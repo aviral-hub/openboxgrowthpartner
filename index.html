@@ -1,0 +1,647 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script>
+        window.huggingface={variables:{"SPACE_CREATOR_USER_ID":"682347dbc87061262c9772fc"}};
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OpenBox Growth Partner // Fluid Architecture</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --primary: #ff4000;
+            --background: #fcfcfc;
+            --foreground: #181818;
+            --card: #ffffff;
+            --muted-bg: #f4f4f4;
+            --muted-text: #6e6e73;
+            --blur-tint: rgba(255, 255, 255, 0.75);
+            --shadow-sm: 0 4px 30px rgba(0, 0, 0, 0.02);
+            --shadow-md: 0 20px 40px rgba(0, 0, 0, 0.04);
+        }
+
+        .dark {
+            --background: #0f0f11;
+            --foreground: #f5f5f7;
+            --card: #18181b;
+            --muted-bg: #27272a;
+            --muted-text: #a1a1aa;
+            --blur-tint: rgba(24, 24, 27, 0.8);
+            --shadow-sm: 0 4px 30px rgba(0, 0, 0, 0.15);
+            --shadow-md: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--background);
+            color: var(--foreground);
+            transition: background-color 0.4s cubic-bezier(0.16, 1, 0.3, 1), color 0.4s;
+        }
+
+        /* FIXED AUTO OPEN BOX KINETIC ANIMATION IN LOOP */
+        @keyframes autoUnfoldLeft {
+
+            0%,
+            100% {
+                transform: rotate(0deg) translate(0px, 0px);
+            }
+
+            40%,
+            60% {
+                transform: rotate(24deg) translate(-4px, -5px);
+            }
+        }
+
+        @keyframes autoUnfoldRight {
+
+            0%,
+            100% {
+                transform: rotate(0deg) translate(0px, 0px);
+            }
+
+            40%,
+            60% {
+                transform: rotate(-24deg) translate(4px, -5px);
+            }
+        }
+
+        .box-lid-l {
+            transform-origin: 30px 32px;
+            animation: autoUnfoldLeft 4s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+        }
+
+        .box-lid-r {
+            transform-origin: 70px 32px;
+            animation: autoUnfoldRight 4s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+        }
+
+        /* Fluid Pill Navigation Hover Interaction */
+        .fluid-nav-link {
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        .fluid-nav-link::before {
+            content: '';
+            position: absolute;
+            inset: -6px -12px;
+            background-color: var(--muted-bg);
+            border-radius: 9999px;
+            transform: scale(0.85);
+            opacity: 0;
+            z-index: -1;
+            transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.2s ease;
+        }
+
+        .fluid-nav-link:hover::before {
+            transform: scale(1);
+            opacity: 1;
+        }
+
+        /* FIXED SWAP VIEWPORT (Fluid block adaptation instead of hardcoded pixel clipping arrays) */
+        .swap-viewport {
+            display: block;
+            position: relative;
+            overflow: hidden;
+            height: 1.2em;
+            width: 100%;
+            max-width: max-content;
+            margin: 0 auto;
+        }
+
+        .swap-slider {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            animation: swapSequence 18s cubic-bezier(0.85, 0, 0.15, 1) infinite;
+        }
+
+        .swap-target {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 1.2em;
+            width: 100%;
+            background: linear-gradient(135deg, var(--primary) 0%, #ff6200 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            white-space: nowrap;
+            padding: 0 0.1em;
+        }
+
+        @keyframes swapSequence {
+
+            0%,
+            13% {
+                transform: translateY(0);
+            }
+
+            16%,
+            29% {
+                transform: translateY(-16.66%);
+            }
+
+            32%,
+            45% {
+                transform: translateY(-33.33%);
+            }
+
+            48%,
+            61% {
+                transform: translateY(-50%);
+            }
+
+            64%,
+            77% {
+                transform: translateY(-66.66%);
+            }
+
+            80%,
+            93% {
+                transform: translateY(-83.33%);
+            }
+
+            100% {
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pulseCursor {
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0;
+            }
+        }
+
+        .fluid-cursor {
+            color: var(--primary);
+            animation: pulseCursor 1.1s infinite;
+        }
+    </style>
+</head>
+
+<body class="antialiased min-h-screen relative overflow-x-hidden px-4 md:px-8 py-4">
+
+    <div
+        class="absolute top-[-10%] left-[-10%] w-[50vw] h-[50vw] rounded-full bg-[var(--primary)]/5 blur-[120px] pointer-events-none z-0">
+    </div>
+    <div
+        class="absolute top-[40%] right-[-10%] w-[40vw] h-[40vw] rounded-full bg-[var(--primary)]/[0.03] blur-[100px] pointer-events-none z-0">
+    </div>
+
+    <div class="max-w-6xl mx-auto flex flex-col gap-6 relative z-10">
+
+        <header
+            class="w-full bg-[var(--blur-tint)] backdrop-blur-xl shadow-[var(--shadow-sm)] border border-white/20 rounded-3xl sticky top-4 z-50 transition-all duration-300">
+            <div class="h-20 px-4 md:px-6 flex items-center justify-between">
+
+                <a href="#" class="flex items-center gap-3 focus:outline-none shrink-0 group"
+                    aria-label="OpenBox Growth Partner Home">
+                    <svg class="h-11 w-auto text-[var(--primary)] filter drop-shadow-[0_2px_10px_rgba(255,64,0,0.15)]"
+                        viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <g stroke="currentColor" stroke-width="4.2" stroke-linecap="round" stroke-linejoin="round">
+                            <polygon points="50,52 70,62 50,72 30,62" fill="currentColor" fill-opacity="0.18"
+                                stroke="none" />
+                            <polygon points="50,95 18,78 18,58 50,75" />
+                            <polygon points="50,95 82,78 82,58 50,75" />
+                            <line x1="50" y1="65" x2="50" y2="95" />
+                            <polygon class="box-lid-l" points="50,52 18,42 18,62 50,72" fill="var(--card)" />
+                            <polygon class="box-lid-r" points="50,52 82,42 82,62 50,72" fill="var(--card)" />
+                        </g>
+                    </svg>
+
+                    <div class="flex flex-col text-left leading-none pr-2">
+                        <span class="text-[var(--foreground)] font-black text-xl tracking-tight">OpenBox</span>
+                        <span class="text-[var(--primary)] font-bold text-[9px] tracking-[0.25em] uppercase mt-0.5">Growth Partner</span>
+                    </div>
+                </a>
+
+                <nav class="hidden md:flex items-center gap-7 text-[13px] font-semibold text-[var(--muted-text)]">
+                    <a href="#" class="fluid-nav-link text-[var(--foreground)] font-bold">Overview</a>
+                    <a href="#services" class="fluid-nav-link hover:text-[var(--foreground)]">Services</a>
+                    <a href="#" class="fluid-nav-link hover:text-[var(--foreground)]">Case Metrics</a>
+                    <a href="#" class="fluid-nav-link hover:text-[var(--foreground)]">Infrastructure</a>
+                </nav>
+
+                <div class="flex items-center gap-3">
+                    <button onclick="document.documentElement.classList.toggle('dark')" class="p-2 w-10 h-10 flex items-center justify-center rounded-xl bg-[var(--muted-bg)] text-[var(--muted-text)] hover:text-[var(--foreground)] transition-colors shadow-sm" title="Toggle Theme">
+                        <i class="fa-solid fa-moon text-xs dark:hidden"></i>
+                        <i class="fa-solid fa-sun text-xs hidden dark:block"></i>
+                    </button>
+                    <a href="audit.html"
+                        class="inline-flex items-center text-xs font-bold bg-[var(--foreground)] text-[var(--background)] px-5 h-10 rounded-xl hover:bg-[var(--primary)] hover:text-white shadow-sm transition-all duration-300">
+                        Initiate Audit
+                    </a>
+                </div>
+
+            </div>
+        </header>
+
+        <section
+            class="min-h-[75vh] lg:min-h-[80vh] rounded-[2.5rem] bg-[var(--card)] shadow-[var(--shadow-md)] border border-white/10 px-4 py-16 md:py-28 flex flex-col items-center justify-center text-center relative overflow-hidden">
+
+            <span class="inline-flex items-center gap-2 bg-[var(--muted-bg)] text-[var(--muted-text)] px-4 py-1.5 rounded-full text-xs font-semibold tracking-wide mb-8">
+                <span class="w-1.5 h-1.5 rounded-full bg-[var(--primary)] animate-ping"></span>
+            Growth Infrastructure for Ambitious Brands
+            </span>
+
+            <div class="w-full max-w-4xl mx-auto px-2">
+                <h1
+                    class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-black tracking-tight leading-[1.2] uppercase select-none">
+                    Your Brand Deserves
+                    <span class="swap-viewport mt-2">
+                        <span class="swap-slider">
+                            <div class="swap-target">Authority.</div>
+                            <div class="swap-target">Scale.</div>
+                            <div class="swap-target">Dominance.</div>
+                            <div class="swap-target">Relentless Scaling.</div>
+                            <div class="swap-target">Digital Clarity.</div>
+                            <div class="swap-target">Strategic Growth.</div>
+                        </span>
+                    </span>
+                </h1>
+            </div>
+
+            <p
+                class="text-[var(--muted-text)] text-base md:text-lg max-w-2xl mx-auto mb-12 leading-relaxed font-medium px-2 mt-6">
+                Data-driven digital marketing that converts. We help growing businesses build unstoppable online
+                presence through proven psychological mechanisms and deep value infrastructure strategies.
+            </p>
+
+            <div class="flex flex-col sm:flex-row items-center gap-4 w-full sm:w-auto px-4">
+                <a href="audit.html"
+                    class="w-full sm:w-auto bg-[var(--primary)] text-white font-bold px-8 py-4 rounded-2xl hover:shadow-lg hover:shadow-[var(--primary)]/20 hover:translate-y-[-2px] transition-all text-sm tracking-wide flex items-center justify-center gap-3">
+                    <i class="fa-solid fa-bolt text-xs"></i> Start Growing
+                </a>
+                <a href="#services"
+                    class="w-full sm:w-auto bg-[var(--muted-bg)] text-[var(--foreground)] hover:bg-[var(--foreground)] hover:text-[var(--background)] px-8 py-4 rounded-2xl transition-all text-sm font-bold tracking-wide flex items-center justify-center gap-2">
+                    Explore Services <i class="fa-solid fa-arrow-down text-xs opacity-60"></i>
+                </a>
+            </div>
+
+        </section>
+        <!-- SERVICES INFRASTRUCTURE SECTION (aviral1 Upgraded Layout) -->
+        <section id="services" class="w-full flex flex-col gap-12 py-12 overflow-hidden">
+        
+            <!-- Section Header -->
+            <div class="text-center max-w-2xl mx-auto flex flex-col items-center">
+                <span class="inline-flex items-center gap-2 bg-[var(--muted-bg)] text-[var(--muted-text)] px-4 py-1.5 rounded-full text-xs font-semibold tracking-wide mb-4">
+                            Core Capabilities
+                        </span>
+                <h2 class="text-3xl md:text-5xl font-black tracking-tight uppercase">
+                    What We Do
+                </h2>
+                <p class="text-[var(--muted-text)] text-sm md:text-base font-medium mt-3 px-4">
+                    High-performance growth systems engineered to extract maximum market share and establish digital dominance.
+                </p>
+            </div>
+        
+            <!-- Services Grid Matrix -->
+            <div class="grid grid-cols-1 lg:grid-cols-6 gap-6">
+        
+                <!-- 1. LOCAL SEO (FEATURED WIDE CARD - 4 Columns) -->
+                <div
+                    class="lg:col-span-4 rounded-[2.5rem] bg-[var(--card)] shadow-[var(--shadow-md)] border border-white/10 p-6 md:p-10 flex flex-col md:flex-row gap-8 items-center justify-between overflow-hidden relative group">
+                    <div class="flex-1 flex flex-col justify-between h-full z-10 w-full">
+                        <div>
+                            <div
+                                class="w-12 h-12 rounded-2xl bg-[var(--primary)]/10 flex items-center justify-center text-[var(--primary)] text-lg mb-6">
+                                <i class="fa-solid fa-location-dot"></i>
+                            </div>
+                            <h3 class="text-2xl font-black tracking-tight uppercase mb-3">Local SEO</h3>
+                            <p class="text-[var(--muted-text)] text-sm font-medium mb-6 leading-relaxed">
+                                We help your business appear at the top of Google when customers search for what you offer.
+                            </p>
+                            <ul class="space-y-3 mb-8 text-sm font-semibold text-[var(--foreground)]">
+                                <li class="flex items-center gap-3">
+                                    <i class="fa-solid fa-circle-check text-[var(--primary)] text-xs"></i> Get Found by More
+                                    Customers</li>
+                                <li class="flex items-center gap-3">
+                                    <i class="fa-solid fa-circle-check text-[var(--primary)] text-xs"></i> Free Marketing That
+                                    Works 24/7</li>
+                                <li class="flex items-center gap-3">
+                                    <i class="fa-solid fa-circle-check text-[var(--primary)] text-xs"></i> Build Trust and Look
+                                    Professional</li>
+                            </ul>
+                        </div>
+                        <a href="audit.html"
+                            class="inline-flex items-center justify-center text-xs font-bold bg-[var(--foreground)] text-[var(--background)] px-6 h-12 rounded-xl hover:bg-[var(--primary)] hover:text-white transition-all self-start shadow-sm w-full sm:w-auto text-center">
+                            Get Free SEO Audit
+                        </a>
+                    </div>
+        
+                    <!-- Illustration 1: SERP Stack -->
+                    <div
+                        class="aviral1-illustration w-full md:w-64 bg-[var(--muted-bg)] rounded-2xl p-4 border border-white/5 shadow-inner flex flex-col gap-2.5 relative shrink-0">
+                        <div
+                            class="flex items-center gap-2 border-b border-[var(--foreground)]/5 pb-2 text-[10px] font-bold text-[var(--muted-text)]">
+                            <span class="text-[var(--primary)] tracking-tight font-black">Google</span>
+                            <div
+                                class="bg-[var(--card)] px-2 py-0.5 rounded-md border border-[var(--foreground)]/5 flex-1 text-left text-[9px] text-[var(--muted-text)] flex justify-between">
+                                local service near me
+                                <i class="fa-solid fa-magnifying-glass text-[var(--primary)] scale-75"></i></div>
+                        </div>
+                        <div class="flex flex-col gap-2 relative h-36 justify-end">
+                            <div
+                                class="bg-[var(--card)] p-2 rounded-xl border border-[var(--foreground)]/5 flex items-center gap-2 opacity-40">
+                                <div
+                                    class="w-5 h-5 rounded bg-blue-500/10 text-[9px] text-blue-500 font-bold flex items-center justify-center">
+                                    B2</div>
+                                <div class="w-24 h-2 bg-[var(--muted-text)]/20 rounded"></div>
+                            </div>
+                            <div
+                                class="bg-[var(--card)] p-2 rounded-xl border border-[var(--foreground)]/5 flex items-center gap-2 opacity-40">
+                                <div
+                                    class="w-5 h-5 rounded bg-emerald-500/10 text-[9px] text-emerald-500 font-bold flex items-center justify-center">
+                                    LS</div>
+                                <div class="w-20 h-2 bg-[var(--muted-text)]/20 rounded"></div>
+                            </div>
+                            <div
+                                class="absolute inset-x-0 bottom-0 bg-[var(--card)] p-2.5 rounded-xl border-2 border-[var(--primary)] flex items-center gap-2 shadow-lg animate-[seoLeap_6s_cubic-bezier(0.16,1,0.3,1)_infinite]">
+                                <div
+                                    class="w-6 h-6 rounded bg-[var(--primary)] text-white font-black text-[10px] flex items-center justify-center">
+                                    #1</div>
+                                <div class="flex-1">
+                                    <div class="text-[8px] text-[var(--primary)] font-bold">yourbusiness.com</div>
+                                    <div class="w-28 h-2 bg.target bg-[var(--foreground)] rounded mt-1"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        
+                <!-- 2. WEBSITE DEV CARD (2 Columns) -->
+                <div
+                    class="lg:col-span-2 rounded-[2.5rem] bg-[var(--card)] shadow-[var(--shadow-md)] border border-white/10 p-6 md:p-8 flex flex-col justify-between overflow-hidden relative group">
+                    <div class="z-10 mb-6">
+                        <div
+                            class="w-12 h-12 rounded-2xl bg-[var(--primary)]/10 flex items-center justify-center text-[var(--primary)] text-lg mb-6">
+                            <i class="fa-solid fa-code"></i>
+                        </div>
+                        <h3 class="text-2xl font-black tracking-tight uppercase mb-3">Website Dev</h3>
+                        <p class="text-[var(--muted-text)] text-sm font-medium mb-4 leading-relaxed">
+                            We build you a professional website that looks great and turns visitors into paying customers.
+                        </p>
+                        <ul class="space-y-2 text-xs font-semibold text-[var(--foreground)] mb-6">
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-[var(--primary)]"></i>
+                                Great First Impression</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-[var(--primary)]"></i>
+                                Convert Visitors</li>
+                        </ul>
+                    </div>
+        
+                    <!-- Illustration 2: UI Canvas Window Layout -->
+                    <div
+                        class="aviral1-illustration w-full bg-[var(--muted-bg)] border border-white/10 rounded-2xl p-3 mb-6 relative overflow-hidden h-32 flex flex-col justify-between shadow-inner">
+                        <div class="flex items-center justify-between border-b border-[var(--foreground)]/5 pb-1.5">
+                            <div class="flex gap-1.5">
+                                <span class="w-2 h-2 rounded-full bg-red-400"></span><span class="w-2 h-2 rounded-full bg-yellow-400"></span><span class="w-2 h-2 rounded-full bg-green-400"></span>
+                            </div>
+                            <div class="w-24 h-3 bg-[var(--card)] rounded-md border border-[var(--foreground)]/5"></div>
+                        </div>
+                        <div class="flex gap-3 items-center flex-1 mt-2">
+                            <div
+                                class="w-12 h-12 rounded-xl bg-[var(--primary)]/10 border border-[var(--primary)]/20 flex items-center justify-center text-[var(--primary)] animate-pulse">
+                                <i class="fa-solid fa-cubes-stacked text-sm"></i></div>
+                            <div class="flex-1 space-y-2">
+                                <div class="w-3/4 h-2.5 bg-[var(--foreground)] rounded"></div>
+                                <div class="w-1/2 h-2 bg-[var(--muted-text)]/30 rounded"></div>
+                            </div>
+                        </div>
+                        <div
+                            class="h-6 w-full bg-[var(--card)] rounded-lg border border-[var(--foreground)]/5 flex items-center justify-between px-2 text-[8px] font-bold text-emerald-500">
+                            <span class="flex items-center gap-1"><i class="fa-solid fa-shield-halved"></i> SSL ACTIVE</span><span>$942.00 Generated</span>
+                        </div>
+                    </div>
+        
+                    <a href="audit.html"
+                        class="inline-flex items-center justify-center text-xs font-bold bg-[var(--muted-bg)] text-[var(--foreground)] hover:bg-[var(--primary)] hover:text-white px-6 h-12 rounded-xl transition-all text-center shadow-sm z-10">
+                        Looking for a pro website?
+                    </a>
+                </div>
+        
+                <!-- 3. CAMPAIGNS CARD (2 Columns) -->
+                <div
+                    class="lg:col-span-2 rounded-[2.5rem] bg-[var(--card)] shadow-[var(--shadow-md)] border border-white/10 p-6 md:p-8 flex flex-col justify-between overflow-hidden relative group">
+                    <div class="z-10 mb-6">
+                        <div
+                            class="w-12 h-12 rounded-2xl bg-[var(--primary)]/10 flex items-center justify-center text-[var(--primary)] text-lg mb-6">
+                            <i class="fa-solid fa-comments-dollar"></i>
+                        </div>
+                        <h3 class="text-2xl font-black tracking-tight uppercase mb-3">Campaigns</h3>
+                        <p class="text-[var(--muted-text)] text-sm font-medium mb-4 leading-relaxed">
+                            Email, SMS, WhatsApp. We send personalized messages directly to your customers' phones.
+                        </p>
+                        <ul class="space-y-2 text-xs font-semibold text-[var(--foreground)] mb-6">
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-[var(--primary)]"></i>
+                                Reach Mobile Wallets</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-[var(--primary)]"></i>
+                                Retain Past Buyers</li>
+                        </ul>
+                    </div>
+        
+                    <!-- Illustration 3: Notification Bubbles Stream -->
+                    <div
+                        class="aviral1-illustration w-full bg-[var(--muted-bg)] border border-white/10 rounded-2xl p-3 mb-6 h-32 relative overflow-hidden flex flex-col gap-2 justify-center shadow-inner">
+                        <div
+                            class="bg-[var(--card)] p-2 rounded-xl shadow-sm border border-[var(--primary)]/10 flex items-center gap-2.5 transform -translate-x-2 animate-[floatBubble_4s_ease-in-out_infinite]">
+                            <i class="fa-brands fa-whatsapp text-emerald-500 text-base"></i>
+                            <div class="leading-none">
+                                <span class="text-[9px] font-bold block">VIP Access Code</span><span class="text-[8px] text-[var(--muted-text)]">Claim 20% off inside...</span>
+                            </div>
+                        </div>
+                        <div
+                            class="bg-[var(--card)] p-2 rounded-xl shadow-sm border border-orange-500/10 flex items-center gap-2.5 transform translate-x-2 animate-[floatBubble_4s_ease-in-out_infinite_2s]">
+                            <i class="fa-solid fa-envelope text-[var(--primary)] text-xs"></i>
+                            <div class="leading-none">
+                                <span class="text-[9px] font-bold block">Invoice Settled</span><span class="text-[8px] text-emerald-500 font-bold">Repeat Purchase ✓</span>
+                            </div>
+                        </div>
+                    </div>
+        
+                    <a href="audit.html"
+                        class="inline-flex items-center justify-center text-xs font-bold bg-[var(--muted-bg)] text-[var(--foreground)] hover:bg-[var(--primary)] hover:text-white px-6 h-12 rounded-xl transition-all text-center shadow-sm z-10">
+                        I want to know more
+                    </a>
+                </div>
+        
+                <!-- 4. SOCIAL MEDIA CARD (2 Columns) -->
+                <div
+                    class="lg:col-span-2 rounded-[2.5rem] bg-[var(--card)] shadow-[var(--shadow-md)] border border-white/10 p-6 md:p-8 flex flex-col justify-between overflow-hidden relative group">
+                    <div class="z-10 mb-6">
+                        <div
+                            class="w-12 h-12 rounded-2xl bg-[var(--primary)]/10 flex items-center justify-center text-[var(--primary)] text-lg mb-6">
+                            <i class="fa-solid fa-share-nodes"></i>
+                        </div>
+                        <h3 class="text-2xl font-black tracking-tight uppercase mb-3">Social Media</h3>
+                        <p class="text-[var(--muted-text)] text-sm font-medium mb-4 leading-relaxed">
+                            We manage your social content pipeline to attract discovery and scale high conversion loops.
+                        </p>
+                        <ul class="space-y-2 text-xs font-semibold text-[var(--foreground)] mb-6">
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-[var(--primary)]"></i>
+                                Attract Discovery Channels</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-[var(--primary)]"></i>
+                                Real Customer Relationships</li>
+                        </ul>
+                    </div>
+        
+                    <!-- Illustration 4: Growth Metric Stream Tracker -->
+                    <div
+                        class="aviral1-illustration w-full bg-[var(--muted-bg)] border border-white/10 rounded-2xl p-4 mb-6 h-32 flex flex-col justify-between relative overflow-hidden shadow-inner">
+                        <div class="flex items-center justify-between">
+                            <span class="text-[10px] font-black tracking-wide text-[var(--muted-text)] uppercase">Engagement Analytics</span><span class="text-[9px] bg-emerald-500/10 text-emerald-500 px-1.5 py-0.5 rounded-md font-bold">+314% Growth</span>
+                        </div>
+                        <div class="flex items-end gap-1.5 h-12 pt-2">
+                            <div class="flex-1 bg-[var(--foreground)]/10 rounded-t h-1/4"></div>
+                            <div class="flex-1 bg-[var(--foreground)]/10 rounded-t h-2/5"></div>
+                            <div class="flex-1 bg-[var(--foreground)]/10 rounded-t h-1/3"></div>
+                            <div class="flex-1 bg-[var(--foreground)]/10 rounded-t h-3/5"></div>
+                            <div class="flex-1 bg-[var(--primary)] rounded-t h-full relative">
+                                <span class="absolute -top-4 left-1/2 transform -translate-x-1/2 text-[7px] font-bold text-[var(--primary)]">VIRAL</span>
+                            </div>
+                        </div>
+                    </div>
+        
+                    <a href="audit.html"
+                        class="inline-flex items-center justify-center text-xs font-bold bg-[var(--muted-bg)] text-[var(--foreground)] hover:bg-[var(--primary)] hover:text-white px-6 h-12 rounded-xl transition-all text-center shadow-sm z-10">
+                        Boost your online presence
+                    </a>
+                </div>
+        
+                <!-- 5. BRANDING CARD (2 Columns) -->
+                <div
+                    class="lg:col-span-2 rounded-[2.5rem] bg-[var(--card)] shadow-[var(--shadow-md)] border border-white/10 p-6 md:p-8 flex flex-col justify-between overflow-hidden relative group">
+                    <div class="z-10 mb-6">
+                        <div
+                            class="w-12 h-12 rounded-2xl bg-[var(--primary)]/10 flex items-center justify-center text-[var(--primary)] text-lg mb-6">
+                            <i class="fa-solid fa-palette"></i>
+                        </div>
+                        <h3 class="text-2xl font-black tracking-tight uppercase mb-3">Branding</h3>
+                        <p class="text-[var(--muted-text)] text-sm font-medium mb-4 leading-relaxed">
+                            We design memorable visual identities and architectures that look trustworthy and high premium.
+                        </p>
+                        <ul class="space-y-2 text-xs font-semibold text-[var(--foreground)] mb-6">
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-[var(--primary)]"></i>
+                                Stand Out from Competition</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-[var(--primary)]"></i>
+                                Attract High Value Deals</li>
+                        </ul>
+                    </div>
+        
+                    <!-- Illustration 5: Corporate Guide Vector Mock -->
+                    <div
+                        class="aviral1-illustration w-full bg-[var(--muted-bg)] border border-white/10 rounded-2xl p-3 mb-6 h-32 flex items-center justify-center relative overflow-hidden shadow-inner">
+                        <div class="absolute inset-0 bg-grid-pattern opacity-5"></div>
+                        <div
+                            class="w-16 h-16 rounded-full border-2 border-dashed border-[var(--primary)]/30 flex items-center justify-center p-1.5 animate-[spin_24s_linear_infinite]">
+                            <div
+                                class="w-full h-full rounded-full bg-[var(--primary)] text-white flex items-center justify-center text-lg shadow-md font-black">
+                                O</div>
+                        </div>
+                        <div
+                            class="absolute right-4 top-4 border border-[var(--foreground)]/5 bg-[var(--card)] px-1.5 py-0.5 rounded text-[7px] font-mono text-[var(--muted-text)]">
+                            R: 255 G: 64 B: 0</div>
+                        <div
+                            class="absolute left-4 bottom-4 border border-[var(--foreground)]/5 bg-[var(--card)] px-1.5 py-0.5 rounded text-[7px] font-mono text-[var(--muted-text)]">
+                            Scale: Vector 1:1</div>
+                    </div>
+        
+                    <a href="audit.html"
+                        class="inline-flex items-center justify-center text-xs font-bold bg-[var(--muted-bg)] text-[var(--foreground)] hover:bg-[var(--primary)] hover:text-white px-6 h-12 rounded-xl transition-all text-center shadow-sm z-10">
+                        Get free consultation
+                    </a>
+                </div>
+        
+            </div>
+        </section>
+        
+        <!-- CSS SCROLL-DRIVEN ARCHITECTURE FOR THE aviral1 THEME MATRIX -->
+        <style>
+            /* Auto-Unfolding Keyframes Matrix */
+            @keyframes seoLeap {
+        
+                0%,
+                100% {
+                    transform: translateY(80px);
+                    opacity: 0.4;
+                }
+        
+                30%,
+                70% {
+                    transform: translateY(-40px);
+                    opacity: 1;
+                    box-shadow: 0 12px 24px rgba(255, 64, 0, 0.15);
+                }
+            }
+        
+            @keyframes floatBubble {
+        
+                0%,
+                100% {
+                    transform: translateY(0) scale(1);
+                }
+        
+                50% {
+                    transform: translateY(-4px) scale(1.02);
+                }
+            }
+        
+            /* Responsive Execution Pipeline (Mobile First) */
+            @media (max-width: 1023px) {
+                .aviral1-illustration {
+                    opacity: 0;
+                    transform: translateY(20px);
+                    transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+                }
+        
+                /* Trigger natural mobile viewing optimization using CSS intersection emulation */
+                .group:hover .aviral1-illustration {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+        
+            /* Desktop Scroll-Driven Horizontal Swipe Layout Optimization */
+            @media (min-width: 1024px) {
+                .aviral1-illustration {
+                    animation: desktopSwipe Reveal linear both;
+                    animation-timeline: view();
+                    animation-range: entry 5% cover 35%;
+                    transform-origin: left center;
+                }
+        
+                @keyframes desktopSwipeReveal {
+                    from {
+                        opacity: 0;
+                        transform: translateX(-40px) scale(0.92) rotate(-2deg);
+                        filter: blur(4px);
+                    }
+        
+                    to {
+                        opacity: 1;
+                        transform: translateX(0) scale(1) rotate(0deg);
+                        filter: blur(0);
+                    }
+                }
+            }
+        </style>
+
+    </div>
+</body>
+
+</html>
+
+```
