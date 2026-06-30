@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -11,7 +10,7 @@
     <title>OpenBox Growth Partner // Fluid Architecture</title>
 
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap"
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght=400;500;600;700;800;900&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
@@ -106,35 +105,35 @@
             opacity: 1;
         }
 
-        /* FIXED SWAP VIEWPORT (Fluid block adaptation instead of hardcoded pixel clipping arrays) */
+        /* FIXED SWAP VIEWPORT - Prevent multi-word hidden text clipping */
         .swap-viewport {
-            display: block;
+            display: inline-block;
             position: relative;
             overflow: hidden;
-            height: 1.2em;
+            height: 1.3em;
+            line-height: 1.3em;
+            vertical-align: bottom;
             width: 100%;
-            max-width: max-content;
-            margin: 0 auto;
         }
 
         .swap-slider {
             display: flex;
             flex-direction: column;
             align-items: center;
-            animation: swapSequence 18s cubic-bezier(0.85, 0, 0.15, 1) infinite;
+            animation: swapSequence 15s cubic-bezier(0.85, 0, 0.15, 1) infinite;
         }
 
         .swap-target {
             display: flex;
             align-items: center;
             justify-content: center;
-            height: 1.2em;
+            height: 1.3em;
             width: 100%;
             background: linear-gradient(135deg, var(--primary) 0%, #ff6200 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             white-space: nowrap;
-            padding: 0 0.1em;
+            padding: 0 0.2em;
         }
 
         @keyframes swapSequence {
@@ -174,21 +173,39 @@
             }
         }
 
-        @keyframes pulseCursor {
+        /* Custom Keyframe Animations for Illustrations */
+        @keyframes seoLeap {
 
             0%,
             100% {
-                opacity: 1;
+                transform: translateY(0);
             }
 
             50% {
-                opacity: 0;
+                transform: translateY(-8px);
             }
         }
 
-        .fluid-cursor {
-            color: var(--primary);
-            animation: pulseCursor 1.1s infinite;
+        @keyframes floatBubble {
+
+            0%,
+            100% {
+                transform: translateY(0) scale(1);
+            }
+
+            50% {
+                transform: translateY(-4px) scale(1.02);
+            }
+        }
+
+        /* Smooth Hide Scrollbars for Swipe Tracker Container */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
         }
     </style>
 </head>
@@ -260,8 +277,8 @@
 
             <div class="w-full max-w-4xl mx-auto px-2">
                 <h1
-                    class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-black tracking-tight leading-[1.2] uppercase select-none">
-                    Your Brand Deserves
+                    class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-7xl font-black tracking-tight leading-[1.2] uppercase select-none">
+                    Your Brand Deserves<br>
                     <span class="swap-viewport mt-2">
                         <span class="swap-slider">
                             <div class="swap-target">Authority.</div>
@@ -293,14 +310,15 @@
             </div>
 
         </section>
-        <!-- SERVICES INFRASTRUCTURE SECTION (aviral1 Upgraded Layout) -->
+
+        <!-- SERVICES INFRASTRUCTURE SECTION WITH RESPONSIVE GRID MATRIX -->
         <section id="services" class="w-full flex flex-col gap-12 py-12 overflow-hidden">
         
             <!-- Section Header -->
             <div class="text-center max-w-2xl mx-auto flex flex-col items-center">
                 <span class="inline-flex items-center gap-2 bg-[var(--muted-bg)] text-[var(--muted-text)] px-4 py-1.5 rounded-full text-xs font-semibold tracking-wide mb-4">
-                            Core Capabilities
-                        </span>
+                    Core Capabilities
+                </span>
                 <h2 class="text-3xl md:text-5xl font-black tracking-tight uppercase">
                     What We Do
                 </h2>
@@ -352,7 +370,8 @@
                             <div
                                 class="bg-[var(--card)] px-2 py-0.5 rounded-md border border-[var(--foreground)]/5 flex-1 text-left text-[9px] text-[var(--muted-text)] flex justify-between">
                                 local service near me
-                                <i class="fa-solid fa-magnifying-glass text-[var(--primary)] scale-75"></i></div>
+                                <i class="fa-solid fa-magnifying-glass text-[var(--primary)] scale-75"></i>
+                            </div>
                         </div>
                         <div class="flex flex-col gap-2 relative h-36 justify-end">
                             <div
@@ -376,7 +395,7 @@
                                     #1</div>
                                 <div class="flex-1">
                                     <div class="text-[8px] text-[var(--primary)] font-bold">yourbusiness.com</div>
-                                    <div class="w-28 h-2 bg.target bg-[var(--foreground)] rounded mt-1"></div>
+                                    <div class="w-28 h-2 bg-[var(--foreground)] rounded mt-1"></div>
                                 </div>
                             </div>
                         </div>
@@ -415,7 +434,8 @@
                         <div class="flex gap-3 items-center flex-1 mt-2">
                             <div
                                 class="w-12 h-12 rounded-xl bg-[var(--primary)]/10 border border-[var(--primary)]/20 flex items-center justify-center text-[var(--primary)] animate-pulse">
-                                <i class="fa-solid fa-cubes-stacked text-sm"></i></div>
+                                <i class="fa-solid fa-cubes-stacked text-sm"></i>
+                            </div>
                             <div class="flex-1 space-y-2">
                                 <div class="w-3/4 h-2.5 bg-[var(--foreground)] rounded"></div>
                                 <div class="w-1/2 h-2 bg-[var(--muted-text)]/30 rounded"></div>
@@ -423,10 +443,10 @@
                         </div>
                         <div
                             class="h-6 w-full bg-[var(--card)] rounded-lg border border-[var(--foreground)]/5 flex items-center justify-between px-2 text-[8px] font-bold text-emerald-500">
-                            <span class="flex items-center gap-1"><i class="fa-solid fa-shield-halved"></i> SSL ACTIVE</span><span>$942.00 Generated</span>
+                            <span class="flex items-center gap-1"><i class="fa-solid fa-shield-halved"></i> SSL ACTIVE</span>
+                            <span>$942.00 Generated</span>
                         </div>
                     </div>
-        
                     <a href="audit.html"
                         class="inline-flex items-center justify-center text-xs font-bold bg-[var(--muted-bg)] text-[var(--foreground)] hover:bg-[var(--primary)] hover:text-white px-6 h-12 rounded-xl transition-all text-center shadow-sm z-10">
                         Looking for a pro website?
@@ -460,18 +480,19 @@
                             class="bg-[var(--card)] p-2 rounded-xl shadow-sm border border-[var(--primary)]/10 flex items-center gap-2.5 transform -translate-x-2 animate-[floatBubble_4s_ease-in-out_infinite]">
                             <i class="fa-brands fa-whatsapp text-emerald-500 text-base"></i>
                             <div class="leading-none">
-                                <span class="text-[9px] font-bold block">VIP Access Code</span><span class="text-[8px] text-[var(--muted-text)]">Claim 20% off inside...</span>
+                                <span class="text-[9px] font-bold block">VIP Access Code</span>
+                                <span class="text-[8px] text-[var(--muted-text)]">Claim 20% off inside...</span>
                             </div>
                         </div>
                         <div
                             class="bg-[var(--card)] p-2 rounded-xl shadow-sm border border-orange-500/10 flex items-center gap-2.5 transform translate-x-2 animate-[floatBubble_4s_ease-in-out_infinite_2s]">
                             <i class="fa-solid fa-envelope text-[var(--primary)] text-xs"></i>
                             <div class="leading-none">
-                                <span class="text-[9px] font-bold block">Invoice Settled</span><span class="text-[8px] text-emerald-500 font-bold">Repeat Purchase ✓</span>
+                                <span class="text-[9px] font-bold block">Invoice Settled</span>
+                                <span class="text-[8px] text-emerald-500 font-bold">Repeat Purchase ✓</span>
                             </div>
                         </div>
                     </div>
-        
                     <a href="audit.html"
                         class="inline-flex items-center justify-center text-xs font-bold bg-[var(--muted-bg)] text-[var(--foreground)] hover:bg-[var(--primary)] hover:text-white px-6 h-12 rounded-xl transition-all text-center shadow-sm z-10">
                         I want to know more
@@ -502,7 +523,8 @@
                     <div
                         class="aviral1-illustration w-full bg-[var(--muted-bg)] border border-white/10 rounded-2xl p-4 mb-6 h-32 flex flex-col justify-between relative overflow-hidden shadow-inner">
                         <div class="flex items-center justify-between">
-                            <span class="text-[10px] font-black tracking-wide text-[var(--muted-text)] uppercase">Engagement Analytics</span><span class="text-[9px] bg-emerald-500/10 text-emerald-500 px-1.5 py-0.5 rounded-md font-bold">+314% Growth</span>
+                            <span class="text-[10px] font-black tracking-wide text-[var(--muted-text)] uppercase">Engagement Analytics</span>
+                            <span class="text-[9px] bg-emerald-500/10 text-emerald-500 px-1.5 py-0.5 rounded-md font-bold">+314% Growth</span>
                         </div>
                         <div class="flex items-end gap-1.5 h-12 pt-2">
                             <div class="flex-1 bg-[var(--foreground)]/10 rounded-t h-1/4"></div>
@@ -514,7 +536,6 @@
                             </div>
                         </div>
                     </div>
-        
                     <a href="audit.html"
                         class="inline-flex items-center justify-center text-xs font-bold bg-[var(--muted-bg)] text-[var(--foreground)] hover:bg-[var(--primary)] hover:text-white px-6 h-12 rounded-xl transition-all text-center shadow-sm z-10">
                         Boost your online presence
@@ -549,16 +570,18 @@
                             class="w-16 h-16 rounded-full border-2 border-dashed border-[var(--primary)]/30 flex items-center justify-center p-1.5 animate-[spin_24s_linear_infinite]">
                             <div
                                 class="w-full h-full rounded-full bg-[var(--primary)] text-white flex items-center justify-center text-lg shadow-md font-black">
-                                O</div>
+                                O
+                            </div>
                         </div>
                         <div
                             class="absolute right-4 top-4 border border-[var(--foreground)]/5 bg-[var(--card)] px-1.5 py-0.5 rounded text-[7px] font-mono text-[var(--muted-text)]">
-                            R: 255 G: 64 B: 0</div>
+                            R: 255 G: 64 B: 0
+                        </div>
                         <div
                             class="absolute left-4 bottom-4 border border-[var(--foreground)]/5 bg-[var(--card)] px-1.5 py-0.5 rounded text-[7px] font-mono text-[var(--muted-text)]">
-                            Scale: Vector 1:1</div>
+                            Scale: Vector 1:1
+                        </div>
                     </div>
-        
                     <a href="audit.html"
                         class="inline-flex items-center justify-center text-xs font-bold bg-[var(--muted-bg)] text-[var(--foreground)] hover:bg-[var(--primary)] hover:text-white px-6 h-12 rounded-xl transition-all text-center shadow-sm z-10">
                         Get free consultation
@@ -617,7 +640,7 @@
             /* Desktop Scroll-Driven Horizontal Swipe Layout Optimization */
             @media (min-width: 1024px) {
                 .aviral1-illustration {
-                    animation: desktopSwipe Reveal linear both;
+                    animation: desktopSwipeReveal linear both;
                     animation-timeline: view();
                     animation-range: entry 5% cover 35%;
                     transform-origin: left center;
@@ -643,5 +666,3 @@
 </body>
 
 </html>
-
-```
