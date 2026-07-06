@@ -2,884 +2,560 @@
 <html lang="en">
 
 <head>
-    <script>
-        window.huggingface={variables:{"SPACE_CREATOR_USER_ID":"682347dbc87061262c9772fc"}};
-    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OpenBox Growth Partner // Fluid Architecture</title>
-
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght=400;500;600;700;800;900&display=swap"
+    <title>Unlitify — Internships That Actually Build You</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <!-- Google Fonts for sharp tech typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
-        :root {
-            --primary: #ff4000;
-            --background: #fcfcfc;
-            --foreground: #181818;
-            --card: #ffffff;
-            --muted-bg: #f4f4f4;
-            --muted-text: #6e6e73;
-            --blur-tint: rgba(255, 255, 255, 0.75);
-            --shadow-sm: 0 4px 30px rgba(0, 0, 0, 0.02);
-            --shadow-md: 0 20px 40px rgba(0, 0, 0, 0.04);
+        @keyframes openLidLeft {
+        0% {
+        transform: translate(0, 0) skewY(0deg) scaleY(1);
         }
-
-        .dark {
-            --background: #0f0f11;
-            --foreground: #f5f5f7;
-            --card: #18181b;
-            --muted-bg: #27272a;
-            --muted-text: #a1a1aa;
-            --blur-tint: rgba(24, 24, 27, 0.8);
-            --shadow-sm: 0 4px 30px rgba(0, 0, 0, 0.15);
-            --shadow-md: 0 20px 40px rgba(0, 0, 0, 0.3);
+        100% {
+        /* Adjust these transformation values to match your specific layout scale */
+        transform: translate(-4px, -10px) rotate(-15deg) skewX(-10deg);
         }
-
+        }
+        
+        @keyframes openLidRight {
+        0% {
+        transform: translate(0, 0) skewY(0deg) scaleY(1);
+        }
+        100% {
+        transform: translate(4px, -10px) rotate(15deg) skewX(10deg);
+        }
+        }
+        
+        /* Target the classes embedded inside your SVG logo */
+        .box-lid-l {
+        transform-origin: 50px 72px; /* Anchor animation to the base intersection of the lid */
+        animation: openLidLeft 1.2s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+        animation-delay: 0.3s; /* Slight delay after page paint for premium feel */
+        }
+        
+        .box-lid-r {
+        transform-origin: 50px 72px;
+        animation: openLidRight 1.2s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+        animation-delay: 0.3s;
+        }
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
-            background-color: var(--background);
-            color: var(--foreground);
-            transition: background-color 0.4s cubic-bezier(0.16, 1, 0.3, 1), color 0.4s;
         }
 
-        /* FIXED AUTO OPEN BOX KINETIC ANIMATION IN LOOP */
-        @keyframes autoUnfoldLeft {
-
-            0%,
-            100% {
-                transform: rotate(0deg) translate(0px, 0px);
-            }
-
-            40%,
-            60% {
-                transform: rotate(24deg) translate(-4px, -5px);
-            }
+        .heading-font {
+            font-family: 'Space Grotesk', sans-serif;
         }
 
-        @keyframes autoUnfoldRight {
-
-            0%,
-            100% {
-                transform: rotate(0deg) translate(0px, 0px);
-            }
-
-            40%,
-            60% {
-                transform: rotate(-24deg) translate(4px, -5px);
-            }
-        }
-
-        .box-lid-l {
-            transform-origin: 30px 32px;
-            animation: autoUnfoldLeft 4s cubic-bezier(0.16, 1, 0.3, 1) infinite;
-        }
-
-        .box-lid-r {
-            transform-origin: 70px 32px;
-            animation: autoUnfoldRight 4s cubic-bezier(0.16, 1, 0.3, 1) infinite;
-        }
-
-        /* Fluid Pill Navigation Hover Interaction */
-        .fluid-nav-link {
-            position: relative;
-            transition: color 0.3s ease;
-        }
-
-        .fluid-nav-link::before {
-            content: '';
-            position: absolute;
-            inset: -6px -12px;
-            background-color: var(--muted-bg);
-            border-radius: 9999px;
-            transform: scale(0.85);
-            opacity: 0;
-            z-index: -1;
-            transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.2s ease;
-        }
-
-        .fluid-nav-link:hover::before {
-            transform: scale(1);
-            opacity: 1;
-        }
-
-        /* FIXED SWAP VIEWPORT - Prevent multi-word hidden text clipping */
-        .swap-viewport {
-            display: inline-block;
-            position: relative;
-            overflow: hidden;
-            height: 1.3em;
-            line-height: 1.3em;
-            vertical-align: bottom;
-            width: 100%;
-        }
-
-        .swap-slider {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            animation: swapSequence 15s cubic-bezier(0.85, 0, 0.15, 1) infinite;
-        }
-
-        .swap-target {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            height: 1.3em;
-            width: 100%;
-            background: linear-gradient(135deg, var(--primary) 0%, #ff6200 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            white-space: nowrap;
-            padding: 0 0.2em;
-        }
-
-        @keyframes swapSequence {
-
-            0%,
-            13% {
-                transform: translateY(0);
-            }
-
-            16%,
-            29% {
-                transform: translateY(-16.66%);
-            }
-
-            32%,
-            45% {
-                transform: translateY(-33.33%);
-            }
-
-            48%,
-            61% {
-                transform: translateY(-50%);
-            }
-
-            64%,
-            77% {
-                transform: translateY(-66.66%);
-            }
-
-            80%,
-            93% {
-                transform: translateY(-83.33%);
-            }
-
-            100% {
-                transform: translateY(0);
-            }
-        }
-
-        /* Custom Keyframe Animations for Illustrations */
-        @keyframes seoLeap {
-
-            0%,
-            100% {
-                transform: translateY(0);
-            }
-
-            50% {
-                transform: translateY(-8px);
-            }
-        }
-
-        @keyframes floatBubble {
-
-            0%,
-            100% {
-                transform: translateY(0) scale(1);
-            }
-
-            50% {
-                transform: translateY(-4px) scale(1.02);
-            }
-        }
-
-        /* Smooth Hide Scrollbars for Swipe Tracker Container */
-        .no-scrollbar::-webkit-scrollbar {
-            display: none;
-        }
-
-        .no-scrollbar {
-            -ms-overflow-style: none;
-            scrollbar-width: none;
+        /* Custom subtle grid overlay styling */
+        .bg-grid {
+            background-size: 40px 40px;
+            background-image:
+                linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
         }
     </style>
 </head>
 
-<body class="antialiased min-h-screen relative overflow-x-hidden px-4 md:px-8 py-4">
+<body class="bg-[#0A0A0C] text-gray-300 min-h-screen relative selection:bg-blue-600 selection:text-white">
 
-    <div
-        class="absolute top-[-10%] left-[-10%] w-[50vw] h-[50vw] rounded-full bg-[var(--primary)]/5 blur-[120px] pointer-events-none z-0">
-    </div>
-    <div
-        class="absolute top-[40%] right-[-10%] w-[40vw] h-[40vw] rounded-full bg-[var(--primary)]/[0.03] blur-[100px] pointer-events-none z-0">
-    </div>
+    <!-- Global Header -->
+<!-- Ensure Alpine.js is included in your project's head for the mobile menu state -->
+<script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
-    <div class="max-w-6xl mx-auto flex flex-col gap-6 relative z-10">
+<!-- OpenBox Header Component -->
+<header
+    class="w-full bg-[var(--blur-tint)] backdrop-blur-xl shadow-[var(--shadow-sm)] border border-white/20 rounded-3xl sticky top-4 z-50 transition-all duration-300"
+    x-data="{ mobileOpen: false }">
+    <div class="h-20 px-4 md:px-6 flex items-center justify-between">
 
-        <header
-            class="w-full bg-[var(--blur-tint)] backdrop-blur-xl shadow-[var(--shadow-sm)] border border-white/20 rounded-3xl sticky top-4 z-50 transition-all duration-300">
-            <div class="h-20 px-4 md:px-6 flex items-center justify-between">
+        <!-- Logo & Branding Section -->
+        <a href="#" class="flex items-center gap-3 focus:outline-none shrink-0 group"
+            aria-label="OpenBox Growth Partner Home">
+            <svg class="h-11 w-auto text-[var(--primary)] filter drop-shadow-[0_2px_10px_rgba(255,64,0,0.15)]"
+                viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <g stroke="currentColor" stroke-width="4.2" stroke-linecap="round" stroke-linejoin="round">
+                    <polygon points="50,52 70,62 50,72 30,62" fill="currentColor" fill-opacity="0.18" stroke="none" />
+                    <polygon points="50,95 18,78 18,58 50,75" />
+                    <polygon points="50,95 82,78 82,58 50,75" />
+                    <line x1="50" y1="65" x2="50" y2="95" />
+                    <polygon class="box-lid-l" points="50,52 18,42 18,62 50,72" fill="var(--card)" />
+                    <polygon class="box-lid-r" points="50,52 82,42 82,62 50,72" fill="var(--card)" />
+                </g>
+            </svg>
 
-                <a href="#" class="flex items-center gap-3 focus:outline-none shrink-0 group"
-                    aria-label="OpenBox Growth Partner Home">
-                    <svg class="h-11 w-auto text-[var(--primary)] filter drop-shadow-[0_2px_10px_rgba(255,64,0,0.15)]"
-                        viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <g stroke="currentColor" stroke-width="4.2" stroke-linecap="round" stroke-linejoin="round">
-                            <polygon points="50,52 70,62 50,72 30,62" fill="currentColor" fill-opacity="0.18"
-                                stroke="none" />
-                            <polygon points="50,95 18,78 18,58 50,75" />
-                            <polygon points="50,95 82,78 82,58 50,75" />
-                            <line x1="50" y1="65" x2="50" y2="95" />
-                            <polygon class="box-lid-l" points="50,52 18,42 18,62 50,72" fill="var(--card)" />
-                            <polygon class="box-lid-r" points="50,52 82,42 82,62 50,72" fill="var(--card)" />
-                        </g>
-                    </svg>
-
-                    <div class="flex flex-col text-left leading-none pr-2">
-                        <span class="text-[var(--foreground)] font-black text-xl tracking-tight">OpenBox</span>
-                        <span class="text-[var(--primary)] font-bold text-[9px] tracking-[0.25em] uppercase mt-0.5">Growth Partner</span>
-                    </div>
-                </a>
-
-                <nav class="hidden md:flex items-center gap-7 text-[13px] font-semibold text-[var(--muted-text)]">
-                    <a href="#" class="fluid-nav-link text-[var(--foreground)] font-bold">Overview</a>
-                    <a href="#services" class="fluid-nav-link hover:text-[var(--foreground)]">Services</a>
-                    <a href="#" class="fluid-nav-link hover:text-[var(--foreground)]">Case Metrics</a>
-                    <a href="#" class="fluid-nav-link hover:text-[var(--foreground)]">Infrastructure</a>
-                </nav>
-
-                <div class="flex items-center gap-3">
-                    <button onclick="document.documentElement.classList.toggle('dark')" class="p-2 w-10 h-10 flex items-center justify-center rounded-xl bg-[var(--muted-bg)] text-[var(--muted-text)] hover:text-[var(--foreground)] transition-colors shadow-sm" title="Toggle Theme">
-                        <i class="fa-solid fa-moon text-xs dark:hidden"></i>
-                        <i class="fa-solid fa-sun text-xs hidden dark:block"></i>
-                    </button>
-                    <a href="audit.html"
-                        class="inline-flex items-center text-xs font-bold bg-[var(--foreground)] text-[var(--background)] px-5 h-10 rounded-xl hover:bg-[var(--primary)] hover:text-white shadow-sm transition-all duration-300">
-                        Initiate Audit
-                    </a>
-                </div>
-
+            <div class="flex flex-col text-left leading-none pr-2">
+                <span class="text-[var(--foreground)] font-black text-xl tracking-tight">OpenBox</span>
+                <span class="text-[var(--primary)] font-bold text-[9px] tracking-[0.25em] uppercase mt-0.5">Growth Partner</span>
             </div>
-        </header>
+        </a>
 
-        <section
-            class="min-h-[75vh] lg:min-h-[80vh] rounded-[2.5rem] bg-[var(--card)] shadow-[var(--shadow-md)] border border-white/10 px-4 py-16 md:py-28 flex flex-col items-center justify-center text-center relative overflow-hidden">
+        <!-- Desktop Navigation Menu (Streamlined) -->
+        <nav class="hidden md:flex items-center gap-7 text-[13px] font-semibold text-[var(--muted-text)]">
+            <a href="about.html" class="fluid-nav-link hover:text-[var(--foreground)] transition-colors">About</a>
+            <a href="events.html" class="fluid-nav-link hover:text-[var(--foreground)] transition-colors">Events</a>
+            <a href="blogs.html" class="fluid-nav-link hover:text-[var(--foreground)] transition-colors">Blogs</a>
+            <a href="jobs.html" class="fluid-nav-link hover:text-[var(--foreground)] transition-colors">Jobs</a>
+            <a href="tests.html" class="fluid-nav-link hover:text-[var(--foreground)] transition-colors">Tests</a>
+            <a href="business.html" class="fluid-nav-link hover:text-[var(--foreground)] transition-colors">Business</a>
+        </nav>
 
-            <span class="inline-flex items-center gap-2 bg-[var(--muted-bg)] text-[var(--muted-text)] px-4 py-1.5 rounded-full text-xs font-semibold tracking-wide mb-8">
-                <span class="w-1.5 h-1.5 rounded-full bg-[var(--primary)] animate-ping"></span>
-            Growth Infrastructure for Ambitious Brands
-            </span>
+        <!-- Functional Actions Shell -->
+        <div class="flex items-center gap-3">
+            <!-- Theme System Switcher -->
+            <button onclick="document.documentElement.classList.toggle('dark')" class="p-2 w-10 h-10 flex items-center justify-center rounded-xl bg-[var(--muted-bg)] text-[var(--muted-text)] hover:text-[var(--foreground)] transition-colors shadow-sm" title="Toggle Theme">
+                <i class="fa-solid fa-moon text-xs dark:hidden"></i>
+                <i class="fa-solid fa-sun text-xs hidden dark:block"></i>
+            </button>
 
-            <div class="w-full max-w-4xl mx-auto px-2">
-                <h1
-                    class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-7xl font-black tracking-tight leading-[1.2] uppercase select-none">
-                    Your Brand Deserves<br>
-                    <span class="swap-viewport mt-2">
-                        <span class="swap-slider">
-                            <div class="swap-target">Authority.</div>
-                            <div class="swap-target">Scale.</div>
-                            <div class="swap-target">Dominance.</div>
-                            <div class="swap-target">Relentless Scaling.</div>
-                            <div class="swap-target">Digital Clarity.</div>
-                            <div class="swap-target">Strategic Growth.</div>
-                        </span>
-                    </span>
-                </h1>
+            <!-- Global Interactive Call-to-Action -->
+            <a href="audit.html"
+                class="hidden sm:inline-flex items-center text-xs font-bold bg-[var(--foreground)] text-[var(--background)] px-5 h-10 rounded-xl hover:bg-[var(--primary)] hover:text-white shadow-sm transition-all duration-300">
+                Initiate Audit
+            </a>
+
+            <!-- Mobile Submenu Trigger Button -->
+            <button @click="mobileOpen = !mobileOpen" class="md:hidden p-2 w-10 h-10 flex items-center justify-center rounded-xl bg-[var(--muted-bg)] text-[var(--muted-text)] transition-colors" aria-label="Toggle Mobile Menu">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path :class="{'hidden': mobileOpen, 'inline-flex': !mobileOpen }" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 6h16M4 12h16M4 18h16"/>
+                    <path :class="{'hidden': !mobileOpen, 'inline-flex': mobileOpen }" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"/>
+                </svg>
+            </button>
+        </div>
+    </div>
+
+    <!-- Responsive Mobile Dropdown Drawer -->
+    <div x-show="mobileOpen" x-transition:enter="transition ease-out duration-200"
+        x-transition:enter-start="opacity-0 -translate-y-4" x-transition:enter-end="opacity-100 translate-y-0"
+        x-transition:leave="transition ease-in duration-150" x-transition:leave-start="opacity-100 translate-y-0"
+        x-transition:leave-end="opacity-0 -translate-y-4"
+        class="md:hidden px-6 pb-6 pt-2 flex flex-col gap-4 border-t border-white/10" @click.away="mobileOpen = false"
+        style="display: none;">
+
+        <a href="about.html" @click="mobileOpen = false"
+            class="text-sm font-semibold py-1 text-[var(--muted-text)] hover:text-[var(--foreground)]">About</a>
+        <a href="events.html" @click="mobileOpen = false"
+            class="text-sm font-semibold py-1 text-[var(--muted-text)] hover:text-[var(--foreground)]">Events</a>
+        <a href="blogs.html" @click="mobileOpen = false"
+            class="text-sm font-semibold py-1 text-[var(--muted-text)] hover:text-[var(--foreground)]">Blogs</a>
+        <a href="jobs.html" @click="mobileOpen = false"
+            class="text-sm font-semibold py-1 text-[var(--muted-text)] hover:text-[var(--foreground)]">Jobs</a>
+        <a href="tests.html" @click="mobileOpen = false"
+            class="text-sm font-semibold py-1 text-[var(--muted-text)] hover:text-[var(--foreground)]">Tests</a>
+        <a href="business.html" @click="mobileOpen = false"
+            class="text-sm font-semibold py-1 text-[var(--muted-text)] hover:text-[var(--foreground)]">Business</a>
+
+        <a href="audit.html" @click="mobileOpen = false"
+            class="sm:hidden block text-center bg-[var(--foreground)] text-[var(--background)] text-xs font-bold uppercase tracking-widest py-3 rounded-xl hover:bg-[var(--primary)] hover:text-white transition-all mt-2">
+            Initiate Audit
+        </a>
+    </div>
+</header>
+    <!-- Hero Section -->
+    <main class="relative pt-16 pb-20 md:pt-24 md:pb-32 overflow-hidden bg-grid">
+        <!-- Radical Glow Effect behind the main header -->
+        <div
+            class="absolute top-0 left-1/2 -translate-x-1/2 w-[500px] h-[250px] bg-blue-600/10 blur-[120px] rounded-full pointer-events-none">
+        </div>
+
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+            <!-- Eyebrow Tag -->
+            <div
+                class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-white/10 bg-white/5 text-xs text-blue-400 font-medium tracking-wide mb-6 backdrop-blur-sm">
+                <span class="w-1.5 h-1.5 rounded-full bg-blue-500 animate-pulse"></span>
+                Built For Ambitious Developers. Zero Tutorial Hell.
             </div>
 
-            <p
-                class="text-[var(--muted-text)] text-base md:text-lg max-w-2xl mx-auto mb-12 leading-relaxed font-medium px-2 mt-6">
-                Data-driven digital marketing that converts. We help growing businesses build unstoppable online
-                presence through proven psychological mechanisms and deep value infrastructure strategies.
+            <!-- Main Headline -->
+            <h1
+                class="heading-font text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight text-white mb-6 max-w-4xl mx-auto leading-[1.15]">
+                Internships That <br class="sm:hidden"> Actually
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-blue-600">Build You.</span>
+            </h1>
+
+            <!-- Subheadline -->
+            <p class="text-base sm:text-lg md:text-xl text-gray-400 max-w-2xl mx-auto mb-10 leading-relaxed">
+                Traditional courses teach you syntax. Unlitify throws you into active engineering pipelines. Start with
+                our free 4-week student community tasks, or unlock the full premium accelerator track to build
+                production-grade startup apps.
             </p>
 
-            <div class="flex flex-col sm:flex-row items-center gap-4 w-full sm:w-auto px-4">
-                <a href="audit.html"
-                    class="w-full sm:w-auto bg-[var(--primary)] text-white font-bold px-8 py-4 rounded-2xl hover:shadow-lg hover:shadow-[var(--primary)]/20 hover:translate-y-[-2px] transition-all text-sm tracking-wide flex items-center justify-center gap-3">
-                    <i class="fa-solid fa-bolt text-xs"></i> Start Growing
+            <!-- Action Buttons with Contextual Subtitles -->
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-6 sm:gap-4 max-w-xl mx-auto mb-16">
+                <!-- Primary Action -->
+                <a href="#tracks"
+                    class="w-full sm:w-auto group flex flex-col items-center justify-center px-8 py-3.5 bg-blue-600 hover:bg-blue-500 text-white rounded-lg font-semibold shadow-xl shadow-blue-600/20 transition-all duration-200 border border-blue-400/20">
+                    <span class="flex items-center gap-2">Join Free Community (₹0)</span>
+                    <span class="text-[10px] opacity-70 font-normal mt-0.5 tracking-wide">4-Week Task Sprint Entry</span>
                 </a>
-                <a href="#services"
-                    class="w-full sm:w-auto bg-[var(--muted-bg)] text-[var(--foreground)] hover:bg-[var(--foreground)] hover:text-[var(--background)] px-8 py-4 rounded-2xl transition-all text-sm font-bold tracking-wide flex items-center justify-center gap-2">
-                    Explore Services <i class="fa-solid fa-arrow-down text-xs opacity-60"></i>
+
+                <!-- Secondary Action -->
+                <a href="#tracks"
+                    class="w-full sm:w-auto group flex flex-col items-center justify-center px-8 py-3.5 bg-white/5 hover:bg-white/10 text-white rounded-lg font-semibold border border-white/10 transition-all duration-200">
+                    <span class="flex items-center gap-2 text-gray-300 group-hover:text-white">Go Premium Track (₹99)</span>
+                    <span class="text-[10px] text-gray-500 group-hover:text-gray-400 font-normal mt-0.5 tracking-wide">Weekend Panels & Verified Certificate</span>
                 </a>
             </div>
 
-        </section>
+            <!-- Trust / Social Proof Badges -->
+            <div class="grid grid-cols-3 gap-4 max-w-3xl mx-auto pt-8 border-t border-white/5 text-left md:text-center">
+                <div class="space-y-1">
+                    <div class="text-xs text-gray-500 font-medium tracking-wider uppercase">Active Modules</div>
+                    <div class="heading-font text-xl sm:text-2xl font-bold text-white">50+ Projects</div>
+                </div>
+                <div class="space-y-1 border-x border-white/5 px-4">
+                    <div class="text-xs text-gray-500 font-medium tracking-wider uppercase">Skin In The Game</div>
+                    <div class="heading-font text-xl sm:text-2xl font-bold text-white">₹99 One-Time</div>
+                </div>
+                <div class="space-y-1 pl-2">
+                    <div class="text-xs text-gray-500 font-medium tracking-wider uppercase">Core Deliverable</div>
+                    <div class="heading-font text-xl sm:text-2xl font-bold text-white tracking-tight">Live GitHub
+                        Commits</div>
+                </div>
+            </div>
+        </div>
+    </main>
 
-        <!-- SERVICES INFRASTRUCTURE SECTION WITH RESPONSIVE GRID MATRIX -->
-        <section id="services" class="w-full flex flex-col gap-12 py-12 overflow-hidden">
-        
-            <!-- Section Header -->
-            <div class="text-center max-w-2xl mx-auto flex flex-col items-center">
-                <span class="inline-flex items-center gap-2 bg-[var(--muted-bg)] text-[var(--muted-text)] px-4 py-1.5 rounded-full text-xs font-semibold tracking-wide mb-4">
-                    Core Capabilities
-                </span>
-                <h2 class="text-3xl md:text-5xl font-black tracking-tight uppercase">
-                    What We Do
+    <!-- Interactive Journey Section -->
+    <section id="how-it-works" class="py-20 border-t border-white/5 bg-[#0A0A0C] relative bg-grid">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="heading-font text-3xl sm:text-4xl font-bold text-white mb-4 tracking-tight">
+                    How We Turn Students into <span class="text-blue-500">Engineers</span>
                 </h2>
-                <p class="text-[var(--muted-text)] text-sm md:text-base font-medium mt-3 px-4">
-                    High-performance growth systems engineered to extract maximum market share and establish digital dominance.
+                <p class="text-gray-400 max-w-xl mx-auto text-sm sm:text-base">
+                    No artificial tutorial sandboxes. Click through our 4-stage pipeline below to see the exact
+                    environment you'll ship code in.
                 </p>
             </div>
-        
-            <!-- Services Grid Matrix -->
-            <div class="grid grid-cols-1 lg:grid-cols-6 gap-6">
-        
-                <!-- 1. LOCAL SEO (FEATURED WIDE CARD - 4 Columns) -->
-                <div
-                    class="lg:col-span-4 rounded-[2.5rem] bg-[var(--card)] shadow-[var(--shadow-md)] border border-white/10 p-6 md:p-10 flex flex-col md:flex-row gap-8 items-center justify-between overflow-hidden relative group">
-                    <div class="flex-1 flex flex-col justify-between h-full z-10 w-full">
-                        <div>
-                            <div
-                                class="w-12 h-12 rounded-2xl bg-[var(--primary)]/10 flex items-center justify-center text-[var(--primary)] text-lg mb-6">
-                                <i class="fa-solid fa-location-dot"></i>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+                <!-- Pipeline Controllers (Left Side - 5 Columns) -->
+                <div class="lg:col-span-5 space-y-4">
+                    <button onclick="switchTab(1)" id="step-btn-1" class="w-full text-left p-5 rounded-xl border transition-all duration-200 bg-blue-600/10 border-blue-500/30 group">
+                        <div class="flex items-start gap-4">
+                            <span id="step-num-1" class="heading-font text-lg font-bold text-blue-400 bg-blue-500/10 px-2.5 py-1 rounded border border-blue-500/20">01</span>
+                            <div>
+                                <h4 class="text-white font-semibold text-base transition-colors group-hover:text-blue-400">Strict Vetting</h4>
+                                <p class="text-xs text-gray-400 mt-1 leading-relaxed">Drop your resume and GitHub. We screen out absolute slackers to keep the collaborative talent pool high-value.</p>
                             </div>
-                            <h3 class="text-2xl font-black tracking-tight uppercase mb-3">Local SEO</h3>
-                            <p class="text-[var(--muted-text)] text-sm font-medium mb-6 leading-relaxed">
-                                We help your business appear at the top of Google when customers search for what you offer.
-                            </p>
-                            <ul class="space-y-3 mb-8 text-sm font-semibold text-[var(--foreground)]">
-                                <li class="flex items-center gap-3">
-                                    <i class="fa-solid fa-circle-check text-[var(--primary)] text-xs"></i> Get Found by More
-                                    Customers</li>
-                                <li class="flex items-center gap-3">
-                                    <i class="fa-solid fa-circle-check text-[var(--primary)] text-xs"></i> Free Marketing That
-                                    Works 24/7</li>
-                                <li class="flex items-center gap-3">
-                                    <i class="fa-solid fa-circle-check text-[var(--primary)] text-xs"></i> Build Trust and Look
-                                    Professional</li>
+                        </div>
+                    </button>
+
+                    <button onclick="switchTab(2)" id="step-btn-2" class="w-full text-left p-5 rounded-xl border transition-all duration-200 bg-white/5 border-white/5 hover:border-white/10 group">
+                        <div class="flex items-start gap-4">
+                            <span id="step-num-2" class="heading-font text-lg font-bold text-gray-500 bg-white/5 px-2.5 py-1 rounded border border-white/5">02</span>
+                            <div>
+                                <h4 class="text-gray-300 font-semibold text-base transition-colors group-hover:text-white">Active Code Scoping</h4>
+                                <p class="text-xs text-gray-400 mt-1 leading-relaxed">No static clone apps. You receive an isolated, genuine module allocation of a production codebase.</p>
+                            </div>
+                        </div>
+                    </button>
+
+                    <button onclick="switchTab(3)" id="step-btn-3" class="w-full text-left p-5 rounded-xl border transition-all duration-200 bg-white/5 border-white/5 hover:border-white/10 group">
+                        <div class="flex items-start gap-4">
+                            <span id="step-num-3" class="heading-font text-lg font-bold text-gray-500 bg-white/5 px-2.5 py-1 rounded border border-white/5">03</span>
+                            <div>
+                                <h4 class="text-gray-300 font-semibold text-base transition-colors group-hover:text-white">Brutal Code Reviews</h4>
+                                <p class="text-xs text-gray-400 mt-1 leading-relaxed">Submit pull requests directly to senior devs. Expect real critical refactoring commentary that forces growth.</p>
+                            </div>
+                        </div>
+                    </button>
+
+                    <button onclick="switchTab(4)" id="step-btn-4" class="w-full text-left p-5 rounded-xl border transition-all duration-200 bg-white/5 border-white/5 hover:border-white/10 group">
+                        <div class="flex items-start gap-4">
+                            <span id="step-num-4" class="heading-font text-lg font-bold text-gray-500 bg-white/5 px-2.5 py-1 rounded border border-white/5">04</span>
+                            <div>
+                                <h4 class="text-gray-300 font-semibold text-base transition-colors group-hover:text-white">Production Shipping</h4>
+                                <p class="text-xs text-gray-400 mt-1 leading-relaxed">Your clean commits deploy live. Lock down concrete verification links to pass screeners easily.</p>
+                            </div>
+                        </div>
+                    </button>
+                </div>
+
+                <!-- Live Environment Screen Visualizer (Right Side - 7 Columns) -->
+                <div
+                    class="lg:col-span-7 bg-[#111115] border border-white/5 rounded-xl overflow-hidden shadow-2xl shadow-black/50">
+                    <div class="bg-[#16161c] px-4 py-3 border-b border-white/5 flex items-center justify-between">
+                        <div class="flex items-center gap-2">
+                            <span class="w-3 h-3 rounded-full bg-red-500/40"></span>
+                            <span class="w-3 h-3 rounded-full bg-yellow-500/40"></span>
+                            <span class="w-3 h-3 rounded-full bg-green-500/40"></span>
+                        </div>
+                        <div id="terminal-title" class="text-xs text-gray-500 font-mono tracking-tight">
+                            unlitify-verify.sh</div>
+                        <div class="w-12"></div>
+                    </div>
+
+                    <div class="p-6 font-mono text-xs sm:text-sm min-h-[340px] flex flex-col justify-between text-left">
+                        <div id="terminal-content" class="space-y-4 leading-relaxed">
+                            <!-- Injected programmatically by script -->
+                        </div>
+                        <div
+                            class="pt-4 border-t border-white/5 flex items-center justify-between text-[11px] text-gray-500">
+                            <span id="terminal-status">Pipeline Status: STANDBY</span>
+                            <span>UTF-8</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Community & Pricing Funnel Section -->
+    <section id="tracks" class="py-20 border-t border-white/5 bg-[#0A0A0C] relative bg-grid">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="heading-font text-3xl sm:text-4xl font-bold text-white mb-4 tracking-tight">
+                    One Community. <span class="text-blue-500">Two Paths to Growth.</span>
+                </h2>
+                <p class="text-gray-400 max-w-xl mx-auto text-sm sm:text-base">
+                    Join our ecosystem of engineering students. Start free with core foundational tasks, or unlock the
+                    full production engineering stack.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto items-stretch">
+                <!-- Card 1: Free 4-Week Sprint Entry -->
+                <div
+                    class="flex flex-col justify-between p-8 rounded-2xl border border-white/5 bg-[#111115]/40 backdrop-blur-sm relative overflow-hidden group hover:border-white/10 transition-all duration-300">
+                    <div>
+                        <div class="text-xs font-bold tracking-wider text-gray-500 uppercase mb-2">The Foundation</div>
+                        <h3 class="heading-font text-2xl font-bold text-white mb-2">4-Week Task Sprint</h3>
+                        <p class="text-sm text-gray-400 mb-6 leading-relaxed">Your entry point into real engineering
+                            workflows. Get a clear idea of actual industry expectations while working through structured
+                            milestones.</p>
+
+                        <div class="space-y-2 border-t border-white/5 pt-6 mb-8">
+                            <div class="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2">What’s
+                                Included:</div>
+                            <ul class="space-y-3 text-sm text-gray-400">
+                                <li class="flex items-center gap-2.5"><span class="text-emerald-500 font-bold">✓</span>
+                                    Curated Core Learning Materials</li>
+                                <li class="flex items-center gap-2.5"><span class="text-emerald-500 font-bold">✓</span>
+                                    4-Weeks of Scheduled Task-Based Milestones</li>
+                                <li class="flex items-center gap-2.5"><span class="text-emerald-500 font-bold">✓</span>
+                                    Peer Student Dev Community Access</li>
+                                <li class="flex items-center gap-2.5 text-gray-600 line-through"><span>✗</span> Live
+                                    Weekend Interactive Expert Panels</li>
+                                <li class="flex items-center gap-2.5 text-gray-600 line-through"><span>✗</span> Verified
+                                    Internship Certificate & Reference</li>
                             </ul>
                         </div>
-                        <a href="audit.html"
-                            class="inline-flex items-center justify-center text-xs font-bold bg-[var(--foreground)] text-[var(--background)] px-6 h-12 rounded-xl hover:bg-[var(--primary)] hover:text-white transition-all self-start shadow-sm w-full sm:w-auto text-center">
-                            Get Free SEO Audit
+                    </div>
+
+                    <div>
+                        <div class="mb-4">
+                            <span class="heading-font text-3xl font-bold text-white">₹0</span>
+                            <span class="text-xs text-gray-500 font-medium ml-1">Free Forever</span>
+                        </div>
+                        <a href="#"
+                            class="w-full inline-flex items-center justify-center px-5 py-3 text-sm font-semibold text-gray-300 hover:text-white bg-white/5 hover:bg-white/10 border border-white/10 rounded-xl transition-all duration-200">
+                            Join Free Community
                         </a>
                     </div>
-        
-                    <!-- Illustration 1: SERP Stack -->
-                    <div
-                        class="aviral1-illustration w-full md:w-64 bg-[var(--muted-bg)] rounded-2xl p-4 border border-white/5 shadow-inner flex flex-col gap-2.5 relative shrink-0">
-                        <div
-                            class="flex items-center gap-2 border-b border-[var(--foreground)]/5 pb-2 text-[10px] font-bold text-[var(--muted-text)]">
-                            <span class="text-[var(--primary)] tracking-tight font-black">Google</span>
-                            <div
-                                class="bg-[var(--card)] px-2 py-0.5 rounded-md border border-[var(--foreground)]/5 flex-1 text-left text-[9px] text-[var(--muted-text)] flex justify-between">
-                                local service near me
-                                <i class="fa-solid fa-magnifying-glass text-[var(--primary)] scale-75"></i>
-                            </div>
-                        </div>
-                        <div class="flex flex-col gap-2 relative h-36 justify-end">
-                            <div
-                                class="bg-[var(--card)] p-2 rounded-xl border border-[var(--foreground)]/5 flex items-center gap-2 opacity-40">
-                                <div
-                                    class="w-5 h-5 rounded bg-blue-500/10 text-[9px] text-blue-500 font-bold flex items-center justify-center">
-                                    B2</div>
-                                <div class="w-24 h-2 bg-[var(--muted-text)]/20 rounded"></div>
-                            </div>
-                            <div
-                                class="bg-[var(--card)] p-2 rounded-xl border border-[var(--foreground)]/5 flex items-center gap-2 opacity-40">
-                                <div
-                                    class="w-5 h-5 rounded bg-emerald-500/10 text-[9px] text-emerald-500 font-bold flex items-center justify-center">
-                                    LS</div>
-                                <div class="w-20 h-2 bg-[var(--muted-text)]/20 rounded"></div>
-                            </div>
-                            <div
-                                class="absolute inset-x-0 bottom-0 bg-[var(--card)] p-2.5 rounded-xl border-2 border-[var(--primary)] flex items-center gap-2 shadow-lg animate-[seoLeap_6s_cubic-bezier(0.16,1,0.3,1)_infinite]">
-                                <div
-                                    class="w-6 h-6 rounded bg-[var(--primary)] text-white font-black text-[10px] flex items-center justify-center">
-                                    #1</div>
-                                <div class="flex-1">
-                                    <div class="text-[8px] text-[var(--primary)] font-bold">yourbusiness.com</div>
-                                    <div class="w-28 h-2 bg-[var(--foreground)] rounded mt-1"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
-        
-                <!-- 2. WEBSITE DEV CARD (2 Columns) -->
+
+                <!-- Card 2: Premium Industry Tier -->
                 <div
-                    class="lg:col-span-2 rounded-[2.5rem] bg-[var(--card)] shadow-[var(--shadow-md)] border border-white/10 p-6 md:p-8 flex flex-col justify-between overflow-hidden relative group">
-                    <div class="z-10 mb-6">
-                        <div
-                            class="w-12 h-12 rounded-2xl bg-[var(--primary)]/10 flex items-center justify-center text-[var(--primary)] text-lg mb-6">
-                            <i class="fa-solid fa-code"></i>
-                        </div>
-                        <h3 class="text-2xl font-black tracking-tight uppercase mb-3">Website Dev</h3>
-                        <p class="text-[var(--muted-text)] text-sm font-medium mb-4 leading-relaxed">
-                            We build you a professional website that looks great and turns visitors into paying customers.
-                        </p>
-                        <ul class="space-y-2 text-xs font-semibold text-[var(--foreground)] mb-6">
-                            <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-[var(--primary)]"></i>
-                                Great First Impression</li>
-                            <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-[var(--primary)]"></i>
-                                Convert Visitors</li>
-                        </ul>
-                    </div>
-        
-                    <!-- Illustration 2: UI Canvas Window Layout -->
+                    class="flex flex-col justify-between p-8 rounded-2xl border border-blue-500/30 bg-[#111115] relative overflow-hidden shadow-xl shadow-blue-600/5 group">
                     <div
-                        class="aviral1-illustration w-full bg-[var(--muted-bg)] border border-white/10 rounded-2xl p-3 mb-6 relative overflow-hidden h-32 flex flex-col justify-between shadow-inner">
-                        <div class="flex items-center justify-between border-b border-[var(--foreground)]/5 pb-1.5">
-                            <div class="flex gap-1.5">
-                                <span class="w-2 h-2 rounded-full bg-red-400"></span><span class="w-2 h-2 rounded-full bg-yellow-400"></span><span class="w-2 h-2 rounded-full bg-green-400"></span>
-                            </div>
-                            <div class="w-24 h-3 bg-[var(--card)] rounded-md border border-[var(--foreground)]/5"></div>
-                        </div>
-                        <div class="flex gap-3 items-center flex-1 mt-2">
-                            <div
-                                class="w-12 h-12 rounded-xl bg-[var(--primary)]/10 border border-[var(--primary)]/20 flex items-center justify-center text-[var(--primary)] animate-pulse">
-                                <i class="fa-solid fa-cubes-stacked text-sm"></i>
-                            </div>
-                            <div class="flex-1 space-y-2">
-                                <div class="w-3/4 h-2.5 bg-[var(--foreground)] rounded"></div>
-                                <div class="w-1/2 h-2 bg-[var(--muted-text)]/30 rounded"></div>
-                            </div>
-                        </div>
+                        class="absolute -top-12 -right-12 w-32 h-32 bg-blue-600/10 blur-xl rounded-full pointer-events-none">
+                    </div>
+
+                    <div>
                         <div
-                            class="h-6 w-full bg-[var(--card)] rounded-lg border border-[var(--foreground)]/5 flex items-center justify-between px-2 text-[8px] font-bold text-emerald-500">
-                            <span class="flex items-center gap-1"><i class="fa-solid fa-shield-halved"></i> SSL ACTIVE</span>
-                            <span>$942.00 Generated</span>
+                            class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-md bg-blue-500/10 border border-blue-500/20 text-[10px] font-bold tracking-wider text-blue-400 uppercase mb-2">
+                            Recommended Accelerator
+                        </div>
+                        <h3 class="heading-font text-2xl font-bold text-white mb-2">Full Accelerator Track</h3>
+                        <p class="text-sm text-gray-400 mb-6 leading-relaxed">For developers ready to skip intermediate
+                            hurdles. Write production code, interface with tech professionals, and claim verified proof
+                            of your skillset.</p>
+
+                        <div class="space-y-2 border-t border-white/5 pt-6 mb-8">
+                            <div class="text-xs font-semibold text-blue-400 uppercase tracking-wider mb-2">Everything in
+                                Free, plus:</div>
+                            <ul class="space-y-3 text-sm text-gray-300">
+                                <li class="flex items-center gap-2.5"><span class="text-blue-500 font-bold">✓</span>
+                                    <strong>Weekend Interactive Panels</strong> with Tech Professionals</li>
+                                <li class="flex items-center gap-2.5"><span class="text-blue-500 font-bold">✓</span>
+                                    <strong>Verified Internship Certificate</strong> & Reference Letter</li>
+                                <li class="flex items-center gap-2.5"><span class="text-blue-500 font-bold">✓</span>
+                                    Production Startup Module Assignments</li>
+                                <li class="flex items-center gap-2.5"><span class="text-blue-500 font-bold">✓</span>
+                                    1-on-1 Critical Pull Request Reviews</li>
+                                <li class="flex items-center gap-2.5"><span class="text-blue-500 font-bold">✓</span>
+                                    Profile Architecture (GitHub & LinkedIn)</li>
+                            </ul>
                         </div>
                     </div>
-                    <a href="audit.html"
-                        class="inline-flex items-center justify-center text-xs font-bold bg-[var(--muted-bg)] text-[var(--foreground)] hover:bg-[var(--primary)] hover:text-white px-6 h-12 rounded-xl transition-all text-center shadow-sm z-10">
-                        Looking for a pro website?
-                    </a>
+
+                    <div>
+                        <div class="mb-4">
+                            <span class="heading-font text-3xl font-bold text-white">₹99</span>
+                            <span class="text-xs text-gray-500 font-medium ml-1">One-Time Commitment Fee</span>
+                        </div>
+                        <a href="#"
+                            class="w-full inline-flex items-center justify-center px-5 py-3 text-sm font-semibold text-white bg-blue-600 hover:bg-blue-500 rounded-xl shadow-lg shadow-blue-600/20 border border-blue-400/20 transition-all duration-200">
+                            Apply for Accelerator Tier 🚀
+                        </a>
+                    </div>
                 </div>
-        
-                <!-- 3. CAMPAIGNS CARD (2 Columns) -->
-                <div
-                    class="lg:col-span-2 rounded-[2.5rem] bg-[var(--card)] shadow-[var(--shadow-md)] border border-white/10 p-6 md:p-8 flex flex-col justify-between overflow-hidden relative group">
-                    <div class="z-10 mb-6">
-                        <div
-                            class="w-12 h-12 rounded-2xl bg-[var(--primary)]/10 flex items-center justify-center text-[var(--primary)] text-lg mb-6">
-                            <i class="fa-solid fa-comments-dollar"></i>
-                        </div>
-                        <h3 class="text-2xl font-black tracking-tight uppercase mb-3">Campaigns</h3>
-                        <p class="text-[var(--muted-text)] text-sm font-medium mb-4 leading-relaxed">
-                            Email, SMS, WhatsApp. We send personalized messages directly to your customers' phones.
-                        </p>
-                        <ul class="space-y-2 text-xs font-semibold text-[var(--foreground)] mb-6">
-                            <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-[var(--primary)]"></i>
-                                Reach Mobile Wallets</li>
-                            <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-[var(--primary)]"></i>
-                                Retain Past Buyers</li>
-                        </ul>
-                    </div>
-        
-                    <!-- Illustration 3: Notification Bubbles Stream -->
-                    <div
-                        class="aviral1-illustration w-full bg-[var(--muted-bg)] border border-white/10 rounded-2xl p-3 mb-6 h-32 relative overflow-hidden flex flex-col gap-2 justify-center shadow-inner">
-                        <div
-                            class="bg-[var(--card)] p-2 rounded-xl shadow-sm border border-[var(--primary)]/10 flex items-center gap-2.5 transform -translate-x-2 animate-[floatBubble_4s_ease-in-out_infinite]">
-                            <i class="fa-brands fa-whatsapp text-emerald-500 text-base"></i>
-                            <div class="leading-none">
-                                <span class="text-[9px] font-bold block">VIP Access Code</span>
-                                <span class="text-[8px] text-[var(--muted-text)]">Claim 20% off inside...</span>
-                            </div>
-                        </div>
-                        <div
-                            class="bg-[var(--card)] p-2 rounded-xl shadow-sm border border-orange-500/10 flex items-center gap-2.5 transform translate-x-2 animate-[floatBubble_4s_ease-in-out_infinite_2s]">
-                            <i class="fa-solid fa-envelope text-[var(--primary)] text-xs"></i>
-                            <div class="leading-none">
-                                <span class="text-[9px] font-bold block">Invoice Settled</span>
-                                <span class="text-[8px] text-emerald-500 font-bold">Repeat Purchase ✓</span>
-                            </div>
-                        </div>
-                    </div>
-                    <a href="audit.html"
-                        class="inline-flex items-center justify-center text-xs font-bold bg-[var(--muted-bg)] text-[var(--foreground)] hover:bg-[var(--primary)] hover:text-white px-6 h-12 rounded-xl transition-all text-center shadow-sm z-10">
-                        I want to know more
-                    </a>
-                </div>
-        
-                <!-- 4. SOCIAL MEDIA CARD (2 Columns) -->
-                <div
-                    class="lg:col-span-2 rounded-[2.5rem] bg-[var(--card)] shadow-[var(--shadow-md)] border border-white/10 p-6 md:p-8 flex flex-col justify-between overflow-hidden relative group">
-                    <div class="z-10 mb-6">
-                        <div
-                            class="w-12 h-12 rounded-2xl bg-[var(--primary)]/10 flex items-center justify-center text-[var(--primary)] text-lg mb-6">
-                            <i class="fa-solid fa-share-nodes"></i>
-                        </div>
-                        <h3 class="text-2xl font-black tracking-tight uppercase mb-3">Social Media</h3>
-                        <p class="text-[var(--muted-text)] text-sm font-medium mb-4 leading-relaxed">
-                            We manage your social content pipeline to attract discovery and scale high conversion loops.
-                        </p>
-                        <ul class="space-y-2 text-xs font-semibold text-[var(--foreground)] mb-6">
-                            <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-[var(--primary)]"></i>
-                                Attract Discovery Channels</li>
-                            <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-[var(--primary)]"></i>
-                                Real Customer Relationships</li>
-                        </ul>
-                    </div>
-        
-                    <!-- Illustration 4: Growth Metric Stream Tracker -->
-                    <div
-                        class="aviral1-illustration w-full bg-[var(--muted-bg)] border border-white/10 rounded-2xl p-4 mb-6 h-32 flex flex-col justify-between relative overflow-hidden shadow-inner">
-                        <div class="flex items-center justify-between">
-                            <span class="text-[10px] font-black tracking-wide text-[var(--muted-text)] uppercase">Engagement Analytics</span>
-                            <span class="text-[9px] bg-emerald-500/10 text-emerald-500 px-1.5 py-0.5 rounded-md font-bold">+314% Growth</span>
-                        </div>
-                        <div class="flex items-end gap-1.5 h-12 pt-2">
-                            <div class="flex-1 bg-[var(--foreground)]/10 rounded-t h-1/4"></div>
-                            <div class="flex-1 bg-[var(--foreground)]/10 rounded-t h-2/5"></div>
-                            <div class="flex-1 bg-[var(--foreground)]/10 rounded-t h-1/3"></div>
-                            <div class="flex-1 bg-[var(--foreground)]/10 rounded-t h-3/5"></div>
-                            <div class="flex-1 bg-[var(--primary)] rounded-t h-full relative">
-                                <span class="absolute -top-4 left-1/2 transform -translate-x-1/2 text-[7px] font-bold text-[var(--primary)]">VIRAL</span>
-                            </div>
-                        </div>
-                    </div>
-                    <a href="audit.html"
-                        class="inline-flex items-center justify-center text-xs font-bold bg-[var(--muted-bg)] text-[var(--foreground)] hover:bg-[var(--primary)] hover:text-white px-6 h-12 rounded-xl transition-all text-center shadow-sm z-10">
-                        Boost your online presence
-                    </a>
-                </div>
-        
-                <!-- 5. BRANDING CARD (2 Columns) -->
-                <div
-                    class="lg:col-span-2 rounded-[2.5rem] bg-[var(--card)] shadow-[var(--shadow-md)] border border-white/10 p-6 md:p-8 flex flex-col justify-between overflow-hidden relative group">
-                    <div class="z-10 mb-6">
-                        <div
-                            class="w-12 h-12 rounded-2xl bg-[var(--primary)]/10 flex items-center justify-center text-[var(--primary)] text-lg mb-6">
-                            <i class="fa-solid fa-palette"></i>
-                        </div>
-                        <h3 class="text-2xl font-black tracking-tight uppercase mb-3">Branding</h3>
-                        <p class="text-[var(--muted-text)] text-sm font-medium mb-4 leading-relaxed">
-                            We design memorable visual identities and architectures that look trustworthy and high premium.
-                        </p>
-                        <ul class="space-y-2 text-xs font-semibold text-[var(--foreground)] mb-6">
-                            <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-[var(--primary)]"></i>
-                                Stand Out from Competition</li>
-                            <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-[var(--primary)]"></i>
-                                Attract High Value Deals</li>
-                        </ul>
-                    </div>
-        
-                    <!-- Illustration 5: Corporate Guide Vector Mock -->
-                    <div
-                        class="aviral1-illustration w-full bg-[var(--muted-bg)] border border-white/10 rounded-2xl p-3 mb-6 h-32 flex items-center justify-center relative overflow-hidden shadow-inner">
-                        <div class="absolute inset-0 bg-grid-pattern opacity-5"></div>
-                        <div
-                            class="w-16 h-16 rounded-full border-2 border-dashed border-[var(--primary)]/30 flex items-center justify-center p-1.5 animate-[spin_24s_linear_infinite]">
-                            <div
-                                class="w-full h-full rounded-full bg-[var(--primary)] text-white flex items-center justify-center text-lg shadow-md font-black">
-                                O
-                            </div>
-                        </div>
-                        <div
-                            class="absolute right-4 top-4 border border-[var(--foreground)]/5 bg-[var(--card)] px-1.5 py-0.5 rounded text-[7px] font-mono text-[var(--muted-text)]">
-                            R: 255 G: 64 B: 0
-                        </div>
-                        <div
-                            class="absolute left-4 bottom-4 border border-[var(--foreground)]/5 bg-[var(--card)] px-1.5 py-0.5 rounded text-[7px] font-mono text-[var(--muted-text)]">
-                            Scale: Vector 1:1
-                        </div>
-                    </div>
-                    <a href="audit.html"
-                        class="inline-flex items-center justify-center text-xs font-bold bg-[var(--muted-bg)] text-[var(--foreground)] hover:bg-[var(--primary)] hover:text-white px-6 h-12 rounded-xl transition-all text-center shadow-sm z-10">
-                        Get free consultation
-                    </a>
-                </div>
-        
             </div>
-        </section>
-        
-        <!-- CSS SCROLL-DRIVEN ARCHITECTURE FOR THE aviral1 THEME MATRIX -->
-        <style>
-            /* Auto-Unfolding Keyframes Matrix */
-            @keyframes seoLeap {
-        
-                0%,
-                100% {
-                    transform: translateY(80px);
-                    opacity: 0.4;
-                }
-        
-                30%,
-                70% {
-                    transform: translateY(-40px);
-                    opacity: 1;
-                    box-shadow: 0 12px 24px rgba(255, 64, 0, 0.15);
-                }
-            }
-        
-            @keyframes floatBubble {
-        
-                0%,
-                100% {
-                    transform: translateY(0) scale(1);
-                }
-        
-                50% {
-                    transform: translateY(-4px) scale(1.02);
-                }
-            }
-        
-            /* Responsive Execution Pipeline (Mobile First) */
-            @media (max-width: 1023px) {
-                .aviral1-illustration {
-                    opacity: 0;
-                    transform: translateY(20px);
-                    transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-                }
-        
-                /* Trigger natural mobile viewing optimization using CSS intersection emulation */
-                .group:hover .aviral1-illustration {
-                    opacity: 1;
-                    transform: translateY(0);
-                }
-            }
-        
-            /* Desktop Scroll-Driven Horizontal Swipe Layout Optimization */
-            @media (min-width: 1024px) {
-                .aviral1-illustration {
-                    animation: desktopSwipeReveal linear both;
-                    animation-timeline: view();
-                    animation-range: entry 5% cover 35%;
-                    transform-origin: left center;
-                }
-        
-                @keyframes desktopSwipeReveal {
-                    from {
-                        opacity: 0;
-                        transform: translateX(-40px) scale(0.92) rotate(-2deg);
-                        filter: blur(4px);
-                    }
-        
-                    to {
-                        opacity: 1;
-                        transform: translateX(0) scale(1) rotate(0deg);
-                        filter: blur(0);
-                    }
-                }
-            }
-        </style>
+        </div>
+    </section>
 
-        
-
-<!-- INTERACTION PIPELINE SPECIFICATION -->
-<style>
-    /* Responsive Canvas Fluid Scales */
-    #nagpur-heritage svg {
-        filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.05));
-    }
-
-    /* Elegant hover acceleration for custom vector elements */
-    .group:hover .accent-orange-solid {
-        fill: #FF4000 !important;
-        transform: scale(1.15);
-        transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-</style>
-
-<!-- GLOBAL REACH LANDMARK SECTION: NAGPUR INFRASTRUCTURE MATRIX -->
-<section id="nagpur-heritage"
-    class="w-full bg-[var(--card)] rounded-[2.5rem] border border-white/10 p-6 md:p-14 overflow-hidden relative my-12 group">
-
-    <!-- Subtle Blueprint Matrix Overlay -->
-    <div class="absolute inset-0 bg-grid-pattern opacity-5 pointer-events-none"></div>
-
-    <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center relative z-10">
-
-        <!-- TELEMETRY COPY PANEL (5 Columns) -->
-        <div class="lg:col-span-5 flex flex-col justify-center text-left order-1">
-            <span class="inline-flex items-center gap-2 bg-[var(--primary)]/10 text-[var(--primary)] px-4 py-1.5 rounded-full text-xs font-semibold tracking-wide mb-5 w-fit">
-                <i class="fa-solid fa-map-pinned"></i> Geographic Core Coordinates
-            </span>
-
-            <h2
-                class="text-3xl md:text-5xl font-black tracking-tight uppercase leading-tight mb-4 text-[var(--foreground)]">
-                Central Hub.<br>
-                <span class="text-[var(--primary)]">Global Delivery.</span>
-            </h2>
-
-            <p class="text-[var(--muted-text)] text-sm md:text-base font-medium leading-relaxed mb-6">
-                Engineered directly out of Nagpur, the definitive geographic heart of India. Our systems draw
-                inspiration from the structural precision of landmarks like Deekshabhoomi and Vidhan Bhavan to deploy
-                robust, high-performance web ecosystems to international markets.
-            </p>
-
-            <!-- Structural Anchors List -->
-            <div
-                class="grid grid-cols-2 gap-x-4 gap-y-3 border-t border-[var(--foreground)]/5 pt-6 mb-8 text-xs font-bold text-[var(--muted-text)] uppercase tracking-wider">
-                <div class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-[var(--primary)]"></span>
-                    Deekshabhoomi Dome</div>
-                <div class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-[var(--primary)]"></span>
-                    Zero Mile Pillar</div>
-                <div class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-[var(--primary)]"></span>
-                    Tekdi Ganesh Mandir</div>
-                <div class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-[var(--primary)]"></span>
-                    Vidhan Bhavan</div>
+    <!-- Proof of Work Showcase Section -->
+    <section id="proof" class="py-20 border-t border-white/5 bg-[#0A0A0C] relative bg-grid">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="heading-font text-3xl sm:text-4xl font-bold text-white mb-4 tracking-tight">
+                    Engineered by Our Interns
+                </h2>
+                <p class="text-gray-400 max-w-xl mx-auto text-sm sm:text-base">
+                    Real Code. Real Impact. No basic todo-list clones.
+                </p>
             </div>
 
-            <a href="#contact"
-                class="inline-flex items-center justify-center text-xs font-bold bg-[var(--foreground)] text-[var(--background)] px-8 h-12 rounded-xl hover:bg-[var(--primary)] hover:text-white transition-all self-start shadow-md w-full sm:w-auto text-center">
-                Launch Globally From The Center
-            </a>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                <!-- Project 1 -->
+                <div class="p-6 bg-[#111115] border border-white/5 rounded-xl space-y-4">
+                    <div class="text-xs text-blue-400 font-mono">01 / Distributed Task Engine</div>
+                    <h4 class="text-white font-bold text-lg heading-font">Real-Time Sync Engine</h4>
+                    <p class="text-sm text-gray-400">Building a highly concurrent task manager with strict real-time
+                        room synchronization states.</p>
+                    <div class="text-xs text-gray-500">React • Node.js • Socket.io • MongoDB</div>
+                </div>
+                <!-- Project 2 -->
+                <div class="p-6 bg-[#111115] border border-white/5 rounded-xl space-y-4">
+                    <div class="text-xs text-blue-400 font-mono">02 / High-Throughput Checkout Pipeline</div>
+                    <h4 class="text-white font-bold text-lg heading-font">Secure Transaction Flow</h4>
+                    <p class="text-sm text-gray-400">Engineering a modular, highly secure transactional checkout route
+                        with strict database validation rules.</p>
+                    <div class="text-xs text-gray-500">Next.js • TypeScript • Stripe • Tailwind CSS</div>
+                </div>
+            </div>
         </div>
+    </section>
 
-        <!-- 100% HAND-DRAWN HIGH-OPTIMIZED INLINE VECTOR ART (7 Columns) -->
-        <div
-            class="lg:col-span-7 flex items-center justify-center relative w-full overflow-hidden rounded-3xl bg-gradient-to-b from-sky-500/5 to-transparent border border-white/5 p-4 order-2">
+    <!-- FAQ Section -->
+    <section id="faqs" class="py-20 border-t border-white/5 bg-[#0A0A0C] relative bg-grid">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="heading-font text-3xl sm:text-4xl font-bold text-white mb-4 tracking-tight">
+                    Hard Questions, Direct Answers
+                </h2>
+            </div>
 
-            <svg class="w-full h-auto max-h-[380px] overflow-visible" viewBox="0 0 1000 420" fill="none"
-                xmlns="http://www.w3.org/2000/svg">
-                <defs>
-                    <!-- Uniform Stroke Config across elements -->
-                    <style>
-                        .skyline-stroke {
-                            stroke: var(--foreground);
-                            stroke-width: 2;
-                            stroke-linecap: round;
-                            stroke-linejoin: round;
-                        }
-
-                        .accent-orange {
-                            fill: var(--primary);
-                            opacity: 0.15;
-                        }
-
-                        .accent-orange-solid {
-                            fill: var(--primary);
-                        }
-                    </style>
-                </defs>
-
-                <!-- ENVIRONMENT: The Orange City Sun & Modern High-Rise Skyline Background -->
-                <g id="bg-skyline" opacity="0.15">
-                    <!-- Giant Radiant Sun Matrix -->
-                    <circle cx="500" cy="180" r="110" fill="var(--primary)" />
-                    <!-- Minimalist High-Rise Line Blocks -->
-                    <path
-                        d="M40 320 L40 180 L75 180 L75 320 M75 210 L120 210 L120 320 M840 320 L840 160 L885 160 L885 320 M885 200 L930 200 L930 320 M930 150 L965 150 L965 320"
-                        class="skyline-stroke" />
-                    <!-- High-Rise window indicators -->
-                    <line x1="55" y1="200" x2="60" y2="200" class="skyline-stroke" />
-                    <line x1="55" y1="220" x2="60" y2="220" class="skyline-stroke" />
-                    <line x1="90" y1="230" x2="105" y2="230" class="skyline-stroke" />
-                    <line x1="90" y1="250" x2="105" y2="250" class="skyline-stroke" />
-                </g>
-
-                <!-- 1. SITABULDI FORT (Far Left Bastion Base) -->
-                <g id="sitabuldi-fort" transform="translate(10, 0)">
-                    <path d="M20 320 L20 250 L45 235 L70 250 L70 320" class="skyline-stroke" />
-                    <path d="M45 235 L45 215" class="skyline-stroke" />
-                    <!-- Fortified Battlements Wall -->
-                    <path d="M70 270 L140 270 L140 320" class="skyline-stroke" />
-                    <path d="M80 270 L80 260 L95 260 L95 270 M110 270 L110 260 L125 260 L125 270"
-                        class="skyline-stroke" />
-                </g>
-
-                <!-- 2. VIDHAN BHAVAN (Classical Columns & Symmetric Front Arch Architecture) -->
-                <g id="vidhan-bhavan" transform="translate(155, 0)">
-                    <path d="M10 320 L10 240 L160 240 L160 320 Z" class="skyline-stroke" />
-                    <!-- Classical Portico Triangular Pediment -->
-                    <path d="M25 240 L85 200 L145 240" class="skyline-stroke" />
-                    <!-- Structural Pillars -->
-                    <line x1="40" y1="240" x2="40" y2="320" class="skyline-stroke" />
-                    <line x1="65" y1="240" x2="65" y2="320" class="skyline-stroke" />
-                    <line x1="105" y1="240" x2="105" y2="320" class="skyline-stroke" />
-                    <line x1="130" y1="240" x2="130" y2="320" class="skyline-stroke" />
-                    <!-- Central Entrance Arch -->
-                    <path d="M73 320 L73 275 C73 265, 97 265, 97 275 L97 320" class="skyline-stroke" />
-                </g>
-
-                <!-- 3. DEEKSHABHOOMI (Centerpiece Hemispherical Great Dome & Boundary Pillars) -->
-                <g id="deekshabhoomi-core">
-                    <!-- Accurate Geometric Hemisphere Dome -->
-                    <path d="M340 320 C340 160, 600 160, 600 320 Z" class="skyline-stroke" />
-                    <path d="M340 320 L600 320" class="skyline-stroke" />
-                    <!-- Accentuation Fill Block for Graphic Depth -->
-                    <path d="M365 318 C365 190, 575 190, 575 318 Z" class="accent-orange" />
-
-                    <!-- Lotus Petal Outer Ring Base Layer Structural Lines -->
-                    <path
-                        d="M320 320 C330 295, 350 295, 360 320 M360 320 C370 295, 390 295, 400 320 M400 320 C410 295, 430 295, 440 320 M440 320 C450 295, 470 295, 480 320 M480 320 C490 295, 510 295, 520 320 M520 320 C530 295, 550 295, 560 320 M560 320 C570 295, 590 295, 600 320 M600 320 C610 295, 630 295, 620 320"
-                        class="skyline-stroke" />
-
-                    <!-- Harmika Apex Square Block and Chhatra Spire -->
-                    <rect x="455" y="150" width="30" height="15" class="skyline-stroke" fill="var(--card)" />
-                    <line x1="470" y1="150" x2="470" y2="105" class="skyline-stroke" />
-                    <!-- Tiered Umbrellas (Chhatra) -->
-                    <line x1="450" y1="125" x2="490" y2="125" class="skyline-stroke" />
-                    <line x1="458" y1="115" x2="482" y2="115" class="skyline-stroke" />
-                    <line x1="464" y1="105" x2="476" y2="105" class="skyline-stroke" />
-                </g>
-
-                <!-- 4. ZERO MILE STONE MONUMENT (Geographic Center Obelisk Pillar) -->
-                <g id="zero-mile-monument" transform="translate(625, 0)">
-                    <!-- Base Foundation Platform Blocks -->
-                    <rect x="10" y="300" width="50" height="20" class="skyline-stroke" />
-                    <rect x="18" y="285" width="34" height="15" class="skyline-stroke" />
-                    <!-- Tapered Sandstone Obelisk Pillar Column -->
-                    <path d="M27 285 L31 165 L39 165 L43 285 Z" class="skyline-stroke" />
-                    <!-- Equator Line Notation on Pillar -->
-                    <line x1="30" y1="210" x2="40" y2="210" class="skyline-stroke" />
-                    <line x1="29" y1="230" x2="41" y2="230" class="skyline-stroke" />
-                </g>
-
-                <!-- 5. SHRI GANESH TEKDI MANDIR & DRAGON PALACE (Symmetric Shikhara Spire Assembly) -->
-                <g id="tekdi-ganesh-dragon" transform="translate(710, 0)">
-                    <!-- Tiered Multi-Level Shikhara Pagoda Architecture -->
-                    <path d="M10 320 L10 250 L110 250 L110 320 Z" class="skyline-stroke" />
-                    <path d="M20 250 L30 200 L90 200 L100 250 Z" class="skyline-stroke" />
-                    <path d="M35 200 L45 155 L75 155 L85 200 Z" class="skyline-stroke" />
-                    <!-- Crown Kalasha Pot Finial Element -->
-                    <path d="M52 155 C52 140, 68 140, 68 155 Z" class="skyline-stroke" fill="var(--primary)"
-                        opacity="0.3" />
-                    <line x1="60" y1="140" x2="60" y2="120" class="skyline-stroke" />
-                    <circle cx="60" cy="117" r="3" class="accent-orange-solid" />
-                </g>
-
-                <!-- 6. ORANGE TREES & SUBTLE HARVEST ELEMENTS (Integrated Along Bottom Axis) -->
-                <g id="orange-city-flora">
-                    <!-- Left Hand Grove -->
-                    <path d="M140 320 C130 300, 160 280, 155 320" class="skyline-stroke" />
-                    <circle cx="145" cy="295" r="4" class="accent-orange-solid" />
-
-                    <!-- Mid Center Base Grove -->
-                    <path d="M315 320 C300 290, 335 285, 330 320" class="skyline-stroke" />
-                    <circle cx="315" cy="300" r="3.5" class="accent-orange-solid" />
-                    <circle cx="328" cy="293" r="3.5" class="accent-orange-solid" />
-
-                    <!-- Right Hand Post Grove -->
-                    <path d="M690 320 C675 295, 710 290, 705 320" class="skyline-stroke" />
-                    <circle cx="695" cy="300" r="4" class="accent-orange-solid" />
-                </g>
-
-                <!-- GROUND MATRIX TERMINAL HIGHWAY -->
-                <line x1="10" y1="320" x2="990" y2="320" class="skyline-stroke" />
-                <line x1="10" y1="332" x2="990" y2="332" stroke="var(--muted-text)" stroke-width="1" opacity="0.3"
-                    stroke-dasharray="12 8" />
-            </svg>
+            <div class="space-y-6">
+                <div class="p-6 bg-[#111115] border border-white/5 rounded-xl">
+                    <h4 class="text-white font-semibold mb-2 heading-font">Is the 4-week task internship completely
+                        free?</h4>
+                    <p class="text-sm text-gray-400">Yes. We provide the entry-level tasks and curated learning
+                        materials to the student community at zero cost so everyone gets a clear idea of actual work.
+                    </p>
+                </div>
+                <div class="p-6 bg-[#111115] border border-white/5 rounded-xl">
+                    <h4 class="text-white font-semibold mb-2 heading-font">What do I get in the paid version?</h4>
+                    <p class="text-sm text-gray-400">The ₹99 tier unlocks interactive weekend panels with industry
+                        professionals, direct 1-on-1 code reviews from senior developers, and a verified, shareable
+                        Internship Certificate with a reference letter.</p>
+                </div>
+                <div class="p-6 bg-[#111115] border border-white/5 rounded-xl">
+                    <h4 class="text-white font-semibold mb-2 heading-font">Why is the premium tier only ₹99?</h4>
+                    <p class="text-sm text-gray-400">We don't believe in charging massive student debt. The ₹99 acts as
+                        a psychological commitment filter—ensuring you have enough skin in the game to actually finish
+                        the work.</p>
+                </div>
+            </div>
         </div>
+    </section>
 
-    </div>
-</section>
+    <!-- Script Handling Tab Switches -->
+    <script>
+        const tabData = {
+            1: {
+                title: "unlitify-vetting_pipeline.sh",
+                status: "VETTING STATUS: IN_PROGRESS",
+                content: `
+                    <p class="text-gray-500">// Processing incoming candidate credentials...</p>
+                    <p class="text-blue-400">$ unlitify parse --resume --github</p>
+                    <div class="p-3 bg-white/5 rounded border border-white/5 text-gray-400 space-y-1">
+                        <p class="text-white font-medium">[SYSTEM LOG]: Parsing applicant data...</p>
+                        <p>↳ Core JavaScript / Java familiarity verified.</p>
+                        <p class="text-yellow-500">⚠️ Flagged: Cookie-cutter clone repositories located on profile.</p>
+                        <p class="text-green-400">✓ Approved: Baseline logical aptitude matches code standards.</p>
+                    </div>
+                    <p class="text-green-500">● Verification step 01 locked. Passing to system module assignment.</p>
+                `
+            },
+            2: {
+                title: "allocate_startup_module.js",
+                status: "SCOPE STATUS: ALLOCATED",
+                content: `
+                    <p class="text-gray-500">// Fetching live isolated database branches...</p>
+                    <p class="text-blue-400">$ git checkout -b unlitify-feature/high-throughput-checkout</p>
+                    <div class="p-3 bg-white/5 rounded border border-white/5 text-gray-400 space-y-1">
+                        <p class="text-white font-medium">[SYSTEM SCOPE]: System Engine Module</p>
+                        <p>🚀 Target: Implement strict atomic states inside checkout hooks.</p>
+                        <p>🛠️ Env Architecture: Next.js, Stripe SDK, PostgreSQL</p>
+                        <p class="text-red-400">✗ No Tutorial Guidelines: Must build via production spec sheets.</p>
+                    </div>
+                `
+            },
+            3: {
+                title: "pull_request_review.md",
+                status: "REVIEW STATUS: CHANGES_REQUESTED",
+                content: `
+                    <p class="text-gray-500"># Pull Request #142 Code Critique from Senior Engineer</p>
+                    <p class="text-red-400">● Line 42: "Your try/catch block captures error states but defaults back silently. This leaves standard operations blind."</p>
+                    <p class="text-yellow-500">● Line 89: "Optimistic updates trigger race-conditions on high latency mobile calls."</p>
+                    <p class="text-blue-400">$ git commit -am "Fix: Implement proper error catch logging metrics"</p>
+                `
+            },
+            4: {
+                title: "production_deploy_pipeline.yml",
+                status: "DEPLOY STATUS: SUCCESS",
+                content: `
+                    <p class="text-gray-500">// Launching GitHub actions container framework...</p>
+                    <p class="text-blue-400">$ yarn build && vercel --prod</p>
+                    <div class="p-3 bg-green-950/20 rounded border border-green-500/20 text-green-400 space-y-1">
+                        <p class="font-semibold text-white">✓ Build optimization completed inside target pipeline.</p>
+                        <p>↳ Unit Testing suites executed: 24 passed successfully.</p>
+                    </div>
+                    <p class="text-white font-medium">✨ Portfolio update complete. Verifiable code proof attached to profile.</p>
+                `
+            }
+        };
 
-<!-- INTERACTION PIPELINE SPECIFICATION -->
-<style>
-    /* Responsive Canvas Fluid Scales */
-    #nagpur-heritage svg {
-        filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.05));
-    }
+        function switchTab(tabId) {
+            document.getElementById('terminal-title').innerText = tabData[tabId].title;
+            document.getElementById('terminal-status').innerText = tabData[tabId].status;
+            document.getElementById('terminal-content').innerHTML = tabData[tabId].content;
 
-    /* Elegant hover acceleration for custom vector elements */
-    .group:hover .accent-orange-solid {
-        fill: #FF4000 !important;
-        transform: scale(1.15);
-        transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-</style>
-
-    </div>
+            for (let i = 1; i <= 4; i++) {
+                const btn = document.getElementById(`step-btn-${i}`);
+                const num = document.getElementById(`step-num-${i}`);
+                
+                if (i === tabId) {
+                    btn.className = "w-full text-left p-5 rounded-xl border transition-all duration-200 bg-blue-600/10 border-blue-500/30 group";
+                    num.className = "heading-font text-lg font-bold text-blue-400 bg-blue-500/10 px-2.5 py-1 rounded border border-blue-500/20";
+                } else {
+                    btn.className = "w-full text-left p-5 rounded-xl border transition-all duration-200 bg-white/5 border-white/5 hover:border-white/10 group";
+                    num.className = "heading-font text-lg font-bold text-gray-500 bg-white/5 px-2.5 py-1 rounded border border-white/5";
+                }
+            }
+        }
+        switchTab(1);
+    </script>
 </body>
 
 </html>
