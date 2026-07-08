@@ -564,43 +564,7 @@
             });
         }
 
-        import { Resend } from 'resend';
-
-// REPLACE WITH YOUR ACTUAL KEY
-const resend = new Resend('re_UZkBiQT8_38f2vbPFYG5ZSKeCmXntzKG9'); 
-
-export default async function handler(req, res) {
-  if (req.method !== 'POST') return res.status(405).json({ message: 'Method not allowed' });
-
-  const { name, email, passed, score } = req.body;
-
-  const passHtml = `
-    <h1>Congratulations, ${name}!</h1>
-    <p>You've cleared the Openbox benchmark with a score of <strong>${score}%</strong>.</p>
-    <p>Your certification is ready. Click below to secure your spot on the BA Internship Waitlist.</p>
-    <a href="https://openboxgp.vercel.app/waitlist" style="padding: 12px 20px; background: #059669; color: white; text-decoration: none; border-radius: 8px;">Join the Waitlist</a>
-  `;
-
-  const failHtml = `
-    <h1>Evaluation Update</h1>
-    <p>Hi ${name}, you scored <strong>${score}%</strong>.</p>
-    <p>To earn your certification, an 80% benchmark is required. Review the modules and try again!</p>
-    <a href="https://openboxgp.vercel.app/" style="padding: 12px 20px; background: #e11d48; color: white; text-decoration: none; border-radius: 8px;">Retake Assessment</a>
-  `;
-
-  try {
-    await resend.emails.send({
-      from: 'Openbox <onboarding@resend.dev>',
-      to: email,
-      subject: passed ? 'You are Certified! 🚀' : 'Evaluation Result: Openbox',
-      html: passed ? passHtml : failHtml,
-    });
-    return res.status(200).json({ success: true });
-  } catch (error) {
-    return res.status(500).json({ error: error.message });
-  }
-}
-    </script>
+    
 </body>
 
 </html>
