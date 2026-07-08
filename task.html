@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Unlitify — Business Analyst Workspace</title>
+    <title>Openbox — Business Analyst Workspace</title>
 
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 
@@ -113,7 +113,7 @@
                             class="w-9 h-9 rounded-xl bg-blue-600 flex items-center justify-center text-white font-bold heading-font text-lg shadow-md shadow-blue-500/20">
                             U</div>
                         <div class="flex flex-col text-left leading-none">
-                            <span class="text-[var(--foreground)] font-bold text-lg tracking-tight heading-font">unlitify</span>
+                            <span class="text-[var(--foreground)] font-bold text-lg tracking-tight heading-font">Openbox</span>
                             <span class="text-blue-500 font-bold text-[8px] tracking-[0.2em] uppercase mt-0.5">Virtual Accelerator</span>
                         </div>
                     </a>
@@ -155,7 +155,7 @@
                         class="lg:col-span-8 bg-[var(--card)] p-6 md:p-8 rounded-2xl border border-slate-200 dark:border-white/10 shadow-sm relative overflow-hidden">
                         <div>
                             <div class="flex flex-wrap items-center gap-2 mb-3">
-                                <span class="px-2.5 py-1 rounded-md bg-amber-500/10 text-amber-500 text-xs font-bold uppercase tracking-wider">☕ Unlitify Business Analyst Virtual Internship</span>
+                                <span class="px-2.5 py-1 rounded-md bg-amber-500/10 text-amber-500 text-xs font-bold uppercase tracking-wider">☕ Openbox Business Analyst Virtual Internship</span>
                                 <span class="px-2.5 py-1 rounded-md bg-emerald-500/10 text-emerald-500 text-xs font-bold uppercase tracking-wider">Project: Coffee Bean Sales Analysis</span>
                             </div>
                             <h1
@@ -1339,7 +1339,7 @@
                 ],
 
                 init() {
-                    const activeToken = localStorage.getItem('unlitify_authenticated_session');
+                    const activeToken = localStorage.getItem('Openbox_authenticated_session');
                     if (activeToken) {
                         const session = JSON.parse(activeToken);
                         this.userSession = session;
@@ -1365,7 +1365,7 @@
                         const res = await response.json();
                         if (res.status === "success") {
                             this.userSession = { name: res.user.name, phone: res.user.phone, progress: res.user.progress };
-                            localStorage.setItem('unlitify_authenticated_session', JSON.stringify(this.userSession));
+                            localStorage.setItem('Openbox_authenticated_session', JSON.stringify(this.userSession));
                             this.hydrateDatabaseState(res.user.progress);
                             this.isLoggedIn = true;
                         } else { alert("Database rejection: " + res.message); }
@@ -1414,7 +1414,7 @@
                                 submitted: true,
                                 completed: this.selectedDay.completed
                             };
-                            localStorage.setItem('unlitify_authenticated_session', JSON.stringify(this.userSession));
+                            localStorage.setItem('Openbox_authenticated_session', JSON.stringify(this.userSession));
                             this.modalOpen = false;
                             alert("🚀 Work submission synced to Google Sheet review queue successfully!");
                         } else { alert("Sync error: " + res.message); }
@@ -1436,7 +1436,7 @@
                     this.modalOpen = true;
                 },
                 executeSignOut() {
-                    localStorage.removeItem('unlitify_authenticated_session');
+                    localStorage.removeItem('Openbox_authenticated_session');
                     this.isLoggedIn = false;
                     this.loginForm = { name: '', phone: '' };
                 },
