@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Openbox — Premium Business Analytics & Software Internships</title>
+    <!-- Tailwind CSS v4 CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <!-- Alpine.js for global application interactive state mechanics -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <!-- FontAwesome 6 CDN for modern UI controls -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts for sharp typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Theme Architecture Design Pattern Initializer -->
+    <script>
+        if (localStorage.getItem('theme') === 'light' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: light)').matches)) {
+            document.documentElement.classList.remove('dark');
+        } else {
+            document.documentElement.classList.add('dark');
+        }
+    </script>
+    <style>
+        :root {
+            --primary: #2563eb;
+            --accent: #3b82f6;
+            --background: #f8fafc;
+            --foreground: #0f172a;
+            --muted-bg: #f1f5f9;
+            --muted-text: #475569;
+            --blur-tint: rgba(248, 250, 252, 0.8);
+            --shadow-sm: 0 4px 12px rgba(15, 23, 42, 0.05);
+            --card: #ffffff;
+            --grid-line: rgba(15, 23, 42, 0.04);
+        }
+
+        .dark {
+            --primary: #3b82f6;
+            --accent: #60a5fa;
+            --background: #0a0a0c;
+            --foreground: #f8fafc;
+            --muted-bg: #111115;
+            --muted-text: #94a3b8;
+            --blur-tint: rgba(10, 10, 12, 0.8);
+            --shadow-sm: 0 10px 30px rgba(0, 0, 0, 0.5);
+            --card: #111115;
+            --grid-line: rgba(255, 255, 255, 0.03);
+        }
+
+        [x-cloak] {
+            display: none !important;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--background);
+            color: var(--muted-text);
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .heading-font {
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        .bg-grid {
+            background-size: 40px 40px;
+            background-image:
+                linear-gradient(to right, var(--grid-line) 1px, transparent 1px),
+                linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
+        }
+
+        @keyframes openLidLeft {
+            0% {
+                transform: translate(0, 0) skewY(0deg) scaleY(1);
+            }
+
+            100% {
+                transform: translate(-4px, -10px) rotate(-15deg) skewX(-10deg);
+            }
+        }
+
+        @keyframes openLidRight {
+            0% {
+                transform: translate(0, 0) skewY(0deg) scaleY(1);
+            }
+
+            100% {
+                transform: translate(4px, -10px) rotate(15deg) skewX(10deg);
+            }
+        }
+
+        .box-lid-l {
+            transform-origin: 50px 72px;
+            animation: openLidLeft 1.2s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+            animation-delay: 0.3s;
+        }
+
+        .box-lid-r {
+            transform-origin: 50px 72px;
+            animation: openLidRight 1.2s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+            animation-delay: 0.3s;
+        }
+    </style>
+</head>
+
+<body class="min-h-screen relative selection:bg-blue-600 selection:text-white pb-12"
+    x-data="{ modalOpen: false, email: '', isSubmitting: false, btnText: 'Secure My Waitlist Slot' }">
+
+    <!-- Global Header Component -->
+    <header
+        class="max-w-6xl mx-auto mt-4 mx-4 lg:mx-auto bg-[var(--blur-tint)] backdrop-blur-xl shadow-[var(--shadow-sm)] border border-slate-200 dark:border-white/10 rounded-2xl sticky top-4 z-50 transition-all duration-300"
+        x-data="{ mobileOpen: false }">
+        <div class="h-20 px-4 md:px-6 flex items-center justify-between">
+            <!-- Logo & Branding Section -->
+            <a href="#" class="flex items-center gap-3 focus:outline-none shrink-0 group"
+                aria-label="Openbox Accelerator Home">
+                <svg class="h-11 w-auto text-[var(--primary)] filter drop-shadow-[0_2px_10px_rgba(59,130,246,0.15)]"
+                    viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <g stroke="currentColor" stroke-width="4.2" stroke-linecap="round" stroke-linejoin="round">
+                        <polygon points="50,52 70,62 50,72 30,62" fill="currentColor" fill-opacity="0.18"
+                            stroke="none" />
+                        <polygon points="50,95 18,78 18,58 50,75" />
+                        <polygon points="50,95 82,78 82,58 50,75" />
+                        <line x1="50" y1="65" x2="50" y2="95" />
+                        <polygon class="box-lid-l" points="50,52 18,42 18,62 50,72" fill="var(--card)" />
+                        <polygon class="box-lid-r" points="50,52 82,42 82,62 50,72" fill="var(--card)" />
+                    </g>
+                </svg>
+                <div class="flex flex-col text-left leading-none pr-2">
+                    <span class="text-[var(--foreground)] font-black text-xl tracking-tight heading-font">Openbox</span>
+                    <span class="text-[var(--primary)] font-bold text-[9px] tracking-[0.25em] uppercase mt-0.5">Growth Partner</span>
+                </div>
+            </a>
+
+            <!-- Desktop Navigation Menu -->
+            <nav class="hidden md:flex items-center gap-7 text-[13px] font-semibold text-[var(--muted-text)]">
+                <a href="#how-it-works" class="hover:text-[var(--foreground)] transition-colors">Framework</a>
+                <a href="#tracks" class="hover:text-[var(--foreground)] transition-colors">Community Paths</a>
+                <a href="#proof" class="hover:text-[var(--foreground)] transition-colors">Showcase</a>
+            </nav>
+
+            <!-- Actions Shell -->
+            <div class="flex items-center gap-3">
+                <button id="theme-toggle" class="p-2 w-10 h-10 flex items-center justify-center rounded-xl bg-[var(--muted-bg)] text-[var(--muted-text)] hover:text-[var(--foreground)] transition-colors cursor-pointer" title="Toggle System Visual Workspace Profile">
+                    <i id="theme-toggle-dark-icon" class="fa-solid fa-moon text-sm hidden dark:block"></i>
+                    <i id="theme-toggle-light-icon" class="fa-solid fa-sun text-sm dark:hidden"></i>
+                </button>
+                <a href="#tracks"
+                    class="hidden sm:inline-flex items-center text-xs font-bold bg-[var(--foreground)] text-[var(--background)] px-5 h-10 rounded-xl hover:bg-[var(--primary)] hover:text-white shadow-sm transition-all duration-300">
+                    Explore Portals
+                </a>
+                <button @click="mobileOpen = !mobileOpen" class="md:hidden p-2 w-10 h-10 flex items-center justify-center rounded-xl bg-[var(--muted-bg)] text-[var(--muted-text)] transition-colors" aria-label="Toggle Mobile Menu">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path :class="{'hidden': mobileOpen, 'inline-flex': !mobileOpen }" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 6h16M4 12h16M4 18h16"/>
+                        <path :class="{'hidden': !mobileOpen, 'inline-flex': mobileOpen }" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Drawer -->
+        <div x-show="mobileOpen" x-cloak x-transition:enter="transition ease-out duration-200"
+            x-transition:enter-start="opacity-0 -translate-y-4" x-transition:enter-end="opacity-100 translate-y-0"
+            x-transition:leave="transition ease-in duration-150" x-transition:leave-start="opacity-100 translate-y-0"
+            x-transition:leave-end="opacity-0 -translate-y-4"
+            class="md:hidden px-6 pb-6 pt-2 flex flex-col gap-4 border-t border-slate-200 dark:border-white/10"
+            @click.away="mobileOpen = false">
+            <a href="#how-it-works" @click="mobileOpen = false"
+                class="text-sm font-semibold py-1 text-[var(--muted-text)] hover:text-[var(--foreground)]">Framework</a>
+            <a href="#tracks" @click="mobileOpen = false"
+                class="text-sm font-semibold py-1 text-[var(--muted-text)] hover:text-[var(--foreground)]">Community
+                Paths</a>
+            <a href="#proof" @click="mobileOpen = false"
+                class="text-sm font-semibold py-1 text-[var(--muted-text)] hover:text-[var(--foreground)]">Showcase</a>
+        </div>
+    </header>
+
+    <!-- Hero Hub Section -->
+    <main class="relative pt-16 pb-20 md:pt-24 md:pb-32 overflow-hidden bg-grid">
+        <div
+            class="absolute top-0 left-1/2 -translate-x-1/2 w-[500px] h-[250px] bg-blue-600/10 blur-[120px] rounded-full pointer-events-none">
+        </div>
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+
+            <div
+                class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-slate-200 dark:border-white/10 bg-[var(--card)] text-xs text-blue-500 font-medium tracking-wide mb-6 backdrop-blur-sm shadow-sm">
+                <span class="w-1.5 h-1.5 rounded-full bg-blue-500 animate-pulse"></span>
+                Join Free Community Workspace (₹0)
+            </div>
+
+            <h1
+                class="heading-font text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight text-[var(--foreground)] mb-6 max-w-4xl mx-auto leading-[1.15]">
+                Accelerate Your Growth. <br>
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-blue-600">Zero Cost Entry.</span>
+            </h1>
+
+            <p class="text-base sm:text-lg md:text-xl text-[var(--muted-text)] max-w-2xl mx-auto mb-10 leading-relaxed">
+                Unlock our open-access student ecosystem network. Jump start your profile validation with our free
+                capability certificate assessment matrix, or sync directly into our live team communications.
+            </p>
+
+            <!-- Dynamic Framework Actions -->
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4 max-w-xl mx-auto mb-16">
+                <a href="https://openboxgp.vercel.app/test.html"
+                    class="w-full sm:w-auto group flex flex-col items-center justify-center px-8 py-3.5 bg-blue-600 hover:bg-blue-500 text-white rounded-xl font-semibold shadow-xl shadow-blue-600/20 transition-all duration-200">
+                    <span class="flex items-center gap-2">Claim Free Certificate <i class="fa-solid fa-arrow-right text-xs"></i></span>
+                    <span class="text-[10px] opacity-70 font-normal mt-0.5 tracking-wide">Launch Diagnostic Test Engine</span>
+                </a>
+                <a href="https://chat.whatsapp.com/LaRatHUEfnnEhroyiuQyFw" target="_blank"
+                    class="w-full sm:w-auto group flex flex-col items-center justify-center px-8 py-3.5 bg-[var(--muted-bg)] hover:bg-emerald-600/10 text-[var(--foreground)] rounded-xl font-semibold border border-slate-200 dark:border-white/10 transition-all duration-200">
+                    <span class="flex items-center gap-2 text-emerald-500"><i class="fa-brands fa-whatsapp text-sm"></i> WhatsApp Community</span>
+                    <span class="text-[10px] text-[var(--muted-text)] font-normal mt-0.5 tracking-wide">Instant Peer Network Synchronization</span>
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <!-- Core Ecosystem Integration Streams -->
+    <section id="tracks" class="py-12 border-t border-slate-200 dark:border-white/5 relative bg-grid">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="heading-font text-3xl font-bold text-[var(--foreground)] mb-3 tracking-tight">
+                    Active Development Gateways
+                </h2>
+                <p class="text-[var(--muted-text)] max-w-xl mx-auto text-sm">
+                    Review live pipelines or lock in priority credentials inside the Openbox partner ecosystem.
+                </p>
+            </div>
+
+            <!-- Dashboard Grid Layout -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto items-stretch">
+
+                <!-- Card 1: Free Assessment Evaluation Engine -->
+                <div
+                    class="flex flex-col justify-between p-6 rounded-xl border border-slate-200 dark:border-white/5 bg-[var(--card)] hover:border-blue-500/30 transition-all duration-300">
+                    <div>
+                        <div class="text-xs font-bold tracking-wider text-blue-500 uppercase mb-2">
+                            <i class="fa-solid fa-certificate mr-1"></i> Credential Engine</div>
+                        <h3 class="heading-font text-xl font-bold text-[var(--foreground)] mb-2">Capability Evaluation
+                        </h3>
+                        <p class="text-xs text-[var(--muted-text)] mb-6 leading-relaxed">Map analytical parameters
+                            directly across core technical modules to trigger a high-fidelity verification asset.</p>
+                    </div>
+                    <div>
+                        <div class="mb-4">
+                            <span class="heading-font text-2xl font-bold text-[var(--foreground)]">₹0</span>
+                            <span class="text-[11px] text-[var(--muted-text)] ml-1">Free Verification</span>
+                        </div>
+                        <a href="https://openboxgp.vercel.app/test.html"
+                            class="w-full text-center inline-block px-4 py-2.5 text-xs font-bold text-white bg-blue-600 hover:bg-blue-500 rounded-lg transition-all shadow-md shadow-blue-600/10">
+                            Launch Test Engine
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Card 2: Live Comms WhatsApp Stream -->
+                <div
+                    class="flex flex-col justify-between p-6 rounded-xl border border-slate-200 dark:border-white/5 bg-[var(--card)] hover:border-emerald-500/30 transition-all duration-300">
+                    <div>
+                        <div class="text-xs font-bold tracking-wider text-emerald-500 uppercase mb-2">
+                            <i class="fa-brands fa-whatsapp mr-1"></i> Global Chat Matrix</div>
+                        <h3 class="heading-font text-xl font-bold text-[var(--foreground)] mb-2">Ecosystem Network</h3>
+                        <p class="text-xs text-[var(--muted-text)] mb-6 leading-relaxed">Connect natively with global
+                            student peers. Share system frameworks, review task patterns, and engage daily.</p>
+                    </div>
+                    <div>
+                        <div class="mb-4">
+                            <span class="heading-font text-2xl font-bold text-[var(--foreground)]">₹0</span>
+                            <span class="text-[11px] text-[var(--muted-text)] ml-1">Open Community</span>
+                        </div>
+                        <a href="https://chat.whatsapp.com/LaRatHUEfnnEhroyiuQyFw" target="_blank"
+                            class="w-full text-center inline-block px-4 py-2.5 text-xs font-bold text-emerald-600 dark:text-emerald-400 bg-[var(--muted-bg)] hover:bg-emerald-500/10 border border-slate-200 dark:border-white/10 rounded-lg transition-all">
+                            Join Chat Sync <i class="fa-solid fa-arrow-up-right-from-square text-[10px] ml-0.5"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Card 3: Business Analyst Waitlist Module -->
+                <div
+                    class="flex flex-col justify-between p-6 rounded-xl border border-amber-500/30 bg-[var(--card)] relative overflow-hidden group">
+                    <div
+                        class="absolute top-3 right-3 bg-amber-500/10 text-amber-500 border border-amber-500/20 text-[8px] font-bold tracking-widest px-2 py-0.5 rounded font-mono uppercase animate-pulse">
+                        WIP • Building
+                    </div>
+                    <div>
+                        <div class="text-xs font-bold tracking-wider text-amber-500 uppercase mb-2">
+                            <i class="fa-solid fa-laptop-code mr-1"></i> Professional Track</div>
+                        <h3 class="heading-font text-xl font-bold text-[var(--foreground)] mb-2">BA Task Internship</h3>
+                        <p class="text-xs text-[var(--muted-text)] mb-6 leading-relaxed">Engineered for freshers. Map
+                            mock client scopes, build out complex visual data models, and deploy live portfolio
+                            infrastructure.</p>
+                    </div>
+                    <div>
+                        <div class="mb-4">
+                            <span class="heading-font text-lg font-bold text-amber-500 font-mono">Initializing...</span>
+                        </div>
+                        <button @click="modalOpen = true" class="w-full text-center inline-block px-4 py-2.5 text-xs font-bold text-amber-500 bg-amber-500/10 hover:bg-amber-500/20 border border-amber-500/30 rounded-lg transition-all cursor-pointer">
+                            Secure Waitlist Slot
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Formspree Asynchronous Waitlist Overlay Modal -->
+    <div x-show="modalOpen" x-cloak
+        class="fixed inset-0 z-50 overflow-y-auto flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md"
+        x-transition>
+        <div @click.away="modalOpen = false"
+            class="w-full max-w-md bg-[var(--card)] border border-slate-200 dark:border-white/10 p-6 rounded-2xl shadow-2xl relative space-y-4">
+
+            <button @click="modalOpen = false" class="absolute top-4 right-4 text-[var(--muted-text)] hover:text-[var(--foreground)] transition cursor-pointer">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+
+            <div class="space-y-1">
+                <div class="text-[10px] font-bold font-mono uppercase tracking-wider text-amber-500">Business Analyst
+                    Core Matrix</div>
+                <h3 class="heading-font text-xl font-bold text-[var(--foreground)]">Fresher Internship Waitlist</h3>
+                <p class="text-xs text-[var(--muted-text)] leading-relaxed">The task framework development is underway.
+                    Input your communication tracking payload address below to preserve structural scheduling priority.
+                </p>
+            </div>
+
+            <!-- Waitlist Interactive Form Shell -->
+            <div class="space-y-3 pt-2">
+                <div>
+                    <label class="block text-[9px] font-mono tracking-wider uppercase text-[var(--muted-text)] mb-1">Candidate Active Email</label>
+                    <input type="email" x-model="email" placeholder="fresher@example.com" class="w-full px-3 py-2.5 bg-[var(--muted-bg)] border border-slate-200 dark:border-white/5 rounded-xl text-xs text-[var(--foreground)] focus:outline-none focus:border-amber-500 transition">
+                </div>
+
+                <button @click="
+                    if(!email || !email.includes('@')) { alert('Please enter a structured, valid email endpoint configuration.'); return; }
+                    isSubmitting = true;
+                    btnText = 'Transmitting Data...';
+                    
+                    let dataPayload = new FormData();
+                    dataPayload.append('email', email);
+                    dataPayload.append('pipeline_origin', 'BA Freshers Task Based Internship');
+                    dataPayload.append('system_timestamp', new Date().toISOString());
+
+                    fetch('https://formspree.io/f/xnjkybyj', {
+                        method: 'POST',
+                        body: dataPayload,
+                        headers: { 'Accept': 'application/json' }
+                    })
+                    .then(res => {
+                        if(res.ok) {
+                            alert('Success! Email node safely integrated into the pipeline log.');
+                            email = '';
+                            modalOpen = false;
+                        } else {
+                            alert('Endpoint reported a handling disruption. Verify configuration.');
+                        }
+                    })
+                    .catch(() => alert('Network layer communication fault.'))
+                    .finally(() => {
+                        isSubmitting = false;
+                        btnText = 'Secure My Waitlist Slot';
+                    });
+                " :disabled="isSubmitting" class="w-full py-3 bg-amber-500 hover:bg-amber-600 disabled:opacity-50 text-slate-950 font-bold text-xs rounded-xl tracking-wider uppercase font-mono shadow-md transition-all cursor-pointer" x-text="btnText">
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Theme Switch Engine Logic Binding -->
+    <script>
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        themeToggleBtn.addEventListener('click', function() {
+            if (document.documentElement.classList.contains('dark')) {
+                document.documentElement.classList.remove('dark');
+                localStorage.setItem('theme', 'light');
+            } else {
+                document.documentElement.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+            }
+        });
+    </script>
+</body>
+
+</html>
