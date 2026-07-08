@@ -4,12 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Openbox Accelerator | Business Analyst Qualification</title>
-    <!-- Tailwind CSS CDN -->
+    <title>Openbox Accelerator | Study & Certification Portal</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- FontAwesome Premium Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- High-Definition Canvas Capture Engine -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 
     <style>
@@ -31,7 +28,7 @@
             color: inherit !important;
         }
 
-        /* Elegant Light-Mode Corporate Aesthetic for Openbox Certificate */
+        /* Light-Mode Corporate Aesthetic for Openbox Certificate */
         .cert-light-canvas {
             background: #ffffff;
             background-image:
@@ -51,7 +48,6 @@
     oncontextmenu="return false;"
     onkeydown="if ((event.ctrlKey && event.keyCode === 67) || (event.metaKey && event.keyCode === 67)) return false;">
 
-    <!-- TOP GLOBAL HEADER WITH INTEGRATED OPENBOX BRANDING LOGO -->
     <nav
         class="border-b border-slate-800 bg-[#0f172a]/90 px-6 py-4 flex justify-between items-center sticky top-0 z-50 backdrop-blur-md">
         <a href="#" class="flex items-center gap-3 focus:outline-none shrink-0 group"
@@ -79,33 +75,114 @@
         </div>
     </nav>
 
-    <!-- CONTENT ROUTING VIEWPORT -->
     <main class="flex-grow flex items-center justify-center p-4 md:p-8 max-w-5xl w-full mx-auto">
 
-        <!-- STEP 1: IDENTITY GATEWAY -->
         <div id="panel-login"
             class="w-full max-w-md glass-dark-panel p-8 rounded-2xl border border-slate-800 shadow-2xl space-y-6">
             <div class="text-center space-y-2">
-                <h2 class="text-xl font-bold tracking-wide text-white">BA Qualification Gateway</h2>
-                <p class="text-xs text-slate-400">Initialize configurations to output performance scores safely onto the
-                    <b class="text-blue-400 font-mono">Formspree Endpoint</b>.</p>
+                <h2 class="text-xl font-bold tracking-wide text-white">Openbox Learning Gate</h2>
+                <p class="text-xs text-slate-400">Enter your credentials to unlock the comprehensive study guides and
+                    qualification platform.</p>
             </div>
             <div class="space-y-4">
                 <div>
                     <label class="block text-[10px] font-mono tracking-wider text-blue-400 uppercase font-bold mb-1">Full Candidate Name</label>
-                    <input type="text" id="user-fullname" placeholder="John Doe" class="w-full p-3 bg-slate-950 border border-slate-800 rounded-xl text-xs text-white focus:outline-none focus:border-blue-500 font-sans">
+                    <input type="text" id="user-fullname" placeholder="John Doe" class="w-full p-3 bg-slate-950 border border-slate-800 rounded-xl text-xs text-white focus:outline-none focus:border-blue-500">
                 </div>
                 <div>
-                    <label class="block text-[10px] font-mono tracking-wider text-blue-400 uppercase font-bold mb-1">Email / Matrix Contact</label>
-                    <input type="text" id="user-contact" placeholder="john@openbox.com" class="w-full p-3 bg-slate-950 border border-slate-800 rounded-xl text-xs text-white focus:outline-none focus:border-blue-500 font-sans">
+                    <label class="block text-[10px] font-mono tracking-wider text-blue-400 uppercase font-bold mb-1">Email / Contact</label>
+                    <input type="text" id="user-contact" placeholder="john@openbox.com" class="w-full p-3 bg-slate-950 border border-slate-800 rounded-xl text-xs text-white focus:outline-none focus:border-blue-500">
                 </div>
                 <button onclick="submitAuthentication()" class="w-full py-3 bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs rounded-xl transition tracking-wider uppercase font-mono shadow-lg shadow-blue-600/10">
-                    Launch Assessment Core <i class="fa-solid fa-bolt ml-1"></i>
+                    Enter Portal <i class="fa-solid fa-right-to-bracket ml-1"></i>
                 </button>
             </div>
         </div>
 
-        <!-- STEP 2: DYNAMIC ASSESSMENT COMPONENT -->
+        <div id="panel-learn"
+            class="hidden w-full max-w-3xl glass-dark-panel p-6 md:p-8 rounded-2xl border border-slate-800 shadow-2xl space-y-6">
+            <div class="flex justify-between items-center border-b border-slate-800 pb-4">
+                <div>
+                    <span class="text-[10px] font-mono tracking-wider text-blue-400 uppercase font-bold">Phase 1: Knowledge Acquisition</span>
+                    <h3 class="text-xl font-bold text-white mt-0.5">Business Analyst Foundational Matrix</h3>
+                </div>
+                <span class="text-xs bg-blue-500/10 border border-blue-500/20 px-3 py-1 rounded-full text-blue-400 font-mono font-bold"><i class="fa-solid fa-book-open mr-1"></i> Study Mode</span>
+            </div>
+
+            <div
+                class="space-y-6 max-h-[60vh] overflow-y-auto pr-2 text-slate-300 text-xs md:text-sm leading-relaxed font-sans">
+                <div class="bg-slate-900/50 border border-slate-800/80 p-5 rounded-xl space-y-3">
+                    <h4 class="text-sm font-bold text-white flex items-center gap-2">
+                        <i class="fa-solid fa-file-invoice text-blue-500"></i> Module 1: Requirements Engineering &
+                        Prioritization</h4>
+                    <p><b>BRD vs. FRD:</b> The Business Requirements Document (BRD) details high-level business drivers
+                        and targeted targets (the <i>What</i>), while the Functional Requirements Document (FRD)
+                        clarifies software interactions and granular mechanics (the <i>How</i>).</p>
+                    <p><b>MoSCoW Matrix:</b> Core categorization criteria to optimize system scoping parameters:
+                        <br>• <b class="text-emerald-400">M</b>ust-Have: Vital properties. Release collapses completely
+                        without them.
+                        <br>• <b class="text-blue-400">S</b>hould-Have: Important items that possess temporary manual
+                        workarounds.
+                        <br>• <b class="text-amber-400">C</b>ould-Have: Discretionary upgrades implemented if runtime
+                        bandwidth parameters allow.
+                        <br>• <b class="text-rose-400">W</b>on't-Have: Fully out-of-scope for the active sprint
+                        milestone iteration.
+                    </p>
+                </div>
+
+                <div class="bg-slate-900/50 border border-slate-800/80 p-5 rounded-xl space-y-3">
+                    <h4 class="text-sm font-bold text-white flex items-center gap-2">
+                        <i class="fa-solid fa-diagram-project text-blue-500"></i> Module 2: Visual Modeling & Process
+                        Architecture</h4>
+                    <p><b>Context Diagram:</b> Structural scoping boundary chart representing the comprehensive core
+                        system platform as a singular bubble interaction point bounded by outside actors and incoming
+                        data fields.</p>
+                    <p><b>Process Swimlanes:</b> Functional lanes splitting vertical or horizontal swimlane charts. They
+                        explicitly denote <i>who</i> (which operational role, department, or module) owns and runs that
+                        exact task node.</p>
+                    <p><b>RACI Matrix:</b> Maps task ownership: <b class="text-white">Responsible</b> (executes
+                        assignment), <b class="text-blue-400">Accountable</b> (has final sign-off authority; exactly one
+                        per task), <b class="text-white">Consulted</b> (SMEs providing inputs), and
+                        <b class="text-white">Informed</b> (notified upon delivery).</p>
+                </div>
+
+                <div class="bg-slate-900/50 border border-slate-800/80 p-5 rounded-xl space-y-3">
+                    <h4 class="text-sm font-bold text-white flex items-center gap-2">
+                        <i class="fa-solid fa-rotate text-blue-500"></i> Module 3: Agile Scrum Methodology &
+                        Requirements Writing</h4>
+                    <p><b>Scrum Architecture:</b> The <i>Product Owner</i> holds absolute accountability over the
+                        backlogs. The <i>Sprint Retrospective</i> is positioned at the terminal boundary of sprints to
+                        optimize development workflows. The <i>Definition of Ready (DoR)</i> defines the acceptance
+                        standard before pulling cards into active sprints.</p>
+                    <p><b>User Story Formulation Blueprint:</b> Standard non-technical requirement framework sequence:
+                        <br><code class="text-blue-400 bg-slate-950 px-2 py-0.5 rounded font-mono block text-center mt-1">As a [User Role], I want [Feature Requirement] so that [Business Value].</code>
+                    </p>
+                </div>
+
+                <div class="bg-slate-900/50 border border-slate-800/80 p-5 rounded-xl space-y-3">
+                    <h4 class="text-sm font-bold text-white flex items-center gap-2">
+                        <i class="fa-solid fa-chart-line text-blue-500"></i> Module 4: Strategy Frameworks & Validation
+                        Testing</h4>
+                    <p><b>PESTLE Frame:</b> Macro environmental audit evaluating external business constraints:
+                        Political, Economic, Social, Technological, Legal, and Environmental variables.</p>
+                    <p><b>Gap Analysis & Continuous Optimization:</b> Benchmarking operations against a desired future
+                        state structure. Lean Six Sigma focuses heavily on eliminating process waste using iterative
+                        Kaizen cycles.</p>
+                    <p><b>Validation Engineering:</b> <i>User Acceptance Testing (UAT)</i> acts as the final gate check
+                        to ensure built systems fulfill business requirements. The
+                        <i>Requirements Traceability Matrix (RTM)</i> maps every business criteria item to specific
+                        automated test components to eliminate scope creep.</p>
+                </div>
+            </div>
+
+            <div class="pt-4 border-t border-slate-800 flex flex-col sm:flex-row gap-4 justify-between items-center">
+                <span class="text-xs text-slate-400 text-center sm:text-left"><i class="fa-solid fa-circle-info text-blue-400"></i> Ready? Advancing unlocks the evaluation layer (80% score required to pass).</span>
+                <button onclick="launchQuizPhase()" class="w-full sm:w-auto px-6 py-3 bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs rounded-xl transition uppercase tracking-wider font-mono shadow-lg shadow-emerald-600/10">
+                    Launch Certification Quiz <i class="fa-solid fa-graduation-cap ml-1"></i>
+                </button>
+            </div>
+        </div>
+
         <div id="panel-quiz"
             class="hidden w-full max-w-2xl glass-dark-panel p-6 md:p-8 rounded-2xl border border-slate-800 shadow-2xl space-y-6">
             <div class="flex justify-between items-center text-xs font-mono border-b border-slate-800 pb-3">
@@ -117,7 +194,6 @@
                 <h3 class="text-sm md:text-base font-bold text-slate-100 leading-relaxed" id="quiz-question-target">
                     Loading Framework Matrix Prompt...</h3>
                 <div class="grid grid-cols-1 gap-2.5" id="quiz-options-target">
-                    <!-- Options inject here -->
                 </div>
             </div>
 
@@ -134,7 +210,6 @@
             </div>
         </div>
 
-        <!-- STEP 3: SYSTEM FAIL DISCLOSURE -->
         <div id="panel-fail"
             class="hidden w-full max-w-md glass-dark-panel p-8 rounded-2xl border border-rose-500/20 shadow-2xl text-center space-y-4">
             <div
@@ -148,14 +223,13 @@
             </div>
             <p class="text-xs text-slate-400 leading-relaxed">
                 Openbox Accelerator criteria demands an **80% compliance threshold** to pass. Your response record has
-                been completely dispatched to your Formspree dashboard. Clear your constants and re-attempt.
+                been completely dispatched to your Formspree dashboard. Review the study deck modules and try again.
             </p>
-            <button onclick="resetEvaluation()" class="w-full py-2.5 bg-rose-950/40 hover:bg-rose-900/50 text-rose-300 border border-rose-800/40 font-bold text-xs rounded-xl transition font-mono">
-                Re-initialize Evaluation
+            <button onclick="returnToStudyMode()" class="w-full py-2.5 bg-blue-950/40 hover:bg-blue-900/50 text-blue-300 border border-blue-800/40 font-bold text-xs rounded-xl transition font-mono">
+                Return to Study Deck <i class="fa-solid fa-book ml-1"></i>
             </button>
         </div>
 
-        <!-- STEP 4: PASS PANEL WITH STEPWISE CONTROL PROTOCOLS -->
         <div id="panel-pass" class="hidden w-full space-y-8">
             <div class="p-4 bg-emerald-500/5 border border-emerald-500/20 rounded-xl text-center max-w-lg mx-auto">
                 <h4 class="text-sm font-bold text-emerald-400"><i class="fa-solid fa-circle-check"></i> Verification
@@ -164,24 +238,20 @@
                     Formspree backend registry.</p>
             </div>
 
-            <!-- PREMIUM OPENBOX ACCELERATOR BRANDED CERTIFICATE CANVAS -->
             <div
                 class="p-4 bg-slate-900 rounded-2xl border border-slate-800 max-w-4xl mx-auto overflow-x-auto shadow-2xl">
                 <div id="openbox-light-certificate"
                     class="cert-light-canvas w-[840px] h-[540px] mx-auto p-12 flex flex-col justify-between items-center text-center text-slate-800 relative border-[12px] border-slate-200 shadow-xl rounded-lg">
 
-                    <!-- Decorative Framework Boundaries -->
                     <div class="absolute inset-2 border-2 border-slate-300 rounded"></div>
                     <div class="absolute inset-3 border border-blue-500/10 rounded"></div>
 
-                    <!-- Header Branding Matrix -->
                     <div class="w-full flex justify-between items-center px-6 relative z-10">
                         <div class="text-left">
                             <span class="text-[8px] font-mono tracking-widest text-slate-400 block">FORMSPREE INBOUND VERIFIED</span>
                             <span id="cert-secure-token" class="text-[10px] font-mono font-bold text-blue-600 tracking-wider">OPB-BA-PENDING</span>
                         </div>
 
-                        <!-- Openbox Injected SVG Component -->
                         <div class="flex items-center gap-2 scale-90 origin-right">
                             <svg class="h-9 w-auto text-blue-600" viewBox="0 0 100 100" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
@@ -203,14 +273,12 @@
                         </div>
                     </div>
 
-                    <!-- Core Certification Typography -->
                     <div class="space-y-4 relative z-10 w-full px-8 -mt-2">
                         <h2 class="text-xs font-mono text-blue-600 uppercase tracking-widest font-bold">Credential of
                             Analyst Compliance</h2>
                         <p class="text-xs italic text-slate-500 font-serif">This certifies that business systems
                             specialist</p>
 
-                        <!-- Reactive Student Node Output -->
                         <div id="cert-target-name"
                             class="text-3xl font-black tracking-wide text-slate-900 py-1 border-b-2 border-slate-200 max-w-md mx-auto capitalize font-sans">
                             Candidate Identity String
@@ -224,7 +292,6 @@
                         </p>
                     </div>
 
-                    <!-- Authorization Section -->
                     <div
                         class="w-full grid grid-cols-2 items-end pt-4 relative z-10 text-left px-8 font-mono text-[8px] text-slate-400">
                         <div class="space-y-1">
@@ -245,13 +312,11 @@
                 </div>
             </div>
 
-            <!-- STEP-BY-STEP CONTROL PROTOCOLS -->
             <div class="max-w-2xl mx-auto space-y-4">
                 <h5 class="text-xs font-mono font-bold tracking-widest text-blue-400 uppercase">
                     <i class="fa-solid fa-network-wired"></i> STEPWISE CREDENTIAL PROCESSING ACTIONS</h5>
 
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                    <!-- Step 1 -->
                     <div
                         class="bg-slate-900 border border-slate-800 p-4 rounded-xl space-y-3 flex flex-col justify-between">
                         <div>
@@ -266,7 +331,6 @@
                         </button>
                     </div>
 
-                    <!-- Step 2 -->
                     <div
                         class="bg-slate-900 border border-slate-800 p-4 rounded-xl space-y-3 flex flex-col justify-between">
                         <div>
@@ -280,7 +344,6 @@
                         </button>
                     </div>
 
-                    <!-- Step 3 -->
                     <div
                         class="bg-slate-900 border border-slate-800 p-4 rounded-xl space-y-3 flex flex-col justify-between">
                         <div>
@@ -298,7 +361,6 @@
                 </div>
             </div>
 
-            <!-- DYNAMIC CAPTION RECOGNITION PANEL -->
             <div class="max-w-2xl mx-auto bg-slate-950 p-4 rounded-xl border border-slate-800 space-y-2">
                 <span class="text-[9px] font-mono tracking-wider text-slate-500 uppercase block">Active Copy Verification Box:</span>
                 <div id="linkedin-dynamic-caption"
@@ -309,14 +371,11 @@
         </div>
     </main>
 
-    <!-- ACCURATE SYSTEM FOOTER FRAME -->
     <footer class="py-4 text-center text-[9px] font-mono text-slate-600 border-t border-slate-900 bg-[#060b18]">
         &copy; 2026 OPENBOX ACCELERATOR AUTOMATION CHANNELS. ENDPOINT PIPELINE TARGET: FORMSPREE CORE.
     </footer>
 
-    <!-- INTERACTIVE ENGINE BUSINESS ARCHITECTURE LAYER -->
     <script>
-        // Formspree Target Endpoint URL Integration
         const endpointTarget = 'https://formspree.io/f/xnjkybyj';
         
         let accountIdentity = { name: '', email: '' };
@@ -326,7 +385,7 @@
         let scalePercentage = 0;
         let verificationHash = 'OPB-VERIFIED';
 
-        // 20 Core General Business Analyst Foundational Industry Prompts
+        // 20 Core General Business Analyst Foundational Prompts
         const catalog = [
             { id: 1, text: 'What does the acronym BRD stand for in business analysis methodologies?', options: ['A) Business Reporting Dimension', 'B) Business Requirements Document', 'C) Baseline Resource Allocation Diagram', 'D) Behavioral Request Blueprint'], correct: 1 },
             { id: 2, text: 'Which model mapping approach visualizes sequential actions from actors to system targets?', options: ['A) Entity Relationship Matrix', 'B) Use Case Diagram', 'C) Gantt Track Configuration', 'D) Fishbone Cause Layering'], correct: 1 },
@@ -365,6 +424,12 @@
             document.getElementById('display-name').innerText = accountIdentity.name;
             document.getElementById('user-display-badge').classList.remove('hidden');
             document.getElementById('panel-login').classList.add('hidden');
+            // ROUTE DIRECTLY TO THE STUDY ENVIRONMENT FIRST
+            document.getElementById('panel-learn').classList.remove('hidden');
+        }
+
+        function launchQuizPhase() {
+            document.getElementById('panel-learn').classList.add('hidden');
             document.getElementById('panel-quiz').classList.remove('hidden');
             drawQuestionMatrix();
         }
@@ -419,7 +484,7 @@
             }
 
             document.getElementById('nav-btn-finalize').disabled = true;
-            document.getElementById('submit-btn-label').innerText = "Transmitting to Formspree...";
+            document.getElementById('submit-btn-label').innerText = "Transmitting Data Payload...";
 
             finalCorrectCount = 0;
             catalog.forEach(item => {
@@ -431,7 +496,7 @@
             const statusLabel = clearState ? 'Pass' : 'Fail';
             verificationHash = 'OPB-BA-' + Math.random().toString(36).substr(2, 6).toUpperCase() + '-' + scalePercentage;
 
-            // Compile Formspree Form Data Payload
+            // Formspree Payload Packaging
             const payload = new FormData();
             payload.append('name', accountIdentity.name);
             payload.append('contact', accountIdentity.email);
@@ -440,7 +505,6 @@
             payload.append('status', statusLabel);
             payload.append('token', verificationHash);
 
-            // Execute Asynchronous Fetch POST directly to Formspree
             fetch(endpointTarget, {
                 method: 'POST',
                 body: payload,
@@ -463,20 +527,19 @@
             })
             .catch(error => {
                 console.error('Transmission fault:', error);
-                alert('Formspree dispatch error. Please check your endpoint connectivity.');
+                alert('Formspree dispatch error. Re-checking connectivity metrics.');
                 document.getElementById('nav-btn-finalize').disabled = false;
                 document.getElementById('submit-btn-label').innerText = "Transmit Data Payload";
             });
         }
 
-        function resetEvaluation() {
+        function returnToStudyMode() {
             activePointer = 0;
             responseMap = {};
             document.getElementById('nav-btn-finalize').disabled = false;
             document.getElementById('submit-btn-label').innerText = "Transmit Data Payload";
             document.getElementById('panel-fail').classList.add('hidden');
-            document.getElementById('panel-quiz').classList.remove('hidden');
-            drawQuestionMatrix();
+            document.getElementById('panel-learn').classList.remove('hidden');
         }
 
         function copyShareCaption() {
