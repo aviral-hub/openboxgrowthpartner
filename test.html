@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unlitify Business Analyst Qualification Engine</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Premium Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- High-Definition Canvas Capture Engine -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+    <style>
+        .secure-lock {
+            -webkit-user-select: none !important;
+            -moz-user-select: none !important;
+            -ms-user-select: none !important;
+            user-select: none !important;
+        }
+
+        .secure-lock ::selection {
+            background: transparent !important;
+            color: inherit !important;
+        }
+
+        /* Elegant Light-Mode Corporate Aesthetic for Certificate */
+        .cert-light-canvas {
+            background: #ffffff;
+            background-image:
+                radial-gradient(circle at 100% 150%, #f3f4f6 24%, #e5e7eb 25%, #e5e7eb 28%, #f3f4f6 29%, #f3f4f6 36%, #e5e7eb 36%, #e5e7eb 40%, transparent 40%),
+                radial-gradient(circle at 0% 150%, #f3f4f6 24%, #e5e7eb 25%, #e5e7eb 28%, #f3f4f6 29%, #f3f4f6 36%, #e5e7eb 36%, #e5e7eb 40%, transparent 40%),
+                linear-gradient(to bottom, #f9fafb, #ffffff);
+        }
+
+        .glass-dark-panel {
+            background: rgba(15, 23, 42, 0.85);
+            backdrop-filter: blur(16px);
+        }
+    </style>
+</head>
+
+<body class="bg-[#080c14] text-slate-100 min-h-screen font-sans secure-lock flex flex-col justify-between"
+    oncontextmenu="return false;"
+    onkeydown="if ((event.ctrlKey && event.keyCode === 67) || (event.metaKey && event.keyCode === 67)) return false;">
+
+    <!-- TOP GLOBAL BAR -->
+    <nav
+        class="border-b border-slate-800 bg-[#0f172a]/90 px-6 py-4 flex justify-between items-center sticky top-0 z-50 backdrop-blur-md">
+        <div class="flex items-center gap-3">
+            <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh7bMxNwa7Ncov8MjMwEm0k6aBobtyDqe1wKxwbjiBJgIam2EJnJIWyJRBFSlMKaUlNu79ylp1kLyOYPoj5ZPvdNJlLa_OcIy-E8pdrdS0ot0oIVtcwWdBdqhaHvaBcDZADoX-ldXYTFO1QUp19Fk4R1kT48oAlMyzyYbqnp-JfHdEDW89_LmMJmN2lQzvx/s320/Vector.png"
+                 alt="Unlitify" class="h-7 object-contain">
+            <span class="font-mono text-base font-bold tracking-widest text-indigo-400">UNLITIFY LABS</span>
+        </div>
+        <div id="user-display-badge"
+            class="hidden text-xs font-mono bg-indigo-500/10 border border-indigo-500/20 px-3 py-1 rounded-md text-indigo-300">
+            <i class="fa-solid fa-id-badge mr-1"></i> <span id="display-name">Guest</span>
+        </div>
+    </nav>
+
+    <!-- CONTENT ROUTING VIEWPORT -->
+    <main class="flex-grow flex items-center justify-center p-4 md:p-8 max-w-5xl w-full mx-auto">
+
+        <!-- STEP 1: LOGIN IDENTITY GATEWAY -->
+        <div id="panel-login"
+            class="w-full max-w-md glass-dark-panel p-8 rounded-2xl border border-slate-800 shadow-2xl space-y-6">
+            <div class="text-center space-y-2">
+                <h2 class="text-xl font-bold tracking-wide text-white">Business Analyst Entry Gateway</h2>
+                <p class="text-xs text-slate-400">Provide authentication variables to stamp validation metrics on sheet
+                    sub-tab named <b class="text-indigo-400 font-mono">"user"</b>.</p>
+            </div>
+            <div class="space-y-4">
+                <div>
+                    <label class="block text-[10px] font-mono tracking-wider text-indigo-400 uppercase font-bold mb-1">Full Identity String (For Certificate)</label>
+                    <input type="text" id="user-fullname" placeholder="Alex Mercer" class="w-full p-3 bg-slate-950 border border-slate-800 rounded-xl text-xs text-white focus:outline-none focus:border-indigo-500 font-sans">
+                </div>
+                <div>
+                    <label class="block text-[10px] font-mono tracking-wider text-indigo-400 uppercase font-bold mb-1">Communication Matrix (Phone / Email)</label>
+                    <input type="text" id="user-contact" placeholder="alex@domain.com" class="w-full p-3 bg-slate-950 border border-slate-800 rounded-xl text-xs text-white focus:outline-none focus:border-indigo-500 font-sans">
+                </div>
+                <button onclick="submitAuthentication()" class="w-full py-3 bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-xs rounded-xl transition tracking-wider uppercase font-mono shadow-lg shadow-indigo-600/10">
+                    Initialize Assessment Engine <i class="fa-solid fa-arrow-right ml-1"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- STEP 2: DYNAMIC ASSESSMENT COMPONENT -->
+        <div id="panel-quiz"
+            class="hidden w-full max-w-2xl glass-dark-panel p-6 md:p-8 rounded-2xl border border-slate-800 shadow-2xl space-y-6">
+            <div class="flex justify-between items-center text-xs font-mono border-b border-slate-800 pb-3">
+                <span class="text-slate-400">EXAM ITEM <b class="text-white" id="progress-current">1</b> OF 20</span>
+                <span class="text-indigo-400 font-bold" id="progress-percent">5%</span>
+            </div>
+
+            <div class="space-y-5">
+                <h3 class="text-sm md:text-base font-bold text-slate-100 leading-relaxed" id="quiz-question-target">
+                    Loading Framework Prompt Matrix...</h3>
+                <div class="grid grid-cols-1 gap-2.5" id="quiz-options-target">
+                    <!-- Javascript populates -->
+                </div>
+            </div>
+
+            <div class="flex justify-between items-center pt-4 border-t border-slate-800">
+                <button id="nav-btn-back" onclick="changeQuestion(-1)" class="px-4 py-1.5 bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold rounded-lg transition">
+                    <i class="fa-solid fa-arrow-left-long mr-1"></i> Back
+                </button>
+                <button id="nav-btn-forward" onclick="changeQuestion(1)" class="px-4 py-1.5 bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold rounded-lg transition">
+                    Advance <i class="fa-solid fa-arrow-right-long ml-1"></i>
+                </button>
+                <button id="nav-btn-finalize" onclick="processEvaluation()" class="hidden px-5 py-1.5 bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold rounded-lg flex items-center gap-2 transition">
+                    <i class="fa-solid fa-cloud-arrow-up animate-pulse"></i> <span id="submit-btn-label">Finalize Matrix Sync</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- STEP 3: SYSTEM FAILS DISCLOSURE -->
+        <div id="panel-fail"
+            class="hidden w-full max-w-md glass-dark-panel p-8 rounded-2xl border border-rose-500/20 shadow-2xl text-center space-y-4">
+            <div
+                class="w-14 h-14 bg-rose-500/10 rounded-full flex items-center justify-center text-rose-400 mx-auto text-xl border border-rose-500/20">
+                <i class="fa-solid fa-chart-line-down"></i>
+            </div>
+            <div>
+                <h4 class="text-base font-bold text-rose-400">Benchmark Metric Deficit</h4>
+                <p class="text-xs text-slate-400 mt-1 font-mono">Result:
+                    <span id="fail-metric-label" class="text-white font-bold">0%</span></p>
+            </div>
+            <p class="text-xs text-slate-400 leading-relaxed">
+                General Business Analyst standards demand an **80% baseline matrix clearance**. This record was
+                outputted to your tracker. Reset your model arrays and try again.
+            </p>
+            <button onclick="resetEvaluation()" class="w-full py-2.5 bg-rose-950/40 hover:bg-rose-900/50 text-rose-300 border border-rose-800/40 font-bold text-xs rounded-xl transition font-mono">
+                Re-initiate Assessment Array
+            </button>
+        </div>
+
+        <!-- STEP 4: PASS PANEL WITH STEPWISE CONTROL PROTOCOLS -->
+        <div id="panel-pass" class="hidden w-full space-y-8">
+            <div class="p-4 bg-emerald-500/5 border border-emerald-500/20 rounded-xl text-center max-w-lg mx-auto">
+                <h4 class="text-sm font-bold text-emerald-400"><i class="fa-solid fa-shield-halved"></i> Analytics
+                    Compliance Clear!</h4>
+                <p class="text-xs text-slate-400 mt-0.5">Execution sequence complete. Identity logged onto column
+                    headers.</p>
+            </div>
+
+            <!-- PREMIUM LIGHT MODE CERTIFICATE CANVAS ARCHITECTURE -->
+            <div
+                class="p-4 bg-slate-900 rounded-2xl border border-slate-800 max-w-4xl mx-auto overflow-x-auto shadow-2xl">
+                <div id="unlitify-light-certificate"
+                    class="cert-light-canvas w-[840px] h-[540px] mx-auto p-12 flex flex-col justify-between items-center text-center text-slate-800 relative border-[12px] border-slate-100 shadow-xl rounded-lg">
+
+                    <!-- Decorative Clean Inset Fine Lines -->
+                    <div class="absolute inset-2 border-2 border-slate-200 rounded"></div>
+                    <div class="absolute inset-3 border border-indigo-600/10 rounded"></div>
+
+                    <!-- Header Corporate Branding -->
+                    <div class="w-full flex justify-between items-center px-6 relative z-10">
+                        <div class="text-left">
+                            <span class="text-[8px] font-mono tracking-widest text-slate-400 block">LEDGER PROTOCOL VERIFICATION</span>
+                            <span id="cert-secure-token" class="text-[10px] font-mono font-bold text-indigo-600 tracking-wider">UNL-ID-PENDING</span>
+                        </div>
+                        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh7bMxNwa7Ncov8MjMwEm0k6aBobtyDqe1wKxwbjiBJgIam2EJnJIWyJRBFSlMKaUlNu79ylp1kLyOYPoj5ZPvdNJlLa_OcIy-E8pdrdS0ot0oIVtcwWdBdqhaHvaBcDZADoX-ldXYTFO1QUp19Fk4R1kT48oAlMyzyYbqnp-JfHdEDW89_LmMJmN2lQzvx/s320/Vector.png"
+                             alt="Unlitify" class="h-8 object-contain">
+                    </div>
+
+                    <!-- Core Certification Typography -->
+                    <div class="space-y-4 relative z-10 w-full px-8 -mt-2">
+                        <h2 class="text-xs font-mono text-indigo-600 uppercase tracking-widest font-bold">Credential of
+                            System Competency</h2>
+                        <p class="text-xs italic text-slate-500 font-serif">This document systematically registers that
+                            industry specialist</p>
+
+                        <!-- Reactive Student Node Output -->
+                        <div id="cert-target-name"
+                            class="text-3xl font-black tracking-wide text-slate-900 py-1 border-b-2 border-slate-200 max-w-md mx-auto capitalize font-sans">
+                            Candidate Name
+                        </div>
+
+                        <p class="text-xs text-slate-600 max-w-xl mx-auto leading-relaxed font-sans px-4">
+                            has demonstrated structural compliance through rigorous framework verification in
+                            <span class="text-slate-900 font-bold">General Business Analysis Disciplines</span>.
+                            Competencies verified include BRD/FRD technical translation, Agile sprint tracking, UML
+                            entity lifecycle mapping, and financial performance variance auditing.
+                        </p>
+                    </div>
+
+                    <!-- Authorized Verification Signatures Grid -->
+                    <div
+                        class="w-full grid grid-cols-2 items-end pt-4 relative z-10 text-left px-8 font-mono text-[8px] text-slate-400">
+                        <div class="space-y-1">
+                            <!-- Clean Signature Overlay Integration -->
+                            <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgx-shwO1g7Tzl96m86iuxkkoez5_T06_AvRvR6m9kSlcN09AmqLXvccGewB0S1VsxLtZxNOiapDUeH1jLcXHpYes5T5rMbZ4vc8Jt44M5yizPjKTZUfq8O-uGTTnhM9GxZzl5CQpKexdeQBjj4U316RTYwBxl0GKfx6KBsWGsRHETklU1y18BkzOObhc3n/s320/img-removebg-preview%20(1).png"
+                                 alt="Aviral Pathak Signature" class="h-10 object-contain ml-4 -mb-3 opacity-95">
+                            <div class="w-32 border-t border-slate-200 my-1"></div>
+                            <p class="text-slate-800 font-serif text-[10px] font-bold">Aviral Pathak</p>
+                            <p class="uppercase tracking-wider text-indigo-600 font-bold">Founder, Unlitify</p>
+                        </div>
+
+                        <div class="text-right space-y-1">
+                            <div class="h-10 flex items-end justify-end">
+                                <span id="cert-accuracy-badge" class="text-slate-900 font-bold font-mono text-xs tracking-wider bg-slate-100 border border-slate-200 px-2 py-0.5 rounded">100% CLEARANCE</span>
+                            </div>
+                            <div class="w-32 border-t border-slate-200 my-1 ml-auto"></div>
+                            <p class="text-slate-500 font-serif text-[9px] font-bold">Validation Index</p>
+                            <p class="uppercase tracking-wider text-slate-400">OPERATIONAL REGISTRY MATRIX</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- STEPWISE DOWNLOADING AND SHARING FRAMEWORK CONTROL PANEL -->
+            <div class="max-w-2xl mx-auto space-y-4">
+                <h5 class="text-xs font-mono font-bold tracking-widest text-indigo-400 uppercase">
+                    <i class="fa-solid fa-route"></i> STEP-BY-STEP CREDENTIAL DISPATCH</h5>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <!-- Step 1 -->
+                    <div
+                        class="bg-slate-900 border border-slate-800 p-4 rounded-xl space-y-3 flex flex-col justify-between">
+                        <div>
+                            <span class="w-5 h-5 bg-indigo-600/20 text-indigo-400 rounded-full flex items-center justify-center text-xs font-mono font-bold mb-2">1</span>
+                            <h6 class="text-xs font-bold text-white">Save Image</h6>
+                            <p class="text-[11px] text-slate-400 mt-1">Converts the high-end light mode canvas to a
+                                print-ready image asset downloaded directly to your device.</p>
+                        </div>
+                        <button onclick="downloadLightCert()" class="w-full py-2 bg-indigo-600 hover:bg-indigo-500 text-white text-[11px] font-bold rounded-lg transition cursor-pointer">
+                            <i class="fa-solid fa-download mr-1"></i> Download Asset
+                        </button>
+                    </div>
+
+                    <!-- Step 2 -->
+                    <div
+                        class="bg-slate-900 border border-slate-800 p-4 rounded-xl space-y-3 flex flex-col justify-between">
+                        <div>
+                            <span class="w-5 h-5 bg-indigo-600/20 text-indigo-400 rounded-full flex items-center justify-center text-xs font-mono font-bold mb-2">2</span>
+                            <h6 class="text-xs font-bold text-white">Copy Caption</h6>
+                            <p class="text-[11px] text-slate-400 mt-1">Saves an optimized profile narrative featuring
+                                your exact data scores seamlessly into your system clipboard.</p>
+                        </div>
+                        <button onclick="copyShareCaption()" class="w-full py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 text-[11px] font-bold rounded-lg transition cursor-pointer border border-slate-700">
+                            <i class="fa-solid fa-copy mr-1"></i> Copy Caption text
+                        </button>
+                    </div>
+
+                    <!-- Step 3 -->
+                    <div
+                        class="bg-slate-900 border border-slate-800 p-4 rounded-xl space-y-3 flex flex-col justify-between">
+                        <div>
+                            <span class="w-5 h-5 bg-indigo-600/20 text-indigo-400 rounded-full flex items-center justify-center text-xs font-mono font-bold mb-2">3</span>
+                            <h6 class="text-xs font-bold text-white">Publish Network</h6>
+                            <p class="text-[11px] text-slate-400 mt-1">Launches the LinkedIn structural payload screen.
+                                Paste your caption, drop the certificate file, and tag Unlitify.</p>
+                        </div>
+                        <a href="https://www.linkedin.com/feed/" target="_blank"
+                            class="w-full py-2 bg-slate-100 hover:bg-white text-slate-950 text-[11px] font-bold rounded-lg transition text-center block">
+                            <i class="fa-brands fa-linkedin text-blue-600 mr-1"></i> Open LinkedIn Feed
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TEXT FIELD TRACKING CONTAINER FOR COPY SAFETIES -->
+            <div class="max-w-2xl mx-auto bg-slate-950 p-4 rounded-xl border border-slate-800 space-y-2">
+                <span class="text-[9px] font-mono tracking-wider text-slate-500 uppercase block">Live Copy Verification Frame:</span>
+                <div id="linkedin-dynamic-caption"
+                    class="text-xs text-slate-300 font-sans italic leading-relaxed select-all">
+                    Loading contextual script arrays...
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- ACCURATE SYSTEM FOOTER FRAME -->
+    <footer class="py-3 text-center text-[9px] font-mono text-slate-700 border-t border-slate-900 bg-[#04060a]">
+        &copy; 2026 UNLITIFY ECOSYSTEM LOGISTICS INTERFACE. DIRECT SHEET INTEGRATION CHANNEL ACTIVE.
+    </footer>
+
+    <!-- EXECUTION ARCHITECTURE INTERACTIVE JAVASCRIPT LAYER -->
+    <script>
+        const endpointTarget = 'https://script.google.com/macros/s/AKfycbwMylFtaQiWUCA_PHUSYyd1luR2WTzb5O6kmM6eWSm9xPxnLfPdHtuVSoARftXb3g/exec';
+        
+        let accountIdentity = { name: '', email: '' };
+        let activePointer = 0;
+        let responseMap = {};
+        let finalCorrectCount = 0;
+        let scalePercentage = 0;
+        let verificationHash = 'UNL-VERIFIED';
+
+        // 20 Core General Business Analyst Foundational Industry Prompts
+        const catalog = [
+            { id: 1, text: 'What does the acronym BRD stand for in business analysis methodologies?', options: ['A) Business Reporting Dimension', 'B) Business Requirements Document', 'C) Baseline Resource Allocation Diagram', 'D) Behavioral Request Blueprint'], correct: 1 },
+            { id: 2, text: 'Which model mapping approach visualizes sequential actions from actors to system targets?', options: ['A) Entity Relationship Matrix', 'B) Use Case Diagram', 'C) Gantt Track Configuration', 'D) Fishbone Cause Layering'], correct: 1 },
+            { id: 3, text: 'In Agile Scrum methodologies, who is ultimately responsible for product backlog prioritization?', options: ['A) Scrum Master Specialist', 'B) Lead Database Developer', 'C) Product Owner', 'D) Systems Configuration Architect'], correct: 2 },
+            { id: 4, text: 'What is the core focus when running a MoSCoW prioritization model matrix?', options: ['A) Calculating hourly server costs', 'B) Grouping product requirements into Must-have, Should-have, Could-have, and Won\'t-have buckets', 'C) Mapping geographic customer growth targets', 'D) Running performance load evaluation cycles'], correct: 1 },
+            { id: 5, text: 'Which technique is ideal for discovering root structural issues behind a process problem?', options: ['A) SWOT Matrix Framing', 'B) 5 Whys / Fishbone Analysis', 'C) Prototyping Wireframes', 'D) RACI Matrix Allocation'], correct: 1 },
+            { id: 6, text: 'What type of testing validates that an end-to-end user sequence aligns perfectly with initial business constraints?', options: ['A) Unit Code Profiling', 'B) User Acceptance Testing (UAT)', 'C) Smoke System Loading', 'D) Database Schema Auditing'], correct: 1 },
+            { id: 7, text: 'What parameter layout maps accountabilities across Responsible, Accountable, Consulted, and Informed states?', options: ['A) MoSCoW Grid Structure', 'B) RACI Matrix Layout', 'C) Balanced Scorecard Model', 'D) PESTLE Market Analysis'], correct: 1 },
+            { id: 8, text: 'In business process modeling, what does a horizontal container lane (Swimlane) explicitly represent?', options: ['A) Server performance bandwidth maximums', 'B) Timeline duration buffers', 'C) Specific functional roles, departments, or actors executing tasks', 'D) Database item relationship links'], correct: 2 },
+            { id: 9, text: 'What is a user story\'s standard, structural composition format?', options: ['A) If system triggers, then execute parameter matrix', 'B) Select columns from table join condition constraints', 'C) As a [User Role], I want [Feature Requirement] so that [Business Benefit/Value]', 'D) Total Revenue divided by operational customer footprint counters'], correct: 2 },
+            { id: 10, text: 'Which analytics focus tracks historical performance patterns to answer "What has occurred within our sales pipelines?"', options: ['A) Predictive Forecasting Models', 'B) Descriptive Analytics', 'C) Prescriptive Strategy Paths', 'D) Artificial Neural Network Inferences'], correct: 1 },
+            { id: 11, text: 'What operational milestone defines a Product Backlog Item as ready for active sprint execution processing?', options: ['A) Definition of Ready (DoR)', 'B) Quality Assurance Sign-off File', 'C) Definition of Done (DoD)', 'D) Executive Steering Group Approval Notice'], correct: 0 },
+            { id: 12, text: 'What tool details a solution\'s structural scope boundary by charting external actors against inner system interfaces?', options: ['A) Entity Relationship Diagram (ERD)', 'B) Context Diagram', 'C) Wireframe Interface Archetype', 'D) Data Field Transformation Ledger'], correct: 1 },
+            { id: 13, text: 'What approach extracts industry variables across Political, Economic, Social, Technological, Legal, and Environmental constraints?', options: ['A) SWOT Matrix Frame', 'B) PESTLE Analysis Framework', 'C) Porter\'s 5 Forces Grid', 'D) Balanced Scorecard Ledger'], correct: 1 },
+            { id: 14, text: 'Which type of requirement specifies global properties like security standards, response speeds, and system uptime limits?', options: ['A) Functional Action Triggers', 'B) Data Definition Requirements', 'C) Non-Functional Requirements (NFRs)', 'D) Form UI Configuration Blueprints'], correct: 2 },
+            { id: 15, text: 'What methodology focuses on minimizing wastes while establishing continuous pipeline efficiency improvements?', options: ['A) Waterfall Lifecycle Framework', 'B) Lean Six Sigma / Kaizen Model', 'C) Monolithic Architecture Structuring', 'D) Descriptive Ad-Hoc Data Querying'], correct: 1 },
+            { id: 16, text: 'When a BA identifies gap profiles between a current production layout and a future state design, it is called a:', options: ['A) Linear Regression Variance Study', 'B) Gap Analysis', 'C) Risk Mitigation Sprint Plan', 'D) Database Join Collision Test'], correct: 1 },
+            { id: 17, text: 'What document maps a business requirement directly to its technical design components and automated test scripts?', options: ['A) Project Charter Document', 'B) Requirements Traceability Matrix (RTM)', 'C) Functional Specification Document', 'D) Standard User Interface Schema File'], correct: 1 },
+            { id: 18, text: 'Which meeting allows Scrum teams to review the previous sprint to optimize performance metrics going forward?', options: ['A) Daily Standup Sync', 'B) Sprint Retrospective Meeting', 'C) Product Roadmap Review Gating', 'D) Backlog Refinement Sprint Session'], correct: 1 },
+            { id: 19, text: 'What visual layout charts data entities alongside their physical cardinality and connection points within structural tables?', options: ['A) Value Stream Pipeline Map', 'B) Entity Relationship Diagram (ERD)', 'C) Wireframe Layout Blueprint', 'D) System Context Interactivity View'], correct: 1 },
+            { id: 20, text: 'What is the objective of conducting a structural Stakeholder Analysis matrix sweep during discovery?', options: ['A) To structure payroll calculations accurately', 'B) To evaluate system processing bandwidth thresholds', 'C) To assess and categorize stakeholders based on their influence, interest, and communication needs', 'D) To format relational columns automatically into string strings'], correct: 2 }
+        ];
+
+        function submitAuthentication() {
+            const name = document.getElementById('user-fullname').value.trim();
+            const contact = document.getElementById('user-contact').value.trim();
+            
+            if (name.length < 3 || contact.length < 5) {
+                alert('Please provide complete identity values to clear dashboard parameters.');
+                return;
+            }
+            
+            accountIdentity.name = name;
+            accountIdentity.email = contact;
+            
+            document.getElementById('display-name').innerText = accountIdentity.name;
+            document.getElementById('user-display-badge').classList.remove('hidden');
+            document.getElementById('panel-login').classList.add('hidden');
+            document.getElementById('panel-quiz').classList.remove('hidden');
+            drawQuestionMatrix();
+        }
+
+        function drawQuestionMatrix() {
+            const cursor = catalog[activePointer];
+            document.getElementById('progress-current').innerText = activePointer + 1;
+            document.getElementById('progress-percent').innerText = Math.round(((activePointer + 1)/catalog.length)*100) + '% Complete';
+            document.getElementById('quiz-question-target').innerText = `Q${cursor.id}. ${cursor.text}`;
+            
+            const box = document.getElementById('quiz-options-target');
+            box.innerHTML = '';
+            
+            cursor.options.forEach((opt, idx) => {
+                const filled = responseMap[cursor.id] === idx;
+                const card = document.createElement('div');
+                card.className = `p-3.5 rounded-xl border text-xs cursor-pointer flex items-center gap-3 transition ${filled ? 'border-indigo-500 bg-indigo-500/5 text-white font-medium' : 'border-slate-800 hover:bg-slate-900/60 text-slate-300'}`;
+                card.onclick = () => { responseMap[cursor.id] = idx; drawQuestionMatrix(); };
+                
+                card.innerHTML = `
+                    <div class="w-3.5 h-3.5 rounded-full border border-slate-600 flex items-center justify-center ${filled ? 'border-indigo-500 bg-indigo-500' : ''}">
+                        ${filled ? '<div class="w-1.5 h-1.5 bg-white rounded-full"></div>' : ''}
+                    </div>
+                    <span>${opt}</span>
+                `;
+                box.appendChild(card);
+            });
+
+            document.getElementById('nav-btn-back').disabled = activePointer === 0;
+            if(activePointer === catalog.length - 1) {
+                document.getElementById('nav-btn-forward').classList.add('hidden');
+                document.getElementById('nav-btn-finalize').classList.remove('hidden');
+            } else {
+                document.getElementById('nav-btn-forward').classList.remove('hidden');
+                document.getElementById('nav-btn-finalize').classList.add('hidden');
+            }
+        }
+
+        function changeQuestion(val) {
+            if (val === 1 && responseMap[catalog[activePointer].id] === undefined) {
+                alert('An answer parameter must be registered before moving forward.');
+                return;
+            }
+            activePointer += val;
+            drawQuestionMatrix();
+        }
+
+        function processEvaluation() {
+            if (Object.keys(responseMap).length < catalog.length) {
+                alert('Complete all metrics before executing final validation checks.');
+                return;
+            }
+
+            document.getElementById('nav-btn-finalize').disabled = true;
+            document.getElementById('submit-btn-label').innerText = "Logging Attempt...";
+
+            finalCorrectCount = 0;
+            catalog.forEach(item => {
+                if (responseMap[item.id] === item.correct) finalCorrectCount++;
+            });
+
+            scalePercentage = Math.round((finalCorrectCount / catalog.length) * 100);
+            const clearState = scalePercentage >= 80;
+            const statusLabel = clearState ? 'Pass' : 'Fail';
+            verificationHash = 'UNL-BA-' + Math.random().toString(36).substr(2, 6).toUpperCase() + '-' + scalePercentage;
+
+            // Direct Form GET Parameters Route explicitly tracking "user" sheet destination mapping variables
+            const routingParameters = `?name=${encodeURIComponent(accountIdentity.name)}&contact=${encodeURIComponent(accountIdentity.email)}&score=${finalCorrectCount}&percentage=${scalePercentage}&status=${statusLabel}&token=${verificationHash}&sheet=user`;
+            
+            const injectionPoint = document.createElement('script');
+            injectionPoint.src = endpointTarget + routingParameters;
+            document.body.appendChild(injectionPoint);
+
+            setTimeout(() => {
+                document.getElementById('panel-quiz').classList.add('hidden');
+                if(clearState) {
+                    document.getElementById('cert-target-name').innerText = accountIdentity.name;
+                    document.getElementById('cert-secure-token').innerText = verificationHash;
+                    document.getElementById('cert-accuracy-badge').innerText = `${scalePercentage}% COMPLIANCE`;
+                    
+                    document.getElementById('linkedin-dynamic-caption').innerText = `Thrilled to share that I have successfully cleared the General Business Analyst Qualification Board on @unlitify with an aggregate compliance mark of ${scalePercentage}%! 📊 This assessment verifies core analytical framework mastery across BRD conversion pipelines, MoSCoW metric prioritizations, RACI responsibility mapping, and UAT end-to-end user validations. Claim your qualification parameters and download your verified credential canvas tracker here: ${window.location.href} #BusinessAnalyst #BA #AgileFramework #ContinuousLearning #Unlitify`;
+                    
+                    document.getElementById('panel-pass').classList.remove('hidden');
+                } else {
+                    document.getElementById('fail-metric-label').innerText = `${scalePercentage}% (${finalCorrectCount}/20 Correct)`;
+                    document.getElementById('panel-fail').classList.remove('hidden');
+                }
+            }, 1500);
+        }
+
+        function resetEvaluation() {
+            activePointer = 0;
+            responseMap = {};
+            document.getElementById('nav-btn-finalize').disabled = false;
+            document.getElementById('submit-btn-label').innerText = "Finalize Matrix Sync";
+            document.getElementById('panel-fail').classList.add('hidden');
+            document.getElementById('panel-quiz').classList.remove('hidden');
+            drawQuestionMatrix();
+        }
+
+        function copyShareCaption() {
+            const selection = document.getElementById('linkedin-dynamic-caption').innerText;
+            navigator.clipboard.writeText(selection);
+            alert('Tailored LinkedIn narrative post saved cleanly to your system clipboard tracking matrix!');
+        }
+
+        function downloadLightCert() {
+            const selector = document.getElementById('unlitify-light-certificate');
+            html2canvas(selector, {
+                scale: 3,
+                useCORS: true,
+                allowTaint: true,
+                backgroundColor: null,
+                logging: false
+            }).then(imgOutput => {
+                const triggerLink = document.createElement('a');
+                triggerLink.download = `Unlitify_BA_Light_Certificate_${accountIdentity.name.replace(/\s+/g, '_')}.png`;
+                triggerLink.href = imgOutput.toDataURL('image/png', 1.0);
+                triggerLink.click();
+            });
+        }
+    </script>
+</body>
+
+</html>
