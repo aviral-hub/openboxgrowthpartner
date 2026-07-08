@@ -6,17 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Unlitify — Business Analyst Workspace</title>
 
-    <!-- Tailwind CSS v4 CDN -->
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 
-    <!-- Alpine.js for Interactive State Mechanics -->
     <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/collapse@3.x.x/dist/cdn.min.js"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
-    <!-- FontAwesome CDN -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -74,7 +70,6 @@
 
 <body class="min-h-screen relative selection:bg-blue-600 selection:text-white pb-16 bg-grid" x-data="dashboardApp()">
 
-    <!-- LAYER A: GATEWAY GATE SECURITY OVERLAY -->
     <div x-show="!isLoggedIn"
         class="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-md p-4">
         <div
@@ -107,14 +102,11 @@
         </div>
     </div>
 
-    <!-- LAYER B: PRIMARY PRIVATE CONTENT FRAMEWAY -->
     <div x-show="isLoggedIn" x-cloak>
-        <!-- Top Navigation Workspace Header -->
         <header
             class="max-w-7xl mx-auto mt-4 px-4 lg:px-8 bg-[var(--blur-tint)] backdrop-blur-xl border border-slate-200 dark:border-white/10 rounded-2xl sticky top-4 z-40 transition-all duration-300">
             <div class="h-16 flex items-center justify-between">
 
-                <!-- Branding Shell -->
                 <div class="flex items-center gap-3">
                     <a href="#" @click.prevent="currentTab = 'dashboard'" class="flex items-center gap-2.5">
                         <div
@@ -127,7 +119,6 @@
                     </a>
                 </div>
 
-                <!-- Central Tab Navigation Systems Router -->
                 <nav
                     class="flex items-center bg-[var(--muted-bg)] p-1 rounded-xl border border-slate-200 dark:border-white/5">
                     <button @click="currentTab = 'dashboard'" :class="currentTab === 'dashboard' ? 'bg-blue-600 text-white font-bold shadow-md' : 'text-[var(--muted-text)] hover:text-[var(--foreground)]'" class="px-4 py-1.5 rounded-lg text-xs transition-all cursor-pointer">
@@ -138,7 +129,6 @@
                     </button>
                 </nav>
 
-                <!-- Profile & Workspace Actions -->
                 <div class="flex items-center gap-3">
                     <button @click="toggleTheme()" class="p-2 w-9 h-9 flex items-center justify-center rounded-xl bg-[var(--muted-bg)] text-[var(--muted-text)] hover:text-[var(--foreground)] transition-colors cursor-pointer">
                         <i class="fa-solid fa-moon text-xs dark:hidden"></i>
@@ -158,24 +148,23 @@
             </div>
         </header>
 
-        <!-- SUB-FRAME 1: TASKS TRACKER DASHBOARD VIEW -->
         <div x-show="currentTab === 'dashboard'">
             <main class="max-w-7xl mx-auto px-4 lg:px-8 pt-8">
-                <!-- Top Summary Banner -->
                 <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 mb-8">
                     <div
                         class="lg:col-span-8 bg-[var(--card)] p-6 md:p-8 rounded-2xl border border-slate-200 dark:border-white/10 shadow-sm relative overflow-hidden">
                         <div>
                             <div class="flex flex-wrap items-center gap-2 mb-3">
-                                <span class="px-2.5 py-1 rounded-md bg-blue-500/10 text-blue-500 text-xs font-bold uppercase tracking-wider">Week 1 Module</span>
-                                <span class="px-2.5 py-1 rounded-md bg-emerald-500/10 text-emerald-500 text-xs font-bold uppercase tracking-wider">Format: Task-Based Virtual</span>
+                                <span class="px-2.5 py-1 rounded-md bg-amber-500/10 text-amber-500 text-xs font-bold uppercase tracking-wider">☕ Unlitify Business Analyst Virtual Internship</span>
+                                <span class="px-2.5 py-1 rounded-md bg-emerald-500/10 text-emerald-500 text-xs font-bold uppercase tracking-wider">Project: Coffee Bean Sales Analysis</span>
                             </div>
                             <h1
                                 class="heading-font text-2xl md:text-3xl font-bold text-[var(--foreground)] tracking-tight mb-2">
-                                Business Analyst Internship Foundation</h1>
+                                BrewBean Coffee Optimization Workspace</h1>
                             <p class="text-xs md:text-sm text-[var(--muted-text)] max-w-2xl leading-relaxed">
-                                Learn how a Business Analyst thinks, gathers requirements, analyzes problems, and
-                                creates production documents used in real software products.
+                                <strong>Business Scenario:</strong> You have joined BrewBean Coffee as a Business
+                                Analyst Intern. Transform raw datasets (Orders, Customers, Products) into critical
+                                business insights to optimize performance and customer retention.
                             </p>
                         </div>
                     </div>
@@ -184,7 +173,7 @@
                         class="lg:col-span-4 bg-[var(--card)] p-6 rounded-2xl border border-slate-200 dark:border-white/10 shadow-sm flex flex-col justify-between">
                         <div>
                             <div class="flex justify-between items-center mb-2">
-                                <span class="text-xs font-bold uppercase tracking-wider text-[var(--muted-text)]">Week Progress</span>
+                                <span class="text-xs font-bold uppercase tracking-wider text-[var(--muted-text)]">Internship Progress</span>
                                 <span class="text-xs font-bold text-blue-500" x-text="`${calculateProgress()}% Complete`"></span>
                             </div>
                             <div class="w-full h-3 bg-[var(--muted-bg)] rounded-full overflow-hidden mb-4">
@@ -196,25 +185,24 @@
                             class="grid grid-cols-2 gap-3 pt-3 border-t border-slate-200 dark:border-white/5 text-center">
                             <div>
                                 <div class="text-xl font-bold text-[var(--foreground)] heading-font"
-                                    x-text="`${completedCount()}/5`"></div>
+                                    x-text="`${completedCount()}/9`"></div>
                                 <div class="text-[10px] text-[var(--muted-text)] uppercase tracking-wider mt-0.5">Tasks
-                                    Verified</div>
+                                    Approved</div>
                             </div>
                             <div>
-                                <div class="text-xl font-bold text-[var(--foreground)] heading-font">1 Case Study</div>
-                                <div class="text-[10px] text-[var(--muted-text)] uppercase tracking-wider mt-0.5">
-                                    Portfolio Asset</div>
+                                <div class="text-xl font-bold text-[var(--foreground)] heading-font">3 Tables</div>
+                                <div class="text-[10px] text-[var(--muted-text)] uppercase tracking-wider mt-0.5">Core
+                                    Datasets</div>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Dashboard Layout Split -->
                 <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
                     <div class="lg:col-span-8 space-y-4">
                         <div class="flex items-center justify-between mb-2">
                             <h2 class="heading-font text-lg font-bold text-[var(--foreground)] flex items-center gap-2">
-                                <i class="fa-solid fa-list-check text-blue-500 text-sm"></i> Daily Execution Roadmap
+                                <i class="fa-solid fa-list-check text-blue-500 text-sm"></i> Project Milestones Roadmap
                             </h2>
                             <button @click="currentTab = 'learning'" class="text-xs text-blue-500 font-bold hover:underline cursor-pointer">Open Study Material <i class="fa-solid fa-arrow-right ml-1"></i></button>
                         </div>
@@ -227,7 +215,7 @@
                                     <div class="flex items-center gap-4">
                                         <div class="w-10 h-10 rounded-xl flex items-center justify-center font-bold text-sm heading-font"
                                             :class="day.completed ? 'bg-emerald-500/10 text-emerald-500 border border-emerald-500/20' : 'bg-[var(--muted-bg)] text-[var(--muted-text)]'">
-                                            <span x-show="!day.completed" x-text="`D${day.id}`"></span>
+                                            <span x-show="!day.completed" x-text="`T${day.id}`"></span>
                                             <i x-show="day.completed" class="fa-solid fa-check text-sm"></i>
                                         </div>
                                         <div>
@@ -245,12 +233,25 @@
                                     class="border-t border-slate-200 dark:border-white/5 p-6 bg-[var(--muted-bg)]/30 space-y-4">
                                     <div
                                         class="bg-[var(--card)] p-5 rounded-xl border border-slate-200 dark:border-white/5 space-y-2">
+                                        <div class="flex justify-between items-center mb-1">
+                                            <h4
+                                                class="text-xs font-bold text-[var(--foreground)] uppercase tracking-wider">
+                                                Activities Matrix</h4>
+                                        </div>
+                                        <ul class="text-xs space-y-1.5 list-disc pl-4 text-[var(--muted-text)]">
+                                            <template x-for="act in day.activities">
+                                                <li x-text="act"></li>
+                                            </template>
+                                        </ul>
+                                    </div>
+
+                                    <div
+                                        class="bg-[var(--card)] p-5 rounded-xl border border-slate-200 dark:border-white/5 space-y-1">
                                         <div class="flex justify-between items-center">
-                                            <h4 class="text-sm font-bold text-[var(--foreground)] heading-font">Task
+                                            <h4 class="text-sm font-bold text-[var(--foreground)] heading-font">Required
                                                 Deliverable</h4>
                                             <span class="text-xs font-mono text-blue-500" x-text="day.deliverable"></span>
                                         </div>
-                                        <p class="text-xs leading-relaxed" x-text="day.taskDescription"></p>
                                     </div>
 
                                     <div x-show="day.submitted"
@@ -260,7 +261,7 @@
                                     </div>
 
                                     <div class="flex justify-end gap-2">
-                                        <button x-show="day.id === 1" @click="currentTab = 'learning'" class="px-4 py-2 bg-[var(--muted-bg)] text-[var(--foreground)] font-bold text-xs rounded-xl cursor-pointer mr-auto"><i class="fa-solid fa-book mr-1.5"></i> Read Day 1 Content</button>
+                                        <button x-show="day.id === 1" @click="currentTab = 'learning'" class="px-4 py-2 bg-[var(--muted-bg)] text-[var(--foreground)] font-bold text-xs rounded-xl cursor-pointer mr-auto"><i class="fa-solid fa-book mr-1.5"></i> Read Study Guide</button>
                                         <button @click="openSubmissionModal(day)" :disabled="day.completed" class="px-4 py-2 bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs rounded-xl cursor-pointer">
                                             <span x-text="day.submitted ? 'Update Work' : 'Submit Artifact Link'"></span>
                                         </button>
@@ -272,334 +273,1009 @@
 
                     <div class="lg:col-span-4 space-y-4">
                         <div class="bg-[var(--card)] p-5 rounded-2xl border border-slate-200 dark:border-white/10">
-                            <h3 class="text-sm font-bold text-[var(--foreground)] heading-font mb-2">Module Details</h3>
-                            <p class="text-xs leading-relaxed"><strong>Track:</strong> Business
-                                Analyst<br><strong>Duration:</strong> 2-3 Hours Learning + 2-3 Hours Task Execution</p>
+                            <h3 class="text-sm font-bold text-[var(--foreground)] heading-font mb-2">Internship Tracks
+                            </h3>
+                            <p class="text-xs leading-relaxed">
+                                <strong>Track:</strong> Data & Business Analysis<br>
+                                <strong>Toolstack:</strong> Excel / Power BI / Tableau / Figma<br>
+                                <strong>Data Scope:</strong> BrewBean Coffee transaction sheets
+                            </p>
                         </div>
                     </div>
                 </div>
             </main>
         </div>
 
-        <!-- SUB-FRAME 2: CORE STUDY PORTAL WORKSPACE VIEW -->
         <div x-show="currentTab === 'learning'" x-cloak>
             <main class="max-w-5xl mx-auto px-4 pt-8">
-                <!-- Learning Header Metadata Banner -->
                 <div class="border-b border-slate-200 dark:border-white/10 pb-6 mb-8 space-y-2">
                     <div class="flex items-center gap-2 text-xs font-bold text-blue-500 uppercase tracking-wider">
-                        <span>Week 1</span> &bull; <span>Module 1</span> &bull; <span>Duration: 2–3 Hours</span>
+                        <span>Task 1 Core</span> &bull; <span>Data Architecture Module</span> &bull;
+                        <span>Est: 2–3 Hours</span>
                     </div>
-                    <h1 class="heading-font text-3xl font-bold text-[var(--foreground)] tracking-tight">Introduction to
-                        Business Analysis</h1>
-                    <p class="text-xs text-[var(--muted-text)]">Review your study guides and concepts thoroughly before
-                        triggering artifact uploads inside the tracking tab.</p>
+                    <h1 class="heading-font text-3xl font-bold text-[var(--foreground)] tracking-tight">Task 1:
+                        Understanding the Business Data</h1>
+                    <p class="text-xs text-[var(--muted-text)]">Learn to evaluate data fields, map key attributes, and
+                        configure standard ER diagrams before constructing analytical calculations.</p>
                 </div>
 
-                <!-- Learning Objectives Panel Layout -->
                 <div
                     class="p-5 bg-gradient-to-r from-blue-600/10 to-indigo-600/10 rounded-2xl border border-blue-500/20 mb-8 space-y-3">
                     <h3
                         class="heading-font text-sm font-bold text-[var(--foreground)] uppercase tracking-wider flex items-center gap-2">
-                        <i class="fa-solid fa-bullseye text-blue-500"></i> 🎯 Learning Objectives
+                        <i class="fa-solid fa-bullseye text-blue-500"></i> 🎯 Task Objectives
                     </h3>
                     <ul class="grid grid-cols-1 md:grid-cols-2 gap-2 text-xs text-[var(--foreground)]">
                         <li class="flex items-center gap-2"><i class="fa-solid fa-angle-right text-blue-500"></i>
-                            Understand BA domain mapping importance.</li>
+                            Comprehend the business purpose of distinct transactional files.</li>
                         <li class="flex items-center gap-2"><i class="fa-solid fa-angle-right text-blue-500"></i>
-                            Identify standard BA responsibilities.</li>
+                            Formulate clear Data Dictionaries.</li>
                         <li class="flex items-center gap-2"><i class="fa-solid fa-angle-right text-blue-500"></i>
-                            Compare operational layers (Startups vs Enterprises).</li>
-                        <li class="flex items-center gap-2"><i class="fa-solid fa-angle-right text-blue-500"></i> Map
-                            structural SDLC cycle pathways.</li>
+                            Isolate Primary Keys (PK) and Foreign Keys (FK).</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-angle-right text-blue-500"></i> Design
+                            structural Entity Relationship Diagrams (ERD).</li>
                         <li class="flex items-center gap-2"><i class="fa-solid fa-angle-right text-blue-500"></i>
-                            Differentiate between Agile and Waterfall values.</li>
+                            Formulate structured, conversational business justifications.</li>
                         <li class="flex items-center gap-2"><i class="fa-solid fa-angle-right text-blue-500"></i>
-                            Execute rapid logic-driven product breakdowns.</li>
+                            Utilize generative AI as an evaluative critique mechanism.</li>
                     </ul>
                 </div>
 
-                <!-- Content Chapters Block Structure Loop -->
                 <div class="space-y-12">
 
-                    <!-- Lesson 1 -->
                     <section class="space-y-4">
                         <h2
                             class="heading-font text-xl font-bold text-[var(--foreground)] border-l-4 border-blue-500 pl-3">
-                            Lesson 1: What is Business Analysis?</h2>
+                            Part 1 — Explore Every Table</h2>
                         <p class="text-xs leading-relaxed">
-                            Business Analysis is the process of identifying business problems, understanding user needs,
-                            and recommending solutions that create value for both users and organizations.
+                            Open your three data catalogs (<strong>Orders, Customers, Products</strong>) in Excel. Spend
+                            10–15 minutes evaluating their basic structure without running formulas. Ask yourself what
+                            each horizontal row and vertical element represents to the business operation.
                         </p>
-                        <p class="text-xs leading-relaxed">
-                            A <strong>Business Analyst (BA)</strong> acts as the bridge between business stakeholders
-                            and the development team. Instead of writing code, a BA focuses on understanding what should
-                            be built, why it should be built, and how success will be measured.
-                        </p>
-
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2">
-                            <div
-                                class="p-4 rounded-xl bg-[var(--card)] border border-slate-200 dark:border-white/5 space-y-2">
-                                <h4 class="text-xs font-bold text-rose-500 uppercase">The Risk: Without Analysis</h4>
-                                <ul class="text-[11px] space-y-1 list-disc pl-4">
-                                    <li>Teams build features users don't need.</li>
-                                    <li>Projects exceed budgets and deadlines.</li>
-                                    <li>Customer problems remain unsolved.</li>
-                                </ul>
-                            </div>
-                            <div
-                                class="p-4 rounded-xl bg-[var(--card)] border border-slate-200 dark:border-white/5 space-y-2">
-                                <h4 class="text-xs font-bold text-emerald-500 uppercase">The Reward: Strategic Analysis
-                                </h4>
-                                <ul class="text-[11px] space-y-1 list-disc pl-4">
-                                    <li>Solves core systemic business issues.</li>
-                                    <li>Reduces development cycle wastage risks.</li>
-                                    <li>Aligns development directly to revenue goals.</li>
-                                </ul>
-                            </div>
-                        </div>
-
-                        <div class="p-4 rounded-xl bg-[var(--muted-bg)]/50 space-y-2">
-                            <h4 class="text-xs font-bold uppercase tracking-wider text-[var(--foreground)]">Key
-                                Vocabulary Terminology Matrices</h4>
-                            <div class="flex flex-wrap gap-1.5">
-                                <span class="px-2 py-0.5 rounded bg-[var(--card)] border border-slate-200 dark:border-white/5 text-[10px] font-mono">Business Problem</span>
-                                <span class="px-2 py-0.5 rounded bg-[var(--card)] border border-slate-200 dark:border-white/5 text-[10px] font-mono">Stakeholder</span>
-                                <span class="px-2 py-0.5 rounded bg-[var(--card)] border border-slate-200 dark:border-white/5 text-[10px] font-mono">Functional Requirement</span>
-                                <span class="px-2 py-0.5 rounded bg-[var(--card)] border border-slate-200 dark:border-white/5 text-[10px] font-mono">Product Vision</span>
-                            </div>
-                        </div>
-
-                        <!-- Knowledge Sandbox Box -->
                         <div
-                            class="p-4 rounded-xl border border-dashed border-slate-300 dark:border-white/10 space-y-2">
-                            <div class="text-xs font-bold text-[var(--foreground)]">
-                                <i class="fa-solid fa-lightbulb text-amber-500 mr-1.5"></i> Knowledge Check Reflection
+                            class="bg-[var(--card)] border border-slate-200 dark:border-white/5 p-4 rounded-xl space-y-2">
+                            <span class="text-[10px] uppercase font-bold text-blue-500 tracking-wider font-mono block"><i class="fa-solid fa-robot mr-1"></i> Interactive Guidance Prompt</span>
+                            <div
+                                class="bg-[var(--muted-bg)] p-3 rounded text-xs select-all font-mono leading-relaxed text-[var(--foreground)]">
+                                I am a beginner Business Analyst. I have a dataset with three tables: Orders, Customers,
+                                and Products. Explain what business purpose each table serves in a coffee company. Keep
+                                the explanation simple and use real business examples.
                             </div>
-                            <p class="text-[11px] italic">"Why should modern product companies aggressively validate
-                                structural problems before allocating engineering bandwidth to code solutions?"</p>
+                            <p class="text-[11px] italic text-rose-500 font-medium mt-1">⚠️ Rule: Use the AI reply to
+                                validate your ideas. Rewrite it into your final documentation using your own words.</p>
                         </div>
                     </section>
 
-                    <!-- Lesson 2 -->
                     <section class="space-y-4">
                         <h2
                             class="heading-font text-xl font-bold text-[var(--foreground)] border-l-4 border-blue-500 pl-3">
-                            Lesson 2: Roles & Responsibilities of a Business Analyst</h2>
-                        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
-                            <div class="p-3 bg-[var(--card)] border border-slate-200 dark:border-white/5 rounded-xl">
-                                <div class="text-xs font-bold text-[var(--foreground)] mb-1">1. Problem Definition</div>
-                                <p class="text-[11px]">Meet stakeholders to understand metrics, bottlenecks, and core
-                                    objectives.</p>
-                            </div>
-                            <div class="p-3 bg-[var(--card)] border border-slate-200 dark:border-white/5 rounded-xl">
-                                <div class="text-xs font-bold text-[var(--foreground)] mb-1">2. Requirement Gathering
-                                </div>
-                                <p class="text-[11px]">Collect domain facts via user interviews, shadow sessions, and
-                                    tracking workshops.</p>
-                            </div>
-                            <div class="p-3 bg-[var(--card)] border border-slate-200 dark:border-white/5 rounded-xl">
-                                <div class="text-xs font-bold text-[var(--foreground)] mb-1">3. Process Analysis</div>
-                                <p class="text-[11px]">Evaluate structural systems to convert legacy As-Is processes
-                                    into To-Be models.</p>
-                            </div>
-                            <div class="p-3 bg-[var(--card)] border border-slate-200 dark:border-white/5 rounded-xl">
-                                <div class="text-xs font-bold text-[var(--foreground)] mb-1">4. Matrix Documentation
-                                </div>
-                                <p class="text-[11px]">Draft unambiguous specification docs: BRDs, FRDs, and user
-                                    stories.</p>
-                            </div>
-                            <div class="p-3 bg-[var(--card)] border border-slate-200 dark:border-white/5 rounded-xl">
-                                <div class="text-xs font-bold text-[var(--foreground)] mb-1">5. Technical Translation
-                                </div>
-                                <p class="text-[11px]">Map functional items into clean, scannable developer ticket
-                                    components.</p>
-                            </div>
-                            <div class="p-3 bg-[var(--card)] border border-slate-200 dark:border-white/5 rounded-xl">
-                                <div class="text-xs font-bold text-[var(--foreground)] mb-1">6. Solution Validation
-                                </div>
-                                <p class="text-[11px]">Test built assets against functional criteria to ensure
-                                    deployment readiness.</p>
-                            </div>
-                        </div>
+                            Part 2 — Create a Data Dictionary</h2>
+                        <p class="text-xs leading-relaxed">A Data Dictionary sets up a shared vocabulary, mapping every
+                            field label to technical definitions, intent contexts, and stakeholder access groups.</p>
 
-                        <div
-                            class="p-4 bg-[var(--card)] border border-slate-200 dark:border-white/10 rounded-xl space-y-2">
-                            <h4 class="text-xs font-bold text-[var(--foreground)] uppercase">Industry Standard Tool
-                                Stack</h4>
-                            <p class="text-[11px]">BAs manipulate data, documentation, and processes using:
-                                <span class="font-semibold text-blue-500">Jira, Confluence, Figma, Miro, Draw.io, Excel, and Notion.</span>
-                            </p>
-                        </div>
-                    </section>
-
-                    <!-- Lesson 3 -->
-                    <section class="space-y-4">
-                        <h2
-                            class="heading-font text-xl font-bold text-[var(--foreground)] border-l-4 border-blue-500 pl-3">
-                            Lesson 3: Business Analyst in Startups vs Enterprises</h2>
-                        <p class="text-xs">BAs operate differently based on organizational scale. Startups prioritize
-                            delivery speed, whereas enterprises prioritize compliance and predictable scale metrics.</p>
-
-                        <!-- Structured Matrix Table Block -->
                         <div class="overflow-x-auto rounded-xl border border-slate-200 dark:border-white/10">
                             <table class="w-full text-left border-collapse text-xs">
                                 <thead>
                                     <tr
                                         class="bg-[var(--muted-bg)] text-[var(--foreground)] border-b border-slate-200 dark:border-white/10">
-                                        <th class="p-3 font-bold">Operational Area</th>
-                                        <th class="p-3 font-bold">Startup Framework</th>
-                                        <th class="p-3 font-bold">Enterprise Framework</th>
+                                        <th class="p-3 font-bold">Column Key</th>
+                                        <th class="p-3 font-bold">Business Description</th>
+                                        <th class="p-3 font-bold">Operational Use Case Context</th>
                                     </tr>
                                 </thead>
-                                <tbody class="divide-y divide-slate-200 dark:divide-white/5">
+                                <tbody
+                                    class="divide-y divide-slate-200 dark:divide-white/5 bg-[var(--card)] text-[var(--muted-text)]">
                                     <tr>
-                                        <td class="p-3 font-bold text-[var(--foreground)]">Team Dynamic</td>
-                                        <td class="p-3">Small, cross-functional squads</td>
-                                        <td class="p-3">Large departments, strict swimlanes</td>
+                                        <td class="p-3 font-bold text-[var(--foreground)]">Order ID</td>
+                                        <td class="p-3">Unique sequence label generated upon purchase.</td>
+                                        <td class="p-3">Tracks system logistics and operational transaction counts.</td>
                                     </tr>
                                     <tr>
-                                        <td class="p-3 font-bold text-[var(--foreground)]">Documentation</td>
-                                        <td class="p-3">Lightweight, agile specifications</td>
-                                        <td class="p-3">Extensive governance (BRD/FRD blueprints)</td>
+                                        <td class="p-3 font-bold text-[var(--foreground)]">Customer ID</td>
+                                        <td class="p-3">Unique tracking index assigned to individual customer entries.
+                                        </td>
+                                        <td class="p-3">Connects specific orders back to exact profile attributes.</td>
                                     </tr>
                                     <tr>
-                                        <td class="p-3 font-bold text-[var(--foreground)]">Velocity</td>
-                                        <td class="p-3">Rapid iterations and MVP loops</td>
-                                        <td class="p-3">Moderate pace, methodical validation cycles</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="p-3 font-bold text-[var(--foreground)]">Approvals</td>
-                                        <td class="p-3">Direct founder access routes</td>
-                                        <td class="p-3">Multi-tier sign-off and compliance blocks</td>
+                                        <td class="p-3 font-bold text-[var(--foreground)]">Product ID</td>
+                                        <td class="p-3">Unique alphanumeric SKU assigned to items.</td>
+                                        <td class="p-3">Links transaction rows to unit price, roast variant, and profit
+                                            values.</td>
                                     </tr>
                                 </tbody>
                             </table>
                         </div>
-                    </section>
 
-                    <!-- Lesson 4 -->
-                    <section class="space-y-4">
-                        <h2
-                            class="heading-font text-xl font-bold text-[var(--foreground)] border-l-4 border-blue-500 pl-3">
-                            Lesson 4: Software Development Life Cycle (SDLC)</h2>
-                        <p class="text-xs">The Software Development Life Cycle is a structured process used to plan,
-                            build, test, deploy, and maintain software efficiently.</p>
-
-                        <div class="relative pl-6 border-l border-blue-500/30 space-y-4 text-xs">
-                            <div class="relative">
-                                <div
-                                    class="absolute -left-[30px] top-0 w-4 h-4 bg-blue-600 rounded-full border-4 border-[var(--background)]">
-                                </div><strong>1. Requirement Gathering:</strong> Extract data constraints and define
-                                solution scopes.
-                            </div>
-                            <div class="relative">
-                                <div
-                                    class="absolute -left-[30px] top-0 w-4 h-4 bg-blue-600 rounded-full border-4 border-[var(--background)]">
-                                </div><strong>2. Scope Planning:</strong> Baseline milestones, estimate timelines, and
-                                assign resources.
-                            </div>
-                            <div class="relative">
-                                <div
-                                    class="absolute -left-[30px] top-0 w-4 h-4 bg-blue-600 rounded-full border-4 border-[var(--background)]">
-                                </div><strong>3. Architecture Design:</strong> Build user journeys, workflow schematics,
-                                and functional wireframes.
-                            </div>
-                            <div class="relative">
-                                <div
-                                    class="absolute -left-[30px] top-0 w-4 h-4 bg-blue-600 rounded-full border-4 border-[var(--background)]">
-                                </div><strong>4. Development Implementation:</strong> Engineers build the defined system
-                                architecture code blocks.
-                            </div>
-                            <div class="relative">
-                                <div
-                                    class="absolute -left-[30px] top-0 w-4 h-4 bg-blue-600 rounded-full border-4 border-[var(--background)]">
-                                </div><strong>5. QA Verification Testing:</strong> Test functionality against acceptance
-                                criteria matrices to catch bugs.
-                            </div>
-                            <div class="relative">
-                                <div
-                                    class="absolute -left-[30px] top-0 w-4 h-4 bg-blue-600 rounded-full border-4 border-[var(--background)]">
-                                </div><strong>6. Production Deployment:</strong> Release artifacts into staging and live
-                                production environments.
+                        <div
+                            class="bg-[var(--card)] border border-slate-200 dark:border-white/5 p-4 rounded-xl space-y-2">
+                            <span class="text-[10px] uppercase font-bold text-blue-500 tracking-wider font-mono block"><i class="fa-solid fa-robot mr-1"></i> Interactive Guidance Prompt</span>
+                            <div
+                                class="bg-[var(--muted-bg)] p-3 rounded text-xs select-all font-mono leading-relaxed text-[var(--foreground)]">
+                                Act as a Senior Business Analyst. Help me create a professional Data Dictionary for a
+                                coffee sales dataset. For every column provide: Business Description, Why the business
+                                stores it, and Which department uses it. Keep explanations beginner friendly.
                             </div>
                         </div>
                     </section>
 
-                    <!-- Lesson 5 -->
                     <section class="space-y-4">
                         <h2
                             class="heading-font text-xl font-bold text-[var(--foreground)] border-l-4 border-blue-500 pl-3">
-                            Lesson 5: Agile vs Waterfall Management</h2>
+                            Part 3 — Identify Primary Keys</h2>
+                        <p class="text-xs leading-relaxed">A Primary Key (PK) represents a tracking rule: it must
+                            contain unique entries, and cannot be empty (null). It ensures that individual data records
+                            remain unique and trackable.</p>
 
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
                             <div
-                                class="p-4 rounded-xl bg-[var(--card)] border border-slate-200 dark:border-white/5 space-y-2">
-                                <h3 class="font-bold text-xs uppercase text-blue-500 tracking-wider">Waterfall
-                                    Architecture</h3>
-                                <p class="text-[11px] leading-relaxed">Sequential phase framework where requirement
-                                    configurations are locked upfront. Excellent for highly predictable structures like
-                                    core banking or infrastructural engineering projects where errors are costly.</p>
+                                class="p-3 bg-[var(--card)] border border-slate-200 dark:border-white/5 rounded-xl text-center">
+                                <div class="text-xs font-bold text-blue-500 mb-1">Orders Table</div>
+                                <div class="text-sm font-mono text-[var(--foreground)] font-bold">Order ID</div>
                             </div>
                             <div
-                                class="p-4 rounded-xl bg-[var(--card)] border border-slate-200 dark:border-white/5 space-y-2">
-                                <h3 class="font-bold text-xs uppercase text-indigo-500 tracking-wider">Agile Iterative
-                                    Framework</h3>
-                                <p class="text-[11px] leading-relaxed">Incremental sprints driven by shifting backlogs,
-                                    rapid releases, and continuous feedback loops. The default operational methodology
-                                    for SaaS products, early-stage mobile apps, and hyper-growth platforms.</p>
+                                class="p-3 bg-[var(--card)] border border-slate-200 dark:border-white/5 rounded-xl text-center">
+                                <div class="text-xs font-bold text-blue-500 mb-1">Customers Table</div>
+                                <div class="text-sm font-mono text-[var(--foreground)] font-bold">Customer ID</div>
+                            </div>
+                            <div
+                                class="p-3 bg-[var(--card)] border border-slate-200 dark:border-white/5 rounded-xl text-center">
+                                <div class="text-xs font-bold text-blue-500 mb-1">Products Table</div>
+                                <div class="text-sm font-mono text-[var(--foreground)] font-bold">Product ID</div>
+                            </div>
+                        </div>
+
+                        <div
+                            class="bg-[var(--card)] border border-slate-200 dark:border-white/5 p-4 rounded-xl space-y-2">
+                            <span class="text-[10px] uppercase font-bold text-blue-500 tracking-wider font-mono block"><i class="fa-solid fa-robot mr-1"></i> Interactive Guidance Prompt</span>
+                            <div
+                                class="bg-[var(--muted-bg)] p-3 rounded text-xs select-all font-mono leading-relaxed text-[var(--foreground)]">
+                                Explain Primary Keys like I'm a first-year engineering student. Then help me identify
+                                the primary key in these three tables: Orders, Customers, Products. Explain why each
+                                column qualifies as a primary key.
                             </div>
                         </div>
                     </section>
 
-                    <!-- Final Practical Execution Block -->
+                    <section class="space-y-4">
+                        <h2
+                            class="heading-font text-xl font-bold text-[var(--foreground)] border-l-4 border-blue-500 pl-3">
+                            Part 4 — Identify Foreign Keys</h2>
+                        <p class="text-xs leading-relaxed">Foreign Keys (FK) establish paths that connect separate
+                            relational matrices. By placing another table's Primary Key inside your transaction tracker,
+                            you link those datasets together cleanly.</p>
+
+                        <div class="overflow-x-auto rounded-xl border border-slate-200 dark:border-white/10">
+                            <table class="w-full text-left border-collapse text-xs">
+                                <thead>
+                                    <tr
+                                        class="bg-[var(--muted-bg)] text-[var(--foreground)] border-b border-slate-200 dark:border-white/10">
+                                        <th class="p-3 font-bold">Foreign Key Field</th>
+                                        <th class="p-3 font-bold">References Parent Origin</th>
+                                        <th class="p-3 font-bold">System Connection Intent</th>
+                                    </tr>
+                                </thead>
+                                <tbody
+                                    class="divide-y divide-slate-200 dark:divide-white/5 bg-[var(--card)] text-[var(--muted-text)]">
+                                    <tr>
+                                        <td class="p-3 font-mono font-bold text-[var(--foreground)]">Customer ID</td>
+                                        <td class="p-3">Customers Table (PK)</td>
+                                        <td class="p-3">Tracks exactly which specific customer placed the transaction
+                                            row.</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-3 font-mono font-bold text-[var(--foreground)]">Product ID</td>
+                                        <td class="p-3">Products Table (PK)</td>
+                                        <td class="p-3">Tracks exactly what coffee item SKU variant was bought.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div
+                            class="bg-[var(--card)] border border-slate-200 dark:border-white/5 p-4 rounded-xl space-y-2">
+                            <span class="text-[10px] uppercase font-bold text-blue-500 tracking-wider font-mono block"><i class="fa-solid fa-robot mr-1"></i> Interactive Guidance Prompt</span>
+                            <div
+                                class="bg-[var(--muted-bg)] p-3 rounded text-xs select-all font-mono leading-relaxed text-[var(--foreground)]">
+                                Teach me Foreign Keys using my coffee sales dataset. Explain: What is a Foreign Key?
+                                Which columns are Foreign Keys? Why companies use them. Use simple examples.
+                            </div>
+                        </div>
+                    </section>
+
+                    <section class="space-y-4">
+                        <h2
+                            class="heading-font text-xl font-bold text-[var(--foreground)] border-l-4 border-blue-500 pl-3">
+                            Part 5 — Understand Table Relationships</h2>
+                        <p class="text-xs leading-relaxed">Analyze how records in your database interact across tables.
+                            For instance, can an individual customer trigger multiple orders over time? Can a popular
+                            coffee variant show up across multiple transactions?</p>
+
+                        <div
+                            class="p-4 bg-[var(--card)] border border-slate-200 dark:border-white/10 rounded-xl text-xs space-y-1">
+                            <div>&bull; <strong>Customer &rarr; Orders:</strong> One-to-Many Relationship (One profile
+                                triggers multiple transactions)</div>
+                            <div>&bull; <strong>Products &rarr; Orders:</strong> One-to-Many Relationship (One product
+                                appears across multiple customer purchases)</div>
+                        </div>
+
+                        <div
+                            class="bg-[var(--card)] border border-slate-200 dark:border-white/5 p-4 rounded-xl space-y-2">
+                            <span class="text-[10px] uppercase font-bold text-blue-500 tracking-wider font-mono block"><i class="fa-solid fa-robot mr-1"></i> Interactive Guidance Prompt</span>
+                            <div
+                                class="bg-[var(--muted-bg)] p-3 rounded text-xs select-all font-mono leading-relaxed text-[var(--foreground)]">
+                                Help me understand relationships in my coffee sales database. Tables: Orders, Customers,
+                                Products. Explain: One-to-One, One-to-Many, Many-to-Many. Then tell me which
+                                relationship exists between these tables.
+                            </div>
+                        </div>
+                    </section>
+
+                    <section class="space-y-4">
+                        <h2
+                            class="heading-font text-xl font-bold text-[var(--foreground)] border-l-4 border-blue-500 pl-3">
+                            Part 6 — Draw an ER Diagram</h2>
+                        <p class="text-xs leading-relaxed">Map your data architecture visually. You can sketch this map
+                            using toolsets like <strong>Draw.io, Lucidchart, Figma, Canva, or PowerPoint</strong>.</p>
+
+                        <div
+                            class="p-4 bg-[var(--card)] border border-slate-200 dark:border-white/10 rounded-xl space-y-3 font-mono text-[11px] text-[var(--foreground)] overflow-x-auto">
+                            <div>Customers
+                                {<br>&nbsp;&nbsp;Customer_ID (PK)<br>&nbsp;&nbsp;Customer_Name<br>&nbsp;&nbsp;Country<br>}
+                            </div>
+                            <div class="text-blue-500 pl-8">
+                                &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;│<br>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;│ 1 to Many<br>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&▼
+                            </div>
+                            <div>Orders
+                                {<br>&nbsp;&nbsp;Order_ID (PK)<br>&nbsp;&nbsp;Customer_ID (FK)<br>&nbsp;&nbsp;Product_ID (FK)<br>&nbsp;&nbsp;Quantity<br>}
+                            </div>
+                            <div class="text-blue-500 pl-8">
+                                &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;▲<br>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;│ 1 to Many<br>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;│
+                            </div>
+                            <div>Products
+                                {<br>&nbsp;&nbsp;Product_ID (PK)<br>&nbsp;&nbsp;Coffee_Type<br>&nbsp;&nbsp;Size<br>&nbsp;&nbsp;Price<br>}
+                            </div>
+                        </div>
+
+                        <div
+                            class="bg-[var(--card)] border border-slate-200 dark:border-white/5 p-4 rounded-xl space-y-2">
+                            <span class="text-[10px] uppercase font-bold text-blue-500 tracking-wider font-mono block"><i class="fa-solid fa-code mr-1"></i> Automated Diagram Syntax Prompt</span>
+                            <div
+                                class="bg-[var(--muted-bg)] p-3 rounded text-xs select-all font-mono leading-relaxed text-[var(--foreground)]">
+                                Create a simple ER Diagram for these tables: Orders, Customers, Products. Show Primary
+                                Keys, Foreign Keys and relationships. Use Mermaid syntax so I can visualize it.
+                            </div>
+                        </div>
+                    </section>
+
+                    <section class="space-y-4">
+                        <h2
+                            class="heading-font text-xl font-bold text-[var(--foreground)] border-l-4 border-blue-500 pl-3">
+                            Part 7 — Business Understanding Reflection</h2>
+                        <p class="text-xs leading-relaxed">A core requirement for analysts is explaining technical
+                            choices in plain business language. Prepare brief responses for the following questions:</p>
+
+                        <div class="space-y-3 bg-[var(--muted-bg)]/40 p-4 rounded-xl text-xs text-[var(--foreground)]">
+                            <div><strong>Q1:</strong> Why does BrewBean separate data into three tables instead of
+                                storing everything in one long Excel sheet?</div>
+                            <div><strong>Q2:</strong> What problems would happen if customer profiles were duplicated
+                                inside every single transaction row?</div>
+                            <div><strong>Q3:</strong> Why is the Product Catalog cataloged separately from order logs?
+                            </div>
+                            <div><strong>Q4:</strong> How does this relational database layout help the company scale
+                                its system efficiently?</div>
+                        </div>
+
+                        <div
+                            class="bg-[var(--card)] border border-slate-200 dark:border-white/5 p-4 rounded-xl space-y-2">
+                            <span class="text-[10px] uppercase font-bold text-blue-500 tracking-wider font-mono block"><i class="fa-solid fa-robot mr-1"></i> Mentorship Interaction Prompt</span>
+                            <div
+                                class="bg-[var(--muted-bg)] p-3 rounded text-xs select-all font-mono leading-relaxed text-[var(--foreground)]">
+                                Pretend you're a Business Analyst mentor. Ask me four questions about why databases are
+                                normalized into Orders, Customers and Products. After I answer, evaluate my answers and
+                                suggest improvements.
+                            </div>
+                        </div>
+                    </section>
+
+                    <section class="space-y-4">
+                        <h2
+                            class="heading-font text-xl font-bold text-[var(--foreground)] border-l-4 border-blue-500 pl-3">
+                            Part 8 — AI Evaluation Best Practices</h2>
+                        <p class="text-xs leading-relaxed">Instead of relying on AI to write your reports, use it to
+                            review your analysis. This helps you catch missing details and refine your business
+                            terminology effectively.</p>
+
+                        <div
+                            class="bg-[var(--card)] border border-slate-200 dark:border-white/5 p-4 rounded-xl space-y-2">
+                            <span class="text-[10px] uppercase font-bold text-blue-500 tracking-wider font-mono block"><i class="fa-solid fa-graduation-cap mr-1"></i> AI Critique Blueprint Prompt</span>
+                            <div
+                                class="bg-[var(--muted-bg)] p-3 rounded text-xs select-all font-mono leading-relaxed text-[var(--foreground)]">
+                                You are my Business Analyst mentor. Review my Data Dictionary. Tell me: Missing
+                                explanations, Incorrect assumptions, Business terms I should improve, and Professional
+                                suggestions. Do not rewrite it completely. Instead, guide me so I can improve it myself.
+                            </div>
+                        </div>
+                    </section>
+
+
+
+
                     <section
                         class="p-6 bg-[var(--card)] border border-slate-200 dark:border-white/10 rounded-2xl space-y-4">
                         <div
                             class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-200 dark:border-white/5 pb-3">
                             <h2 class="heading-font text-lg font-bold text-[var(--foreground)] flex items-center gap-2">
-                                <i class="fa-solid fa-square-poll-horizontal text-blue-500"></i> Module 1 Action
-                                Deliverable: Product Breakdown
+                                <i class="fa-solid fa-square-poll-horizontal text-blue-500"></i> Task 1 Evaluation
+                                Parameters
                             </h2>
                             <span class="px-2 py-0.5 rounded text-[10px] bg-blue-500/10 text-blue-500 font-mono font-bold">100 MARKS TOTAL</span>
                         </div>
-                        <p class="text-xs leading-relaxed text-[var(--muted-text)]">
-                            Pick an everyday application (e.g.,
-                            <strong>Uber, Zomato, Swiggy, Amazon, Zepto, Blinkit, Spotify, Netflix</strong>) and build a
-                            1-Page Business Analysis Report breaking down its structure.
-                        </p>
 
-                        <div class="space-y-3 bg-[var(--muted-bg)]/40 p-4 rounded-xl text-xs">
-                            <div><strong>Section 1: Product Overview</strong> — Name, industry mapping, and clear
-                                one-line target value declaration.</div>
-                            <div><strong>Section 2: Core Problem Definition</strong> — What pain point does this app
-                                eliminate, and why does that issue matter?</div>
-                            <div><strong>Section 3: Target Segmentation</strong> — Map primary cohorts (e.g., Consumers,
-                                Drivers, Merchants) and their usage motives.</div>
-                            <div><strong>Section 4: Four Core Revenue Generators</strong> — Detail 4 specific
-                                application features that directly drive cash flow.</div>
-                            <div><strong>Section 5: Gaps Identification</strong> — Uncover 3 functional design blind
-                                spots or performance inefficiencies.</div>
-                            <div><strong>Section 6: Actionable Optimization Rules</strong> — Propose 2 feature
-                                enhancements, detailing expected metrics impact.</div>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3 text-center">
+                            <div class="p-3 bg-[var(--muted-bg)]/60 rounded-xl">
+                                <div class="text-lg font-bold text-[var(--foreground)] heading-font">30M</div>
+                                <div class="text-[10px] text-[var(--muted-text)] uppercase tracking-wider mt-0.5">
+                                    Dictionary Scope</div>
+                            </div>
+                            <div class="p-3 bg-[var(--muted-bg)]/60 rounded-xl">
+                                <div class="text-lg font-bold text-[var(--foreground)] heading-font">20M</div>
+                                <div class="text-[10px] text-[var(--muted-text)] uppercase tracking-wider mt-0.5">Key
+                                    Identifiers</div>
+                            </div>
+                            <div class="p-3 bg-[var(--muted-bg)]/60 rounded-xl">
+                                <div class="text-lg font-bold text-[var(--foreground)] heading-font">20M</div>
+                                <div class="text-[10px] text-[var(--muted-text)] uppercase tracking-wider mt-0.5">ERD
+                                    Structural Maps</div>
+                            </div>
+                            <div class="p-3 bg-[var(--muted-bg)]/60 rounded-xl">
+                                <div class="text-lg font-bold text-[var(--foreground)] heading-font">30M</div>
+                                <div class="text-[10px] text-[var(--muted-text)] uppercase tracking-wider mt-0.5">
+                                    Business Logic</div>
+                            </div>
                         </div>
 
                         <div class="flex items-center justify-between flex-wrap gap-4 pt-2">
                             <div class="text-[11px] text-[var(--muted-text)]">
-                                <i class="fa-solid fa-triangle-exclamation text-amber-500 mr-1"></i> Pass criteria
-                                requires an evaluation score of <strong>70% or greater</strong>.
+                                <i class="fa-solid fa-triangle-exclamation text-amber-500 mr-1"></i> Prepare your
+                                <strong>PDF Dictionary</strong> and <strong>ERD link</strong> before loading assets.
                             </div>
                             <button @click="currentTab = 'dashboard'; activeDay = 1; openSubmissionModal(daysData[0])" class="px-5 py-2 bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs rounded-xl shadow-lg transition-all cursor-pointer">
-                                Ready? Open Submission Panel <i class="fa-solid fa-arrow-right ml-1"></i>
+                                Open Submission Panel <i class="fa-solid fa-arrow-right ml-1"></i>
                             </button>
                         </div>
                     </section>
+
+
+
+
+                    <!-- TASK 2 CURRICULUM CONTAINER -->
+                    <div id="task-2-learning-guide"
+                        class="p-6 bg-[var(--card)] rounded-2xl border border-slate-200 dark:border-white/10 space-y-8">
+                        <!-- Module Banner Header -->
+                        <div class="p-5 bg-gradient-to-r from-indigo-600/10 to-blue-600/10 rounded-xl border border-blue-500/20 space-y-2">
+                            <div class="flex items-center justify-between flex-wrap gap-2">
+                                <h3
+                                    class="heading-font text-base font-bold text-[var(--foreground)] uppercase tracking-wider flex items-center gap-2">
+                                    <i class="fa-solid fa-graduation-cap text-blue-500"></i> Module 2: Task 2 — Build the Master Sales Table
+                                </h3>
+                                <span class="px-2 py-0.5 text-[10px] font-mono font-bold bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 rounded">100 MARKS TOTAL</span>
+                            </div>
+                            <p class="text-xs text-[var(--muted-text)]">Estimated Time: 3–4 Hours | Difficulty: ⭐⭐ Beginner to Intermediate
+                            </p>
+                        </div>
+                    
+                        <!-- Objective Summary -->
+                        <div class="text-xs leading-relaxed text-[var(--muted-text)] space-y-2">
+                            <p><strong>Task Objective:</strong> In most enterprise ecosystems, data normalization stores operational
+                                information across separate specialized files rather than a single massive worksheet. As a Business Analyst,
+                                your job is to reassemble these rows via relational data joins to provide a unified reporting matrix for
+                                senior management.</p>
+                        </div>
+                    
+                        <!-- Part 1 -->
+                        <section class="space-y-4">
+                            <h2 class="heading-font text-lg font-bold text-[var(--foreground)] border-l-4 border-blue-500 pl-3">Part 1 —
+                                Understand Why We Need a Master Table</h2>
+                            <p class="text-xs leading-relaxed">
+                                Imagine the CEO asks you:
+                                <span class="italic text-[var(--foreground)] font-medium">"Who purchased the most Arabica coffee in the United States?"</span>
+                                If you check only the raw
+                                <code class="font-mono bg-[var(--muted-bg)] px-1 py-0.5 rounded text-blue-500">Orders</code> logs, you will
+                                find only transaction rows containing IDs. The customer profile traits belong to the
+                                <code class="font-mono bg-[var(--muted-bg)] px-1 py-0.5 rounded text-blue-500">Customers</code> sheet, and
+                                the flavor classifications live inside the
+                                <code class="font-mono bg-[var(--muted-bg)] px-1 py-0.5 rounded text-blue-500">Products</code> database. A
+                                combined Master Table breaks down these silos.
+                            </p>
+                            <div class="bg-[var(--muted-bg)]/40 border border-slate-200 dark:border-white/5 p-4 rounded-xl space-y-2">
+                                <span class="text-[10px] uppercase font-bold text-blue-500 tracking-wider font-mono block"><i class="fa-solid fa-robot mr-1"></i> Mentor Optimization Prompt</span>
+                                <div
+                                    class="bg-[var(--muted-bg)] p-3 rounded text-xs select-all font-mono leading-relaxed text-[var(--foreground)]">
+                                    Act as a Senior Business Analyst. Explain why companies store Orders, Customers, and Products in
+                                    separate tables instead of one spreadsheet. Then explain why Business Analysts often create a Master
+                                    Sales Table for reporting. Use simple examples.
+                                </div>
+                            </div>
+                        </section>
+                    
+                        <!-- Part 2 -->
+                        <section class="space-y-4">
+                            <h2 class="heading-font text-lg font-bold text-[var(--foreground)] border-l-4 border-blue-500 pl-3">Part 2 —
+                                Identify the Join Keys</h2>
+                            <p class="text-xs leading-relaxed">To combine distinct files cleanly without generating mapping errors, you must
+                                use shared relational key strings present across both files.</p>
+                            <div
+                                class="p-4 bg-[var(--muted-bg)]/30 rounded-xl text-xs space-y-2 border border-slate-200 dark:border-white/5">
+                                <div>&bull; <strong class="text-[var(--foreground)]">Orders &harr; Customers Join:</strong> Map via
+                                    <code class="font-mono text-blue-500 font-bold bg-[var(--muted-bg)] px-1 rounded">Customer ID</code>
+                                </div>
+                                <div>&bull; <strong class="text-[var(--foreground)]">Orders &harr; Products Join:</strong> Map via
+                                    <code class="font-mono text-blue-500 font-bold bg-[var(--muted-bg)] px-1 rounded">Product ID</code>
+                                </div>
+                            </div>
+                            <div class="bg-[var(--muted-bg)]/40 border border-slate-200 dark:border-white/5 p-4 rounded-xl space-y-2">
+                                <span class="text-[10px] uppercase font-bold text-blue-500 tracking-wider font-mono block"><i class="fa-solid fa-robot mr-1"></i> Validation Mapping Prompt</span>
+                                <div
+                                    class="bg-[var(--muted-bg)] p-3 rounded text-xs select-all font-mono leading-relaxed text-[var(--foreground)]">
+                                    I have three tables: Orders, Customers, and Products. Help me identify which columns should be used to
+                                    join these tables. Explain why these columns are suitable. Also explain what would happen if I joined
+                                    using the wrong column.
+                                </div>
+                            </div>
+                        </section>
+                    
+                        <!-- Part 3 -->
+                        <section class="space-y-4">
+                            <h2 class="heading-font text-lg font-bold text-[var(--foreground)] border-l-4 border-blue-500 pl-3">Part 3 —
+                                Perform the First Join (Customers Metadata)</h2>
+                            <p class="text-xs leading-relaxed">Your initial operational goal is expanding the baseline order history list.
+                                Pull corresponding information from the customer sheets
+                                (<span class="text-[var(--foreground)] font-medium">Customer Name, Country, Loyalty Card status</span>)
+                                directly onto your primary worksheet.</p>
+                            <div class="bg-[var(--muted-bg)]/40 border border-slate-200 dark:border-white/5 p-4 rounded-xl space-y-2">
+                                <span class="text-[10px] uppercase font-bold text-emerald-500 tracking-wider font-mono block"><i class="fa-solid fa-code mr-1"></i> Technical Syntax Tool Blueprint Prompt</span>
+                                <div
+                                    class="bg-[var(--muted-bg)] p-3 rounded text-xs select-all font-mono leading-relaxed text-[var(--foreground)]">
+                                    Teach me how to merge the Orders and Customers tables using Customer ID. Explain the process for: 1.
+                                    Microsoft Excel (XLOOKUP or VLOOKUP), 2. Google Sheets (XLOOKUP or VLOOKUP), 3. SQL (LEFT JOIN). Explain
+                                    each method step by step.
+                                </div>
+                            </div>
+                        </section>
+                    
+                        <!-- Part 4 -->
+                        <section class="space-y-4">
+                            <h2 class="heading-font text-lg font-bold text-[var(--foreground)] border-l-4 border-blue-500 pl-3">Part 4 —
+                                Join Product Catalogs</h2>
+                            <p class="text-xs leading-relaxed">Next, use your tracking codes to pull in details from the Product file.
+                                Append the descriptive and transactional columns
+                                (<span class="text-[var(--foreground)] font-medium">Coffee Type, Roast Type, Size, Unit Price, Unit Profit</span>)
+                                to complete your unified data row layout.</p>
+                            <div class="bg-[var(--muted-bg)]/40 border border-slate-200 dark:border-white/5 p-4 rounded-xl space-y-2">
+                                <span class="text-[10px] uppercase font-bold text-emerald-500 tracking-wider font-mono block"><i class="fa-solid fa-code mr-1"></i> Product Merge Query Blueprint</span>
+                                <div
+                                    class="bg-[var(--muted-bg)] p-3 rounded text-xs select-all font-mono leading-relaxed text-[var(--foreground)]">
+                                    Explain how to join Orders with Products using Product ID. Show me the steps in Excel, Google Sheets,
+                                    and SQL. Also explain why Product ID is the correct joining column.
+                                </div>
+                            </div>
+                        </section>
+                    
+                        <!-- Part 5 -->
+                        <section class="space-y-4">
+                            <h2 class="heading-font text-lg font-bold text-[var(--foreground)] border-l-4 border-blue-500 pl-3">Part 5 —
+                                Schema Definition Checklist</h2>
+                            <p class="text-xs leading-relaxed">Verify that your compiled spreadsheet report follows the exact column layout
+                                requested by management:</p>
+                            <div class="p-4 bg-[var(--card)] rounded-xl border border-slate-200 dark:border-white/10 overflow-x-auto">
+                                <div class="flex gap-2 text-[10px] font-mono text-blue-500 font-bold whitespace-nowrap">
+                                    <span class="bg-[var(--muted-bg)] p-1.5 rounded border border-slate-200 dark:border-white/5">Order ID</span>
+                                    <span class="bg-[var(--muted-bg)] p-1.5 rounded border border-slate-200 dark:border-white/5">Order Date</span>
+                                    <span class="bg-[var(--muted-bg)] p-1.5 rounded border border-slate-200 dark:border-white/5">Customer ID</span>
+                                    <span class="bg-[var(--muted-bg)] p-1.5 rounded border border-slate-200 dark:border-white/5">Customer Name</span>
+                                    <span class="bg-[var(--muted-bg)] p-1.5 rounded border border-slate-200 dark:border-white/5">Country</span>
+                                    <span class="bg-[var(--muted-bg)] p-1.5 rounded border border-slate-200 dark:border-white/5">Loyalty Card</span>
+                                    <span class="bg-[var(--muted-bg)] p-1.5 rounded border border-slate-200 dark:border-white/5">Product ID</span>
+                                    <span class="bg-[var(--muted-bg)] p-1.5 rounded border border-slate-200 dark:border-white/5">Coffee Type</span>
+                                    <span class="bg-[var(--muted-bg)] p-1.5 rounded border border-slate-200 dark:border-white/5">Roast Type</span>
+                                    <span class="bg-[var(--muted-bg)] p-1.5 rounded border border-slate-200 dark:border-white/5">Size</span>
+                                    <span class="bg-[var(--muted-bg)] p-1.5 rounded border border-slate-200 dark:border-white/5">Quantity</span>
+                                    <span class="bg-[var(--muted-bg)] p-1.5 rounded border border-slate-200 dark:border-white/5">Unit Price</span>
+                                    <span class="bg-[var(--muted-bg)] p-1.5 rounded border border-slate-200 dark:border-white/5">Sales</span>
+                                    <span class="bg-[var(--muted-bg)] p-1.5 rounded border border-slate-200 dark:border-white/5">Profit</span>
+                                </div>
+                            </div>
+                        </section>
+                    
+                        <!-- Part 6 -->
+                        <section class="space-y-4">
+                            <h2 class="heading-font text-lg font-bold text-[var(--foreground)] border-l-4 border-blue-500 pl-3">Part 6 —
+                                Validate Your Data</h2>
+                            <p class="text-xs leading-relaxed">Experienced Business Analysts never assume their formulas worked
+                                perfectly—they check the output. Before sharing your report, verify that your data aligns properly across
+                                all columns.</p>
+                    
+                            <div class="overflow-x-auto rounded-xl border border-slate-200 dark:border-white/10">
+                                <table class="w-full text-left border-collapse text-xs">
+                                    <thead>
+                                        <tr
+                                            class="bg-[var(--muted-bg)] text-[var(--foreground)] border-b border-slate-200 dark:border-white/10">
+                                            <th class="p-3 font-bold">Validation Parameters</th>
+                                            <th class="p-3 font-bold">Target Status Check</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="divide-y divide-slate-200 dark:divide-white/5 bg-[var(--card)] text-[var(--muted-text)]">
+                                        <tr>
+                                            <td class="p-3">Customer Name fields contain no blank rows or unresolved values.</td>
+                                            <td class="p-3 font-bold text-emerald-500"><i class="fa-solid fa-circle-check mr-1"></i>
+                                                Verified</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="p-3">Coffee Type descriptions match their item categories correctly.</td>
+                                            <td class="p-3 font-bold text-emerald-500"><i class="fa-solid fa-circle-check mr-1"></i>
+                                                Verified</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="p-3">Total row count matches your original transaction history worksheet exactly.
+                                            </td>
+                                            <td class="p-3 font-bold text-emerald-500"><i class="fa-solid fa-circle-check mr-1"></i>
+                                                Verified</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                    
+                            <div class="bg-[var(--muted-bg)]/40 border border-slate-200 dark:border-white/5 p-4 rounded-xl space-y-2">
+                                <span class="text-[10px] uppercase font-bold text-amber-500 tracking-wider font-mono block"><i class="fa-solid fa-shield-halved mr-1"></i> QA Audit Checklist Generator</span>
+                                <div
+                                    class="bg-[var(--muted-bg)] p-3 rounded text-xs select-all font-mono leading-relaxed text-[var(--foreground)]">
+                                    Act as a QA Analyst. I have merged my Orders, Customers, and Products tables. Give me a checklist to
+                                    verify that my Master Sales Table is correct. Include common mistakes beginners make while joining
+                                    tables.
+                                </div>
+                            </div>
+                        </section>
+                    
+                        <!-- Part 7 -->
+                        <section class="space-y-4">
+                            <h2 class="heading-font text-lg font-bold text-[var(--foreground)] border-l-4 border-blue-500 pl-3">Part 7 —
+                                Extracting Business Insights</h2>
+                            <p class="text-xs leading-relaxed">Now that your combined dataset is complete, practice reviewing it from a
+                                leadership perspective. Consider how management can use this complete view to evaluate company performance.
+                            </p>
+                            <div class="bg-[var(--muted-bg)]/40 border border-slate-200 dark:border-white/5 p-4 rounded-xl space-y-2">
+                                <span class="text-[10px] uppercase font-bold text-blue-500 tracking-wider font-mono block"><i class="fa-solid fa-lightbulb mr-1"></i> Executive Strategy Simulation Prompt</span>
+                                <div
+                                    class="bg-[var(--muted-bg)] p-3 rounded text-xs select-all font-mono leading-relaxed text-[var(--foreground)]">
+                                    Pretend you're the CEO of BrewBean Coffee. What questions would you ask after seeing a Master Sales
+                                    Table? List at least 10 business questions that can be answered using this combined dataset.
+                                </div>
+                            </div>
+                        </section>
+                    
+                        <!-- Part 8 -->
+                        <section class="space-y-4">
+                            <h2 class="heading-font text-lg font-bold text-[var(--foreground)] border-l-4 border-blue-500 pl-3">Part 8 — AI
+                                Reflection and Final Formatting Review</h2>
+                            <p class="text-xs leading-relaxed">Before submitting your work, ask your AI mentor to double-check your
+                                approach. Use this step to ensure your documentation covers data quality checks, key column relationships,
+                                and clear workflow logic.</p>
+                            <div class="bg-[var(--muted-bg)]/40 border border-slate-200 dark:border-white/5 p-4 rounded-xl space-y-2">
+                                <span class="text-[10px] uppercase font-bold text-indigo-500 tracking-wider font-mono block"><i class="fa-solid fa-code-branch mr-1"></i> Structural Review Query Block</span>
+                                <div
+                                    class="bg-[var(--muted-bg)] p-3 rounded text-xs select-all font-mono leading-relaxed text-[var(--foreground)]">
+                                    You are my Business Analyst mentor. Review my Master Sales Table. Check for: Missing columns, Incorrect
+                                    joins, Duplicate records, Data quality issues, and Suggestions to improve the dataset. Do not create the
+                                    table for me. Instead, explain what I should verify and improve.
+                                </div>
+                            </div>
+                        </section>
+                    
+                        <!-- Grading Metrics Rubric -->
+                        <section class="p-5 bg-[var(--muted-bg)]/20 rounded-xl space-y-3">
+                            <h4 class="text-xs font-bold uppercase tracking-wider text-[var(--foreground)]">Task 2 Rubric Breakdown</h4>
+                            <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 text-[11px]">
+                                <div class="p-2 bg-[var(--card)] rounded border border-slate-200 dark:border-white/5">&bull; Master Sheet
+                                    Construction: <strong>40 Marks</strong></div>
+                                <div class="p-2 bg-[var(--card)] rounded border border-slate-200 dark:border-white/5">&bull; Data Join
+                                    Documentation: <strong>30 Marks</strong></div>
+                                <div class="p-2 bg-[var(--card)] rounded border border-slate-200 dark:border-white/5">&bull; AI Review &
+                                    Reflection Notes: <strong>30 Marks</strong></div>
+                            </div>
+                            <div class="flex justify-end pt-2">
+                                <button @click="currentTab = 'dashboard'; activeDay = 2; openSubmissionModal(daysData[1])" class="px-4 py-1.5 bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs rounded-lg cursor-pointer">
+                                    Open Task 2 Submission Link <i class="fa-solid fa-arrow-up-right-from-square ml-1 text-[10px]"></i>
+                                </button>
+                            </div>
+
+
+                            
+                        </section>
+
+                        <!-- TASK 3 CURRICULUM CONTAINER -->
+                        <div id="task-3-learning-guide"
+                            class="p-6 bg-[var(--card)] rounded-2xl border border-slate-200 dark:border-white/10 space-y-8">
+                            <!-- Module Banner Header -->
+                            <div class="p-5 bg-gradient-to-r from-blue-600/10 to-emerald-600/10 rounded-xl border border-blue-500/20 space-y-2">
+                                <div class="flex items-center justify-between flex-wrap gap-2">
+                                    <h3
+                                        class="heading-font text-base font-bold text-[var(--foreground)] uppercase tracking-wider flex items-center gap-2">
+                                        <i class="fa-solid fa-chart-line text-emerald-500"></i> Module 3: Task 3 — Sales Performance Analysis
+                                    </h3>
+                                    <span class="px-2 py-0.5 text-[10px] font-mono font-bold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 rounded">100 MARKS TOTAL</span>
+                                </div>
+                                <p class="text-xs text-[var(--muted-text)]">Estimated Time: 3–4 Hours | Difficulty: ⭐⭐ Beginner</p>
+                            </div>
+                        
+                            <!-- Objective Summary -->
+                            <div class="text-xs leading-relaxed text-[var(--muted-text)] space-y-2">
+                                <p><strong>Task Objective:</strong> Data aggregation transforms individual master records into high-level
+                                    strategic intelligence. In this milestone, you will translate the unified records of BrewBean Coffee into
+                                    primary financial indicators (KPIs), model timeline trends, and establish an operational baseline to present
+                                    directly to executive leadership.</p>
+                            </div>
+                        
+                            <!-- Part 1 -->
+                            <section class="space-y-4">
+                                <h2 class="heading-font text-lg font-bold text-[var(--foreground)] border-l-4 border-emerald-500 pl-3">Part 1 —
+                                    Understand Business KPIs</h2>
+                                <p class="text-xs leading-relaxed">Before executing formulas, a Business Analyst must know exactly what each
+                                    indicator tracks and how executive decisions depend on those values.</p>
+                        
+                                <div class="overflow-x-auto rounded-xl border border-slate-200 dark:border-white/10">
+                                    <table class="w-full text-left border-collapse text-xs">
+                                        <thead>
+                                            <tr
+                                                class="bg-[var(--muted-bg)] text-[var(--foreground)] border-b border-slate-200 dark:border-white/10">
+                                                <th class="p-3 font-bold">Key Performance Indicator (KPI)</th>
+                                                <th class="p-3 font-bold">Business Meaning & Operational Value</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="divide-y divide-slate-200 dark:divide-white/5 bg-[var(--card)] text-[var(--muted-text)]">
+                                            <tr>
+                                                <td class="p-3 font-bold text-[var(--foreground)]">Total Revenue</td>
+                                                <td class="p-3">Gross financial yield generated across all sales rows. Tracks core business
+                                                    scale and growth.</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="p-3 font-bold text-[var(--foreground)]">Average Order Value (AOV)</td>
+                                                <td class="p-3">The mean revenue scale per discrete order ID. Monitors customer transaction
+                                                    thresholds.</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="p-3 font-bold text-[var(--foreground)]">Monthly Sales Trend</td>
+                                                <td class="p-3">The timeline vector tracking performance over time. Uncovers demand patterns and
+                                                    seasonality.</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                        
+                                <div class="bg-[var(--muted-bg)]/40 border border-slate-200 dark:border-white/5 p-4 rounded-xl space-y-2">
+                                    <span class="text-[10px] uppercase font-bold text-emerald-500 tracking-wider font-mono block"><i class="fa-solid fa-robot mr-1"></i> KPI Framework Mentor Prompt</span>
+                                    <div
+                                        class="bg-[var(--muted-bg)] p-3 rounded text-xs select-all font-mono leading-relaxed text-[var(--foreground)]">
+                                        Act as a Senior Business Analyst. Explain these KPIs in simple language: Total Revenue, Total Orders,
+                                        Total Quantity Sold, Average Order Value, Monthly Sales Trend, and Highest Sales Month. For each KPI
+                                        explain: 1. What it measures, 2. Why management tracks it, and 3. A real business example.
+                                    </div>
+                                </div>
+                            </section>
+                        
+                            <!-- Part 2, 3 & 4: Calculation Framework -->
+                            <section class="space-y-4">
+                                <h2 class="heading-font text-lg font-bold text-[var(--foreground)] border-l-4 border-emerald-500 pl-3">Parts 2,
+                                    3 & 4 — Core Financial & Volume Aggregations</h2>
+                                <p class="text-xs leading-relaxed">Isolate and run the calculations for your primary business baselines. Your
+                                    formulas should point directly to the columns inside your new Master Sheet.</p>
+                        
+                                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
+                                    <div class="p-4 bg-[var(--muted-bg)]/30 border border-slate-200 dark:border-white/5 rounded-xl space-y-1">
+                                        <span class="font-bold text-[var(--foreground)] block">Total Revenue</span>
+                                        <code class="text-emerald-500 font-mono block bg-[var(--muted-bg)] p-1 rounded text-center">=SUM(Sales)</code>
+                                    </div>
+                                    <div class="p-4 bg-[var(--muted-bg)]/30 border border-slate-200 dark:border-white/5 rounded-xl space-y-1">
+                                        <span class="font-bold text-[var(--foreground)] block">Total Orders</span>
+                                        <code class="text-emerald-500 font-mono block bg-[var(--muted-bg)] p-1 rounded text-center">=COUNTA(Order_ID)</code>
+                                    </div>
+                                    <div class="p-4 bg-[var(--muted-bg)]/30 border border-slate-200 dark:border-white/5 rounded-xl space-y-1">
+                                        <span class="font-bold text-[var(--foreground)] block">Total Quantity Sold</span>
+                                        <code class="text-emerald-500 font-mono block bg-[var(--muted-bg)] p-1 rounded text-center">=SUM(Quantity)</code>
+                                    </div>
+                                </div>
+                        
+                                <div class="bg-[var(--muted-bg)]/40 border border-slate-200 dark:border-white/5 p-4 rounded-xl space-y-2">
+                                    <span class="text-[10px] uppercase font-bold text-emerald-500 tracking-wider font-mono block"><i class="fa-solid fa-calculator mr-1"></i> Formula Execution Prompt</span>
+                                    <div
+                                        class="bg-[var(--muted-bg)] p-3 rounded text-xs select-all font-mono leading-relaxed text-[var(--foreground)]">
+                                        Teach me how to count the total number of orders and items sold in Excel and Google Sheets. Explain the
+                                        functional difference between COUNT and COUNTA, which one applies to alphanumeric Order IDs, and how to
+                                        avoid duplicate-counting pitfalls.
+                                    </div>
+                                </div>
+                            </section>
+                        
+                            <!-- Part 5 -->
+                            <section class="space-y-4">
+                                <h2 class="heading-font text-lg font-bold text-[var(--foreground)] border-l-4 border-emerald-500 pl-3">Part 5 —
+                                    Calculate Average Order Value (AOV)</h2>
+                                <p class="text-xs leading-relaxed">
+                                    Average Order Value measures purchasing concentration behavior. Compute this by dividing gross yield by your
+                                    unique transaction record counts:
+                                </p>
+                                <div
+                                    class="p-3 bg-[var(--muted-bg)]/50 border border-slate-200 dark:border-white/5 rounded-xl text-center text-xs font-mono text-[var(--foreground)]">
+                                    AOV = Total Revenue &divide; Total Orders
+                                </div>
+                                <div class="bg-[var(--muted-bg)]/40 border border-slate-200 dark:border-white/5 p-4 rounded-xl space-y-2">
+                                    <span class="text-[10px] uppercase font-bold text-emerald-500 tracking-wider font-mono block"><i class="fa-solid fa-lightbulb mr-1"></i> AOV Strategy Prompt</span>
+                                    <div
+                                        class="bg-[var(--muted-bg)] p-3 rounded text-xs select-all font-mono leading-relaxed text-[var(--foreground)]">
+                                        Explain Average Order Value like I'm a beginner Business Analyst. Why is AOV important for a coffee
+                                        brand like BrewBean, what factors influence its growth, and what are three practical strategies
+                                        management can use to increase it?
+                                    </div>
+                                </div>
+                            </section>
+                        
+                            <!-- Part 6 & 7 -->
+                            <section class="space-y-4">
+                                <h2 class="heading-font text-lg font-bold text-[var(--foreground)] border-l-4 border-emerald-500 pl-3">Part 6 &
+                                    7 — Model Monthly Sales Trends & Peaks</h2>
+                                <p class="text-xs leading-relaxed">Map timeline trajectories by extracting time elements from dates, aggregating
+                                    performance values via Pivot Tables, and visualizing output trends using line charts.</p>
+                        
+                                <div class="bg-[var(--muted-bg)]/40 border border-slate-200 dark:border-white/5 p-4 rounded-xl space-y-2">
+                                    <span class="text-[10px] uppercase font-bold text-emerald-500 tracking-wider font-mono block"><i class="fa-solid fa-chart-area mr-1"></i> Trend Analysis Pipeline Prompt</span>
+                                    <div
+                                        class="bg-[var(--muted-bg)] p-3 rounded text-xs select-all font-mono leading-relaxed text-[var(--foreground)]">
+                                        Teach me how to build a Monthly Sales Trend tracking layout in Excel and Google Sheets from scratch.
+                                        Show me how to extract structural months from dates, compile a Pivot Table summary, and generate a clean
+                                        trend line chart. List common operational reasons why one month significantly outperforms others.
+                                    </div>
+                                </div>
+                            </section>
+                        
+                            <!-- Part 8, 9 & 10 -->
+                            <section class="space-y-4">
+                                <h2 class="heading-font text-lg font-bold text-[var(--foreground)] border-l-4 border-emerald-500 pl-3">Part 8, 9
+                                    & 10 — Interpret Findings & Build the Executive Report</h2>
+                                <p class="text-xs leading-relaxed">Numbers require human context. Package your analytical insights into a
+                                    professional presentation framework, including an Executive Summary, financial overview matrix, trend
+                                    visualizations, and strategic business recommendations.</p>
+                        
+                                <div class="bg-[var(--muted-bg)]/40 border border-slate-200 dark:border-white/5 p-4 rounded-xl space-y-2">
+                                    <span class="text-[10px] uppercase font-bold text-emerald-500 tracking-wider font-mono block"><i class="fa-solid fa-file-signature mr-1"></i> Executive Review Reviewer Prompt</span>
+                                    <div
+                                        class="bg-[var(--muted-bg)] p-3 rounded text-xs select-all font-mono leading-relaxed text-[var(--foreground)]">
+                                        You are my Business Analyst mentor. Review my completed Sales Performance metrics and report framework.
+                                        Challenge my performance assumptions, ask clarifying questions about data anomalies, suggest seasonal
+                                        variables I might have missed, and tell me how to refine my strategic recommendations for executive
+                                        review. Do not write the report for me.
+                                    </div>
+                                </div>
+                            </section>
+                        
+                            <!-- Grading Metrics Rubric -->
+                            <section class="p-5 bg-[var(--muted-bg)]/20 rounded-xl space-y-3">
+                                <h4 class="text-xs font-bold uppercase tracking-wider text-[var(--foreground)]">Task 3 Rubric Breakdown</h4>
+                                <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 text-[11px]">
+                                    <div class="p-2 bg-[var(--card)] rounded border border-slate-200 dark:border-white/5">&bull; KPI &
+                                        Calculations Accuracy: <strong>40 Marks</strong></div>
+                                    <div class="p-2 bg-[var(--card)] rounded border border-slate-200 dark:border-white/5">&bull; Data Charting &
+                                        Trends: <strong>30 Marks</strong></div>
+                                    <div class="p-2 bg-[var(--card)] rounded border border-slate-200 dark:border-white/5">&bull; Executive
+                                        Report Format: <strong>30 Marks</strong></div>
+                                </div>
+                                <div class="flex justify-end pt-2">
+                                    <button @click="currentTab = 'dashboard'; activeDay = 3; openSubmissionModal(daysData[2])" class="px-4 py-1.5 bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs rounded-lg cursor-pointer">
+                                        Open Task 3 Submission Link <i class="fa-solid fa-arrow-up-right-from-square ml-1 text-[10px]"></i>
+                                    </button>
+                                </div>
+                            </section>
+                        </div>
+
+<!-- TASK 4 CURRICULUM CONTAINER -->
+<div id="task-4-learning-guide"
+    class="p-6 bg-[var(--card)] rounded-2xl border border-slate-200 dark:border-white/10 space-y-8">
+    <!-- Module Banner Header -->
+    <div class="p-5 bg-gradient-to-r from-blue-600/10 to-indigo-600/10 rounded-xl border border-blue-500/20 space-y-2">
+        <div class="flex items-center justify-between flex-wrap gap-2">
+            <h3
+                class="heading-font text-base font-bold text-[var(--foreground)] uppercase tracking-wider flex items-center gap-2">
+                <i class="fa-solid fa-users text-blue-400"></i> Module 4: Task 4 — Customer Analysis
+            </h3>
+            <span class="px-2 py-0.5 text-[10px] font-mono font-bold bg-blue-500/10 text-blue-400 border border-blue-500/20 rounded">100 MARKS TOTAL</span>
+        </div>
+        <p class="text-xs text-[var(--muted-text)]">Estimated Time: 3–4 Hours | Difficulty: ⭐⭐ Beginner to Intermediate
+        </p>
+    </div>
+
+    <!-- Objective Summary -->
+    <div class="text-xs leading-relaxed text-[var(--muted-text)] space-y-2">
+        <p><strong>Task Objective:</strong> Sustainable business scaling relies heavily on customer health and cohort
+            optimization. In this phase, you will dissect the BrewBean customer base, isolate high-value VIP segments,
+            map purchase frequency behavior, evaluate regional footprint performance, and measure the operational lift
+            provided by the active loyalty program.</p>
+    </div>
+
+    <!-- Part 1 -->
+    <section class="space-y-4">
+        <h2 class="heading-font text-lg font-bold text-[var(--foreground)] border-l-4 border-blue-500 pl-3">Part 1 —
+            Understand Customer Metrics</h2>
+        <p class="text-xs leading-relaxed">Before manipulating cohort data fields, clarify the business context of
+            behavioral metrics to help target next quarter's direct marketing spend.</p>
+
+        <div class="overflow-x-auto rounded-xl border border-slate-200 dark:border-white/10">
+            <table class="w-full text-left border-collapse text-xs">
+                <thead>
+                    <tr
+                        class="bg-[var(--muted-bg)] text-[var(--foreground)] border-b border-slate-200 dark:border-white/10">
+                        <th class="p-3 font-bold">Metric Frame</th>
+                        <th class="p-3 font-bold">Business Meaning</th>
+                        <th class="p-3 font-bold">Why Management Tracks It</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-slate-200 dark:divide-white/5 bg-[var(--card)] text-[var(--muted-text)]">
+                    <tr>
+                        <td class="p-3 font-bold text-[var(--foreground)]">Repeat Customers</td>
+                        <td class="p-3">Accounts associated with multiple order IDs.</td>
+                        <td class="p-3">Measures brand stickiness and customer retention health.</td>
+                    </tr>
+                    <tr>
+                        <td class="p-3 font-bold text-[var(--foreground)]">Customer Lifetime Value (CLV)</td>
+                        <td class="p-3">The total projected net profit margin per buyer.</td>
+                        <td class="p-3">Sets caps on logical Customer Acquisition Cost (CAC) spending limits.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="bg-[var(--muted-bg)]/40 border border-slate-200 dark:border-white/5 p-4 rounded-xl space-y-2">
+            <span class="text-[10px] uppercase font-bold text-blue-500 tracking-wider font-mono block"><i class="fa-solid fa-robot mr-1"></i> Core Behavioral Prompt</span>
+            <div
+                class="bg-[var(--muted-bg)] p-3 rounded text-xs select-all font-mono leading-relaxed text-[var(--foreground)]">
+                Act as a Senior Business Analyst. Explain these customer metrics: Top Customers, Repeat Customers,
+                Customer Retention, Loyalty Program, and Customer Lifetime Value (CLV). Explain why companies measure
+                each one. Use simple business examples.
+            </div>
+        </div>
+    </section>
+
+    <!-- Part 2 & 3: Sorting VIPs and Repeats -->
+    <section class="space-y-4">
+        <h2 class="heading-font text-lg font-bold text-[var(--foreground)] border-l-4 border-blue-500 pl-3">Part 2 & 3 —
+            Isolate VIP & Repeat Customer Cohorts</h2>
+        <p class="text-xs leading-relaxed">Group transaction records by unique buyer names to calculate absolute
+            frequency frequencies and sales volumes, sorting the results to map Pareto concentration limits.</p>
+
+        <div
+            class="p-4 bg-[var(--muted-bg)]/30 rounded-xl border border-slate-200 dark:border-white/5 space-y-2 text-xs">
+            <div class="font-bold text-[var(--foreground)]">Ranked Customer Structural Model:</div>
+            <div class="font-mono text-blue-400 bg-[var(--muted-bg)] p-2 rounded flex justify-between gap-4 flex-wrap">
+                <span>[Rank]</span> <span>[Customer Name]</span> <span>[Country]</span> <span>[Total Orders]</span>
+                <span>[Total Sales]</span>
+            </div>
+        </div>
+
+        <div class="bg-[var(--muted-bg)]/40 border border-slate-200 dark:border-white/5 p-4 rounded-xl space-y-2">
+            <span class="text-[10px] uppercase font-bold text-blue-500 tracking-wider font-mono block"><i class="fa-solid fa-calculator mr-1"></i> Segmentation Syntax Prompt</span>
+            <div
+                class="bg-[var(--muted-bg)] p-3 rounded text-xs select-all font-mono leading-relaxed text-[var(--foreground)]">
+                Teach me how to identify the Top 10 customers by total sales and repeat purchase behaviors in Excel.
+                Show me step-by-step implementations using Pivot Tables, SORT arrays, and conditional SUMIFS/COUNTIFS
+                statements.
+            </div>
+        </div>
+    </section>
+
+    <!-- Part 4 & 6: Loyalty Program Lift Analysis -->
+    <section class="space-y-4">
+        <h2 class="heading-font text-lg font-bold text-[var(--foreground)] border-l-4 border-blue-500 pl-3">Part 4 & 6 —
+            Measure Loyalty Program Lift Metrics</h2>
+        <p class="text-xs leading-relaxed">Compare reward members side-by-side against non-enrolled accounts to assess
+            whether loyalty perks generate higher baseline purchase values or long-term engagement.</p>
+
+        <div class="overflow-x-auto rounded-xl border border-slate-200 dark:border-white/10">
+            <table class="w-full text-left border-collapse text-xs">
+                <thead>
+                    <tr
+                        class="bg-[var(--muted-bg)] text-[var(--foreground)] border-b border-slate-200 dark:border-white/10">
+                        <th class="p-3 font-bold">Comparative KPI Dimension</th>
+                        <th class="p-3 font-bold">Loyalty Members</th>
+                        <th class="p-3 font-bold">Non-Loyalty Members</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-slate-200 dark:divide-white/5 bg-[var(--card)] text-[var(--muted-text)]">
+                    <tr>
+                        <td class="p-3 font-bold text-[var(--foreground)]">Average Order Value (AOV)</td>
+                        <td class="p-3 text-blue-400 font-mono font-bold">Pending Calc...</td>
+                        <td class="p-3 text-slate-500 font-mono">Pending Calc...</td>
+                    </tr>
+                    <tr>
+                        <td class="p-3 font-bold text-[var(--foreground)]">Orders Per Customer Base</td>
+                        <td class="p-3 text-blue-400 font-mono font-bold">Pending Calc...</td>
+                        <td class="p-3 text-slate-500 font-mono">Pending Calc...</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="bg-[var(--muted-bg)]/40 border border-slate-200 dark:border-white/5 p-4 rounded-xl space-y-2">
+            <span class="text-[10px] uppercase font-bold text-blue-500 tracking-wider font-mono block"><i class="fa-solid fa-calculator mr-1"></i> CRM Performance Analysis Prompt</span>
+            <div
+                class="bg-[var(--muted-bg)] p-3 rounded text-xs select-all font-mono leading-relaxed text-[var(--foreground)]">
+                Act as a CRM Business Analyst and Consultant. Explain how to mathematically compare Loyalty vs
+                Non-Loyalty customer segments. What KPIs should I run beyond standard AOV, and how do I interpret repeat
+                purchase rates to prove a loyalty program's financial success?
+            </div>
+        </div>
+    </section>
+
+    <!-- Part 5: Country Level Breakdown -->
+    <section class="space-y-4">
+        <h2 class="heading-font text-lg font-bold text-[var(--foreground)] border-l-4 border-blue-500 pl-3">Part 5 —
+            Regional Market Performance Analysis</h2>
+        <p class="text-xs leading-relaxed">Aggregate sales metrics geographically to spot high-yield localized markets
+            and underperforming territories that need adjusted distribution or marketing focus.</p>
+
+        <div class="bg-[var(--muted-bg)]/40 border border-slate-200 dark:border-white/5 p-4 rounded-xl space-y-2">
+            <span class="text-[10px] uppercase font-bold text-blue-500 tracking-wider font-mono block"><i class="fa-solid fa-earth-americas mr-1"></i> Regional Market Prompt</span>
+            <div
+                class="bg-[var(--muted-bg)] p-3 rounded text-xs select-all font-mono leading-relaxed text-[var(--foreground)]">
+                Explain how to analyze enterprise sales distributions by country. What structural management decisions
+                can leadership make using localized regional data summaries, and what chart profiles best display this
+                information?
+            </div>
+        </div>
+    </section>
+
+    <!-- Part 7, 8 & 9: Report Generation -->
+    <section class="space-y-4">
+        <h2 class="heading-font text-lg font-bold text-[var(--foreground)] border-l-4 border-blue-500 pl-3">Part 7, 8 &
+            9 — Develop Recommendations & Compile Report</h2>
+        <p class="text-xs leading-relaxed">Combine your user metrics into a professional Customer Insights Report. Focus
+            heavily on providing actionable retention strategies, such as target subscription structures or personalized
+            member tiers, backed by your data.</p>
+
+        <div class="bg-[var(--muted-bg)]/40 border border-slate-200 dark:border-white/5 p-4 rounded-xl space-y-2">
+            <span class="text-[10px] uppercase font-bold text-blue-500 tracking-wider font-mono block"><i class="fa-solid fa-user-shield mr-1"></i> Strategy Review Prompt</span>
+            <div
+                class="bg-[var(--muted-bg)] p-3 rounded text-xs select-all font-mono leading-relaxed text-[var(--foreground)]">
+                You are my Business Analyst mentor. Review the blueprint of my Customer Insights Report. Do not write
+                the insights or recommendations for me. Instead, provide a critical review framework, ask challenging
+                questions about loyalty enrollment data trends, and guide me to make my retention strategies more
+                actionable.
+            </div>
+        </div>
+    </section>
+
+    <!-- Grading Metrics Rubric -->
+    <section class="p-5 bg-[var(--muted-bg)]/20 rounded-xl space-y-3">
+        <h4 class="text-xs font-bold uppercase tracking-wider text-[var(--foreground)]">Task 4 Rubric Breakdown</h4>
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 text-[11px]">
+            <div class="p-2 bg-[var(--card)] rounded border border-slate-200 dark:border-white/5">&bull; Cohort Data
+                Segmentation: <strong>40 Marks</strong></div>
+            <div class="p-2 bg-[var(--card)] rounded border border-slate-200 dark:border-white/5">&bull; Loyalty Lift &
+                Geographics: <strong>30 Marks</strong></div>
+            <div class="p-2 bg-[var(--card)] rounded border border-slate-200 dark:border-white/5">&bull; Insights
+                Presentation File: <strong>30 Marks</strong></div>
+        </div>
+        <div class="flex justify-end pt-2">
+            <button @click="currentTab = 'dashboard'; activeDay = 4; openSubmissionModal(daysData[3])" class="px-4 py-1.5 bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs rounded-lg cursor-pointer">
+                Open Task 4 Submission Link <i class="fa-solid fa-arrow-up-right-from-square ml-1 text-[10px]"></i>
+            </button>
+        </div>
+    </section>
+</div>
+
+                    </div>
 
                 </div>
             </main>
         </div>
     </div>
 
-    <!-- Submission Modal Backdrop -->
     <div x-show="modalOpen" x-cloak
         class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
         <div class="bg-[var(--card)] border border-slate-200 dark:border-white/10 w-full max-w-lg rounded-2xl p-6 shadow-2xl relative"
@@ -607,20 +1283,20 @@
             <button @click="modalOpen = false" class="absolute top-4 right-4 text-[var(--muted-text)] hover:text-[var(--foreground)] p-2"><i class="fa-solid fa-xmark"></i></button>
 
             <div class="mb-5">
-                <span class="text-xs font-bold text-blue-500 uppercase tracking-wider" x-text="selectedDay ? `Day ${selectedDay.id} Submission` : ''"></span>
+                <span class="text-xs font-bold text-blue-500 uppercase tracking-wider" x-text="selectedDay ? `Task ${selectedDay.id} Subsystem` : ''"></span>
                 <h3 class="heading-font text-xl font-bold text-[var(--foreground)]"
                     x-text="selectedDay ? selectedDay.title : ''"></h3>
             </div>
 
             <form @submit.prevent="submitTaskWork()" class="space-y-4">
                 <div>
-                    <label class="block text-xs font-bold text-[var(--foreground)] mb-1 uppercase tracking-wider">Deliverable URL / Shared Artifact Link</label>
-                    <input type="url" required x-model="submissionUrl" placeholder="https://figma.com/@your-wireframe" class="w-full px-4 py-2.5 rounded-xl bg-[var(--muted-bg)] border border-slate-200 dark:border-white/10 text-xs text-[var(--foreground)] focus:outline-none focus:border-blue-500">
+                    <label class="block text-xs font-bold text-[var(--foreground)] mb-1 uppercase tracking-wider">Shared Deliverable Hub / Asset URL Link</label>
+                    <input type="url" required x-model="submissionUrl" placeholder="https://docs.google.com/spreadsheets/..." class="w-full px-4 py-2.5 rounded-xl bg-[var(--muted-bg)] border border-slate-200 dark:border-white/10 text-xs text-[var(--foreground)] focus:outline-none focus:border-blue-500">
                 </div>
 
                 <div>
-                    <label class="block text-xs font-bold text-[var(--foreground)] mb-1 uppercase tracking-wider">Notes / Self-Reflection</label>
-                    <textarea rows="3" x-model="submissionNotes" placeholder="Summary of assumptions built into this requirement..." class="w-full px-4 py-2.5 rounded-xl bg-[var(--muted-bg)] border border-slate-200 dark:border-white/10 text-xs text-[var(--foreground)] focus:outline-none focus:border-blue-500"></textarea>
+                    <label class="block text-xs font-bold text-[var(--foreground)] mb-1 uppercase tracking-wider">Notes / Critical Assumptions Summary</label>
+                    <textarea rows="3" x-model="submissionNotes" placeholder="Explain the key data joins or specific insights extracted..." class="w-full px-4 py-2.5 rounded-xl bg-[var(--muted-bg)] border border-slate-200 dark:border-white/10 text-xs text-[var(--foreground)] focus:outline-none focus:border-blue-500"></textarea>
                 </div>
 
                 <div class="pt-2 flex items-center justify-end gap-3">
@@ -633,9 +1309,7 @@
         </div>
     </div>
 
-    <!-- Alpine State Manager Script -->
     <script>
-        // ⚠️ ATTACH YOUR LIVE GOOGLE DEPLOYED WEB APP URL ENDPOINT DIRECTLY HERE:
         const GOOGLE_SCRIPT_API_URL = "https://script.google.com/macros/s/AKfycbwT8CwDxiwukRwWeHwlTSrkExA26YuF6JnVNhtDj_aDhwG8J3dw8BAIyzW0EnQkoiK0/exec";
 
         function dashboardApp() {
@@ -643,7 +1317,7 @@
                 isLoggedIn: false,
                 authLoading: false,
                 submitLoading: false,
-                currentTab: 'dashboard', // Controls view toggles ('dashboard' or 'learning')
+                currentTab: 'dashboard',
                 activeDay: 1,
                 modalOpen: false,
                 selectedDay: null,
@@ -653,11 +1327,15 @@
                 userSession: { name: '', phone: '' },
 
                 daysData: [
-                    { id: 1, title: "Introduction to Business Analysis", deliverable: "1-Page BA Report", taskDescription: "Select an app like Uber or Zomato. Conduct an initial breakdown analysis mapping functional target loops, 4 distinct revenue models, product system gaps, and actionable fixes.", submitted: false, completed: false, submissionUrl: '', submissionNotes: '' },
-                    { id: 2, title: "Requirement Gathering Foundations", deliverable: "Document Spec (BRD/FRD)", taskDescription: "Interview a user and draft a complete requirement specification sheet containing problem parameters, user personas, and a baseline configuration table of functional requirements.", submitted: false, completed: false, submissionUrl: '', submissionNotes: '' },
-                    { id: 3, title: "Process Mapping & Flowcharts", deliverable: "Process Flowchart Diagram", taskDescription: "Map out clear step-by-step state transition flows. Generate structured swimlane views displaying both legacy As-Is processes and high-efficiency To-Be targets.", submitted: false, completed: false, submissionUrl: '', submissionNotes: '' },
-                    { id: 4, title: "Wireframing & UI Documentation", deliverable: "Wireframe Package Diagram", taskDescription: "Design actionable low-fidelity system wireframe layouts along with technical navigation path charts explaining data transformations across screen structures.", submitted: false, completed: false, submissionUrl: '', submissionNotes: '' },
-                    { id: 5, title: "Final Capstone Portfolio Case Study", deliverable: "Business Analyst Case Study", taskDescription: "Synthesize all accumulated domain skills into a premium, interview-ready capstone portfolio piece detailing full product specs, backlogs, and roadmap strategies.", submitted: false, completed: false, submissionUrl: '', submissionNotes: '' }
+                    { id: 1, title: "Understand the Business Data", deliverable: "Data Dictionary & ERD", activities: ["Identify the purpose of each table (Orders, Customers, Products).", "Determine the primary key for each table.", "Identify foreign keys.", "Draw the relationship topology between the tables."], submitted: false, completed: false, submissionUrl: '', submissionNotes: '' },
+                    { id: 2, title: "Build the Master Sales Table", deliverable: "Master Sales Dataset & Join Logic", activities: ["Join Orders + Customers and Orders + Products.", "Create integrated fields: Order ID, Date, Customer Name, Country, Coffee Type, Roast Type, Size, Qty, Price, Sales, Profit, Loyalty Card."], submitted: false, completed: false, submissionUrl: '', submissionNotes: '' },
+                    { id: 3, title: "Sales Performance Analysis", deliverable: "Sales Performance Report", activities: ["Calculate Total Revenue, Total Orders, and Total Quantity Sold.", "Analyze Average Order Value.", "Map Monthly Sales Trends to uncover the Highest Sales Month."], submitted: false, completed: false, submissionUrl: '', submissionNotes: '' },
+                    { id: 4, title: "Customer Analysis & Retention", deliverable: "Customer Insights Report", activities: ["Identify Top 10 customers by absolute sales numbers.", "Isolate repeat customers vs loyalty card holders.", "Compare Loyalty vs Non-loyalty performance metrics to recommend program expansion."], submitted: false, completed: false, submissionUrl: '', submissionNotes: '' },
+                    { id: 5, title: "Product Performance Optimization", deliverable: "Product Analysis Report", activities: ["Analyze Coffee Type and Roast Type transaction vectors.", "Map container size preference criteria.", "Isolate the most profitable and least profitable catalog items for marketing investment."], submitted: false, completed: false, submissionUrl: '', submissionNotes: '' },
+                    { id: 6, title: "Market & Geographic Analysis", deliverable: "Market Analysis Report", activities: ["Compare metrics grouped by buyer Country location.", "Analyze distribution density profiles.", "Isolate average localized transaction volume thresholds."], submitted: false, completed: false, submissionUrl: '', submissionNotes: '' },
+                    { id: 7, title: "Profitability Analysis Matrix", deliverable: "Profitability Report", activities: ["Compare Revenue trajectories directly against Profit scales.", "Calculate exact Profit Margins by Coffee Type.", "Evaluate structural margins across Product Sizes for the Top 5 items."], submitted: false, completed: false, submissionUrl: '', submissionNotes: '' },
+                    { id: 8, title: "Executive Dashboard Design", deliverable: "Dashboard Mockup Assets", activities: ["Design a clean one-page UI showing Revenue, Profit, Orders, and Customers summaries.", "Render breakdowns for Sales by Month/Country, Coffee/Roast Type profiles, and Loyalty metrics."], submitted: false, completed: false, submissionUrl: '', submissionNotes: '' },
+                    { id: 9, title: "Business Recommendations Engine", deliverable: "1-Page Executive Strategy Brief", activities: ["Solve the CEO Scenario: Allocate ₹1,00,000 optimization funds.", "Cover strategic targets: Product, Customer, Pricing, Loyalty, Marketing, and Expansion lanes."], submitted: false, completed: false, submissionUrl: '', submissionNotes: '' }
                 ],
 
                 init() {
