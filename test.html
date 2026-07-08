@@ -87,8 +87,8 @@
             class="w-full max-w-md glass-dark-panel p-8 rounded-2xl border border-slate-800 shadow-2xl space-y-6">
             <div class="text-center space-y-2">
                 <h2 class="text-xl font-bold tracking-wide text-white">BA Qualification Gateway</h2>
-                <p class="text-xs text-slate-400">Initialize verification configurations to populate core performance
-                    states onto the worksheet tab <b class="text-blue-400 font-mono">"user"</b>.</p>
+                <p class="text-xs text-slate-400">Initialize configurations to output performance scores safely onto the
+                    <b class="text-blue-400 font-mono">Formspree Endpoint</b>.</p>
             </div>
             <div class="space-y-4">
                 <div>
@@ -110,7 +110,7 @@
             class="hidden w-full max-w-2xl glass-dark-panel p-6 md:p-8 rounded-2xl border border-slate-800 shadow-2xl space-y-6">
             <div class="flex justify-between items-center text-xs font-mono border-b border-slate-800 pb-3">
                 <span class="text-slate-400">QUESTION <b class="text-white" id="progress-current">1</b> OF 20</span>
-                <span class="text-blue-400 font-bold" id="progress-percent">5%</span>
+                <span class="text-blue-400 font-bold" id="progress-percent">5% Tracked</span>
             </div>
 
             <div class="space-y-5">
@@ -129,7 +129,7 @@
                     Next <i class="fa-solid fa-arrow-right ml-1"></i>
                 </button>
                 <button id="nav-btn-finalize" onclick="processEvaluation()" class="hidden px-5 py-1.5 bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold rounded-lg flex items-center gap-2 transition">
-                    <i class="fa-solid fa-cloud-arrow-up animate-pulse"></i> <span id="submit-btn-label">Synchronize Scores</span>
+                    <i class="fa-solid fa-cloud-arrow-up animate-pulse"></i> <span id="submit-btn-label">Transmit Data Payload</span>
                 </button>
             </div>
         </div>
@@ -148,7 +148,7 @@
             </div>
             <p class="text-xs text-slate-400 leading-relaxed">
                 Openbox Accelerator criteria demands an **80% compliance threshold** to pass. Your response record has
-                been successfully outputted to the ledger. Clear your local constants and re-attempt.
+                been completely dispatched to your Formspree dashboard. Clear your constants and re-attempt.
             </p>
             <button onclick="resetEvaluation()" class="w-full py-2.5 bg-rose-950/40 hover:bg-rose-900/50 text-rose-300 border border-rose-800/40 font-bold text-xs rounded-xl transition font-mono">
                 Re-initialize Evaluation
@@ -159,9 +159,9 @@
         <div id="panel-pass" class="hidden w-full space-y-8">
             <div class="p-4 bg-emerald-500/5 border border-emerald-500/20 rounded-xl text-center max-w-lg mx-auto">
                 <h4 class="text-sm font-bold text-emerald-400"><i class="fa-solid fa-circle-check"></i> Verification
-                    Metrics Confirmed</h4>
-                <p class="text-xs text-slate-400 mt-0.5">Your record data rows are securely logged inside your sheet app
-                    array.</p>
+                    Metrics Transmitted</h4>
+                <p class="text-xs text-slate-400 mt-0.5">Your record payload rows are securely saved inside your
+                    Formspree backend registry.</p>
             </div>
 
             <!-- PREMIUM OPENBOX ACCELERATOR BRANDED CERTIFICATE CANVAS -->
@@ -177,7 +177,7 @@
                     <!-- Header Branding Matrix -->
                     <div class="w-full flex justify-between items-center px-6 relative z-10">
                         <div class="text-left">
-                            <span class="text-[8px] font-mono tracking-widest text-slate-400 block">ACCELERATOR VERIFICATION SHA256</span>
+                            <span class="text-[8px] font-mono tracking-widest text-slate-400 block">FORMSPREE INBOUND VERIFIED</span>
                             <span id="cert-secure-token" class="text-[10px] font-mono font-bold text-blue-600 tracking-wider">OPB-BA-PENDING</span>
                         </div>
 
@@ -311,12 +311,13 @@
 
     <!-- ACCURATE SYSTEM FOOTER FRAME -->
     <footer class="py-4 text-center text-[9px] font-mono text-slate-600 border-t border-slate-900 bg-[#060b18]">
-        &copy; 2026 OPENBOX ACCELERATOR AUTOMATION CHANNELS. SHEET EXECUTIONS ROOT TO STREAM DESTINATION TAB: "user".
+        &copy; 2026 OPENBOX ACCELERATOR AUTOMATION CHANNELS. ENDPOINT PIPELINE TARGET: FORMSPREE CORE.
     </footer>
 
     <!-- INTERACTIVE ENGINE BUSINESS ARCHITECTURE LAYER -->
     <script>
-        const endpointTarget = 'https://script.google.com/macros/s/AKfycbwMylFtaQiWUCA_PHUSYyd1luR2WTzb5O6kmM6eWSm9xPxnLfPdHtuVSoARftXb3g/exec';
+        // Formspree Target Endpoint URL Integration
+        const endpointTarget = 'https://formspree.io/f/xnjkybyj';
         
         let accountIdentity = { name: '', email: '' };
         let activePointer = 0;
@@ -418,7 +419,7 @@
             }
 
             document.getElementById('nav-btn-finalize').disabled = true;
-            document.getElementById('submit-btn-label').innerText = "Routing Logs...";
+            document.getElementById('submit-btn-label').innerText = "Transmitting to Formspree...";
 
             finalCorrectCount = 0;
             catalog.forEach(item => {
@@ -430,14 +431,22 @@
             const statusLabel = clearState ? 'Pass' : 'Fail';
             verificationHash = 'OPB-BA-' + Math.random().toString(36).substr(2, 6).toUpperCase() + '-' + scalePercentage;
 
-            // Strict parameter payload targeting sub-sheet name variable destination explicit value: "user"
-            const routingParameters = `?name=${encodeURIComponent(accountIdentity.name)}&contact=${encodeURIComponent(accountIdentity.email)}&score=${finalCorrectCount}&percentage=${scalePercentage}&status=${statusLabel}&token=${verificationHash}&sheet=user`;
-            
-            const injectionPoint = document.createElement('script');
-            injectionPoint.src = endpointTarget + routingParameters;
-            document.body.appendChild(injectionPoint);
+            // Compile Formspree Form Data Payload
+            const payload = new FormData();
+            payload.append('name', accountIdentity.name);
+            payload.append('contact', accountIdentity.email);
+            payload.append('score', finalCorrectCount);
+            payload.append('percentage', scalePercentage + '%');
+            payload.append('status', statusLabel);
+            payload.append('token', verificationHash);
 
-            setTimeout(() => {
+            // Execute Asynchronous Fetch POST directly to Formspree
+            fetch(endpointTarget, {
+                method: 'POST',
+                body: payload,
+                headers: { 'Accept': 'application/json' }
+            })
+            .then(response => {
                 document.getElementById('panel-quiz').classList.add('hidden');
                 if(clearState) {
                     document.getElementById('cert-target-name').innerText = accountIdentity.name;
@@ -451,14 +460,20 @@
                     document.getElementById('fail-metric-label').innerText = `${scalePercentage}% (${finalCorrectCount}/20 Correct)`;
                     document.getElementById('panel-fail').classList.remove('hidden');
                 }
-            }, 1500);
+            })
+            .catch(error => {
+                console.error('Transmission fault:', error);
+                alert('Formspree dispatch error. Please check your endpoint connectivity.');
+                document.getElementById('nav-btn-finalize').disabled = false;
+                document.getElementById('submit-btn-label').innerText = "Transmit Data Payload";
+            });
         }
 
         function resetEvaluation() {
             activePointer = 0;
             responseMap = {};
             document.getElementById('nav-btn-finalize').disabled = false;
-            document.getElementById('submit-btn-label').innerText = "Synchronize Scores";
+            document.getElementById('submit-btn-label').innerText = "Transmit Data Payload";
             document.getElementById('panel-fail').classList.add('hidden');
             document.getElementById('panel-quiz').classList.remove('hidden');
             drawQuestionMatrix();
