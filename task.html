@@ -6,13 +6,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Unlitify — Business Analyst Workspace</title>
 
+    <!-- Tailwind CSS v4 CDN -->
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 
+    <!-- Alpine.js for Interactive State Mechanics -->
     <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/collapse@3.x.x/dist/cdn.min.js"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
+    <!-- FontAwesome CDN -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -70,6 +74,7 @@
 
 <body class="min-h-screen relative selection:bg-blue-600 selection:text-white pb-16 bg-grid" x-data="dashboardApp()">
 
+    <!-- LAYER A: GATEWAY GATE SECURITY OVERLAY -->
     <div x-show="!isLoggedIn"
         class="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-md p-4">
         <div
@@ -102,13 +107,16 @@
         </div>
     </div>
 
+    <!-- LAYER B: PRIMARY PRIVATE CONTENT FRAMEWAY -->
     <div x-show="isLoggedIn" x-cloak>
+        <!-- Top Navigation Workspace Header -->
         <header
             class="max-w-7xl mx-auto mt-4 px-4 lg:px-8 bg-[var(--blur-tint)] backdrop-blur-xl border border-slate-200 dark:border-white/10 rounded-2xl sticky top-4 z-40 transition-all duration-300">
             <div class="h-16 flex items-center justify-between">
 
+                <!-- Branding Shell -->
                 <div class="flex items-center gap-3">
-                    <a href="#" class="flex items-center gap-2.5">
+                    <a href="#" @click.prevent="currentTab = 'dashboard'" class="flex items-center gap-2.5">
                         <div
                             class="w-9 h-9 rounded-xl bg-blue-600 flex items-center justify-center text-white font-bold heading-font text-lg shadow-md shadow-blue-500/20">
                             U</div>
@@ -117,12 +125,20 @@
                             <span class="text-blue-500 font-bold text-[8px] tracking-[0.2em] uppercase mt-0.5">Virtual Accelerator</span>
                         </div>
                     </a>
-                    <span class="hidden sm:inline-block h-4 w-[1px] bg-slate-300 dark:bg-white/10 mx-2"></span>
-                    <span class="hidden sm:inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-blue-500/10 text-blue-500 text-xs font-semibold">
-                        <i class="fa-solid fa-graduation-cap"></i> Track: Business Analysis
-                    </span>
                 </div>
 
+                <!-- Central Tab Navigation Systems Router -->
+                <nav
+                    class="flex items-center bg-[var(--muted-bg)] p-1 rounded-xl border border-slate-200 dark:border-white/5">
+                    <button @click="currentTab = 'dashboard'" :class="currentTab === 'dashboard' ? 'bg-blue-600 text-white font-bold shadow-md' : 'text-[var(--muted-text)] hover:text-[var(--foreground)]'" class="px-4 py-1.5 rounded-lg text-xs transition-all cursor-pointer">
+                        <i class="fa-solid fa-chart-pie mr-1.5"></i>Tasks Queue
+                    </button>
+                    <button @click="currentTab = 'learning'" :class="currentTab === 'learning' ? 'bg-blue-600 text-white font-bold shadow-md' : 'text-[var(--muted-text)] hover:text-[var(--foreground)]'" class="px-4 py-1.5 rounded-lg text-xs transition-all cursor-pointer">
+                        <i class="fa-solid fa-graduation-cap mr-1.5"></i>Learning Portal
+                    </button>
+                </nav>
+
+                <!-- Profile & Workspace Actions -->
                 <div class="flex items-center gap-3">
                     <button @click="toggleTheme()" class="p-2 w-9 h-9 flex items-center justify-center rounded-xl bg-[var(--muted-bg)] text-[var(--muted-text)] hover:text-[var(--foreground)] transition-colors cursor-pointer">
                         <i class="fa-solid fa-moon text-xs dark:hidden"></i>
@@ -134,7 +150,7 @@
                             <div class="text-xs font-bold text-[var(--foreground)]" x-text="userSession.name"></div>
                             <div class="text-[10px] text-[var(--muted-text)]" x-text="'ID: ' + userSession.phone"></div>
                         </div>
-                        <button @click="executeSignOut()" class="p-2 text-rose-500 bg-rose-500/10 hover:bg-rose-500/20 rounded-xl transition-all cursor-pointer text-xs" title="Disconnect Session">
+                        <button @click="executeSignOut()" class="p-2 text-rose-500 bg-rose-500/10 hover:bg-rose-500/20 rounded-xl transition-all cursor-pointer text-xs">
                             <i class="fa-solid fa-power-off"></i>
                         </button>
                     </div>
@@ -142,227 +158,448 @@
             </div>
         </header>
 
-        <main class="max-w-7xl mx-auto px-4 lg:px-8 pt-8">
-
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 mb-8">
-                <div
-                    class="lg:col-span-8 bg-[var(--card)] p-6 md:p-8 rounded-2xl border border-slate-200 dark:border-white/10 shadow-sm relative overflow-hidden">
-                    <div class="relative z-10">
-                        <div class="flex flex-wrap items-center gap-2 mb-3">
-                            <span class="px-2.5 py-1 rounded-md bg-blue-500/10 text-blue-500 text-xs font-bold uppercase tracking-wider">Week 1 Module</span>
-                            <span class="px-2.5 py-1 rounded-md bg-emerald-500/10 text-emerald-500 text-xs font-bold uppercase tracking-wider">Format: Task-Based Virtual</span>
-                        </div>
-                        <h1
-                            class="heading-font text-2xl md:text-3xl font-bold text-[var(--foreground)] tracking-tight mb-2">
-                            Business Analyst Internship Foundation
-                        </h1>
-                        <p class="text-xs md:text-sm text-[var(--muted-text)] max-w-2xl leading-relaxed">
-                            Learn how a Business Analyst thinks, gathers requirements, analyzes problems, and creates
-                            production documents used in real software and startup projects.
-                        </p>
-                    </div>
-                </div>
-
-                <div
-                    class="lg:col-span-4 bg-[var(--card)] p-6 rounded-2xl border border-slate-200 dark:border-white/10 shadow-sm flex flex-col justify-between">
-                    <div>
-                        <div class="flex justify-between items-center mb-2">
-                            <span class="text-xs font-bold uppercase tracking-wider text-[var(--muted-text)]">Week Progress</span>
-                            <span class="text-xs font-bold text-blue-500" x-text="`${calculateProgress()}% Complete`"></span>
-                        </div>
-                        <div class="w-full h-3 bg-[var(--muted-bg)] rounded-full overflow-hidden mb-4">
-                            <div class="h-full bg-gradient-to-r from-blue-500 to-indigo-600 transition-all duration-500 rounded-full"
-                                :style="`width: ${calculateProgress()}%`"></div>
-                        </div>
-                    </div>
-
-                    <div class="grid grid-cols-2 gap-3 pt-3 border-t border-slate-200 dark:border-white/5 text-center">
+        <!-- SUB-FRAME 1: TASKS TRACKER DASHBOARD VIEW -->
+        <div x-show="currentTab === 'dashboard'">
+            <main class="max-w-7xl mx-auto px-4 lg:px-8 pt-8">
+                <!-- Top Summary Banner -->
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 mb-8">
+                    <div
+                        class="lg:col-span-8 bg-[var(--card)] p-6 md:p-8 rounded-2xl border border-slate-200 dark:border-white/10 shadow-sm relative overflow-hidden">
                         <div>
-                            <div class="text-xl font-bold text-[var(--foreground)] heading-font"
-                                x-text="`${completedCount()}/5`"></div>
-                            <div class="text-[10px] text-[var(--muted-text)] uppercase tracking-wider mt-0.5">Tasks
-                                Verified</div>
-                        </div>
-                        <div>
-                            <div class="text-xl font-bold text-[var(--foreground)] heading-font">1 Case Study</div>
-                            <div class="text-[10px] text-[var(--muted-text)] uppercase tracking-wider mt-0.5">Portfolio
-                                Asset</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
-
-                <div class="lg:col-span-8 space-y-4">
-                    <div class="flex items-center justify-between mb-2">
-                        <h2 class="heading-font text-lg font-bold text-[var(--foreground)] flex items-center gap-2">
-                            <i class="fa-solid fa-list-check text-blue-500 text-sm"></i> Daily Execution Roadmap
-                        </h2>
-                        <span class="text-xs text-[var(--muted-text)]">5-Day Structured Pipeline</span>
-                    </div>
-
-                    <template x-for="(day, index) in daysData" :key="day.id">
-                        <div
-                            class="bg-[var(--card)] border border-slate-200 dark:border-white/10 rounded-2xl overflow-hidden shadow-sm transition-all duration-200">
-
-                            <div @click="activeDay = activeDay === day.id ? null : day.id"
-                                class="p-5 flex items-center justify-between cursor-pointer hover:bg-[var(--muted-bg)]/50 transition-colors">
-                                <div class="flex items-center gap-4">
-                                    <div class="w-10 h-10 rounded-xl flex items-center justify-center font-bold text-sm heading-font"
-                                        :class="{
-                                            'bg-emerald-500/10 text-emerald-500 border border-emerald-500/20': day.completed,
-                                            'bg-blue-500/10 text-blue-500 border border-blue-500/20': !day.completed && activeDay === day.id,
-                                            'bg-[var(--muted-bg)] text-[var(--muted-text)]': !day.completed && activeDay !== day.id
-                                         }">
-                                        <template x-if="day.completed">
-                                            <i class="fa-solid fa-check text-sm"></i>
-                                        </template>
-                                        <template x-if="!day.completed">
-                                            <span x-text="`D${day.id}`"></span>
-                                        </template>
-                                    </div>
-                                    <div>
-                                        <div class="flex items-center gap-2">
-                                            <span class="text-xs font-bold text-blue-500 uppercase tracking-wider" x-text="`Day ${day.id}`"></span>
-                                            <template x-show="day.isCapstone">
-                                                <span class="px-2 py-0.5 rounded text-[9px] font-bold bg-amber-500/10 text-amber-500 border border-amber-500/20">CAPSTONE PROJECT</span>
-                                            </template>
-                                        </div>
-                                        <h3 class="heading-font text-base font-bold text-[var(--foreground)]"
-                                            x-text="day.title"></h3>
-                                    </div>
-                                </div>
-
-                                <div class="flex items-center gap-3">
-                                    <span class="text-xs font-medium px-2.5 py-1 rounded-md"
-                                          :class="{
-                                            'bg-emerald-500/10 text-emerald-500': day.completed,
-                                            'bg-amber-500/10 text-amber-500': !day.completed && day.submitted,
-                                            'bg-slate-500/10 text-[var(--muted-text)]': !day.completed && !day.submitted
-                                          }"
-                                          x-text="day.completed ? 'Verified' : (day.submitted ? 'In Review' : 'Pending')">
-                                    </span>
-                                    <i class="fa-solid fa-chevron-down text-xs text-[var(--muted-text)] transition-transform duration-200" :class="{'rotate-180': activeDay === day.id}"></i>
-                                </div>
+                            <div class="flex flex-wrap items-center gap-2 mb-3">
+                                <span class="px-2.5 py-1 rounded-md bg-blue-500/10 text-blue-500 text-xs font-bold uppercase tracking-wider">Week 1 Module</span>
+                                <span class="px-2.5 py-1 rounded-md bg-emerald-500/10 text-emerald-500 text-xs font-bold uppercase tracking-wider">Format: Task-Based Virtual</span>
                             </div>
+                            <h1
+                                class="heading-font text-2xl md:text-3xl font-bold text-[var(--foreground)] tracking-tight mb-2">
+                                Business Analyst Internship Foundation</h1>
+                            <p class="text-xs md:text-sm text-[var(--muted-text)] max-w-2xl leading-relaxed">
+                                Learn how a Business Analyst thinks, gathers requirements, analyzes problems, and
+                                creates production documents used in real software products.
+                            </p>
+                        </div>
+                    </div>
 
-                            <div x-show="activeDay === day.id" x-collapse
-                                class="border-t border-slate-200 dark:border-white/5 p-6 bg-[var(--muted-bg)]/30 space-y-6">
+                    <div
+                        class="lg:col-span-4 bg-[var(--card)] p-6 rounded-2xl border border-slate-200 dark:border-white/10 shadow-sm flex flex-col justify-between">
+                        <div>
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="text-xs font-bold uppercase tracking-wider text-[var(--muted-text)]">Week Progress</span>
+                                <span class="text-xs font-bold text-blue-500" x-text="`${calculateProgress()}% Complete`"></span>
+                            </div>
+                            <div class="w-full h-3 bg-[var(--muted-bg)] rounded-full overflow-hidden mb-4">
+                                <div class="h-full bg-gradient-to-r from-blue-500 to-indigo-600 transition-all duration-500 rounded-full"
+                                    :style="`width: ${calculateProgress()}%`"></div>
+                            </div>
+                        </div>
+                        <div
+                            class="grid grid-cols-2 gap-3 pt-3 border-t border-slate-200 dark:border-white/5 text-center">
+                            <div>
+                                <div class="text-xl font-bold text-[var(--foreground)] heading-font"
+                                    x-text="`${completedCount()}/5`"></div>
+                                <div class="text-[10px] text-[var(--muted-text)] uppercase tracking-wider mt-0.5">Tasks
+                                    Verified</div>
+                            </div>
+                            <div>
+                                <div class="text-xl font-bold text-[var(--foreground)] heading-font">1 Case Study</div>
+                                <div class="text-[10px] text-[var(--muted-text)] uppercase tracking-wider mt-0.5">
+                                    Portfolio Asset</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-                                <div>
-                                    <h4
-                                        class="text-xs font-bold uppercase tracking-wider text-[var(--muted-text)] mb-3 flex items-center gap-1.5">
-                                        <i class="fa-solid fa-book-open text-blue-500"></i> Core Concepts Covered
-                                    </h4>
-                                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                                        <template x-for="lesson in day.lessons" :key="lesson">
-                                            <div
-                                                class="flex items-center gap-2 p-2 rounded-lg bg-[var(--card)] border border-slate-200 dark:border-white/5 text-xs text-[var(--foreground)] font-medium">
-                                                <i class="fa-solid fa-circle-dot text-[8px] text-blue-500"></i>
-                                                <span x-text="lesson"></span>
-                                            </div>
-                                        </template>
+                <!-- Dashboard Layout Split -->
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+                    <div class="lg:col-span-8 space-y-4">
+                        <div class="flex items-center justify-between mb-2">
+                            <h2 class="heading-font text-lg font-bold text-[var(--foreground)] flex items-center gap-2">
+                                <i class="fa-solid fa-list-check text-blue-500 text-sm"></i> Daily Execution Roadmap
+                            </h2>
+                            <button @click="currentTab = 'learning'" class="text-xs text-blue-500 font-bold hover:underline cursor-pointer">Open Study Material <i class="fa-solid fa-arrow-right ml-1"></i></button>
+                        </div>
+
+                        <template x-for="(day, index) in daysData" :key="day.id">
+                            <div
+                                class="bg-[var(--card)] border border-slate-200 dark:border-white/10 rounded-2xl overflow-hidden shadow-sm">
+                                <div @click="activeDay = activeDay === day.id ? null : day.id"
+                                    class="p-5 flex items-center justify-between cursor-pointer hover:bg-[var(--muted-bg)]/50">
+                                    <div class="flex items-center gap-4">
+                                        <div class="w-10 h-10 rounded-xl flex items-center justify-center font-bold text-sm heading-font"
+                                            :class="day.completed ? 'bg-emerald-500/10 text-emerald-500 border border-emerald-500/20' : 'bg-[var(--muted-bg)] text-[var(--muted-text)]'">
+                                            <span x-show="!day.completed" x-text="`D${day.id}`"></span>
+                                            <i x-show="day.completed" class="fa-solid fa-check text-sm"></i>
+                                        </div>
+                                        <div>
+                                            <h3 class="heading-font text-base font-bold text-[var(--foreground)]"
+                                                x-text="day.title"></h3>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center gap-3">
+                                        <span class="text-xs font-medium px-2.5 py-1 rounded-md" :class="day.completed ? 'bg-emerald-500/10 text-emerald-500' : (day.submitted ? 'bg-amber-500/10 text-amber-500' : 'bg-slate-500/10')" x-text="day.completed ? 'Verified' : (day.submitted ? 'In Review' : 'Pending')"></span>
+                                        <i class="fa-solid fa-chevron-down text-xs text-[var(--muted-text)] transition-transform duration-200" :class="{'rotate-180': activeDay === day.id}"></i>
                                     </div>
                                 </div>
 
-                                <div
-                                    class="bg-[var(--card)] p-5 rounded-xl border border-slate-200 dark:border-white/5 space-y-3">
-                                    <div class="flex items-center justify-between">
-                                        <h4
-                                            class="heading-font text-sm font-bold text-[var(--foreground)] flex items-center gap-2">
-                                            <i class="fa-solid fa-bullseye text-blue-500"></i> Task Deliverable
-                                        </h4>
-                                        <span class="text-[11px] text-[var(--muted-text)] font-mono" x-text="`Deliverable: ${day.deliverable}`"></span>
-                                    </div>
-                                    <p class="text-xs text-[var(--muted-text)] leading-relaxed"
-                                        x-text="day.taskDescription"></p>
-
-                                    <div class="space-y-1.5 pt-2">
-                                        <template x-for="req in day.requirements" :key="req">
-                                            <div class="flex items-start gap-2 text-xs text-[var(--foreground)]">
-                                                <i class="fa-solid fa-check text-emerald-500 text-xs mt-0.5"></i>
-                                                <span x-text="req"></span>
-                                            </div>
-                                        </template>
-                                    </div>
-                                </div>
-
-                                <div x-show="day.submitted"
-                                    class="p-4 rounded-xl bg-blue-500/5 border border-blue-500/10 space-y-2">
-                                    <p class="text-xs font-bold text-[var(--foreground)]">
-                                        <i class="fa-solid fa-circle-info text-blue-500 mr-1"></i> Current Cached
-                                        Submission</p>
-                                    <p class="text-[11px] text-[var(--muted-text)] break-all"><strong>Link:</strong> <a
-                                            :href="day.submissionUrl" target="_blank" class="text-blue-500 underline"
-                                            x-text="day.submissionUrl"></a></p>
-                                    <p class="text-[11px] text-[var(--muted-text)]"><strong>Notes:</strong>
-                                        <span x-text="day.submissionNotes || 'None.'"></span></p>
-                                </div>
-
-                                <div class="flex flex-wrap items-center justify-between gap-4 pt-2">
-                                    <div class="text-xs text-[var(--muted-text)]">
-                                        <span class="font-bold">Status:</span>
-                                        <span x-text="day.completed ? 'Approved by Reviewer' : (day.submitted ? 'Submission Pending Evaluation' : 'Action Required')"></span>
+                                <div x-show="activeDay === day.id" x-collapse
+                                    class="border-t border-slate-200 dark:border-white/5 p-6 bg-[var(--muted-bg)]/30 space-y-4">
+                                    <div
+                                        class="bg-[var(--card)] p-5 rounded-xl border border-slate-200 dark:border-white/5 space-y-2">
+                                        <div class="flex justify-between items-center">
+                                            <h4 class="text-sm font-bold text-[var(--foreground)] heading-font">Task
+                                                Deliverable</h4>
+                                            <span class="text-xs font-mono text-blue-500" x-text="day.deliverable"></span>
+                                        </div>
+                                        <p class="text-xs leading-relaxed" x-text="day.taskDescription"></p>
                                     </div>
 
-                                    <div class="flex items-center gap-2">
-                                        <button @click="openSubmissionModal(day)" :disabled="day.completed"
-                                                class="px-4 py-2 bg-blue-600 hover:bg-blue-500 text-white font-semibold text-xs rounded-xl shadow-md disabled:opacity-40 transition-all flex items-center gap-2 cursor-pointer">
-                                            <i class="fa-solid" :class="day.submitted ? 'fa-arrows-rotate' : 'fa-upload'"></i>
-                                            <span x-text="day.submitted ? 'Resubmit Work' : 'Submit Task Deliverable'"></span>
+                                    <div x-show="day.submitted"
+                                        class="p-3 bg-blue-500/5 rounded-xl border border-blue-500/10 text-xs">
+                                        <strong>Active Link:</strong> <a :href="day.submissionUrl" target="_blank"
+                                            class="text-blue-500 underline break-all" x-text="day.submissionUrl"></a>
+                                    </div>
+
+                                    <div class="flex justify-end gap-2">
+                                        <button x-show="day.id === 1" @click="currentTab = 'learning'" class="px-4 py-2 bg-[var(--muted-bg)] text-[var(--foreground)] font-bold text-xs rounded-xl cursor-pointer mr-auto"><i class="fa-solid fa-book mr-1.5"></i> Read Day 1 Content</button>
+                                        <button @click="openSubmissionModal(day)" :disabled="day.completed" class="px-4 py-2 bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs rounded-xl cursor-pointer">
+                                            <span x-text="day.submitted ? 'Update Work' : 'Submit Artifact Link'"></span>
                                         </button>
                                     </div>
                                 </div>
+                            </div>
+                        </template>
+                    </div>
 
+                    <div class="lg:col-span-4 space-y-4">
+                        <div class="bg-[var(--card)] p-5 rounded-2xl border border-slate-200 dark:border-white/10">
+                            <h3 class="text-sm font-bold text-[var(--foreground)] heading-font mb-2">Module Details</h3>
+                            <p class="text-xs leading-relaxed"><strong>Track:</strong> Business
+                                Analyst<br><strong>Duration:</strong> 2-3 Hours Learning + 2-3 Hours Task Execution</p>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+
+        <!-- SUB-FRAME 2: CORE STUDY PORTAL WORKSPACE VIEW -->
+        <div x-show="currentTab === 'learning'" x-cloak>
+            <main class="max-w-5xl mx-auto px-4 pt-8">
+                <!-- Learning Header Metadata Banner -->
+                <div class="border-b border-slate-200 dark:border-white/10 pb-6 mb-8 space-y-2">
+                    <div class="flex items-center gap-2 text-xs font-bold text-blue-500 uppercase tracking-wider">
+                        <span>Week 1</span> &bull; <span>Module 1</span> &bull; <span>Duration: 2–3 Hours</span>
+                    </div>
+                    <h1 class="heading-font text-3xl font-bold text-[var(--foreground)] tracking-tight">Introduction to
+                        Business Analysis</h1>
+                    <p class="text-xs text-[var(--muted-text)]">Review your study guides and concepts thoroughly before
+                        triggering artifact uploads inside the tracking tab.</p>
+                </div>
+
+                <!-- Learning Objectives Panel Layout -->
+                <div
+                    class="p-5 bg-gradient-to-r from-blue-600/10 to-indigo-600/10 rounded-2xl border border-blue-500/20 mb-8 space-y-3">
+                    <h3
+                        class="heading-font text-sm font-bold text-[var(--foreground)] uppercase tracking-wider flex items-center gap-2">
+                        <i class="fa-solid fa-bullseye text-blue-500"></i> 🎯 Learning Objectives
+                    </h3>
+                    <ul class="grid grid-cols-1 md:grid-cols-2 gap-2 text-xs text-[var(--foreground)]">
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-angle-right text-blue-500"></i>
+                            Understand BA domain mapping importance.</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-angle-right text-blue-500"></i>
+                            Identify standard BA responsibilities.</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-angle-right text-blue-500"></i>
+                            Compare operational layers (Startups vs Enterprises).</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-angle-right text-blue-500"></i> Map
+                            structural SDLC cycle pathways.</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-angle-right text-blue-500"></i>
+                            Differentiate between Agile and Waterfall values.</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-angle-right text-blue-500"></i>
+                            Execute rapid logic-driven product breakdowns.</li>
+                    </ul>
+                </div>
+
+                <!-- Content Chapters Block Structure Loop -->
+                <div class="space-y-12">
+
+                    <!-- Lesson 1 -->
+                    <section class="space-y-4">
+                        <h2
+                            class="heading-font text-xl font-bold text-[var(--foreground)] border-l-4 border-blue-500 pl-3">
+                            Lesson 1: What is Business Analysis?</h2>
+                        <p class="text-xs leading-relaxed">
+                            Business Analysis is the process of identifying business problems, understanding user needs,
+                            and recommending solutions that create value for both users and organizations.
+                        </p>
+                        <p class="text-xs leading-relaxed">
+                            A <strong>Business Analyst (BA)</strong> acts as the bridge between business stakeholders
+                            and the development team. Instead of writing code, a BA focuses on understanding what should
+                            be built, why it should be built, and how success will be measured.
+                        </p>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2">
+                            <div
+                                class="p-4 rounded-xl bg-[var(--card)] border border-slate-200 dark:border-white/5 space-y-2">
+                                <h4 class="text-xs font-bold text-rose-500 uppercase">The Risk: Without Analysis</h4>
+                                <ul class="text-[11px] space-y-1 list-disc pl-4">
+                                    <li>Teams build features users don't need.</li>
+                                    <li>Projects exceed budgets and deadlines.</li>
+                                    <li>Customer problems remain unsolved.</li>
+                                </ul>
+                            </div>
+                            <div
+                                class="p-4 rounded-xl bg-[var(--card)] border border-slate-200 dark:border-white/5 space-y-2">
+                                <h4 class="text-xs font-bold text-emerald-500 uppercase">The Reward: Strategic Analysis
+                                </h4>
+                                <ul class="text-[11px] space-y-1 list-disc pl-4">
+                                    <li>Solves core systemic business issues.</li>
+                                    <li>Reduces development cycle wastage risks.</li>
+                                    <li>Aligns development directly to revenue goals.</li>
+                                </ul>
                             </div>
                         </div>
-                    </template>
-                </div>
 
-                <div class="lg:col-span-4 space-y-6">
-                    <div
-                        class="bg-[var(--card)] p-6 rounded-2xl border border-slate-200 dark:border-white/10 shadow-sm space-y-4">
-                        <h3 class="heading-font text-base font-bold text-[var(--foreground)] flex items-center gap-2">
-                            <i class="fa-solid fa-award text-blue-500"></i> Verified Skills Gained
-                        </h3>
-                        <div class="flex flex-wrap gap-2">
-                            <span class="px-2.5 py-1 rounded-lg bg-[var(--muted-bg)] text-[var(--foreground)] text-xs font-semibold">Requirement Gathering</span>
-                            <span class="px-2.5 py-1 rounded-lg bg-[var(--muted-bg)] text-[var(--foreground)] text-xs font-semibold">User Personas</span>
-                            <span class="px-2.5 py-1 rounded-lg bg-[var(--muted-bg)] text-[var(--foreground)] text-xs font-semibold">Process Mapping</span>
-                            <span class="px-2.5 py-1 rounded-lg bg-[var(--muted-bg)] text-[var(--foreground)] text-xs font-semibold">Low-Fi Wireframing</span>
+                        <div class="p-4 rounded-xl bg-[var(--muted-bg)]/50 space-y-2">
+                            <h4 class="text-xs font-bold uppercase tracking-wider text-[var(--foreground)]">Key
+                                Vocabulary Terminology Matrices</h4>
+                            <div class="flex flex-wrap gap-1.5">
+                                <span class="px-2 py-0.5 rounded bg-[var(--card)] border border-slate-200 dark:border-white/5 text-[10px] font-mono">Business Problem</span>
+                                <span class="px-2 py-0.5 rounded bg-[var(--card)] border border-slate-200 dark:border-white/5 text-[10px] font-mono">Stakeholder</span>
+                                <span class="px-2 py-0.5 rounded bg-[var(--card)] border border-slate-200 dark:border-white/5 text-[10px] font-mono">Functional Requirement</span>
+                                <span class="px-2 py-0.5 rounded bg-[var(--card)] border border-slate-200 dark:border-white/5 text-[10px] font-mono">Product Vision</span>
+                            </div>
                         </div>
-                    </div>
 
-                    <div
-                        class="bg-[var(--card)] p-6 rounded-2xl border border-slate-200 dark:border-white/10 shadow-sm space-y-4">
-                        <h3 class="heading-font text-base font-bold text-[var(--foreground)] flex items-center gap-2">
-                            <i class="fa-solid fa-screwdriver-wrench text-blue-500"></i> Recommended Toolkit
-                        </h3>
-                        <div class="space-y-3">
-                            <a href="https://app.diagrams.net/" target="_blank"
-                                class="flex items-center justify-between p-2.5 rounded-xl bg-[var(--muted-bg)] hover:bg-blue-500/10 transition-colors group">
-                                <div class="flex items-center gap-3">
-                                    <div
-                                        class="w-8 h-8 rounded-lg bg-orange-500/10 text-orange-500 flex items-center justify-center font-bold text-xs">
-                                        <i class="fa-solid fa-diagram-project"></i>
-                                    </div>
-                                    <div>
-                                        <div
-                                            class="text-xs font-bold text-[var(--foreground)] group-hover:text-blue-500 transition-colors">
-                                            Draw.io / Lucidchart</div>
-                                        <div class="text-[10px] text-[var(--muted-text)]">Process Flow Diagrams</div>
-                                    </div>
+                        <!-- Knowledge Sandbox Box -->
+                        <div
+                            class="p-4 rounded-xl border border-dashed border-slate-300 dark:border-white/10 space-y-2">
+                            <div class="text-xs font-bold text-[var(--foreground)]">
+                                <i class="fa-solid fa-lightbulb text-amber-500 mr-1.5"></i> Knowledge Check Reflection
+                            </div>
+                            <p class="text-[11px] italic">"Why should modern product companies aggressively validate
+                                structural problems before allocating engineering bandwidth to code solutions?"</p>
+                        </div>
+                    </section>
+
+                    <!-- Lesson 2 -->
+                    <section class="space-y-4">
+                        <h2
+                            class="heading-font text-xl font-bold text-[var(--foreground)] border-l-4 border-blue-500 pl-3">
+                            Lesson 2: Roles & Responsibilities of a Business Analyst</h2>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
+                            <div class="p-3 bg-[var(--card)] border border-slate-200 dark:border-white/5 rounded-xl">
+                                <div class="text-xs font-bold text-[var(--foreground)] mb-1">1. Problem Definition</div>
+                                <p class="text-[11px]">Meet stakeholders to understand metrics, bottlenecks, and core
+                                    objectives.</p>
+                            </div>
+                            <div class="p-3 bg-[var(--card)] border border-slate-200 dark:border-white/5 rounded-xl">
+                                <div class="text-xs font-bold text-[var(--foreground)] mb-1">2. Requirement Gathering
                                 </div>
-                                <i class="fa-solid fa-arrow-up-right-from-square text-xs text-[var(--muted-text)]"></i>
-                            </a>
+                                <p class="text-[11px]">Collect domain facts via user interviews, shadow sessions, and
+                                    tracking workshops.</p>
+                            </div>
+                            <div class="p-3 bg-[var(--card)] border border-slate-200 dark:border-white/5 rounded-xl">
+                                <div class="text-xs font-bold text-[var(--foreground)] mb-1">3. Process Analysis</div>
+                                <p class="text-[11px]">Evaluate structural systems to convert legacy As-Is processes
+                                    into To-Be models.</p>
+                            </div>
+                            <div class="p-3 bg-[var(--card)] border border-slate-200 dark:border-white/5 rounded-xl">
+                                <div class="text-xs font-bold text-[var(--foreground)] mb-1">4. Matrix Documentation
+                                </div>
+                                <p class="text-[11px]">Draft unambiguous specification docs: BRDs, FRDs, and user
+                                    stories.</p>
+                            </div>
+                            <div class="p-3 bg-[var(--card)] border border-slate-200 dark:border-white/5 rounded-xl">
+                                <div class="text-xs font-bold text-[var(--foreground)] mb-1">5. Technical Translation
+                                </div>
+                                <p class="text-[11px]">Map functional items into clean, scannable developer ticket
+                                    components.</p>
+                            </div>
+                            <div class="p-3 bg-[var(--card)] border border-slate-200 dark:border-white/5 rounded-xl">
+                                <div class="text-xs font-bold text-[var(--foreground)] mb-1">6. Solution Validation
+                                </div>
+                                <p class="text-[11px]">Test built assets against functional criteria to ensure
+                                    deployment readiness.</p>
+                            </div>
                         </div>
-                    </div>
+
+                        <div
+                            class="p-4 bg-[var(--card)] border border-slate-200 dark:border-white/10 rounded-xl space-y-2">
+                            <h4 class="text-xs font-bold text-[var(--foreground)] uppercase">Industry Standard Tool
+                                Stack</h4>
+                            <p class="text-[11px]">BAs manipulate data, documentation, and processes using:
+                                <span class="font-semibold text-blue-500">Jira, Confluence, Figma, Miro, Draw.io, Excel, and Notion.</span>
+                            </p>
+                        </div>
+                    </section>
+
+                    <!-- Lesson 3 -->
+                    <section class="space-y-4">
+                        <h2
+                            class="heading-font text-xl font-bold text-[var(--foreground)] border-l-4 border-blue-500 pl-3">
+                            Lesson 3: Business Analyst in Startups vs Enterprises</h2>
+                        <p class="text-xs">BAs operate differently based on organizational scale. Startups prioritize
+                            delivery speed, whereas enterprises prioritize compliance and predictable scale metrics.</p>
+
+                        <!-- Structured Matrix Table Block -->
+                        <div class="overflow-x-auto rounded-xl border border-slate-200 dark:border-white/10">
+                            <table class="w-full text-left border-collapse text-xs">
+                                <thead>
+                                    <tr
+                                        class="bg-[var(--muted-bg)] text-[var(--foreground)] border-b border-slate-200 dark:border-white/10">
+                                        <th class="p-3 font-bold">Operational Area</th>
+                                        <th class="p-3 font-bold">Startup Framework</th>
+                                        <th class="p-3 font-bold">Enterprise Framework</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-slate-200 dark:divide-white/5">
+                                    <tr>
+                                        <td class="p-3 font-bold text-[var(--foreground)]">Team Dynamic</td>
+                                        <td class="p-3">Small, cross-functional squads</td>
+                                        <td class="p-3">Large departments, strict swimlanes</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-3 font-bold text-[var(--foreground)]">Documentation</td>
+                                        <td class="p-3">Lightweight, agile specifications</td>
+                                        <td class="p-3">Extensive governance (BRD/FRD blueprints)</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-3 font-bold text-[var(--foreground)]">Velocity</td>
+                                        <td class="p-3">Rapid iterations and MVP loops</td>
+                                        <td class="p-3">Moderate pace, methodical validation cycles</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-3 font-bold text-[var(--foreground)]">Approvals</td>
+                                        <td class="p-3">Direct founder access routes</td>
+                                        <td class="p-3">Multi-tier sign-off and compliance blocks</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </section>
+
+                    <!-- Lesson 4 -->
+                    <section class="space-y-4">
+                        <h2
+                            class="heading-font text-xl font-bold text-[var(--foreground)] border-l-4 border-blue-500 pl-3">
+                            Lesson 4: Software Development Life Cycle (SDLC)</h2>
+                        <p class="text-xs">The Software Development Life Cycle is a structured process used to plan,
+                            build, test, deploy, and maintain software efficiently.</p>
+
+                        <div class="relative pl-6 border-l border-blue-500/30 space-y-4 text-xs">
+                            <div class="relative">
+                                <div
+                                    class="absolute -left-[30px] top-0 w-4 h-4 bg-blue-600 rounded-full border-4 border-[var(--background)]">
+                                </div><strong>1. Requirement Gathering:</strong> Extract data constraints and define
+                                solution scopes.
+                            </div>
+                            <div class="relative">
+                                <div
+                                    class="absolute -left-[30px] top-0 w-4 h-4 bg-blue-600 rounded-full border-4 border-[var(--background)]">
+                                </div><strong>2. Scope Planning:</strong> Baseline milestones, estimate timelines, and
+                                assign resources.
+                            </div>
+                            <div class="relative">
+                                <div
+                                    class="absolute -left-[30px] top-0 w-4 h-4 bg-blue-600 rounded-full border-4 border-[var(--background)]">
+                                </div><strong>3. Architecture Design:</strong> Build user journeys, workflow schematics,
+                                and functional wireframes.
+                            </div>
+                            <div class="relative">
+                                <div
+                                    class="absolute -left-[30px] top-0 w-4 h-4 bg-blue-600 rounded-full border-4 border-[var(--background)]">
+                                </div><strong>4. Development Implementation:</strong> Engineers build the defined system
+                                architecture code blocks.
+                            </div>
+                            <div class="relative">
+                                <div
+                                    class="absolute -left-[30px] top-0 w-4 h-4 bg-blue-600 rounded-full border-4 border-[var(--background)]">
+                                </div><strong>5. QA Verification Testing:</strong> Test functionality against acceptance
+                                criteria matrices to catch bugs.
+                            </div>
+                            <div class="relative">
+                                <div
+                                    class="absolute -left-[30px] top-0 w-4 h-4 bg-blue-600 rounded-full border-4 border-[var(--background)]">
+                                </div><strong>6. Production Deployment:</strong> Release artifacts into staging and live
+                                production environments.
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Lesson 5 -->
+                    <section class="space-y-4">
+                        <h2
+                            class="heading-font text-xl font-bold text-[var(--foreground)] border-l-4 border-blue-500 pl-3">
+                            Lesson 5: Agile vs Waterfall Management</h2>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div
+                                class="p-4 rounded-xl bg-[var(--card)] border border-slate-200 dark:border-white/5 space-y-2">
+                                <h3 class="font-bold text-xs uppercase text-blue-500 tracking-wider">Waterfall
+                                    Architecture</h3>
+                                <p class="text-[11px] leading-relaxed">Sequential phase framework where requirement
+                                    configurations are locked upfront. Excellent for highly predictable structures like
+                                    core banking or infrastructural engineering projects where errors are costly.</p>
+                            </div>
+                            <div
+                                class="p-4 rounded-xl bg-[var(--card)] border border-slate-200 dark:border-white/5 space-y-2">
+                                <h3 class="font-bold text-xs uppercase text-indigo-500 tracking-wider">Agile Iterative
+                                    Framework</h3>
+                                <p class="text-[11px] leading-relaxed">Incremental sprints driven by shifting backlogs,
+                                    rapid releases, and continuous feedback loops. The default operational methodology
+                                    for SaaS products, early-stage mobile apps, and hyper-growth platforms.</p>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Final Practical Execution Block -->
+                    <section
+                        class="p-6 bg-[var(--card)] border border-slate-200 dark:border-white/10 rounded-2xl space-y-4">
+                        <div
+                            class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-200 dark:border-white/5 pb-3">
+                            <h2 class="heading-font text-lg font-bold text-[var(--foreground)] flex items-center gap-2">
+                                <i class="fa-solid fa-square-poll-horizontal text-blue-500"></i> Module 1 Action
+                                Deliverable: Product Breakdown
+                            </h2>
+                            <span class="px-2 py-0.5 rounded text-[10px] bg-blue-500/10 text-blue-500 font-mono font-bold">100 MARKS TOTAL</span>
+                        </div>
+                        <p class="text-xs leading-relaxed text-[var(--muted-text)]">
+                            Pick an everyday application (e.g.,
+                            <strong>Uber, Zomato, Swiggy, Amazon, Zepto, Blinkit, Spotify, Netflix</strong>) and build a
+                            1-Page Business Analysis Report breaking down its structure.
+                        </p>
+
+                        <div class="space-y-3 bg-[var(--muted-bg)]/40 p-4 rounded-xl text-xs">
+                            <div><strong>Section 1: Product Overview</strong> — Name, industry mapping, and clear
+                                one-line target value declaration.</div>
+                            <div><strong>Section 2: Core Problem Definition</strong> — What pain point does this app
+                                eliminate, and why does that issue matter?</div>
+                            <div><strong>Section 3: Target Segmentation</strong> — Map primary cohorts (e.g., Consumers,
+                                Drivers, Merchants) and their usage motives.</div>
+                            <div><strong>Section 4: Four Core Revenue Generators</strong> — Detail 4 specific
+                                application features that directly drive cash flow.</div>
+                            <div><strong>Section 5: Gaps Identification</strong> — Uncover 3 functional design blind
+                                spots or performance inefficiencies.</div>
+                            <div><strong>Section 6: Actionable Optimization Rules</strong> — Propose 2 feature
+                                enhancements, detailing expected metrics impact.</div>
+                        </div>
+
+                        <div class="flex items-center justify-between flex-wrap gap-4 pt-2">
+                            <div class="text-[11px] text-[var(--muted-text)]">
+                                <i class="fa-solid fa-triangle-exclamation text-amber-500 mr-1"></i> Pass criteria
+                                requires an evaluation score of <strong>70% or greater</strong>.
+                            </div>
+                            <button @click="currentTab = 'dashboard'; activeDay = 1; openSubmissionModal(daysData[0])" class="px-5 py-2 bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs rounded-xl shadow-lg transition-all cursor-pointer">
+                                Ready? Open Submission Panel <i class="fa-solid fa-arrow-right ml-1"></i>
+                            </button>
+                        </div>
+                    </section>
+
                 </div>
-            </div>
-        </main>
+            </main>
+        </div>
     </div>
 
+    <!-- Submission Modal Backdrop -->
     <div x-show="modalOpen" x-cloak
         class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
         <div class="bg-[var(--card)] border border-slate-200 dark:border-white/10 w-full max-w-lg rounded-2xl p-6 shadow-2xl relative"
@@ -396,15 +633,17 @@
         </div>
     </div>
 
+    <!-- Alpine State Manager Script -->
     <script>
         // ⚠️ ATTACH YOUR LIVE GOOGLE DEPLOYED WEB APP URL ENDPOINT DIRECTLY HERE:
-        const GOOGLE_SCRIPT_API_URL = "https://script.google.com/macros/s/AKfycbw6OlcM9V5gqkbThWxtrurU387AZ1d73WpdwyI0CrEEpt_RGvXkMahH7NgWTSVHrj78/exec";
+        const GOOGLE_SCRIPT_API_URL = "https://script.google.com/macros/s/AKfycbwT8CwDxiwukRwWeHwlTSrkExA26YuF6JnVNhtDj_aDhwG8J3dw8BAIyzW0EnQkoiK0/exec";
 
         function dashboardApp() {
             return {
                 isLoggedIn: false,
                 authLoading: false,
                 submitLoading: false,
+                currentTab: 'dashboard', // Controls view toggles ('dashboard' or 'learning')
                 activeDay: 1,
                 modalOpen: false,
                 selectedDay: null,
@@ -414,15 +653,14 @@
                 userSession: { name: '', phone: '' },
 
                 daysData: [
-                    { id: 1, title: "Introduction to Business Analysis", lessons: ["What is Business Analysis?", "Roles & Responsibilities of a BA", "BA in Startups vs Enterprises", "SDLC Frameworks (Agile vs Waterfall)"], taskDescription: "Select an existing startup or everyday app (e.g. Uber, Zomato). Conduct an initial breakdown analyzing its product gaps.", requirements: ["Define primary problem solved", "Document target user segments", "List top 4 revenue features", "Propose 2 actionable improvements"], deliverable: "1-Page BA Report", submitted: false, completed: false, submissionUrl: '', submissionNotes: '' },
-                    { id: 2, title: "Requirement Gathering", lessons: ["Functional Requirements", "Non-Functional Requirements", "Stakeholder Identification", "User Stories & Acceptance Criteria"], taskDescription: "Interview a user and draft a complete requirement spec sheet.", requirements: ["Explicit Problem Statement", "1 Primary User Persona", "10 Functional Specs", "5 Non-Functional Specs"], deliverable: "Document Spec (BRD/FRD)", submitted: false, completed: false, submissionUrl: '', submissionNotes: '' },
-                    { id: 3, title: "Process Mapping & Flowcharts", lessons: ["Business Process Mapping", "Flowchart Conventions", "Customer Journey Mapping", "As-Is vs. To-Be Analysis"], taskDescription: "Map out step-by-step state transition flow for a real-world workflow.", requirements: ["Friction-heavy As-Is process map", "Optimized To-Be streamline workflow", "Standard swimlane layout paths"], deliverable: "Process Flowchart Diagram", submitted: false, completed: false, submissionUrl: '', submissionNotes: '' },
-                    { id: 4, title: "Wireframing & Documentation", lessons: ["Low-Fidelity Layouts", "User Navigation Flows", "BRD & FRD Architecture Patterns"], taskDescription: "Design clear low-fidelity screen layouts and interaction paths.", requirements: ["Low-Fi Wireframe Mockups", "Logical navigation flow connections"], deliverable: "Wireframe Package Diagram", submitted: false, completed: false, submissionUrl: '', submissionNotes: '' },
-                    { id: 5, title: "Final Capstone Portfolio Case Study", isCapstone: true, lessons: ["Portfolio Case Study Composition", "Pitch Preparation & Synthesis"], taskDescription: "Combine all skills gained into a comprehensive capstone portfolio piece.", requirements: ["Problem Statement & Stakeholder Map", "15 Functional & 8 Non-Functional specs", "Agile User Stories package", "Complete MVP feature roadmap"], deliverable: "Business Analyst Case Study", submitted: false, completed: false, submissionUrl: '', submissionNotes: '' }
+                    { id: 1, title: "Introduction to Business Analysis", deliverable: "1-Page BA Report", taskDescription: "Select an app like Uber or Zomato. Conduct an initial breakdown analysis mapping functional target loops, 4 distinct revenue models, product system gaps, and actionable fixes.", submitted: false, completed: false, submissionUrl: '', submissionNotes: '' },
+                    { id: 2, title: "Requirement Gathering Foundations", deliverable: "Document Spec (BRD/FRD)", taskDescription: "Interview a user and draft a complete requirement specification sheet containing problem parameters, user personas, and a baseline configuration table of functional requirements.", submitted: false, completed: false, submissionUrl: '', submissionNotes: '' },
+                    { id: 3, title: "Process Mapping & Flowcharts", deliverable: "Process Flowchart Diagram", taskDescription: "Map out clear step-by-step state transition flows. Generate structured swimlane views displaying both legacy As-Is processes and high-efficiency To-Be targets.", submitted: false, completed: false, submissionUrl: '', submissionNotes: '' },
+                    { id: 4, title: "Wireframing & UI Documentation", deliverable: "Wireframe Package Diagram", taskDescription: "Design actionable low-fidelity system wireframe layouts along with technical navigation path charts explaining data transformations across screen structures.", submitted: false, completed: false, submissionUrl: '', submissionNotes: '' },
+                    { id: 5, title: "Final Capstone Portfolio Case Study", deliverable: "Business Analyst Case Study", taskDescription: "Synthesize all accumulated domain skills into a premium, interview-ready capstone portfolio piece detailing full product specs, backlogs, and roadmap strategies.", submitted: false, completed: false, submissionUrl: '', submissionNotes: '' }
                 ],
 
                 init() {
-                    // Cache check avoids repeated logins on page refreshes
                     const activeToken = localStorage.getItem('unlitify_authenticated_session');
                     if (activeToken) {
                         const session = JSON.parse(activeToken);
@@ -430,8 +668,6 @@
                         this.hydrateDatabaseState(session.progress);
                         this.isLoggedIn = true;
                     }
-                    
-                    // Dark theme recovery checks
                     if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
                         document.documentElement.classList.add('dark');
                     } else {
@@ -446,11 +682,7 @@
                         const response = await fetch(GOOGLE_SCRIPT_API_URL, {
                             method: "POST",
                             headers: { "Content-Type": "text/plain" },
-                            body: JSON.stringify({
-                                action: "login",
-                                name: this.loginForm.name,
-                                phone: this.loginForm.phone
-                            })
+                            body: JSON.stringify({ action: "login", name: this.loginForm.name, phone: this.loginForm.phone })
                         });
                         const res = await response.json();
                         if (res.status === "success") {
@@ -458,11 +690,9 @@
                             localStorage.setItem('unlitify_authenticated_session', JSON.stringify(this.userSession));
                             this.hydrateDatabaseState(res.user.progress);
                             this.isLoggedIn = true;
-                        } else {
-                            alert("Database rejection: " + res.message);
-                        }
+                        } else { alert("Database rejection: " + res.message); }
                     } catch (e) {
-                        alert("Network integration interface issue. Verify your Web App settings.");
+                        alert("Network connectivity mapping issue.");
                         console.error(e);
                     } finally { this.authLoading = false; }
                 },
@@ -500,7 +730,6 @@
                             this.selectedDay.submissionNotes = this.submissionNotes;
                             this.selectedDay.submitted = true;
                             
-                            // Re-cache fresh state locally
                             this.userSession.progress[this.selectedDay.id] = {
                                 url: this.submissionUrl,
                                 notes: this.submissionNotes,
@@ -508,15 +737,11 @@
                                 completed: this.selectedDay.completed
                             };
                             localStorage.setItem('unlitify_authenticated_session', JSON.stringify(this.userSession));
-                            
                             this.modalOpen = false;
                             alert("🚀 Work submission synced to Google Sheet review queue successfully!");
-                        } else {
-                            alert("Sync error: " + res.message);
-                        }
+                        } else { alert("Sync error: " + res.message); }
                     } catch (e) {
                         alert("Failed to submit deliverable nodes.");
-                        console.error(e);
                     } finally { this.submitLoading = false; }
                 },
 
@@ -525,23 +750,18 @@
                     return Math.round((completed / this.daysData.length) * 100);
                 },
 
-                completedCount() {
-                    return this.daysData.filter(d => d.completed).length;
-                },
-
+                completedCount() { return this.daysData.filter(d => d.completed).length; },
                 openSubmissionModal(day) {
                     this.selectedDay = day;
                     this.submissionUrl = day.submissionUrl || '';
                     this.submissionNotes = day.submissionNotes || '';
                     this.modalOpen = true;
                 },
-
                 executeSignOut() {
                     localStorage.removeItem('unlitify_authenticated_session');
                     this.isLoggedIn = false;
                     this.loginForm = { name: '', phone: '' };
                 },
-
                 toggleTheme() {
                     if (document.documentElement.classList.contains('dark')) {
                         document.documentElement.classList.remove('dark');
