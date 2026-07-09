@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Openbox — Premium Business Analytics & Software Internships</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap"
+        rel="stylesheet">
+
+    <style>
+        :root {
+            --primary: #2563eb;
+            --accent: #3b82f6;
+            --background: #f8fafc;
+            --foreground: #0f172a;
+            --muted-bg: #f1f5f9;
+            --muted-text: #475569;
+            --blur-tint: rgba(248, 250, 252, 0.8);
+            --card: #ffffff;
+            --grid-line: rgba(15, 23, 42, 0.04);
+        }
+
+        .dark {
+            --primary: #3b82f6;
+            --accent: #60a5fa;
+            --background: #0a0a0c;
+            --foreground: #f8fafc;
+            --muted-bg: #111115;
+            --muted-text: #94a3b8;
+            --blur-tint: rgba(10, 10, 12, 0.8);
+            --card: #111115;
+            --grid-line: rgba(255, 255, 255, 0.03);
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--background);
+            color: var(--muted-text);
+        }
+
+        .heading-font {
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        .bg-grid {
+            background-size: 40px 40px;
+            background-image: linear-gradient(to right, var(--grid-line) 1px, transparent 1px), linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
+        }
+
+        [x-cloak] {
+            display: none !important;
+        }
+    </style>
+
+    <script>
+        if (localStorage.getItem('theme') === 'light' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: light)').matches)) {
+            document.documentElement.classList.remove('dark');
+        } else { document.documentElement.classList.add('dark'); }
+    </script>
+</head>
+
+<body class="min-h-screen bg-grid pb-20">
+
+    <!-- Header -->
+    <header
+        class="max-w-6xl mx-auto mt-4 px-4 lg:px-0 bg-[var(--blur-tint)] backdrop-blur-xl border border-slate-200 dark:border-white/10 rounded-2xl sticky top-4 z-50">
+        <div class="h-20 px-6 flex items-center justify-between">
+            <a href="#" class="flex items-center gap-3">
+                <div class="h-10 w-10 bg-blue-600 rounded-lg flex items-center justify-center text-white font-bold">OB
+                </div>
+                <div class="flex flex-col leading-none">
+                    <span class="text-[var(--foreground)] font-black text-xl tracking-tight heading-font">Openbox</span>
+                    <span class="text-[var(--primary)] font-bold text-[9px] tracking-[0.25em] uppercase">Growth Partner</span>
+                </div>
+            </a>
+            <button id="theme-toggle" class="p-2 w-10 h-10 rounded-xl bg-[var(--muted-bg)] cursor-pointer">
+                <i class="fa-solid fa-moon dark:hidden"></i>
+                <i class="fa-solid fa-sun hidden dark:block"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-5xl mx-auto px-6 py-20">
+        <div class="text-center mb-16">
+            <h1 class="heading-font text-5xl font-bold text-[var(--foreground)] mb-6">Accelerator Portal</h1>
+            <p class="text-lg text-[var(--muted-text)] max-w-xl mx-auto">Choose your growth path. Access high-fidelity
+                internship simulations or certify your skills instantly.</p>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-8">
+            <!-- Internship Card -->
+            <section
+                class="p-8 rounded-3xl border border-slate-200 dark:border-white/10 bg-[var(--card)] hover:border-blue-500/50 transition">
+                <div class="w-16 h-16 bg-blue-600/10 flex items-center justify-center rounded-2xl text-blue-500 mb-6">
+                    <i class="fa-solid fa-briefcase text-2xl"></i>
+                </div>
+                <h2 class="heading-font text-2xl font-bold text-[var(--foreground)] mb-3">Virtual Internship</h2>
+                <p class="text-sm text-[var(--muted-text)] mb-8">Hands-on experience. Map client requirements and deploy
+                    project infrastructure in real-world simulated environments.</p>
+                <a href="#"
+                    class="block w-full text-center py-4 bg-blue-600 hover:bg-blue-500 text-white rounded-xl font-bold text-xs uppercase tracking-widest">Start
+                    Internship</a>
+            </section>
+
+            <!-- Certification Card -->
+            <section
+                class="p-8 rounded-3xl border border-slate-200 dark:border-white/10 bg-[var(--card)] hover:border-green-500/50 transition">
+                <div class="w-16 h-16 bg-green-600/10 flex items-center justify-center rounded-2xl text-green-500 mb-6">
+                    <i class="fa-solid fa-certificate text-2xl"></i>
+                </div>
+                <h2 class="heading-font text-2xl font-bold text-[var(--foreground)] mb-3">Free Certification</h2>
+                <p class="text-sm text-[var(--muted-text)] mb-8">Validate your skills. Complete our analytical
+                    diagnostic test and receive your verified Openbox credential badge.</p>
+                <a href="https://openboxgp.vercel.app/test.html"
+                    class="block w-full text-center py-4 bg-green-600 hover:bg-green-500 text-white rounded-xl font-bold text-xs uppercase tracking-widest">Begin
+                    Assessment</a>
+            </section>
+        </div>
+    </main>
+
+    <footer class="text-center text-[10px] text-[var(--muted-text)] font-mono">
+        &copy; 2026 OPENBOX GROWTH PARTNER
+    </footer>
+
+    <script>
+        document.getElementById('theme-toggle').addEventListener('click', () => {
+            document.documentElement.classList.toggle('dark');
+            localStorage.setItem('theme', document.documentElement.classList.contains('dark') ? 'dark' : 'light');
+        });
+    </script>
+</body>
+
+</html>
