@@ -3474,6 +3474,370 @@ document.addEventListener(
     }
 );
 
+
+
+
+/* =========================================================
+   LOCAL STORAGE — COURSE PROGRESS
+   ========================================================= */
+
+const STORAGE_KEY = "python_cs_course_progress";
+
+/*
+Example stored structure:
+
+{
+    "lecture-1": {
+        "task-1": true,
+        "task-2": true
+    },
+    "lecture-2": {
+        "task-1": true
+    }
+}
+*/
+
+
+function getProgress() {
+
+    try {
+
+        const saved = localStorage.getItem(STORAGE_KEY);
+
+        return saved ? JSON.parse(saved) : {};
+
+    } catch (error) {
+
+        console.error("Unable to load saved progress:", error);
+
+        return {};
+
+    }
+
+}
+
+
+function saveProgress(progress) {
+
+    try {
+
+        localStorage.setItem(
+            STORAGE_KEY,
+            JSON.stringify(progress)
+        );
+
+        updateSyncStatus("Progress saved");
+
+    } catch (error) {
+
+        console.error("Unable to save progress:", error);
+
+        updateSyncStatus("Save failed");
+
+    }
+
+}
+
+
+function updateSyncStatus(message) {
+
+    const syncStatus =
+        document.getElementById("syncStatus");
+
+    if (!syncStatus) return;
+
+    syncStatus.textContent = message;
+
+}
+
+
+/* =========================================================
+   SAVE INDIVIDUAL TASK
+   ========================================================= */
+
+function setTaskCompleted(
+    lectureId,
+    taskId,
+    completed
+) {
+
+    const progress = getProgress();
+
+    if (!progress[lectureId]) {
+
+        progress[lectureId] = {};
+
+    }
+
+    progress[lectureId][taskId] = completed;
+
+    saveProgress(progress);
+
+    updateLectureCompletion(lectureId);
+
+    updateCourseProgress();
+
+}
+
+
+/* =========================================================
+   CHECK IF TASK IS COMPLETED
+   ========================================================= */
+
+function isTaskCompleted(
+    lectureId,
+    taskId
+) {
+
+    const progress = getProgress();
+
+    return !!(
+        progress[lectureId] &&
+        progress[lectureId][taskId]
+    );
+
+}
+
+
+/* =========================================================
+   RESTORE CHECKBOXES AFTER PAGE LOAD
+   ========================================================= */
+
+function restoreTaskProgress() {
+
+    const progress = getProgress();
+
+    document
+        .querySelectorAll(
+            '[data-lecture-id][data-task-id]'
+        )
+        .forEach(task => {
+
+            const lectureId =
+                task.dataset.lectureId;
+
+            const taskId =
+                task.dataset.taskId;
+
+            task.checked =
+                !!(
+                    progress[lectureId] &&
+                    progress[lectureId][taskId]
+                );
+
+        });
+
+}
+
+
+/* =========================================================
+   CONNECT CHECKBOXES
+   ========================================================= */
+
+function initializeTaskListeners() {
+
+    document
+        .querySelectorAll(
+            '[data-lecture-id][data-task-id]'
+        )
+        .forEach(task => {
+
+            task.addEventListener(
+                "change",
+                function () {
+
+                    setTaskCompleted(
+                        this.dataset.lectureId,
+                        this.dataset.taskId,
+                        this.checked
+                    );
+
+                }
+            );
+
+        });
+
+}
+
+
+/* =========================================================
+   COUNT COMPLETED TASKS FOR A LECTURE
+   ========================================================= */
+
+function updateLectureCompletion(lectureId) {
+
+    const lectureTasks =
+        document.querySelectorAll(
+            `[data-lecture-id="${lectureId}"]`
+        );
+
+    if (!lectureTasks.length) return;
+
+    const completed =
+        [...lectureTasks]
+            .filter(task => task.checked)
+            .length;
+
+    const total =
+        lectureTasks.length;
+
+    const complete =
+        completed === total;
+
+    console.log(
+        `${lectureId}: ${completed}/${total}`
+    );
+
+    /*
+       If your existing lecture object has
+       a completed property, update it here.
+    */
+
+    if (typeof updateLectureUI === "function") {
+
+        updateLectureUI(
+            lectureId,
+            complete
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   COURSE PROGRESS
+   ========================================================= */
+
+function updateCourseProgress() {
+
+    const lectures =
+        document.querySelectorAll(
+            "[data-lecture]"
+        );
+
+    if (!lectures.length) return;
+
+    let completedLectures = 0;
+
+    lectures.forEach(lecture => {
+
+        const lectureId =
+            lecture.dataset.lecture;
+
+        const tasks =
+            document.querySelectorAll(
+                `[data-lecture-id="${lectureId}"]`
+            );
+
+        if (!tasks.length) return;
+
+        const completed =
+            [...tasks]
+                .every(task => task.checked);
+
+        if (completed) {
+
+            completedLectures++;
+
+        }
+
+    });
+
+    const totalLectures =
+        lectures.length;
+
+    const percentage =
+        Math.round(
+            (completedLectures / totalLectures) * 100
+        );
+
+    const sidebarPercent =
+        document.getElementById(
+            "sidebarPercent"
+        );
+
+    const sidebarProgress =
+        document.getElementById(
+            "sidebarProgress"
+        );
+
+    const sidebarMeta =
+        document.getElementById(
+            "sidebarMeta"
+        );
+
+    if (sidebarPercent) {
+
+        sidebarPercent.textContent =
+            `${percentage}%`;
+
+    }
+
+    if (sidebarProgress) {
+
+        sidebarProgress.style.width =
+            `${percentage}%`;
+
+    }
+
+    if (sidebarMeta) {
+
+        sidebarMeta.textContent =
+            `${completedLectures} of ${totalLectures} lectures completed`;
+
+    }
+
+    updateSyncStatus(
+        `${percentage}% progress saved`
+    );
+
+}
+
+
+/* =========================================================
+   INITIALIZE
+   ========================================================= */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function () {
+
+        restoreTaskProgress();
+
+        initializeTaskListeners();
+
+        updateCourseProgress();
+
+        updateSyncStatus("Progress loaded");
+
+    }
+);
+
+
+/* =========================================================
+   OPTIONAL — CLEAR ALL PROGRESS
+   ========================================================= */
+
+function clearCourseProgress() {
+
+    const confirmClear =
+        confirm(
+            "Are you sure you want to reset all course progress?"
+        );
+
+    if (!confirmClear) return;
+
+    localStorage.removeItem(
+        STORAGE_KEY
+    );
+
+    location.reload();
+
+}
+
+
+
 </script>
 
 </body>
