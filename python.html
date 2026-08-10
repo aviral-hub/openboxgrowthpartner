@@ -2019,65 +2019,218 @@ answer:1
 },
 
 {
-q:"Variable Math: Assume a, b and c are defined. Create total as the sum of a and b, multiplied by c, then print it.",
-code:true,
-expected:"total=(a+b)*c"
-},
+    q: "Variable Math: Assume a, b and c are defined. Create total as the sum of a and b, multiplied by c, then print it.",
+    options: [
+      `total = a + b * c
+print(total)`,
+      `total = (a + b) * c
+print(total)`,
+      `total = (a * b) + c
+print(total)`,
+      `total = a + (b * c)
+print(total)`
+    ],
+    answer: 1
+  },
 
-{
-q:"Branching: Given number, print positive if > 0, negative if < 0, and zero if equal to 0.",
-code:true,
-expected:"ifnumber>0"
-},
+  {
+    q: "Branching: Given number, print 'positive' if > 0, 'negative' if < 0, and 'zero' if equal to 0.",
+    options: [
+      `if number > 0:
+    print("positive")
+elif number < 0:
+    print("negative")
+else:
+    print("zero")`,
 
-{
-q:'For Loop: Write a loop that prints "hello world" exactly N times.',
-code:true,
-expected:"foriinrange(n)"
-},
+      `if number >= 0:
+    print("positive")
+else:
+    print("negative")`,
 
-{
-q:"While Loop: Find the cube root of N using a while loop, assuming N is a perfect cube.",
-code:true,
-expected:"whilei**3<n"
-},
+      `if number < 0:
+    print("positive")
+elif number > 0:
+    print("negative")
+else:
+    print("zero")`,
 
-{
-q:"List Comprehension: Create Lnew containing the squares of all even numbers in L.",
-code:true,
-expected:"lnew=[e**2foreinlif"
-},
+      `if number == 0:
+    print("positive")
+else:
+    print("zero")`
+    ],
+    answer: 0
+  },
 
-{
-q:"Function Definition: Define div_by(n, d) returning True if d divides n evenly.",
-code:true,
-expected:"defdiv_by(n,d):returnn%d==0"
-},
+  {
+    q: `For Loop: Write a loop that prints "hello world" exactly N times.`,
+    options: [
+      `for i in range(N):
+    print("hello world")`,
 
-{
-q:"Dictionary Iteration: Count how many items in dictionary d have a key equal to its value.",
-code:true,
-expected:"ford,vind.items"
-},
+      `for i in range(N + 1):
+    print("hello world")`,
 
-{
-q:"Recursion: Define recur_power(base, exp) to calculate base raised to exp.",
-code:true,
-expected:"defrecur_power(base,exp)"
-},
+      `while i < N:
+    print("hello world")`,
 
-{
-q:"Recursion: Define total_recur(L) to sum all elements in L recursively.",
-code:true,
-expected:"deftotal_recur(l)"
-},
+      `for i in N:
+    print("hello world")`
+    ],
+    answer: 0
+  },
 
-{
-q:"OOP: Define Container with __init__ creating an empty self.myList.",
-code:true,
-expected:"classcontainer"
-}
+  {
+    q: "While Loop: Find the cube root of N using a while loop, assuming N is a perfect cube.",
+    options: [
+      `i = 1
+while i ** 3 < N:
+    i += 1
+print(i)`,
 
+      `i = 0
+while i ** 2 < N:
+    i += 1
+print(i)`,
+
+      `i = 1
+while i * 3 < N:
+    i += 1
+print(i)`,
+
+      `i = 1
+while i ** 3 > N:
+    i -= 1
+print(i)`
+    ],
+    answer: 0
+  },
+
+  {
+    q: "List Comprehension: Create Lnew containing the squares of all even numbers in L.",
+    options: [
+      `Lnew = [e ** 2 for e in L if e % 2 == 0]`,
+
+      `Lnew = [e * 2 for e in L if e % 2 == 0]`,
+
+      `Lnew = [e ** 2 for e in L if e % 2 != 0]`,
+
+      `Lnew = [e for e in L if e % 2 == 0]`
+    ],
+    answer: 0
+  },
+
+  {
+    q: "Function Definition: Define div_by(n, d) returning True if d divides n evenly.",
+    options: [
+      `def div_by(n, d):
+    return n / d == 0`,
+
+      `def div_by(n, d):
+    return n % d == 0`,
+
+      `def div_by(n, d):
+    return d % n == 0`,
+
+      `def div_by(n, d):
+    return n * d == 0`
+    ],
+    answer: 1
+  },
+
+  {
+    q: "Dictionary Iteration: Count how many items in dictionary d have a key equal to its value.",
+    options: [
+      `count = 0
+for k, v in d.items():
+    if k == v:
+        count += 1`,
+
+      `count = 0
+for k in d:
+    if k == d:
+        count += 1`,
+
+      `count = 0
+for k, v in d.items():
+    if k != v:
+        count += 1`,
+
+      `count = 0
+for v in d.values():
+    count += 1`
+    ],
+    answer: 0
+  },
+
+  {
+    q: "Recursion: Define recur_power(base, exp) to calculate base raised to exp.",
+    options: [
+      `def recur_power(base, exp):
+    if exp <= 0:
+        return 1
+    return base * recur_power(base, exp - 1)`,
+
+      `def recur_power(base, exp):
+    return base + recur_power(base, exp - 1)`,
+
+      `def recur_power(base, exp):
+    if exp == 0:
+        return 0
+    return base * exp`,
+
+      `def recur_power(base, exp):
+    if exp <= 0:
+        return 0
+    return base + exp`
+    ],
+    answer: 0
+  },
+
+  {
+    q: "Recursion: Define total_recur(L) to sum all elements in L recursively.",
+    options: [
+      `def total_recur(L):
+    if len(L) == 0:
+        return 0
+    return L[0] + total_recur(L[1:])`,
+
+      `def total_recur(L):
+    if len(L) == 0:
+        return 1
+    return L[0] * total_recur(L[1:])`,
+
+      `def total_recur(L):
+    return L + total_recur(L)`,
+
+      `def total_recur(L):
+    return sum(L[1:])`
+    ],
+    answer: 0
+  },
+
+  {
+    q: "OOP: Define Container with __init__ creating an empty self.myList.",
+    options: [
+      `class Container:
+    def __init__(self):
+        self.myList = []`,
+
+      `class Container:
+    def __init__(self):
+        myList = []`,
+
+      `class Container:
+    def init(self):
+        self.myList = {}`,
+
+      `class Container:
+    def __init__(self):
+        self.myList = None`
+    ],
+    answer: 0
+  }
 ];
 
 
