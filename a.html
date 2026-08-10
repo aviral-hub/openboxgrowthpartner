@@ -1673,374 +1673,595 @@ const API_URL =
    Replace/add your actual resources here.
 ========================================================= */
 
+ COURSE DATA
+============================================================ */
+
 const lectures = [
 
-    {
-        id: 1,
-        title: "Introduction",
-        description:
-            "Introduction to computation, programming and the Python learning journey.",
-        checklist: [
-            "Watch the lecture",
-            "Read the lecture notes",
-            "Write and run your first Python program"
-        ],
-        resources: [],
-        problemSet: null
-    },
+{
+    id: 1,
+    title: "Introduction",
+    description:
+        "Understand the fundamentals of computer science, computational thinking and Python programming.",
+    video:
+        "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/video_galleries/lecture-videos/",
+    notes:
+        "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/resources/mit6_100l_f22_lec01_pdf/",
+    code:
+        "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/resources/mit6_100l_f22_lec01_code_py/",
+    exercise:
+        "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/pages/finger-exercises/",
+    practice: [
+        "Watch the lecture",
+        "Review the lecture notes",
+        "Run the accompanying Python code",
+        "Complete the finger exercises",
+        "Write a simple Python program"
+    ]
+},
 
-    {
-        id: 2,
-        title: "Core Elements of Programs",
-        description:
-            "Learn variables, expressions, operators and the basic structure of Python programs.",
-        checklist: [
-            "Watch the lecture",
-            "Study variables and expressions",
-            "Complete the coding exercises"
-        ],
-        resources: [],
-        problemSet: null
-    },
+{
+    id: 2,
+    title: "Strings, Input/Output, and Branching",
+    description:
+        "Learn strings, user input, output and conditional branching.",
+    video:
+        "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/video_galleries/lecture-videos/",
+    notes:
+        "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/resources/mit6_100l_f22_lec02_pdf/",
+    code:
+        "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/resources/mit6_100l_f22_lec02_code_py/",
+    exercise:
+        "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/pages/finger-exercises/",
+    practice: [
+        "Watch the lecture",
+        "Review the lecture notes",
+        "Run the lecture code",
+        "Complete finger exercises",
+        "Build an input-based branching program"
+    ]
+},
 
-    {
-        id: 3,
-        title: "Computations",
-        description:
-            "Understand computation, values, operators and mathematical expressions.",
-        checklist: [
-            "Watch the lecture",
-            "Practice Python expressions",
-            "Complete the exercises"
-        ],
-        resources: [],
-        problemSet: null
-    },
+{
+    id: 3,
+    title: "Iteration",
+    description:
+        "Understand loops and repeated computation using Python.",
+    video: "#",
+    notes:
+        "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/resources/mit6_100l_f22_lec03_pdf/",
+    code:
+        "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/resources/mit6_100l_f22_lec03_code_py/",
+    exercise:
+        "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/pages/finger-exercises/",
+    practice: [
+        "Watch the lecture",
+        "Review the notes",
+        "Run lecture examples",
+        "Complete exercises",
+        "Build a loop-based program"
+    ]
+},
 
-    {
-        id: 4,
-        title: "Branching",
-        description:
-            "Learn conditional logic and decision making using if, elif and else.",
-        checklist: [
-            "Study conditional statements",
-            "Write branching programs",
-            "Complete the exercises"
-        ],
-        resources: [],
-        problemSet: null
-    },
+{
+    id: 4,
+    title: "Loops over Strings, Guess-and-Check, Binary",
+    description:
+        "Explore loops over strings, guess-and-check algorithms and binary concepts.",
+    video: "#",
+    notes:
+        "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/resources/mit6_100l_f22_lec04_pdf/",
+    code:
+        "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/resources/mit6_100l_f22_lec04_code_py/",
+    exercise:
+        "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/pages/finger-exercises/",
+    practice: [
+        "Watch the lecture",
+        "Review the notes",
+        "Study lecture code",
+        "Complete exercises",
+        "Implement guess-and-check"
+    ]
+},
 
-    {
-        id: 5,
-        title: "Iteration",
-        description:
-            "Learn loops and repeated computation using Python.",
-        checklist: [
-            "Study for loops",
-            "Study while loops",
-            "Complete iteration exercises"
-        ],
-        resources: [],
-        problemSet: null
-    },
+{
+    id: 5,
+    title: "Floats and Approximation Methods",
+    description:
+        "Learn floating point numbers and numerical approximation.",
+    video: "#",
+    notes:
+        "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/resources/mit6_100l_f22_lec05_pdf/",
+    code:
+        "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/resources/mit6_100l_f22_lec05_code_py/",
+    exercise:
+        "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/pages/finger-exercises/",
+    practice: [
+        "Watch lecture",
+        "Review notes",
+        "Run code",
+        "Complete exercises",
+        "Implement approximation"
+    ]
+},
 
-    {
-        id: 6,
-        title: "Functions",
-        description:
-            "Understand functions, parameters, arguments and return values.",
-        checklist: [
-            "Study function definitions",
-            "Write reusable functions",
-            "Complete the exercises"
-        ],
-        resources: [],
-        problemSet: null
-    },
+{
+    id: 6,
+    title: "Bisection Search",
+    description:
+        "Understand bisection search and efficient search-space reduction.",
+    video: "#",
+    notes:
+        "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/resources/mit6_100l_f22_lec06_pdf/",
+    code:
+        "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/resources/mit6_100l_f22_lec06_code_py/",
+    exercise:
+        "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/pages/finger-exercises/",
+    practice: [
+        "Watch lecture",
+        "Review notes",
+        "Run code",
+        "Complete exercises",
+        "Implement bisection search"
+    ]
+},
 
-    {
-        id: 7,
-        title: "Testing and Debugging",
-        description:
-            "Learn systematic approaches to testing programs and finding errors.",
-        checklist: [
-            "Study common programming errors",
-            "Practice debugging",
-            "Complete the debugging exercises"
-        ],
-        resources: [],
-        problemSet: null
-    },
+{
+    id: 7,
+    title: "Decomposition, Abstraction, Functions",
+    description:
+        "Break complex problems into smaller reusable functions.",
+    video: "#",
+    notes:
+        "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/resources/mit6_100l_f22_lec07_pdf/",
+    code:
+        "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/resources/mit6_100l_f22_lec07_code_py/",
+    exercise:
+        "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/pages/finger-exercises/",
+    practice: [
+        "Watch lecture",
+        "Read notes",
+        "Run examples",
+        "Complete exercises",
+        "Refactor a program into functions"
+    ]
+},
 
-    {
-        id: 8,
-        title: "Exceptions and Assertions",
-        description:
-            "Learn how programs handle unexpected situations and validate assumptions.",
-        checklist: [
-            "Study exceptions",
-            "Practice try and except",
-            "Complete the exercises"
-        ],
-        resources: [],
-        problemSet: null
-    },
+{
+    id: 8,
+    title: "Functions as Objects",
+    description:
+        "Understand how Python treats functions as first-class objects.",
+    video: "#",
+    notes:
+        "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/resources/mit6_100l_f22_lec08_pdf/",
+    code:
+        "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/resources/mit6_100l_f22_lec08_code_py/",
+    exercise:
+        "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/pages/finger-exercises/",
+    practice: [
+        "Watch lecture",
+        "Read notes",
+        "Run code",
+        "Complete exercises",
+        "Pass functions as arguments"
+    ]
+},
 
-    {
-        id: 9,
-        title: "Lists",
-        description:
-            "Learn Python lists and collections of values.",
-        checklist: [
-            "Study list operations",
-            "Practice indexing and iteration",
-            "Complete list exercises"
-        ],
-        resources: [],
-        problemSet: null
-    },
+{
+    id: 9,
+    title: "Lambda Functions, Tuples, and Lists",
+    description:
+        "Learn lambda expressions, tuples and Python lists.",
+    video: "#",
+    notes:
+        "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/resources/mit6_100l_f22_lec09_pdf/",
+    code:
+        "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/resources/mit6_100l_f22_lec09_code_py/",
+    exercise:
+        "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/pages/finger-exercises/",
+    practice: [
+        "Watch lecture",
+        "Review notes",
+        "Run code",
+        "Complete exercises",
+        "Manipulate lists and tuples"
+    ]
+},
 
-    {
-        id: 10,
-        title: "Tuples and Dictionaries",
-        description:
-            "Explore tuples, dictionaries and structured data.",
-        checklist: [
-            "Study tuples",
-            "Study dictionaries",
-            "Complete collection exercises"
-        ],
-        resources: [],
-        problemSet: null
-    },
+{
+    id: 10,
+    title: "Lists, Mutability",
+    description:
+        "Understand Python lists and mutable objects.",
+    video: "#",
+    notes:
+        "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/resources/mit6_100l_f22_lec10_pdf/",
+    code:
+        "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/resources/mit6_100l_f22_lec10_code_py/",
+    exercise:
+        "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/pages/finger-exercises/",
+    practice: [
+        "Watch lecture",
+        "Review notes",
+        "Run code",
+        "Complete exercises",
+        "Build a list-processing application"
+    ]
+},
 
-    {
-        id: 11,
-        title: "Functions as Objects",
-        description:
-            "Understand functions as first-class objects and higher-order programming.",
-        checklist: [
-            "Study functions as objects",
-            "Practice passing functions",
-            "Complete the exercises"
-        ],
-        resources: [],
-        problemSet: null
-    },
+{
+    id: 11,
+    title: "Aliasing, Cloning",
+    description:
+        "Understand references, aliasing and object cloning.",
+    video: "#",
+    notes:
+        "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/resources/mit6_100l_f22_lec11_pdf/",
+    code:
+        "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/resources/mit6_100l_f22_lec11_code_py/",
+    exercise:
+        "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/pages/finger-exercises/",
+    practice: [
+        "Watch lecture",
+        "Review notes",
+        "Run code",
+        "Complete exercises",
+        "Demonstrate aliasing and cloning"
+    ]
+},
 
-    {
-        id: 12,
-        title: "Recursion",
-        description:
-            "Learn recursive problem solving and recursive function design.",
-        checklist: [
-            "Understand recursion",
-            "Trace recursive functions",
-            "Complete recursion exercises"
-        ],
-        resources: [],
-        problemSet: null
-    },
+{
+    id: 12,
+    title: "List Comprehension, Functions as Objects, Testing, Debugging",
+    description:
+        "Learn list comprehensions and improve program quality through testing and debugging.",
+    video: "#",
+    notes:
+        "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/resources/mit6_100l_f22_lec12_pdf/",
+    code:
+        "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/resources/mit6_100l_f22_lec12_code_zip/",
+    exercise:
+        "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/pages/finger-exercises/",
+    practice: [
+        "Watch lecture",
+        "Review notes",
+        "Study code",
+        "Complete exercises",
+        "Debug a Python program"
+    ]
+},
 
-    {
-        id: 13,
-        title: "Searching and Sorting",
-        description:
-            "Understand fundamental searching and sorting techniques.",
-        checklist: [
-            "Study searching",
-            "Study sorting",
-            "Implement the algorithms"
-        ],
-        resources: [],
-        problemSet: null
-    },
+{
+    id: 13,
+    title: "Exceptions, Assertions",
+    description:
+        "Learn error handling and defensive programming.",
+    video: "#",
+    notes:
+        "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/resources/mit6_100l_f22_lec13_pdf/",
+    code:
+        "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/resources/mit6_100l_f22_lec13_code_py/",
+    exercise:
+        "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/pages/finger-exercises/",
+    practice: [
+        "Watch lecture",
+        "Read notes",
+        "Run examples",
+        "Complete exercises",
+        "Implement error handling"
+    ]
+},
 
-    {
-        id: 14,
-        title: "Complexity",
-        description:
-            "Learn how to reason about computational complexity and efficiency.",
-        checklist: [
-            "Study algorithm complexity",
-            "Compare algorithms",
-            "Complete complexity exercises"
-        ],
-        resources: [],
-        problemSet: null
-    },
+{
+    id: 14,
+    title: "Dictionaries",
+    description:
+        "Learn key-value data structures and dictionary operations.",
+    video: "#",
+    notes:
+        "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/resources/mit6_100l_f22_lec14_pdf/",
+    code:
+        "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/resources/mit6_100l_f22_lec14_code_py/",
+    exercise:
+        "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/pages/finger-exercises/",
+    practice: [
+        "Watch lecture",
+        "Read notes",
+        "Run code",
+        "Complete exercises",
+        "Build a dictionary-based application"
+    ]
+},
 
-    {
-        id: 15,
-        title: "Classes and Objects",
-        description:
-            "Introduction to object-oriented programming with Python.",
-        checklist: [
-            "Study classes",
-            "Create objects",
-            "Complete OOP exercises"
-        ],
-        resources: [],
-        problemSet: null
-    },
+{
+    id: 15,
+    title: "Recursion",
+    description:
+        "Understand recursive problem solving and recursive functions.",
+    video: "#",
+    notes:
+        "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/resources/mit6_100l_f22_lec15_pdf/",
+    code:
+        "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/resources/mit6_100l_f22_lec15_code_py/",
+    exercise:
+        "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/pages/finger-exercises/",
+    practice: [
+        "Watch lecture",
+        "Review notes",
+        "Run recursive examples",
+        "Complete exercises",
+        "Write recursive functions"
+    ]
+},
 
-    {
-        id: 16,
-        title: "Inheritance",
-        description:
-            "Learn inheritance and relationships between classes.",
-        checklist: [
-            "Study inheritance",
-            "Create subclasses",
-            "Complete the exercises"
-        ],
-        resources: [],
-        problemSet: null
-    },
+{
+    id: 16,
+    title: "Recursion on Non-Numerics",
+    description:
+        "Apply recursion to strings, collections and non-numerical problems.",
+    video: "#",
+    notes:
+        "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/resources/mit6_100l_f22_lec16_pdf/",
+    code:
+        "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/resources/mit6_100l_f22_lec16_code_py/",
+    exercise:
+        "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/pages/finger-exercises/",
+    practice: [
+        "Watch lecture",
+        "Review notes",
+        "Run code",
+        "Complete exercises",
+        "Solve a recursive non-numerical problem"
+    ]
+},
 
-    {
-        id: 17,
-        title: "Abstract Data Types",
-        description:
-            "Understand abstraction and data structure design.",
-        checklist: [
-            "Study abstraction",
-            "Implement an abstract data type",
-            "Complete exercises"
-        ],
-        resources: [],
-        problemSet: null
-    },
+{
+    id: 17,
+    title: "Python Classes",
+    description:
+        "Learn the fundamentals of classes and objects.",
+    video: "#",
+    notes:
+        "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/resources/mit6_100l_f22_lec17_pdf/",
+    code:
+        "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/resources/mit6_100l_f22_lec17_code_py/",
+    exercise:
+        "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/pages/finger-exercises/",
+    practice: [
+        "Watch lecture",
+        "Review notes",
+        "Run class examples",
+        "Complete exercises",
+        "Create a Python class"
+    ]
+},
 
-    {
-        id: 18,
-        title: "Linked Lists",
-        description:
-            "Understand linked data structures and node-based representations.",
-        checklist: [
-            "Study linked lists",
-            "Implement a linked list",
-            "Complete exercises"
-        ],
-        resources: [],
-        problemSet: null
-    },
+{
+    id: 18,
+    title: "More Python Class Methods",
+    description:
+        "Work with class methods, object state and object behavior.",
+    video: "#",
+    notes:
+        "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/resources/mit6_100l_f22_lec18_pdf/",
+    code:
+        "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/resources/mit6_100l_f22_lec18_code_py/",
+    exercise:
+        "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/pages/finger-exercises/",
+    practice: [
+        "Watch lecture",
+        "Review notes",
+        "Run code",
+        "Complete exercises",
+        "Extend a Python class"
+    ]
+},
 
-    {
-        id: 19,
-        title: "Stacks and Queues",
-        description:
-            "Learn stack and queue data structures and their applications.",
-        checklist: [
-            "Study stacks",
-            "Study queues",
-            "Implement both structures"
-        ],
-        resources: [],
-        problemSet: null
-    },
+{
+    id: 19,
+    title: "Inheritance",
+    description:
+        "Understand inheritance and class hierarchies.",
+    video: "#",
+    notes:
+        "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/resources/mit6_100l_f22_lec19_pdf/",
+    code:
+        "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/resources/mit6_100l_f22_lec19_code_py/",
+    exercise:
+        "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/pages/finger-exercises/",
+    practice: [
+        "Watch lecture",
+        "Review notes",
+        "Run code",
+        "Complete exercises",
+        "Create an inheritance hierarchy"
+    ]
+},
 
-    {
-        id: 20,
-        title: "Trees",
-        description:
-            "Introduction to tree structures and hierarchical data.",
-        checklist: [
-            "Study tree terminology",
-            "Implement a basic tree",
-            "Complete exercises"
-        ],
-        resources: [],
-        problemSet: null
-    },
+{
+    id: 20,
+    title: "Fitness Tracker Object Oriented Programming Example",
+    description:
+        "Apply object-oriented programming to a realistic fitness-tracking example.",
+    video: "#",
+    notes:
+        "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/resources/mit6_100l_f22_lec20_pdf/",
+    code:
+        "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/resources/mit6_100l_f22_lec20_code_zip/",
+    exercise:
+        "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/pages/finger-exercises/",
+    practice: [
+        "Watch lecture",
+        "Review notes",
+        "Study example",
+        "Complete exercises",
+        "Build a small OOP application"
+    ]
+},
 
-    {
-        id: 21,
-        title: "Graphs",
-        description:
-            "Learn graph representations and graph-based problem solving.",
-        checklist: [
-            "Study graph concepts",
-            "Explore graph representations",
-            "Complete exercises"
-        ],
-        resources: [],
-        problemSet: null
-    },
+{
+    id: 21,
+    title: "Timing Programs, Counting Operations",
+    description:
+        "Understand program performance and operation counting.",
+    video: "#",
+    notes:
+        "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/resources/mit6_100l_f22_lec21_pdf/",
+    code:
+        "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/resources/mit6_100l_f22_lec21_code_py/",
+    exercise:
+        "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/pages/finger-exercises/",
+    practice: [
+        "Watch lecture",
+        "Review notes",
+        "Run examples",
+        "Complete exercises",
+        "Compare algorithm performance"
+    ]
+},
 
-    {
-        id: 22,
-        title: "Dynamic Programming",
-        description:
-            "Learn how to break complex problems into reusable subproblems.",
-        checklist: [
-            "Study dynamic programming",
-            "Solve a simple DP problem",
-            "Complete exercises"
-        ],
-        resources: [],
-        problemSet: null
-    },
+{
+    id: 22,
+    title: "Big Oh and Theta",
+    description:
+        "Learn Big O, Theta notation and algorithmic growth rates.",
+    video: "#",
+    notes:
+        "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/resources/mit6_100l_f22_lec22_pdf/",
+    code:
+        "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/resources/mit6_100l_f22_lec22_code_py/",
+    exercise:
+        "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/pages/finger-exercises/",
+    practice: [
+        "Watch lecture",
+        "Read notes",
+        "Run code",
+        "Complete exercises",
+        "Analyze algorithm complexity"
+    ]
+},
 
-    {
-        id: 23,
-        title: "Randomized Algorithms",
-        description:
-            "Explore algorithms involving randomness and probabilistic approaches.",
-        checklist: [
-            "Study randomized algorithms",
-            "Implement a randomized example",
-            "Complete exercises"
-        ],
-        resources: [],
-        problemSet: null
-    },
+{
+    id: 23,
+    title: "Complexity Classes Examples",
+    description:
+        "Compare complexity classes and understand algorithmic trade-offs.",
+    video: "#",
+    notes:
+        "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/resources/mit6_100l_f22_lec23_pdf/",
+    code:
+        "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/resources/mit6_100l_f22_lec23_code_py/",
+    exercise:
+        "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/pages/finger-exercises/",
+    practice: [
+        "Watch lecture",
+        "Review notes",
+        "Run code",
+        "Complete exercises",
+        "Classify algorithm complexity"
+    ]
+},
 
-    {
-        id: 24,
-        title: "Data and Visualization",
-        description:
-            "Apply programming concepts to data processing and visualization.",
-        checklist: [
-            "Explore data processing",
-            "Create a simple visualization",
-            "Complete exercises"
-        ],
-        resources: [],
-        problemSet: null
-    },
+{
+    id: 24,
+    title: "Sorting Algorithms",
+    description:
+        "Understand sorting algorithms and compare their efficiency.",
+    video: "#",
+    notes:
+        "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/resources/mit6_100l_f22_lec24_pdf/",
+    code:
+        "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/resources/mit6_100l_f22_lec24_code_py/",
+    exercise:
+        "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/pages/finger-exercises/",
+    practice: [
+        "Watch lecture",
+        "Review notes",
+        "Run sorting code",
+        "Complete exercises",
+        "Implement sorting algorithms"
+    ]
+},
 
-    {
-        id: 25,
-        title: "Final Project",
-        description:
-            "Apply the concepts learned throughout the course in a practical project.",
-        checklist: [
-            "Select a project",
-            "Build the project",
-            "Submit the project"
-        ],
-        resources: [],
-        problemSet: null
-    },
+{
+    id: 25,
+    title: "Plotting",
+    description:
+        "Use Python plotting to visualize data and computational results.",
+    video: "#",
+    notes:
+        "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/resources/mit6_100l_f22_lec25_pdf/",
+    code:
+        "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/resources/mit6_100l_f22_lec25_code_zip/",
+    exercise:
+        "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/pages/finger-exercises/",
+    practice: [
+        "Watch lecture",
+        "Review notes",
+        "Run plotting examples",
+        "Complete exercises",
+        "Create a Python visualization"
+    ]
+},
 
-    {
-        id: 26,
-        title: "Final Review",
-        description:
-            "Review the complete learning pathway and finalize all requirements.",
-        checklist: [
-            "Review the course",
-            "Complete the final assessment",
-            "Submit final requirements"
-        ],
-        resources: [],
-        problemSet: null
-    }
+{
+    id: 26,
+    title: "List Access, Hashing, Simulations, and Wrap-Up",
+    description:
+        "Review list access, hashing, simulations and the major concepts from the course.",
+    video: "#",
+    notes:
+        "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/resources/mit6_100l_f22_lec26_pdf/",
+    code:
+        "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/resources/mit6_100l_f22_lec26_code_py/",
+    exercise:
+        "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/pages/finger-exercises/",
+    practice: [
+        "Watch lecture",
+        "Review notes",
+        "Study final code",
+        "Complete exercises",
+        "Build a final Python simulation"
+    ]
+}
 
 ];
 
+
+/* ============================================================
+   STATE
+============================================================ */
+
+let currentLecture = 1;
+
+let progress = {
+    lectures: {}
+};
+
+
+/* ============================================================
+   INITIALIZE
+============================================================ */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    async () => {
+
+        initializeProgress();
+
+        renderSidebar();
+
+        await loadProgress();
+
+        determineStartingLecture();
+
+        renderLecture();
+
+        updateGlobalProgress();
+
+    }
+);
 
 /* =========================================================
    GLOBAL STATE
