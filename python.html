@@ -4,59 +4,73 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Openbox — Developer Workspace</title>
 
+    <title>Openbox — Python Engineering Lab</title>
+
+    <!-- Tailwind -->
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 
+    <!-- Alpine -->
     <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/collapse@3.x.x/dist/cdn.min.js"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Icons -->
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
     <link
-        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap"
         rel="stylesheet">
 
     <style>
         :root {
             --primary: #2563eb;
-            --accent: #3b82f6;
+            --accent: #60a5fa;
             --background: #f8fafc;
             --foreground: #0f172a;
             --muted-bg: #f1f5f9;
-            --muted-text: #475569;
-            --blur-tint: rgba(248, 250, 252, 0.85);
+            --muted-text: #64748b;
             --card: #ffffff;
-            --grid-line: rgba(15, 23, 42, 0.04);
+            --border: rgba(15, 23, 42, 0.08);
+            --grid-line: rgba(15, 23, 42, 0.035);
         }
 
         .dark {
             --primary: #3b82f6;
             --accent: #60a5fa;
-            --background: #0a0a0c;
+            --background: #09090b;
             --foreground: #f8fafc;
-            --muted-bg: #111115;
+            --muted-bg: #111114;
             --muted-text: #94a3b8;
-            --blur-tint: rgba(10, 10, 12, 0.85);
-            --card: #111115;
-            --grid-line: rgba(255, 255, 255, 0.03);
+            --card: #111114;
+            --border: rgba(255, 255, 255, 0.08);
+            --grid-line: rgba(255, 255, 255, 0.035);
         }
 
         [x-cloak] {
             display: none !important;
         }
 
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
-            background-color: var(--background);
+            background: var(--background);
             color: var(--muted-text);
-            transition: background-color 0.3s ease, color 0.3s ease;
         }
 
         .heading-font {
             font-family: 'Space Grotesk', sans-serif;
+        }
+
+        .mono {
+            font-family: 'JetBrains Mono', monospace;
         }
 
         .bg-grid {
@@ -65,440 +79,2461 @@
                 linear-gradient(to right, var(--grid-line) 1px, transparent 1px),
                 linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
         }
+
+        .editor {
+            font-family: 'JetBrains Mono', monospace;
+            tab-size: 4;
+        }
+
+        .glass {
+            background: color-mix(in srgb, var(--card) 88%, transparent);
+            backdrop-filter: blur(18px);
+        }
+
+        ::selection {
+            background: #2563eb;
+            color: white;
+        }
+
+        .scrollbar::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+
+        .scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .scrollbar::-webkit-scrollbar-thumb {
+            background: #334155;
+            border-radius: 10px;
+        }
     </style>
 </head>
 
-<body class="min-h-screen relative selection:bg-blue-600 selection:text-white pb-16 bg-grid" x-data="dashboardApp()">
+<body
+    class="min-h-screen bg-grid"
+    x-data="courseApp()"
+    x-init="init()">
 
-    <!-- Authentication Overlay -->
-    <div x-show="!isLoggedIn"
-        class="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-md p-4">
+    <!-- ========================================================= -->
+    <!-- AUTHENTICATION -->
+    <!-- ========================================================= -->
+
+    <div
+        x-show="!isLoggedIn"
+        x-cloak
+        class="fixed inset-0 z-[100] flex items-center justify-center bg-black/85 backdrop-blur-xl p-5">
+
         <div
-            class="bg-[var(--card)] border border-slate-200 dark:border-white/10 p-6 sm:p-8 rounded-2xl max-w-md w-full space-y-6 shadow-2xl">
-            <div class="space-y-1 text-center">
+            class="w-full max-w-md rounded-3xl border border-white/10 bg-[var(--card)] p-7 shadow-2xl">
+
+            <div class="text-center mb-7">
+
                 <div
-                    class="w-12 h-12 rounded-xl bg-blue-600 flex items-center justify-center text-white font-bold heading-font text-xl mx-auto shadow-lg shadow-blue-500/20 mb-2">
-                    O</div>
-                <h2 class="text-xl font-bold tracking-tight text-[var(--foreground)] heading-font">Developer Portal Sign-In</h2>
-                <p class="text-xs text-[var(--muted-text)]">Authenticate to access system logs, task queues, and modules.</p>
+                    class="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-blue-600 text-xl font-bold text-white shadow-xl shadow-blue-600/20">
+                    O
+                </div>
+
+                <div class="text-xs font-bold uppercase tracking-[0.2em] text-blue-500">
+                    Openbox Academy
+                </div>
+
+                <h1 class="heading-font mt-2 text-2xl font-bold text-[var(--foreground)]">
+                    Python Engineering Lab
+                </h1>
+
+                <p class="mt-2 text-xs leading-relaxed text-[var(--muted-text)]">
+                    A completion-based learning experience based on
+                    MIT OpenCourseWare 6.100L.
+                </p>
             </div>
 
-            <form @submit.prevent="executeAuthHandshake()" class="space-y-4">
-                <div class="space-y-1">
-                    <label class="text-[10px] uppercase font-bold tracking-wider text-[var(--muted-text)]">Full Name</label>
-                    <input type="text" x-model="loginForm.name" required placeholder="Alex Morgan" class="w-full px-3 py-2.5 rounded-xl bg-[var(--muted-bg)] border border-slate-200 dark:border-white/10 text-sm text-[var(--foreground)] focus:outline-none focus:border-blue-500">
+            <form
+                @submit.prevent="login()"
+                class="space-y-4">
+
+                <div>
+                    <label class="mb-1 block text-[10px] font-bold uppercase tracking-wider">
+                        Full Name
+                    </label>
+
+                    <input
+                        x-model="loginForm.name"
+                        required
+                        type="text"
+                        placeholder="Aviral Pathak"
+                        class="w-full rounded-xl border border-white/10 bg-[var(--muted-bg)] px-4 py-3 text-sm text-[var(--foreground)] outline-none focus:border-blue-500">
                 </div>
 
-                <div class="space-y-1">
-                    <label class="text-[10px] uppercase font-bold tracking-wider text-[var(--muted-text)]">Developer ID / Phone</label>
-                    <input type="tel" x-model="loginForm.phone" required placeholder="9876543210" class="w-full px-3 py-2.5 rounded-xl bg-[var(--muted-bg)] border border-slate-200 dark:border-white/10 text-sm text-[var(--foreground)] focus:outline-none focus:border-blue-500">
+                <div>
+                    <label class="mb-1 block text-[10px] font-bold uppercase tracking-wider">
+                        Student ID / Phone
+                    </label>
+
+                    <input
+                        x-model="loginForm.phone"
+                        required
+                        type="text"
+                        placeholder="9876543210"
+                        class="w-full rounded-xl border border-white/10 bg-[var(--muted-bg)] px-4 py-3 text-sm text-[var(--foreground)] outline-none focus:border-blue-500">
                 </div>
 
-                <button type="submit" :disabled="authLoading" class="w-full py-2.5 bg-blue-600 hover:bg-blue-500 disabled:opacity-50 text-white font-bold rounded-xl text-xs transition-all cursor-pointer shadow-md shadow-blue-500/10">
-                    <span x-text="authLoading ? 'Verifying Workspace Handshake...' : 'Authenticate Workspace'"></span>
+                <button
+                    type="submit"
+                    class="w-full rounded-xl bg-blue-600 py-3 text-xs font-bold text-white transition hover:bg-blue-500">
+
+                    <span x-show="!authLoading">
+                        Enter Learning Workspace
+                    </span>
+
+                    <span x-show="authLoading">
+                        Initializing Workspace...
+                    </span>
+
                 </button>
             </form>
+
+            <div class="mt-6 border-t border-white/5 pt-5 text-center">
+                <p class="text-[10px] leading-relaxed text-slate-500">
+                    Openbox learning experience.
+                    MIT OpenCourseWare is used as the educational source.
+                </p>
+            </div>
         </div>
     </div>
 
-    <!-- Main Workspace Container -->
+
+    <!-- ========================================================= -->
+    <!-- APPLICATION -->
+    <!-- ========================================================= -->
+
     <div x-show="isLoggedIn" x-cloak>
-        <!-- Top Navigation Bar -->
+
+        <!-- NAVIGATION -->
+
         <header
-            class="max-w-7xl mx-auto mt-4 px-4 lg:px-8 bg-[var(--blur-tint)] backdrop-blur-xl border border-slate-200 dark:border-white/10 rounded-2xl sticky top-4 z-40 transition-all duration-300">
-            <div class="h-16 flex items-center justify-between">
+            class="sticky top-4 z-50 mx-auto mt-4 max-w-7xl rounded-2xl border border-white/10 glass px-4 lg:px-7">
 
-                <div class="flex items-center gap-3">
-                    <a href="#" @click.prevent="currentTab = 'dashboard'" class="flex items-center gap-2.5">
-                        <div
-                            class="w-9 h-9 rounded-xl bg-blue-600 flex items-center justify-center text-white font-bold heading-font text-lg shadow-md shadow-blue-500/20">
-                            O</div>
-                        <div class="flex flex-col text-left leading-none">
-                            <span class="text-[var(--foreground)] font-bold text-lg tracking-tight heading-font">Openbox</span>
-                            <span class="text-blue-500 font-bold text-[8px] tracking-[0.2em] uppercase mt-0.5">Developer Hub</span>
+            <div class="flex h-16 items-center justify-between">
+
+                <!-- BRAND -->
+
+                <button
+                    @click="currentView='dashboard'"
+                    class="flex items-center gap-3">
+
+                    <div
+                        class="flex h-9 w-9 items-center justify-center rounded-xl bg-blue-600 font-bold text-white">
+                        O
+                    </div>
+
+                    <div class="hidden text-left sm:block">
+                        <div class="heading-font text-base font-bold text-[var(--foreground)]">
+                            Openbox
                         </div>
-                    </a>
-                </div>
 
-                <nav class="flex items-center bg-[var(--muted-bg)] p-1 rounded-xl border border-slate-200 dark:border-white/5">
-                    <button @click="currentTab = 'dashboard'" :class="currentTab === 'dashboard' ? 'bg-blue-600 text-white font-bold shadow-md' : 'text-[var(--muted-text)] hover:text-[var(--foreground)]'" class="px-4 py-1.5 rounded-lg text-xs transition-all cursor-pointer">
-                        <i class="fa-solid fa-list-check mr-1.5"></i>Tasks Queue
+                        <div class="text-[8px] font-bold uppercase tracking-[0.2em] text-blue-500">
+                            Python Engineering Lab
+                        </div>
+                    </div>
+                </button>
+
+
+                <!-- NAV -->
+
+                <nav
+                    class="hidden items-center gap-1 rounded-xl bg-[var(--muted-bg)] p-1 md:flex">
+
+                    <button
+                        @click="currentView='dashboard'"
+                        :class="currentView==='dashboard'
+                            ? 'bg-blue-600 text-white'
+                            : 'text-[var(--muted-text)]'"
+                        class="rounded-lg px-4 py-2 text-xs font-bold transition">
+
+                        <i class="fa-solid fa-chart-line mr-1"></i>
+                        Dashboard
                     </button>
-                    <button @click="currentTab = 'learning'" :class="currentTab === 'learning' ? 'bg-blue-600 text-white font-bold shadow-md' : 'text-[var(--muted-text)] hover:text-[var(--foreground)]'" class="px-4 py-1.5 rounded-lg text-xs transition-all cursor-pointer">
-                        <i class="fa-solid fa-code mr-1.5"></i>Docs & Schema
+
+                    <button
+                        @click="currentView='course'"
+                        :class="currentView==='course'
+                            ? 'bg-blue-600 text-white'
+                            : 'text-[var(--muted-text)]'"
+                        class="rounded-lg px-4 py-2 text-xs font-bold transition">
+
+                        <i class="fa-solid fa-book-open mr-1"></i>
+                        Course
                     </button>
+
+                    <button
+                        @click="currentView='scripts'"
+                        :class="currentView==='scripts'
+                            ? 'bg-blue-600 text-white'
+                            : 'text-[var(--muted-text)]'"
+                        class="rounded-lg px-4 py-2 text-xs font-bold transition">
+
+                        <i class="fa-solid fa-code mr-1"></i>
+                        Script Lab
+                    </button>
+
+                    <button
+                        @click="currentView='certificate'"
+                        :class="currentView==='certificate'
+                            ? 'bg-blue-600 text-white'
+                            : 'text-[var(--muted-text)]'"
+                        class="rounded-lg px-4 py-2 text-xs font-bold transition">
+
+                        <i class="fa-solid fa-award mr-1"></i>
+                        Certificate
+                    </button>
+
                 </nav>
 
+
+                <!-- USER -->
+
                 <div class="flex items-center gap-3">
-                    <button @click="toggleTheme()" class="p-2 w-9 h-9 flex items-center justify-center rounded-xl bg-[var(--muted-bg)] text-[var(--muted-text)] hover:text-[var(--foreground)] transition-colors cursor-pointer">
-                        <i class="fa-solid fa-moon text-xs dark:hidden"></i>
-                        <i class="fa-solid fa-sun text-xs hidden dark:block"></i>
+
+                    <button
+                        @click="toggleTheme()"
+                        class="flex h-9 w-9 items-center justify-center rounded-xl bg-[var(--muted-bg)] text-[var(--muted-text)]">
+
+                        <i
+                            class="fa-solid"
+                            :class="darkMode ? 'fa-sun' : 'fa-moon'">
+                        </i>
+
                     </button>
 
-                    <div class="flex items-center gap-3 pl-2 border-l border-slate-200 dark:border-white/10">
-                        <div class="text-right hidden md:block leading-tight">
-                            <div class="text-xs font-bold text-[var(--foreground)]" x-text="userSession.name"></div>
-                            <div class="text-[10px] text-[var(--muted-text)]" x-text="'ID: ' + userSession.phone"></div>
+                    <div class="hidden border-l border-white/10 pl-3 text-right lg:block">
+
+                        <div
+                            class="text-xs font-bold text-[var(--foreground)]"
+                            x-text="userSession.name">
                         </div>
-                        <button @click="executeSignOut()" class="p-2 text-rose-500 bg-rose-500/10 hover:bg-rose-500/20 rounded-xl transition-all cursor-pointer text-xs">
-                            <i class="fa-solid fa-power-off"></i>
-                        </button>
+
+                        <div
+                            class="text-[9px]"
+                            x-text="'ID: '+userSession.phone">
+                        </div>
+
                     </div>
+
+                    <button
+                        @click="logout()"
+                        class="flex h-9 w-9 items-center justify-center rounded-xl bg-rose-500/10 text-rose-500">
+
+                        <i class="fa-solid fa-power-off text-xs"></i>
+
+                    </button>
+
                 </div>
+
             </div>
         </header>
 
-        <!-- Dashboard View -->
-        <div x-show="currentTab === 'dashboard'">
-            <main class="max-w-7xl mx-auto px-4 lg:px-8 pt-8">
-                <!-- Overview Header -->
-                <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 mb-8">
-                    <div class="lg:col-span-8 bg-[var(--card)] p-6 md:p-8 rounded-2xl border border-slate-200 dark:border-white/10 shadow-sm relative overflow-hidden">
-                        <div>
-                            <div class="flex flex-wrap items-center gap-2 mb-3">
-                                <span class="px-2.5 py-1 rounded-md bg-blue-500/10 text-blue-500 text-xs font-bold uppercase tracking-wider">⚡ Full-Stack Engineering</span>
-                                <span class="px-2.5 py-1 rounded-md bg-emerald-500/10 text-emerald-500 text-xs font-bold uppercase tracking-wider">Project: API & Database Migration</span>
-                            </div>
-                            <h1 class="heading-font text-2xl md:text-3xl font-bold text-[var(--foreground)] tracking-tight mb-2">
-                                System Architecture & Services Hub</h1>
-                            <p class="text-xs md:text-sm text-[var(--muted-text)] max-w-2xl leading-relaxed">
-                                <strong>System Overview:</strong> Streamline platform infrastructure, refactor real-time queue listeners, and normalize core relational data structures to ensure optimal query throughput.
-                            </p>
+
+        <!-- ===================================================== -->
+        <!-- DASHBOARD -->
+        <!-- ===================================================== -->
+
+        <main
+            x-show="currentView==='dashboard'"
+            x-cloak
+            class="mx-auto max-w-7xl px-4 pb-20 pt-8 lg:px-8">
+
+            <div class="grid gap-6 lg:grid-cols-12">
+
+                <!-- HERO -->
+
+                <section
+                    class="relative overflow-hidden rounded-3xl border border-white/10 bg-[var(--card)] p-7 lg:col-span-8 lg:p-9">
+
+                    <div class="absolute -right-20 -top-20 h-64 w-64 rounded-full bg-blue-600/10 blur-3xl"></div>
+
+                    <div class="relative">
+
+                        <div class="mb-4 flex flex-wrap gap-2">
+
+                            <span class="rounded-lg bg-blue-500/10 px-3 py-1.5 text-[10px] font-bold uppercase tracking-wider text-blue-500">
+                                Python 3
+                            </span>
+
+                            <span class="rounded-lg bg-emerald-500/10 px-3 py-1.5 text-[10px] font-bold uppercase tracking-wider text-emerald-500">
+                                26 Lectures
+                            </span>
+
+                            <span class="rounded-lg bg-purple-500/10 px-3 py-1.5 text-[10px] font-bold uppercase tracking-wider text-purple-500">
+                                Completion Based
+                            </span>
+
                         </div>
+
+                        <h1
+                            class="heading-font max-w-3xl text-3xl font-bold tracking-tight text-[var(--foreground)] md:text-4xl">
+
+                            Introduction to Computer Science
+                            & Programming Using Python
+
+                        </h1>
+
+                        <p class="mt-4 max-w-2xl text-sm leading-7">
+
+                            Build programming fundamentals through lectures,
+                            exercises, coding challenges, projects and
+                            progressively harder problem-solving tasks.
+
+                        </p>
+
+                        <div class="mt-6 flex flex-wrap gap-3">
+
+                            <button
+                                @click="openNextLesson()"
+                                class="rounded-xl bg-blue-600 px-5 py-3 text-xs font-bold text-white hover:bg-blue-500">
+
+                                Continue Learning
+                                <i class="fa-solid fa-arrow-right ml-2"></i>
+
+                            </button>
+
+                            <a
+                                href="https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/"
+                                target="_blank"
+                                class="rounded-xl border border-white/10 bg-[var(--muted-bg)] px-5 py-3 text-xs font-bold text-[var(--foreground)]">
+
+                                MIT OCW
+                                <i class="fa-solid fa-arrow-up-right-from-square ml-1"></i>
+
+                            </a>
+
+                        </div>
+
+                    </div>
+                </section>
+
+
+                <!-- PROGRESS -->
+
+                <section
+                    class="rounded-3xl border border-white/10 bg-[var(--card)] p-6 lg:col-span-4">
+
+                    <div class="mb-5 flex items-center justify-between">
+
+                        <span class="text-[10px] font-bold uppercase tracking-widest">
+                            Course Progress
+                        </span>
+
+                        <span
+                            class="text-sm font-bold text-blue-500"
+                            x-text="progressPercent()+'%'">
+                        </span>
+
                     </div>
 
-                    <div class="lg:col-span-4 bg-[var(--card)] p-6 rounded-2xl border border-slate-200 dark:border-white/10 shadow-sm flex flex-col justify-between">
-                        <div>
-                            <div class="flex justify-between items-center mb-2">
-                                <span class="text-xs font-bold uppercase tracking-wider text-[var(--muted-text)]">Sprint Progress</span>
-                                <span class="text-xs font-bold text-blue-500" x-text="`${calculateProgress()}% Complete`"></span>
-                            </div>
-                            <div class="w-full h-3 bg-[var(--muted-bg)] rounded-full overflow-hidden mb-4">
-                                <div class="h-full bg-gradient-to-r from-blue-500 to-indigo-600 transition-all duration-500 rounded-full"
-                                    :style="`width: ${calculateProgress()}%`"></div>
-                            </div>
+                    <div class="mb-6 h-3 overflow-hidden rounded-full bg-[var(--muted-bg)]">
+
+                        <div
+                            class="h-full rounded-full bg-gradient-to-r from-blue-500 to-indigo-500 transition-all duration-700"
+                            :style="'width:'+progressPercent()+'%'">
                         </div>
-                        <div class="grid grid-cols-2 gap-3 pt-3 border-t border-slate-200 dark:border-white/5 text-center">
-                            <div>
-                                <div class="text-xl font-bold text-[var(--foreground)] heading-font"
-                                    x-text="`${completedCount()}/4`"></div>
-                                <div class="text-[10px] text-[var(--muted-text)] uppercase tracking-wider mt-0.5">Modules Completed</div>
-                            </div>
-                            <div>
-                                <div class="text-xl font-bold text-[var(--foreground)] heading-font">3 Systems</div>
-                                <div class="text-[10px] text-[var(--muted-text)] uppercase tracking-wider mt-0.5">Core Pipelines</div>
-                            </div>
-                        </div>
+
                     </div>
+
+                    <div class="grid grid-cols-2 gap-3">
+
+                        <div class="rounded-2xl bg-[var(--muted-bg)] p-4">
+
+                            <div
+                                class="heading-font text-2xl font-bold text-[var(--foreground)]"
+                                x-text="completedLectures()">
+                            </div>
+
+                            <div class="mt-1 text-[9px] uppercase tracking-wider">
+                                Lectures Done
+                            </div>
+
+                        </div>
+
+                        <div class="rounded-2xl bg-[var(--muted-bg)] p-4">
+
+                            <div
+                                class="heading-font text-2xl font-bold text-[var(--foreground)]"
+                                x-text="submittedScripts">
+                            </div>
+
+                            <div class="mt-1 text-[9px] uppercase tracking-wider">
+                                Scripts
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+            </div>
+
+
+            <!-- LEARNING MODEL -->
+
+            <section class="mt-8">
+
+                <div class="mb-4 flex items-center justify-between">
+
+                    <div>
+
+                        <h2 class="heading-font text-lg font-bold text-[var(--foreground)]">
+                            Your Learning Path
+                        </h2>
+
+                        <p class="mt-1 text-xs">
+                            Complete each stage to unlock the next.
+                        </p>
+
+                    </div>
+
+                    <button
+                        @click="currentView='course'"
+                        class="text-xs font-bold text-blue-500">
+                        View all
+                        <i class="fa-solid fa-arrow-right ml-1"></i>
+                    </button>
+
                 </div>
 
-                <!-- Roadmap & Sidebar -->
-                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
-                    <!-- Tasks Queue Accordion -->
-                    <div class="lg:col-span-8 space-y-4">
-                        <div class="flex items-center justify-between mb-2">
-                            <h2 class="heading-font text-lg font-bold text-[var(--foreground)] flex items-center gap-2">
-                                <i class="fa-solid fa-list-check text-blue-500 text-sm"></i> Architecture Execution Milestones
-                            </h2>
-                            <button @click="currentTab = 'learning'" class="text-xs text-blue-500 font-bold hover:underline cursor-pointer">Open Schema Docs <i class="fa-solid fa-arrow-right ml-1"></i></button>
-                        </div>
 
-                        <template x-for="(day, index) in daysData" :key="day.id">
-                            <div class="bg-[var(--card)] border border-slate-200 dark:border-white/10 rounded-2xl overflow-hidden shadow-sm">
-                                <div @click="activeDay = activeDay === day.id ? null : day.id"
-                                    class="p-5 flex items-center justify-between cursor-pointer hover:bg-[var(--muted-bg)]/50">
-                                    <div class="flex items-center gap-4">
-                                        <div class="w-10 h-10 rounded-xl flex items-center justify-center font-bold text-sm heading-font"
-                                            :class="day.completed ? 'bg-emerald-500/10 text-emerald-500 border border-emerald-500/20' : 'bg-[var(--muted-bg)] text-[var(--muted-text)]'">
-                                            <span x-show="!day.completed" x-text="`M${day.id}`"></span>
-                                            <i x-show="day.completed" class="fa-solid fa-check text-sm"></i>
-                                        </div>
-                                        <div>
-                                            <h3 class="heading-font text-base font-bold text-[var(--foreground)]" x-text="day.title"></h3>
-                                        </div>
-                                    </div>
-                                    <div class="flex items-center gap-3">
-                                        <span class="text-xs font-medium px-2.5 py-1 rounded-md" :class="day.completed ? 'bg-emerald-500/10 text-emerald-500' : (day.submitted ? 'bg-amber-500/10 text-amber-500' : 'bg-slate-500/10')" x-text="day.completed ? 'Verified' : (day.submitted ? 'In Review' : 'Pending')"></span>
-                                        <i class="fa-solid fa-chevron-down text-xs text-[var(--muted-text)] transition-transform duration-200" :class="{'rotate-180': activeDay === day.id}"></i>
-                                    </div>
+                <div class="grid gap-4 md:grid-cols-3">
+
+                    <template x-for="stage in stages" :key="stage.id">
+
+                        <div
+                            class="rounded-2xl border border-white/10 bg-[var(--card)] p-5">
+
+                            <div class="mb-4 flex items-center justify-between">
+
+                                <div
+                                    class="flex h-10 w-10 items-center justify-center rounded-xl"
+                                    :class="stage.done
+                                        ? 'bg-emerald-500/10 text-emerald-500'
+                                        : 'bg-blue-500/10 text-blue-500'">
+
+                                    <i
+                                        class="fa-solid"
+                                        :class="stage.icon">
+                                    </i>
+
                                 </div>
 
-                                <div x-show="activeDay === day.id" x-collapse
-                                    class="border-t border-slate-200 dark:border-white/5 p-6 bg-[var(--muted-bg)]/30 space-y-4">
-                                    <div class="bg-[var(--card)] p-5 rounded-xl border border-slate-200 dark:border-white/5 space-y-2">
-                                        <div class="flex justify-between items-center mb-1">
-                                            <h4 class="text-xs font-bold text-[var(--foreground)] uppercase tracking-wider">Implementation Requirements</h4>
+                                <span
+                                    class="text-[9px] font-bold uppercase"
+                                    :class="stage.done ? 'text-emerald-500' : 'text-slate-500'"
+                                    x-text="stage.done ? 'Completed' : stage.label">
+                                </span>
+
+                            </div>
+
+                            <h3
+                                class="heading-font text-sm font-bold text-[var(--foreground)]"
+                                x-text="stage.title">
+                            </h3>
+
+                            <p
+                                class="mt-2 text-xs leading-relaxed"
+                                x-text="stage.description">
+                            </p>
+
+                        </div>
+
+                    </template>
+
+                </div>
+
+            </section>
+
+
+            <!-- NEXT MODULE -->
+
+            <section class="mt-8 rounded-3xl border border-blue-500/20 bg-blue-500/5 p-6">
+
+                <div class="flex flex-col gap-5 md:flex-row md:items-center md:justify-between">
+
+                    <div>
+
+                        <div class="mb-2 text-[10px] font-bold uppercase tracking-widest text-blue-500">
+                            Next Challenge
+                        </div>
+
+                        <h2
+                            class="heading-font text-xl font-bold text-[var(--foreground)]"
+                            x-text="nextLesson().title">
+                        </h2>
+
+                        <p
+                            class="mt-1 text-xs"
+                            x-text="nextLesson().topic">
+                        </p>
+
+                    </div>
+
+                    <button
+                        @click="openNextLesson()"
+                        class="rounded-xl bg-blue-600 px-5 py-3 text-xs font-bold text-white">
+                        Start Module
+                        <i class="fa-solid fa-arrow-right ml-2"></i>
+                    </button>
+
+                </div>
+
+            </section>
+
+        </main>
+
+
+        <!-- ===================================================== -->
+        <!-- COURSE VIEW -->
+        <!-- ===================================================== -->
+
+        <main
+            x-show="currentView==='course'"
+            x-cloak
+            class="mx-auto max-w-7xl px-4 pb-20 pt-8 lg:px-8">
+
+            <div class="mb-8">
+
+                <div class="text-[10px] font-bold uppercase tracking-widest text-blue-500">
+                    Openbox Curriculum
+                </div>
+
+                <h1 class="heading-font mt-2 text-3xl font-bold text-[var(--foreground)]">
+                    26-Lecture Python Path
+                </h1>
+
+                <p class="mt-2 max-w-3xl text-sm leading-relaxed">
+                    Follow the progression from basic Python concepts
+                    to object-oriented programming, algorithmic complexity,
+                    sorting, plotting and simulations.
+                </p>
+
+            </div>
+
+
+            <div class="space-y-3">
+
+                <template x-for="lesson in lessons" :key="lesson.id">
+
+                    <article
+                        class="overflow-hidden rounded-2xl border border-white/10 bg-[var(--card)]">
+
+                        <button
+                            @click="activeLesson = activeLesson===lesson.id ? null : lesson.id"
+                            class="flex w-full items-center justify-between p-5 text-left">
+
+                            <div class="flex items-center gap-4">
+
+                                <div
+                                    class="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl text-xs font-bold"
+                                    :class="lesson.completed
+                                        ? 'bg-emerald-500/10 text-emerald-500'
+                                        : 'bg-[var(--muted-bg)] text-[var(--muted-text)]'">
+
+                                    <i
+                                        x-show="lesson.completed"
+                                        class="fa-solid fa-check">
+                                    </i>
+
+                                    <span
+                                        x-show="!lesson.completed"
+                                        x-text="String(lesson.id).padStart(2,'0')">
+                                    </span>
+
+                                </div>
+
+                                <div>
+
+                                    <div
+                                        class="text-[9px] font-bold uppercase tracking-wider text-blue-500"
+                                        x-text="'Lecture '+lesson.id">
+                                    </div>
+
+                                    <h3
+                                        class="heading-font mt-1 text-sm font-bold text-[var(--foreground)]"
+                                        x-text="lesson.title">
+                                    </h3>
+
+                                </div>
+
+                            </div>
+
+                            <div class="flex items-center gap-3">
+
+                                <span
+                                    class="hidden rounded-lg px-2.5 py-1 text-[9px] font-bold uppercase sm:block"
+                                    :class="lesson.completed
+                                        ? 'bg-emerald-500/10 text-emerald-500'
+                                        : 'bg-slate-500/10'"
+                                    x-text="lesson.completed ? 'Completed' : 'Pending'">
+                                </span>
+
+                                <i
+                                    class="fa-solid fa-chevron-down text-xs transition-transform"
+                                    :class="activeLesson===lesson.id ? 'rotate-180' : ''">
+                                </i>
+
+                            </div>
+
+                        </button>
+
+
+                        <div
+                            x-show="activeLesson===lesson.id"
+                            x-collapse
+                            class="border-t border-white/5 bg-[var(--muted-bg)]/30 p-6">
+
+                            <div class="grid gap-6 lg:grid-cols-3">
+
+                                <div class="lg:col-span-2">
+
+                                    <div class="mb-5">
+
+                                        <div class="mb-2 text-[10px] font-bold uppercase tracking-wider text-blue-500">
+                                            Learning Objective
                                         </div>
-                                        <ul class="text-xs space-y-1.5 list-disc pl-4 text-[var(--muted-text)]">
-                                            <template x-for="act in day.activities">
-                                                <li x-text="act"></li>
+
+                                        <p
+                                            class="text-sm leading-7 text-[var(--foreground)]"
+                                            x-text="lesson.objective">
+                                        </p>
+
+                                    </div>
+
+                                    <div>
+
+                                        <div class="mb-2 text-[10px] font-bold uppercase tracking-wider">
+                                            Topics
+                                        </div>
+
+                                        <div class="flex flex-wrap gap-2">
+
+                                            <template x-for="topic in lesson.topics">
+
+                                                <span
+                                                    class="rounded-lg border border-white/10 bg-[var(--card)] px-3 py-1.5 text-[10px]">
+                                                    <span x-text="topic"></span>
+                                                </span>
+
                                             </template>
-                                        </ul>
-                                    </div>
 
-                                    <div class="bg-[var(--card)] p-5 rounded-xl border border-slate-200 dark:border-white/5 space-y-1">
-                                        <div class="flex justify-between items-center">
-                                            <h4 class="text-sm font-bold text-[var(--foreground)] heading-font">Required Deliverable</h4>
-                                            <span class="text-xs font-mono text-blue-500" x-text="day.deliverable"></span>
                                         </div>
+
                                     </div>
 
-                                    <div x-show="day.submitted" class="p-3 bg-blue-500/5 rounded-xl border border-blue-500/10 text-xs">
-                                        <strong>Artifact URL:</strong> <a :href="day.submissionUrl" target="_blank" class="text-blue-500 underline break-all" x-text="day.submissionUrl"></a>
-                                    </div>
-
-                                    <div class="flex justify-end gap-2">
-                                        <button x-show="day.id === 1" @click="currentTab = 'learning'" class="px-4 py-2 bg-[var(--muted-bg)] text-[var(--foreground)] font-bold text-xs rounded-xl cursor-pointer mr-auto"><i class="fa-solid fa-book mr-1.5"></i> View Documentation</button>
-                                        <button @click="openSubmissionModal(day)" :disabled="day.completed" class="px-4 py-2 bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs rounded-xl cursor-pointer">
-                                            <span x-text="day.submitted ? 'Update Submission' : 'Submit PR / Link'"></span>
-                                        </button>
-                                    </div>
                                 </div>
+
+
+                                <div class="rounded-2xl border border-white/10 bg-[var(--card)] p-5">
+
+                                    <div class="mb-4 text-[10px] font-bold uppercase tracking-wider text-blue-500">
+                                        Completion Task
+                                    </div>
+
+                                    <p
+                                        class="text-xs leading-relaxed"
+                                        x-text="lesson.task">
+                                    </p>
+
+                                    <button
+                                        @click="openScript(lesson)"
+                                        class="mt-5 w-full rounded-xl bg-blue-600 py-3 text-xs font-bold text-white">
+
+                                        <i class="fa-solid fa-code mr-1"></i>
+                                        Open Script Lab
+
+                                    </button>
+
+                                    <button
+                                        @click="completeLesson(lesson)"
+                                        :disabled="lesson.completed"
+                                        class="mt-2 w-full rounded-xl border border-white/10 bg-[var(--muted-bg)] py-3 text-xs font-bold text-[var(--foreground)] disabled:opacity-40">
+
+                                        <i class="fa-solid fa-check mr-1"></i>
+
+                                        <span
+                                            x-text="lesson.completed ? 'Lecture Completed' : 'Mark Learning Complete'">
+                                        </span>
+
+                                    </button>
+
+                                </div>
+
                             </div>
-                        </template>
+
+                        </div>
+
+                    </article>
+
+                </template>
+
+            </div>
+
+        </main>
+
+
+        <!-- ===================================================== -->
+        <!-- SCRIPT LAB -->
+        <!-- ===================================================== -->
+
+        <main
+            x-show="currentView==='scripts'"
+            x-cloak
+            class="mx-auto max-w-7xl px-4 pb-20 pt-8 lg:px-8">
+
+            <div class="mb-7">
+
+                <div class="text-[10px] font-bold uppercase tracking-widest text-blue-500">
+                    Developer Workspace
+                </div>
+
+                <h1 class="heading-font mt-2 text-3xl font-bold text-[var(--foreground)]">
+                    Script Lab
+                </h1>
+
+                <p class="mt-2 text-sm">
+                    Write, save and submit your Python work for each lecture.
+                </p>
+
+            </div>
+
+
+            <div class="grid gap-6 lg:grid-cols-12">
+
+                <!-- EDITOR -->
+
+                <section class="overflow-hidden rounded-3xl border border-white/10 bg-[var(--card)] lg:col-span-8">
+
+                    <div class="flex items-center justify-between border-b border-white/10 p-4">
+
+                        <div>
+
+                            <div class="text-[9px] font-bold uppercase tracking-widest text-blue-500">
+                                Active Challenge
+                            </div>
+
+                            <div
+                                class="mt-1 text-sm font-bold text-[var(--foreground)]"
+                                x-text="selectedLesson ? 'Lecture '+selectedLesson.id+' — '+selectedLesson.title : 'Select a lecture'">
+                            </div>
+
+                        </div>
+
+                        <div class="flex items-center gap-2">
+
+                            <select
+                                x-model="scriptLanguage"
+                                class="rounded-lg border border-white/10 bg-[var(--muted-bg)] px-3 py-2 text-[10px] text-[var(--foreground)]">
+
+                                <option>Python</option>
+                            </select>
+
+                        </div>
+
                     </div>
 
-                    <!-- Sidebar Info -->
-                    <div class="lg:col-span-4 space-y-4">
-                        <div class="bg-[var(--card)] p-5 rounded-2xl border border-slate-200 dark:border-white/10 space-y-3">
-                            <h3 class="text-sm font-bold text-[var(--foreground)] heading-font mb-2">Environment Specifications</h3>
-                            <p class="text-xs leading-relaxed text-[var(--muted-text)]">
-                                <strong>Stack:</strong> Node.js / PostgreSQL / Supabase / Alpine.js<br>
-                                <strong>Styling:</strong> Tailwind CSS v4<br>
-                                <strong>Runtime:</strong> Edge Functions & WebSocket Channels
-                            </p>
+
+                    <div class="p-5">
+
+                        <label class="mb-2 block text-[10px] font-bold uppercase tracking-wider">
+                            Script Title
+                        </label>
+
+                        <input
+                            x-model="scriptTitle"
+                            placeholder="e.g. Temperature Conversion Program"
+                            class="mb-5 w-full rounded-xl border border-white/10 bg-[var(--muted-bg)] px-4 py-3 text-xs text-[var(--foreground)] outline-none focus:border-blue-500">
+
+
+                        <label class="mb-2 block text-[10px] font-bold uppercase tracking-wider">
+                            Python Code
+                        </label>
+
+                        <div class="overflow-hidden rounded-2xl border border-white/10">
+
+                            <div class="flex items-center gap-2 border-b border-white/10 bg-[#0d0d0f] px-4 py-3">
+
+                                <span class="h-2.5 w-2.5 rounded-full bg-rose-500"></span>
+                                <span class="h-2.5 w-2.5 rounded-full bg-yellow-500"></span>
+                                <span class="h-2.5 w-2.5 rounded-full bg-emerald-500"></span>
+
+                                <span class="ml-3 text-[9px] text-slate-500">
+                                    main.py
+                                </span>
+
+                            </div>
+
+                            <textarea
+                                x-model="scriptCode"
+                                spellcheck="false"
+                                class="editor h-[420px] w-full resize-none bg-[#0b0b0d] p-5 text-[13px] leading-6 text-slate-200 outline-none"
+                                placeholder="# Write your Python solution here...
+
+# Example:
+name = input('Enter your name: ')
+print('Hello', name)
+">
+                            </textarea>
+
                         </div>
+
+
+                        <!-- OUTPUT -->
+
+                        <div class="mt-5">
+
+                            <div class="mb-2 flex items-center justify-between">
+
+                                <span class="text-[10px] font-bold uppercase tracking-wider">
+                                    Validation
+                                </span>
+
+                                <span
+                                    x-show="validationStatus"
+                                    x-text="validationStatus"
+                                    class="text-[10px] font-bold text-emerald-500">
+                                </span>
+
+                            </div>
+
+                            <div
+                                class="min-h-[80px] rounded-2xl bg-[#0b0b0d] p-4 mono text-xs leading-6">
+
+                                <template x-if="!validationOutput">
+
+                                    <span class="text-slate-600">
+                                        Run validation to inspect your submission.
+                                    </span>
+
+                                </template>
+
+                                <template x-if="validationOutput">
+
+                                    <pre
+                                        class="whitespace-pre-wrap text-slate-300"
+                                        x-text="validationOutput">
+                                    </pre>
+
+                                </template>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- ACTIONS -->
+
+                        <div class="mt-5 flex flex-wrap gap-2">
+
+                            <button
+                                @click="validateScript()"
+                                class="rounded-xl border border-white/10 bg-[var(--muted-bg)] px-4 py-3 text-xs font-bold text-[var(--foreground)]">
+
+                                <i class="fa-solid fa-play mr-1"></i>
+                                Validate
+
+                            </button>
+
+                            <button
+                                @click="saveDraft()"
+                                class="rounded-xl border border-white/10 bg-[var(--muted-bg)] px-4 py-3 text-xs font-bold text-[var(--foreground)]">
+
+                                <i class="fa-solid fa-floppy-disk mr-1"></i>
+                                Save Draft
+
+                            </button>
+
+                            <button
+                                @click="submitScript()"
+                                class="rounded-xl bg-blue-600 px-5 py-3 text-xs font-bold text-white">
+
+                                <i class="fa-solid fa-paper-plane mr-1"></i>
+                                Submit Script
+
+                            </button>
+
+                        </div>
+
                     </div>
-                </div>
-            </main>
-        </div>
 
-        <!-- Documentation & Learning View -->
-        <div x-show="currentTab === 'learning'" x-cloak>
-            <main class="max-w-5xl mx-auto px-4 pt-8">
-                <div class="border-b border-slate-200 dark:border-white/10 pb-6 mb-8 space-y-2">
-                    <div class="flex items-center gap-2 text-xs font-bold text-blue-500 uppercase tracking-wider">
-                        <span>Module 01</span> &bull; <span>Relational Data Modeling</span> &bull; <span>Est: 1–2 Hours</span>
+                </section>
+
+
+                <!-- SIDEBAR -->
+
+                <aside class="space-y-5 lg:col-span-4">
+
+                    <!-- CHALLENGE -->
+
+                    <div class="rounded-3xl border border-white/10 bg-[var(--card)] p-5">
+
+                        <div class="mb-4 flex items-center justify-between">
+
+                            <h3 class="heading-font text-sm font-bold text-[var(--foreground)]">
+                                Challenge
+                            </h3>
+
+                            <span class="rounded-lg bg-blue-500/10 px-2 py-1 text-[9px] font-bold text-blue-500">
+                                PYTHON
+                            </span>
+
+                        </div>
+
+                        <p
+                            class="text-xs leading-6"
+                            x-text="selectedLesson ? selectedLesson.task : 'Select a lecture from the Course tab.'">
+                        </p>
+
                     </div>
-                    <h1 class="heading-font text-3xl font-bold text-[var(--foreground)] tracking-tight">Database Architecture & Keys</h1>
-                    <p class="text-xs text-[var(--muted-text)]">Analyze foreign relationships, isolate primary primary indexing constraints, and verify database integrity rules.</p>
-                </div>
 
-                <div class="p-5 bg-gradient-to-r from-blue-600/10 to-indigo-600/10 rounded-2xl border border-blue-500/20 mb-8 space-y-3">
-                    <h3 class="heading-font text-sm font-bold text-[var(--foreground)] uppercase tracking-wider flex items-center gap-2">
-                        <i class="fa-solid fa-bullseye text-blue-500"></i> Module Objectives
-                    </h3>
-                    <ul class="grid grid-cols-1 md:grid-cols-2 gap-2 text-xs text-[var(--foreground)]">
-                        <li class="flex items-center gap-2"><i class="fa-solid fa-angle-right text-blue-500"></i> Isolate Primary Keys (PK) and Foreign Keys (FK).</li>
-                        <li class="flex items-center gap-2"><i class="fa-solid fa-angle-right text-blue-500"></i> Formulate clear Data Dictionaries.</li>
-                        <li class="flex items-center gap-2"><i class="fa-solid fa-angle-right text-blue-500"></i> Map relational cardinality between operational entities.</li>
-                        <li class="flex items-center gap-2"><i class="fa-solid fa-angle-right text-blue-500"></i> Validate integrity constraints across live tables.</li>
-                    </ul>
-                </div>
 
-                <div class="space-y-12">
-                    <!-- Part 1 -->
-                    <section class="space-y-4">
-                        <h2 class="heading-font text-xl font-bold text-[var(--foreground)] border-l-4 border-blue-500 pl-3">Part 1 — Database Primary Keys</h2>
-                        <p class="text-xs leading-relaxed">A Primary Key (PK) ensures every record in a table maintains unique identity integrity. It prohibits null values and strictly guarantees unique row-level lookups.</p>
+                    <!-- RESOURCES -->
 
-                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                            <div class="p-3 bg-[var(--card)] border border-slate-200 dark:border-white/5 rounded-xl text-center">
-                                <div class="text-xs font-bold text-blue-500 mb-1">Orders Entity</div>
-                                <div class="text-sm font-mono text-[var(--foreground)] font-bold">order_id (PK)</div>
-                            </div>
-                            <div class="p-3 bg-[var(--card)] border border-slate-200 dark:border-white/5 rounded-xl text-center">
-                                <div class="text-xs font-bold text-blue-500 mb-1">Customers Entity</div>
-                                <div class="text-sm font-mono text-[var(--foreground)] font-bold">customer_id (PK)</div>
-                            </div>
-                            <div class="p-3 bg-[var(--card)] border border-slate-200 dark:border-white/5 rounded-xl text-center">
-                                <div class="text-xs font-bold text-blue-500 mb-1">Products Entity</div>
-                                <div class="text-sm font-mono text-[var(--foreground)] font-bold">product_id (PK)</div>
-                            </div>
+                    <div class="rounded-3xl border border-white/10 bg-[var(--card)] p-5">
+
+                        <h3 class="heading-font mb-4 text-sm font-bold text-[var(--foreground)]">
+                            Learning Resources
+                        </h3>
+
+                        <div class="space-y-2">
+
+                            <a
+                                href="https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/"
+                                target="_blank"
+                                class="flex items-center justify-between rounded-xl bg-[var(--muted-bg)] p-3 text-xs hover:text-blue-500">
+
+                                MIT OCW Course
+
+                                <i class="fa-solid fa-arrow-up-right-from-square text-[9px]"></i>
+
+                            </a>
+
+                            <a
+                                href="https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/pages/material-by-lecture/"
+                                target="_blank"
+                                class="flex items-center justify-between rounded-xl bg-[var(--muted-bg)] p-3 text-xs hover:text-blue-500">
+
+                                Lecture Materials
+
+                                <i class="fa-solid fa-arrow-up-right-from-square text-[9px]"></i>
+
+                            </a>
+
+                            <a
+                                href="https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/lists/problem-sets/"
+                                target="_blank"
+                                class="flex items-center justify-between rounded-xl bg-[var(--muted-bg)] p-3 text-xs hover:text-blue-500">
+
+                                Problem Sets
+
+                                <i class="fa-solid fa-arrow-up-right-from-square text-[9px]"></i>
+
+                            </a>
+
                         </div>
 
-                        <div class="bg-[var(--card)] border border-slate-200 dark:border-white/5 p-4 rounded-xl space-y-2">
-                            <span class="text-[10px] uppercase font-bold text-blue-500 tracking-wider font-mono block"><i class="fa-solid fa-robot mr-1"></i> Developer Guidance Prompt</span>
-                            <div class="bg-[var(--muted-bg)] p-3 rounded text-xs select-all font-mono leading-relaxed text-[var(--foreground)]">
-                                Explain Primary Keys from an engineering context. Walk through how primary key constraints prevent duplicate rows and why unique indexing is essential for database query performance.
-                            </div>
-                        </div>
-                    </section>
+                    </div>
 
-                    <!-- Part 2 -->
-                    <section class="space-y-4">
-                        <h2 class="heading-font text-xl font-bold text-[var(--foreground)] border-l-4 border-blue-500 pl-3">Part 2 — Relational Foreign Keys</h2>
-                        <p class="text-xs leading-relaxed">Foreign Keys (FK) construct foreign reference constraints between relational entities, ensuring referential integrity across transactional boundary layers.</p>
 
-                        <div class="overflow-x-auto rounded-xl border border-slate-200 dark:border-white/10">
-                            <table class="w-full text-left border-collapse text-xs">
-                                <thead>
-                                    <tr class="bg-[var(--muted-bg)] text-[var(--foreground)] border-b border-slate-200 dark:border-white/10">
-                                        <th class="p-3 font-bold">Source Foreign Key</th>
-                                        <th class="p-3 font-bold">Referenced Parent Table</th>
-                                        <th class="p-3 font-bold">Relationship Type</th>
-                                    </tr>
-                                </thead>
-                                <tbody class="divide-y divide-slate-200 dark:divide-white/5 bg-[var(--card)] text-[var(--muted-text)]">
-                                    <tr>
-                                        <td class="p-3 font-bold text-[var(--foreground)]">Orders.customer_id</td>
-                                        <td class="p-3 font-mono">Customers (customer_id)</td>
-                                        <td class="p-3">Many-to-One (N:1)</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="p-3 font-bold text-[var(--foreground)]">Orders.product_id</td>
-                                        <td class="p-3 font-mono">Products (product_id)</td>
-                                        <td class="p-3">Many-to-One (N:1)</td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                    <!-- SCRIPT HISTORY -->
+
+                    <div class="rounded-3xl border border-white/10 bg-[var(--card)] p-5">
+
+                        <div class="mb-4 flex items-center justify-between">
+
+                            <h3 class="heading-font text-sm font-bold text-[var(--foreground)]">
+                                Script History
+                            </h3>
+
+                            <span
+                                class="text-[9px]"
+                                x-text="scriptHistory.length+' versions'">
+                            </span>
+
                         </div>
-                    </section>
+
+                        <div class="space-y-2">
+
+                            <template x-if="scriptHistory.length===0">
+
+                                <div class="rounded-xl bg-[var(--muted-bg)] p-4 text-center text-[10px]">
+                                    No scripts submitted yet.
+                                </div>
+
+                            </template>
+
+                            <template x-for="item in scriptHistory">
+
+                                <div class="rounded-xl bg-[var(--muted-bg)] p-3">
+
+                                    <div class="flex justify-between">
+
+                                        <span
+                                            class="text-[10px] font-bold text-[var(--foreground)]"
+                                            x-text="item.title">
+                                        </span>
+
+                                        <span
+                                            class="text-[9px] text-blue-500"
+                                            x-text="'v'+item.version">
+                                        </span>
+
+                                    </div>
+
+                                    <div class="mt-1 flex justify-between text-[9px]">
+
+                                        <span x-text="item.date"></span>
+
+                                        <span
+                                            :class="item.status==='Submitted'
+                                                ? 'text-emerald-500'
+                                                : 'text-yellow-500'"
+                                            x-text="item.status">
+                                        </span>
+
+                                    </div>
+
+                                </div>
+
+                            </template>
+
+                        </div>
+
+                    </div>
+
+                </aside>
+
+            </div>
+
+        </main>
+
+
+        <!-- ===================================================== -->
+        <!-- CERTIFICATE -->
+        <!-- ===================================================== -->
+
+        <main
+            x-show="currentView==='certificate'"
+            x-cloak
+            class="mx-auto max-w-4xl px-4 pb-20 pt-10">
+
+            <div
+                class="rounded-[2rem] border border-white/10 bg-[var(--card)] p-7 shadow-2xl md:p-12">
+
+                <div class="text-center">
+
+                    <div
+                        class="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-blue-600 text-2xl font-bold text-white">
+                        O
+                    </div>
+
+                    <div class="mt-6 text-[10px] font-bold uppercase tracking-[0.35em] text-blue-500">
+                        Openbox Academy
+                    </div>
+
+                    <h1 class="heading-font mt-4 text-3xl font-bold text-[var(--foreground)] md:text-5xl">
+                        Certificate of Completion
+                    </h1>
+
+                    <p class="mx-auto mt-4 max-w-xl text-sm leading-7">
+                        This certificate becomes available after the learner
+                        completes the required learning modules and coding
+                        challenges.
+                    </p>
+
                 </div>
-            </main>
-        </div>
+
+
+                <div class="my-10 border-y border-white/10 py-10 text-center">
+
+                    <div class="text-[10px] uppercase tracking-widest">
+                        Awarded to
+                    </div>
+
+                    <div
+                        class="heading-font mt-3 text-3xl font-bold text-[var(--foreground)]"
+                        x-text="userSession.name">
+                    </div>
+
+                    <div class="mx-auto mt-5 h-px max-w-xs bg-white/10"></div>
+
+                    <div class="mt-6 text-sm font-semibold text-[var(--foreground)]">
+                        Introduction to Computer Science & Programming Using Python
+                    </div>
+
+                    <div class="mt-2 text-xs">
+                        Openbox Completion-Based Learning Program
+                    </div>
+
+                </div>
+
+
+                <div class="grid gap-4 md:grid-cols-3">
+
+                    <div class="rounded-2xl bg-[var(--muted-bg)] p-5 text-center">
+
+                        <div
+                            class="heading-font text-2xl font-bold text-[var(--foreground)]"
+                            x-text="completedLectures()">
+                        </div>
+
+                        <div class="mt-1 text-[9px] uppercase tracking-wider">
+                            Lectures
+                        </div>
+
+                    </div>
+
+                    <div class="rounded-2xl bg-[var(--muted-bg)] p-5 text-center">
+
+                        <div
+                            class="heading-font text-2xl font-bold text-[var(--foreground)]"
+                            x-text="submittedScripts">
+                        </div>
+
+                        <div class="mt-1 text-[9px] uppercase tracking-wider">
+                            Scripts
+                        </div>
+
+                    </div>
+
+                    <div class="rounded-2xl bg-[var(--muted-bg)] p-5 text-center">
+
+                        <div
+                            class="heading-font text-2xl font-bold text-[var(--foreground)]"
+                            x-text="progressPercent()+'%'">
+                        </div>
+
+                        <div class="mt-1 text-[9px] uppercase tracking-wider">
+                            Progress
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="mt-8 rounded-2xl border border-yellow-500/20 bg-yellow-500/5 p-4 text-center">
+
+                    <template x-if="progressPercent() < 100">
+
+                        <div>
+
+                            <div class="text-xs font-bold text-yellow-500">
+                                Certificate Locked
+                            </div>
+
+                            <div class="mt-1 text-[10px]">
+                                Complete all required lectures and coding
+                                submissions to unlock certification.
+                            </div>
+
+                        </div>
+
+                    </template>
+
+
+                    <template x-if="progressPercent() === 100">
+
+                        <div>
+
+                            <div class="text-xs font-bold text-emerald-500">
+                                Certificate Eligible
+                            </div>
+
+                            <div class="mt-1 text-[10px]">
+                                You have completed the Openbox learning path.
+                            </div>
+
+                            <button
+                                @click="printCertificate()"
+                                class="mt-4 rounded-xl bg-blue-600 px-5 py-3 text-xs font-bold text-white">
+
+                                <i class="fa-solid fa-print mr-1"></i>
+                                Print Certificate
+
+                            </button>
+
+                        </div>
+
+                    </template>
+
+                </div>
+
+            </div>
+
+        </main>
+
     </div>
 
-    <!-- Submission Modal -->
-    <div x-show="showModal" x-cloak class="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4">
-        <div class="bg-[var(--card)] border border-slate-200 dark:border-white/10 p-6 rounded-2xl max-w-md w-full space-y-4 shadow-2xl">
-            <div class="flex justify-between items-center">
-                <h3 class="font-bold text-base text-[var(--foreground)] heading-font">Submit Module Artifact</h3>
-                <button @click="showModal = false" class="text-[var(--muted-text)] hover:text-[var(--foreground)]"><i class="fa-solid fa-xmark"></i></button>
-            </div>
-            <div class="space-y-2">
-                <label class="text-[10px] uppercase font-bold text-[var(--muted-text)]">Artifact / Pull Request Link</label>
-                <input type="url" x-model="submissionInput" placeholder="https://github.com/username/repository/pull/1" class="w-full px-3 py-2 rounded-xl bg-[var(--muted-bg)] border border-slate-200 dark:border-white/10 text-xs text-[var(--foreground)] focus:outline-none focus:border-blue-500">
-            </div>
-            <button @click="submitArtifact()" class="w-full py-2 bg-blue-600 hover:bg-blue-500 text-white font-bold rounded-xl text-xs transition-all cursor-pointer">
-                Confirm & Submit
-            </button>
-        </div>
-    </div>
+
+    <!-- ========================================================= -->
+    <!-- JAVASCRIPT -->
+    <!-- ========================================================= -->
 
     <script>
-        function dashboardApp() {
+
+        function courseApp() {
+
             return {
+
+                /* ================================================= */
+                /* STATE */
+                /* ================================================= */
+
                 isLoggedIn: false,
+
                 authLoading: false,
-                currentTab: 'dashboard',
-                activeDay: 1,
-                showModal: false,
-                selectedDay: null,
-                submissionInput: '',
+
+                currentView: 'dashboard',
+
+                activeLesson: null,
+
+                selectedLesson: null,
+
+                darkMode: true,
+
+                scriptLanguage: 'Python',
+
+                scriptTitle: '',
+
+                scriptCode: '',
+
+                validationStatus: '',
+
+                validationOutput: '',
+
+                submittedScripts: 0,
+
+                scriptHistory: [],
+
                 loginForm: {
                     name: '',
                     phone: ''
                 },
+
                 userSession: {
                     name: '',
                     phone: ''
                 },
-                daysData: [
+
+
+                /* ================================================= */
+                /* STAGES */
+                /* ================================================= */
+
+                stages: [
+
                     {
                         id: 1,
-                        title: "Module 1 — Database Architecture & Schemas",
-                        completed: false,
-                        submitted: false,
-                        submissionUrl: "",
-                        activities: [
-                            "Map entity tables and primary key requirements.",
-                            "Identify referential foreign keys across transactional boundaries.",
-                            "Construct comprehensive Data Dictionary."
-                        ],
-                        deliverable: "Schema Specification Document"
+                        title: 'Programming Foundations',
+                        description:
+                            'Learn Python syntax, objects, variables, strings, branching and loops.',
+                        icon: 'fa-terminal',
+                        label: 'Foundation',
+                        done: false
                     },
+
                     {
                         id: 2,
-                        title: "Module 2 — Query Optimization & Indexing",
-                        completed: false,
-                        submitted: false,
-                        submissionUrl: "",
-                        activities: [
-                            "Analyze execution plans for slow-running join queries.",
-                            "Implement targeted B-tree indexes on foreign key lookups."
-                        ],
-                        deliverable: "SQL Performance Assessment"
+                        title: 'Problem Solving',
+                        description:
+                            'Build functions, recursion, testing, debugging and data structures.',
+                        icon: 'fa-puzzle-piece',
+                        label: 'Core Skills',
+                        done: false
                     },
+
                     {
                         id: 3,
-                        title: "Module 3 — RESTful API Endpoint Engineering",
-                        completed: false,
-                        submitted: false,
-                        submissionUrl: "",
-                        activities: [
-                            "Design controller endpoints for order payloads.",
-                            "Implement strict payload validation and middleware error handling."
-                        ],
-                        deliverable: "OpenAPI Specification / Pull Request"
-                    },
-                    {
-                        id: 4,
-                        title: "Module 4 — Real-time WebSockets Integration",
-                        completed: false,
-                        submitted: false,
-                        submissionUrl: "",
-                        activities: [
-                            "Subscribe to database changefeed events via WebSockets.",
-                            "Refactor dashboard state to reflect live metrics updates."
-                        ],
-                        deliverable: "Real-time Event Stream Demo"
+                        title: 'Computer Science',
+                        description:
+                            'Understand OOP, complexity, algorithms, sorting, plotting and simulations.',
+                        icon: 'fa-microchip',
+                        label: 'Advanced',
+                        done: false
                     }
+
                 ],
 
-                init() {
-                    const saved = localStorage.getItem('openbox_user');
-                    if (saved) {
-                        this.userSession = JSON.parse(saved);
-                        this.isLoggedIn = true;
+
+                /* ================================================= */
+                /* 26 LECTURES */
+                /* ================================================= */
+
+                lessons: [
+
+                    {
+                        id: 1,
+                        title: 'Introduction',
+                        objective:
+                            'Understand what computation is and how Python programs represent instructions, values and objects.',
+                        topics: [
+                            'Knowledge',
+                            'Machines',
+                            'Objects',
+                            'Types',
+                            'Variables',
+                            'Bindings',
+                            'IDEs'
+                        ],
+                        task:
+                            'Create a Python program that accepts a name and prints a personalized greeting.',
+                        completed: false
+                    },
+
+                    {
+                        id: 2,
+                        title: 'Strings, Input/Output, and Branching',
+                        objective:
+                            'Use input/output, strings, comparisons and conditional branching to build interactive programs.',
+                        topics: [
+                            'Strings',
+                            'Input',
+                            'Output',
+                            'Conditionals',
+                            'Boolean Expressions'
+                        ],
+                        task:
+                            'Build a small interactive program that asks for user information and makes a decision using if/elif/else.',
+                        completed: false
+                    },
+
+                    {
+                        id: 3,
+                        title: 'Iteration',
+                        objective:
+                            'Understand repeated execution and use loops to solve problems involving sequences of operations.',
+                        topics: [
+                            'while',
+                            'for',
+                            'Iteration',
+                            'Counters',
+                            'Accumulation'
+                        ],
+                        task:
+                            'Write a program that repeatedly processes numbers and produces an accumulated result.',
+                        completed: false
+                    },
+
+                    {
+                        id: 4,
+                        title: 'Loops over Strings, Guess-and-Check, and Binary',
+                        objective:
+                            'Apply iteration to strings and explore guess-and-check and binary-style problem solving.',
+                        topics: [
+                            'String Iteration',
+                            'Guess-and-Check',
+                            'Binary',
+                            'Loops'
+                        ],
+                        task:
+                            'Create a program that examines a string character-by-character and computes a meaningful result.',
+                        completed: false
+                    },
+
+                    {
+                        id: 5,
+                        title: 'Floats and Approximation Methods',
+                        objective:
+                            'Understand floating-point values and approximate numerical solutions computationally.',
+                        topics: [
+                            'Floats',
+                            'Approximation',
+                            'Numerical Methods',
+                            'Precision'
+                        ],
+                        task:
+                            'Write an approximation program that estimates a numerical answer within a specified tolerance.',
+                        completed: false
+                    },
+
+                    {
+                        id: 6,
+                        title: 'Bisection Search',
+                        objective:
+                            'Use bisection search to efficiently narrow down a numerical solution.',
+                        topics: [
+                            'Bisection',
+                            'Search',
+                            'Bounds',
+                            'Precision'
+                        ],
+                        task:
+                            'Implement a bisection-search solution for a numerical problem.',
+                        completed: false
+                    },
+
+                    {
+                        id: 7,
+                        title: 'Decomposition, Abstraction, and Functions',
+                        objective:
+                            'Break programs into reusable functions and use abstraction to manage complexity.',
+                        topics: [
+                            'Functions',
+                            'Parameters',
+                            'Return Values',
+                            'Abstraction',
+                            'Decomposition'
+                        ],
+                        task:
+                            'Refactor a small program into multiple reusable functions.',
+                        completed: false
+                    },
+
+                    {
+                        id: 8,
+                        title: 'Functions as Objects',
+                        objective:
+                            'Understand that functions are objects that can be stored, passed and used as values.',
+                        topics: [
+                            'Functions as Objects',
+                            'First-Class Functions',
+                            'Higher-Order Thinking'
+                        ],
+                        task:
+                            'Write a program that passes a function into another function.',
+                        completed: false
+                    },
+
+                    {
+                        id: 9,
+                        title: 'Lambda Functions, Tuples, and Lists',
+                        objective:
+                            'Work with lambda expressions, tuples and lists to represent and transform collections of data.',
+                        topics: [
+                            'Lambda',
+                            'Tuples',
+                            'Lists',
+                            'Collections'
+                        ],
+                        task:
+                            'Create a program that transforms a collection using a lambda function.',
+                        completed: false
+                    },
+
+                    {
+                        id: 10,
+                        title: 'Lists and Mutability',
+                        objective:
+                            'Understand list operations and how mutable objects behave when modified.',
+                        topics: [
+                            'Lists',
+                            'Mutability',
+                            'Methods',
+                            'References'
+                        ],
+                        task:
+                            'Build a list-processing program that demonstrates mutation and list methods.',
+                        completed: false
+                    },
+
+                    {
+                        id: 11,
+                        title: 'Aliasing and Cloning',
+                        objective:
+                            'Understand references, aliasing and how cloning changes object relationships.',
+                        topics: [
+                            'Aliasing',
+                            'References',
+                            'Cloning',
+                            'Copies'
+                        ],
+                        task:
+                            'Demonstrate the difference between aliasing a list and creating an independent copy.',
+                        completed: false
+                    },
+
+                    {
+                        id: 12,
+                        title: 'List Comprehension, Functions as Objects, Testing, Debugging',
+                        objective:
+                            'Combine concise list construction with systematic testing and debugging practices.',
+                        topics: [
+                            'List Comprehension',
+                            'Testing',
+                            'Debugging',
+                            'Functions'
+                        ],
+                        task:
+                            'Write a tested list-processing function and document at least one debugging process.',
+                        completed: false
+                    },
+
+                    {
+                        id: 13,
+                        title: 'Exceptions and Assertions',
+                        objective:
+                            'Handle exceptional situations and use assertions to protect program assumptions.',
+                        topics: [
+                            'Exceptions',
+                            'try/except',
+                            'Assertions',
+                            'Error Handling'
+                        ],
+                        task:
+                            'Create a robust input program that handles invalid values without crashing.',
+                        completed: false
+                    },
+
+                    {
+                        id: 14,
+                        title: 'Dictionaries',
+                        objective:
+                            'Use dictionaries to represent key-value relationships and organize structured data.',
+                        topics: [
+                            'Dictionaries',
+                            'Keys',
+                            'Values',
+                            'Lookup'
+                        ],
+                        task:
+                            'Build a small student or product database using a dictionary.',
+                        completed: false
+                    },
+
+                    {
+                        id: 15,
+                        title: 'Recursion',
+                        objective:
+                            'Understand recursive problem solving and identify base and recursive cases.',
+                        topics: [
+                            'Recursion',
+                            'Base Case',
+                            'Recursive Case'
+                        ],
+                        task:
+                            'Implement a recursive numerical function and explain its base case.',
+                        completed: false
+                    },
+
+                    {
+                        id: 16,
+                        title: 'Recursion on Non-Numerics',
+                        objective:
+                            'Apply recursion to structures and problems that are not purely numerical.',
+                        topics: [
+                            'Recursive Structures',
+                            'Strings',
+                            'Lists',
+                            'Tree Thinking'
+                        ],
+                        task:
+                            'Solve a non-numerical problem using recursion.',
+                        completed: false
+                    },
+
+                    {
+                        id: 17,
+                        title: 'Python Classes',
+                        objective:
+                            'Understand classes, instances, attributes and methods.',
+                        topics: [
+                            'Classes',
+                            'Objects',
+                            'Attributes',
+                            'Methods'
+                        ],
+                        task:
+                            'Create a Python class representing a real-world object.',
+                        completed: false
+                    },
+
+                    {
+                        id: 18,
+                        title: 'More Python Class Methods',
+                        objective:
+                            'Extend classes using instance methods and object behavior.',
+                        topics: [
+                            'Instance Methods',
+                            'State',
+                            'Object Behavior'
+                        ],
+                        task:
+                            'Extend your previous class with multiple meaningful methods.',
+                        completed: false
+                    },
+
+                    {
+                        id: 19,
+                        title: 'Inheritance',
+                        objective:
+                            'Understand inheritance and how classes can specialize existing behavior.',
+                        topics: [
+                            'Inheritance',
+                            'Parent Classes',
+                            'Child Classes',
+                            'Method Override'
+                        ],
+                        task:
+                            'Implement a parent class and at least one specialized child class.',
+                        completed: false
+                    },
+
+                    {
+                        id: 20,
+                        title: 'Fitness Tracker Object-Oriented Programming Example',
+                        objective:
+                            'Apply object-oriented design to a larger practical problem.',
+                        topics: [
+                            'OOP',
+                            'Design',
+                            'State',
+                            'Methods'
+                        ],
+                        task:
+                            'Design a small object-oriented fitness or activity tracking system.',
+                        completed: false
+                    },
+
+                    {
+                        id: 21,
+                        title: 'Timing Programs and Counting Operations',
+                        objective:
+                            'Measure program performance and reason about computational work.',
+                        topics: [
+                            'Timing',
+                            'Operations',
+                            'Performance'
+                        ],
+                        task:
+                            'Compare two implementations of the same task and record their performance.',
+                        completed: false
+                    },
+
+                    {
+                        id: 22,
+                        title: 'Big Oh and Theta',
+                        objective:
+                            'Understand asymptotic notation and how it describes algorithmic growth.',
+                        topics: [
+                            'Big O',
+                            'Theta',
+                            'Growth',
+                            'Complexity'
+                        ],
+                        task:
+                            'Analyze the time complexity of three simple Python algorithms.',
+                        completed: false
+                    },
+
+                    {
+                        id: 23,
+                        title: 'Complexity Classes Examples',
+                        objective:
+                            'Compare common complexity classes and understand how input size affects performance.',
+                        topics: [
+                            'Complexity Classes',
+                            'Efficiency',
+                            'Algorithms'
+                        ],
+                        task:
+                            'Implement and compare algorithms with different complexity behaviors.',
+                        completed: false
+                    },
+
+                    {
+                        id: 24,
+                        title: 'Sorting Algorithms',
+                        objective:
+                            'Understand sorting algorithms and compare their computational characteristics.',
+                        topics: [
+                            'Sorting',
+                            'Algorithms',
+                            'Comparisons',
+                            'Performance'
+                        ],
+                        task:
+                            'Implement a sorting algorithm and analyze its behavior.',
+                        completed: false
+                    },
+
+                    {
+                        id: 25,
+                        title: 'Plotting',
+                        objective:
+                            'Use visualization to communicate computational results and patterns.',
+                        topics: [
+                            'Plotting',
+                            'Data',
+                            'Visualization',
+                            'Graphs'
+                        ],
+                        task:
+                            'Generate a simple visualization from program-generated data.',
+                        completed: false
+                    },
+
+                    {
+                        id: 26,
+                        title: 'List Access, Hashing, Simulations, and Wrap-Up',
+                        objective:
+                            'Connect data access, hashing, simulations and algorithmic thinking into a final computational project.',
+                        topics: [
+                            'List Access',
+                            'Hashing',
+                            'Simulations',
+                            'Wrap-Up'
+                        ],
+                        task:
+                            'Build a final Python mini-project combining data structures, algorithms and simulation or analysis.',
+                        completed: false
                     }
+
+                ],
+
+
+                /* ================================================= */
+                /* INIT */
+                /* ================================================= */
+
+                init() {
+
+                    const savedSession =
+                        localStorage.getItem('openbox_python_session');
+
+                    if (savedSession) {
+
+                        try {
+
+                            this.userSession =
+                                JSON.parse(savedSession);
+
+                            this.isLoggedIn = true;
+
+                        } catch (error) {
+
+                            localStorage.removeItem(
+                                'openbox_python_session'
+                            );
+
+                        }
+
+                    }
+
+
+                    const savedTheme =
+                        localStorage.getItem('openbox_python_theme');
+
+                    if (savedTheme === 'light') {
+
+                        this.darkMode = false;
+
+                        document.documentElement
+                            .classList.remove('dark');
+
+                    } else {
+
+                        this.darkMode = true;
+
+                        document.documentElement
+                            .classList.add('dark');
+
+                    }
+
+
+                    this.loadProgress();
+
+                    this.updateStages();
+
                 },
 
-                executeAuthHandshake() {
+
+                /* ================================================= */
+                /* LOGIN */
+                /* ================================================= */
+
+                login() {
+
+                    if (!this.loginForm.name ||
+                        !this.loginForm.phone) {
+                        return;
+                    }
+
                     this.authLoading = true;
+
                     setTimeout(() => {
-                        this.userSession = { ...this.loginForm };
-                        localStorage.setItem('openbox_user', JSON.stringify(this.userSession));
+
+                        this.userSession = {
+
+                            name: this.loginForm.name,
+
+                            phone: this.loginForm.phone
+
+                        };
+
+                        localStorage.setItem(
+                            'openbox_python_session',
+                            JSON.stringify(this.userSession)
+                        );
+
                         this.isLoggedIn = true;
+
                         this.authLoading = false;
-                    }, 600);
+
+                    }, 500);
+
                 },
 
-                executeSignOut() {
-                    localStorage.removeItem('openbox_user');
+
+                logout() {
+
+                    localStorage.removeItem(
+                        'openbox_python_session'
+                    );
+
                     this.isLoggedIn = false;
-                    this.loginForm = { name: '', phone: '' };
+
+                    this.loginForm = {
+                        name: '',
+                        phone: ''
+                    };
+
                 },
+
+
+                /* ================================================= */
+                /* THEME */
+                /* ================================================= */
 
                 toggleTheme() {
-                    document.documentElement.classList.toggle('dark');
-                },
 
-                calculateProgress() {
-                    const completed = this.daysData.filter(d => d.completed).length;
-                    return Math.round((completed / this.daysData.length) * 100);
-                },
+                    this.darkMode = !this.darkMode;
 
-                completedCount() {
-                    return this.daysData.filter(d => d.completed).length;
-                },
+                    if (this.darkMode) {
 
-                openSubmissionModal(day) {
-                    this.selectedDay = day;
-                    this.submissionInput = day.submissionUrl || '';
-                    this.showModal = true;
-                },
+                        document.documentElement
+                            .classList.add('dark');
 
-                submitArtifact() {
-                    if (this.selectedDay && this.submissionInput) {
-                        this.selectedDay.submitted = true;
-                        this.selectedDay.submissionUrl = this.submissionInput;
-                        this.showModal = false;
+                        localStorage.setItem(
+                            'openbox_python_theme',
+                            'dark'
+                        );
+
+                    } else {
+
+                        document.documentElement
+                            .classList.remove('dark');
+
+                        localStorage.setItem(
+                            'openbox_python_theme',
+                            'light'
+                        );
+
                     }
+
+                },
+
+
+                /* ================================================= */
+                /* PROGRESS */
+                /* ================================================= */
+
+                progressPercent() {
+
+                    const completed =
+                        this.lessons.filter(
+                            lesson => lesson.completed
+                        ).length;
+
+                    return Math.round(
+                        (completed / this.lessons.length) * 100
+                    );
+
+                },
+
+
+                completedLectures() {
+
+                    return this.lessons.filter(
+                        lesson => lesson.completed
+                    ).length;
+
+                },
+
+
+                updateStages() {
+
+                    const progress =
+                        this.progressPercent();
+
+                    this.stages[0].done = progress >= 30;
+                    this.stages[1].done = progress >= 65;
+                    this.stages[2].done = progress >= 100;
+
+                },
+
+
+                completeLesson(lesson) {
+
+                    if (lesson.completed) {
+                        return;
+                    }
+
+                    lesson.completed = true;
+
+                    this.saveProgress();
+
+                    this.updateStages();
+
+                },
+
+
+                saveProgress() {
+
+                    const progress =
+                        this.lessons.map(
+                            lesson => ({
+                                id: lesson.id,
+                                completed: lesson.completed
+                            })
+                        );
+
+                    localStorage.setItem(
+                        this.progressKey(),
+                        JSON.stringify(progress)
+                    );
+
+                },
+
+
+                loadProgress() {
+
+                    const saved =
+                        localStorage.getItem(
+                            this.progressKey()
+                        );
+
+                    if (!saved) {
+                        return;
+                    }
+
+                    try {
+
+                        const progress =
+                            JSON.parse(saved);
+
+                        progress.forEach(item => {
+
+                            const lesson =
+                                this.lessons.find(
+                                    l => l.id === item.id
+                                );
+
+                            if (lesson) {
+
+                                lesson.completed =
+                                    item.completed;
+
+                            }
+
+                        });
+
+                    } catch (error) {
+
+                        console.error(
+                            'Progress load error',
+                            error
+                        );
+
+                    }
+
+                },
+
+
+                progressKey() {
+
+                    return 'openbox_python_progress_' +
+                        (this.userSession.phone || 'guest');
+
+                },
+
+
+                /* ================================================= */
+                /* NEXT LESSON */
+                /* ================================================= */
+
+                nextLesson() {
+
+                    return this.lessons.find(
+                        lesson => !lesson.completed
+                    ) || this.lessons[this.lessons.length - 1];
+
+                },
+
+
+                openNextLesson() {
+
+                    const lesson =
+                        this.nextLesson();
+
+                    this.openScript(lesson);
+
+                },
+
+
+                /* ================================================= */
+                /* SCRIPT LAB */
+                /* ================================================= */
+
+                openScript(lesson) {
+
+                    this.selectedLesson = lesson;
+
+                    this.currentView = 'scripts';
+
+                    this.activeLesson = lesson.id;
+
+                    this.scriptTitle =
+                        lesson.title + ' Challenge';
+
+                    this.scriptCode =
+                        this.defaultCode(lesson);
+
+                    this.validationStatus = '';
+
+                    this.validationOutput = '';
+
+                    this.loadScriptHistory();
+
+                    window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth'
+                    });
+
+                },
+
+
+                defaultCode(lesson) {
+
+                    if (!lesson) {
+                        return '';
+                    }
+
+                    return `# Openbox Python Challenge
+# Lecture ${lesson.id}: ${lesson.title}
+#
+# Task:
+# ${lesson.task}
+#
+# Write your solution below.
+
+
+`;
+
+                },
+
+
+                /* ================================================= */
+                /* SCRIPT VALIDATION */
+                /* ================================================= */
+
+                validateScript() {
+
+                    const code =
+                        this.scriptCode.trim();
+
+                    if (!code) {
+
+                        this.validationStatus = 'FAILED';
+
+                        this.validationOutput =
+                            'No Python code detected. Write your solution first.';
+
+                        return;
+
+                    }
+
+
+                    const checks = [];
+
+
+                    /* Basic Python checks */
+
+                    if (
+                        code.includes('print(') ||
+                        code.includes('def ') ||
+                        code.includes('class ') ||
+                        code.includes('for ') ||
+                        code.includes('while ') ||
+                        code.includes('import ')
+                    ) {
+
+                        checks.push(
+                            '✓ Python structure detected'
+                        );
+
+                    } else {
+
+                        checks.push(
+                            '⚠ No common Python construct detected'
+                        );
+
+                    }
+
+
+                    if (
+                        code.includes('if ') ||
+                        code.includes('elif ') ||
+                        code.includes('else:')
+                    ) {
+
+                        checks.push(
+                            '✓ Conditional logic detected'
+                        );
+
+                    }
+
+
+                    if (
+                        code.includes('for ') ||
+                        code.includes('while ')
+                    ) {
+
+                        checks.push(
+                            '✓ Iteration detected'
+                        );
+
+                    }
+
+
+                    if (code.includes('def ')) {
+
+                        checks.push(
+                            '✓ Function definition detected'
+                        );
+
+                    }
+
+
+                    if (code.includes('class ')) {
+
+                        checks.push(
+                            '✓ Class definition detected'
+                        );
+
+                    }
+
+
+                    if (
+                        code.includes('try:') ||
+                        code.includes('except')
+                    ) {
+
+                        checks.push(
+                            '✓ Exception handling detected'
+                        );
+
+                    }
+
+
+                    const lines =
+                        code.split('\n').filter(
+                            line => line.trim()
+                        ).length;
+
+
+                    checks.push(
+                        `✓ ${lines} non-empty code lines`
+                    );
+
+
+                    checks.push(
+                        '',
+                        'Validation completed.',
+                        '',
+                        'This browser validation checks basic',
+                        'submission structure only.',
+                        '',
+                        'For real Python execution and automated',
+                        'grading, connect a secure Python sandbox.'
+                    );
+
+
+                    this.validationStatus = 'READY';
+
+                    this.validationOutput =
+                        checks.join('\n');
+
+                },
+
+
+                /* ================================================= */
+                /* SAVE DRAFT */
+                /* ================================================= */
+
+                saveDraft() {
+
+                    if (!this.selectedLesson) {
+
+                        alert(
+                            'Select a lecture before saving a script.'
+                        );
+
+                        return;
+
+                    }
+
+
+                    if (!this.scriptCode.trim()) {
+
+                        alert(
+                            'Write some Python code first.'
+                        );
+
+                        return;
+
+                    }
+
+
+                    const key =
+                        this.scriptHistoryKey();
+
+
+                    const existing =
+                        JSON.parse(
+                            localStorage.getItem(key) || '[]'
+                        );
+
+
+                    const version =
+                        existing.length + 1;
+
+
+                    existing.unshift({
+
+                        title:
+                            this.scriptTitle ||
+                            'Untitled Script',
+
+                        lessonId:
+                            this.selectedLesson.id,
+
+                        version:
+                            version,
+
+                        status:
+                            'Draft',
+
+                        date:
+                            new Date().toLocaleString(),
+
+                        code:
+                            this.scriptCode
+
+                    });
+
+
+                    localStorage.setItem(
+                        key,
+                        JSON.stringify(existing)
+                    );
+
+
+                    this.loadScriptHistory();
+
+                    alert(
+                        'Draft saved locally.'
+                    );
+
+                },
+
+
+                /* ================================================= */
+                /* SUBMIT SCRIPT */
+                /* ================================================= */
+
+                submitScript() {
+
+                    if (!this.selectedLesson) {
+
+                        alert(
+                            'Select a lecture first.'
+                        );
+
+                        return;
+
+                    }
+
+
+                    if (!this.scriptCode.trim()) {
+
+                        alert(
+                            'Write your Python solution first.'
+                        );
+
+                        return;
+
+                    }
+
+
+                    this.validateScript();
+
+
+                    const key =
+                        this.scriptHistoryKey();
+
+
+                    const existing =
+                        JSON.parse(
+                            localStorage.getItem(key) || '[]'
+                        );
+
+
+                    const version =
+                        existing.length + 1;
+
+
+                    existing.unshift({
+
+                        title:
+                            this.scriptTitle ||
+                            'Untitled Script',
+
+                        lessonId:
+                            this.selectedLesson.id,
+
+                        version:
+                            version,
+
+                        status:
+                            'Submitted',
+
+                        date:
+                            new Date().toLocaleString(),
+
+                        code:
+                            this.scriptCode
+
+                    });
+
+
+                    localStorage.setItem(
+                        key,
+                        JSON.stringify(existing)
+                    );
+
+
+                    this.submittedScripts =
+                        this.countSubmittedScripts();
+
+
+                    this.loadScriptHistory();
+
+
+                    /*
+                     * Completion is intentionally tied
+                     * to script submission.
+                     */
+
+                    this.selectedLesson.completed =
+                        true;
+
+
+                    this.saveProgress();
+
+                    this.updateStages();
+
+
+                    alert(
+                        '🚀 Script submitted successfully. Lecture completed.'
+                    );
+
+                },
+
+
+                /* ================================================= */
+                /* SCRIPT HISTORY */
+                /* ================================================= */
+
+                scriptHistoryKey() {
+
+                    return 'openbox_python_scripts_' +
+                        (this.userSession.phone || 'guest');
+
+                },
+
+
+                loadScriptHistory() {
+
+                    const key =
+                        this.scriptHistoryKey();
+
+                    const all =
+                        JSON.parse(
+                            localStorage.getItem(key) || '[]'
+                        );
+
+                    this.scriptHistory =
+                        this.selectedLesson
+                            ? all.filter(
+                                item =>
+                                    item.lessonId ===
+                                    this.selectedLesson.id
+                            )
+                            : all;
+
+                    this.submittedScripts =
+                        all.filter(
+                            item =>
+                                item.status ===
+                                'Submitted'
+                        ).length;
+
+                },
+
+
+                countSubmittedScripts() {
+
+                    const key =
+                        this.scriptHistoryKey();
+
+                    const all =
+                        JSON.parse(
+                            localStorage.getItem(key) || '[]'
+                        );
+
+                    return all.filter(
+                        item =>
+                            item.status === 'Submitted'
+                    ).length;
+
+                },
+
+
+                /* ================================================= */
+                /* CERTIFICATE */
+                /* ================================================= */
+
+                printCertificate() {
+
+                    if (this.progressPercent() < 100) {
+
+                        alert(
+                            'Complete the course before generating your certificate.'
+                        );
+
+                        return;
+
+                    }
+
+                    window.print();
+
                 }
-            }
+
+            };
+
         }
+
     </script>
+
 </body>
 
 </html>
