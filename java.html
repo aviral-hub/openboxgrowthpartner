@@ -3,976 +3,653 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Openbox GP | Java Architecture</title>
-    
+    <title>Java Architecture & Foundations</title>
     <style>
         :root {
-            --primary: #2864e8;
-            --dark: #10182b;
-            --text: #172033;
-            --muted: #6d7789;
-            --bg: #f5f7fb;
-            --card: #ffffff;
-            --line: #e2e7ef;
-            --success: #159570;
-            --success-bg: #eaf8f3;
-            --blue-bg: #edf3ff;
-            --orange: #e58b00;
+            --primary: #0076CE;
+            --primary-dark: #005A9C;
+            --secondary: #003366;
+            --bg-main: #F4F7FB;
+            --card-bg: #FFFFFF;
+            --text-main: #2D3748;
+            --text-muted: #718096;
+            --accent-green: #38A169;
+            --accent-red: #E53E3E;
+            --border-color: #E2E8F0;
         }
 
         * {
             box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
         }
 
         body {
-            margin: 0;
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, Arial, sans-serif;
-            background: var(--bg);
-            color: var(--text);
+            background-color: var(--bg-main);
+            color: var(--text-main);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* Header Navigation */
+        header {
+            background-color: var(--secondary);
+            color: white;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        header h1 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .slide-counter {
+            background-color: rgba(255,255,255,0.15);
+            padding: 0.25rem 0.75rem;
+            border-radius: 999px;
+            font-size: 0.875rem;
+        }
+
+        /* Main Container Layout */
+        .main-container {
+            flex: 1;
+            display: flex;
+            max-width: 1400px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 1.5rem;
+            gap: 1.5rem;
+        }
+
+        /* Sidebar Navigation */
+        nav.sidebar {
+            width: 280px;
+            background: var(--card-bg);
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            padding: 1rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            height: fit-content;
+        }
+
+        nav.sidebar h2 {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-muted);
+            margin-bottom: 0.5rem;
+            padding-left: 0.5rem;
+        }
+
+        .nav-btn {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem 1rem;
+            border: none;
+            background: transparent;
+            color: var(--text-main);
+            border-radius: 6px;
+            cursor: pointer;
+            text-align: left;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.2s ease;
+        }
+
+        .nav-btn:hover {
+            background-color: #EDF2F7;
+        }
+
+        .nav-btn.active {
+            background-color: #EBF8FF;
+            color: var(--primary);
+            font-weight: 600;
+            border-left: 4px solid var(--primary);
+        }
+
+        /* Content Area */
+        main.content-area {
+            flex: 1;
+            background: var(--card-bg);
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            padding: 2.5rem;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            position: relative;
+            overflow-y: auto;
+        }
+
+        .slide {
+            display: none;
+            animation: fadeIn 0.3s ease-in-out;
+        }
+
+        .slide.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(4px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h2.slide-title {
+            font-size: 1.75rem;
+            color: var(--secondary);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        /* Cards & Components */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.25rem;
+            margin-top: 1rem;
+        }
+
+        .info-card {
+            background: #F8FAFC;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1.25rem;
+        }
+
+        .info-card h3 {
+            font-size: 1.1rem;
+            color: var(--primary);
+            margin-bottom: 0.75rem;
+        }
+
+        ul.styled-list {
+            list-style: none;
+        }
+
+        ul.styled-list li {
+            position: relative;
+            padding-left: 1.5rem;
+            margin-bottom: 0.75rem;
             line-height: 1.5;
         }
 
-        button {
-            font-family: inherit;
-            cursor: pointer;
-        }
-
-        /* TOP BAR */
-        .topbar {
-            height: 68px;
-            background: white;
-            border-bottom: 1px solid var(--line);
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 0 7%;
-            position: sticky;
-            top: 0;
-            z-index: 20;
-        }
-
-        .brand {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .brand img {
-            width: 125px;
-            max-height: 45px;
-            object-fit: contain;
-        }
-
-        .course-label {
-            border-left: 1px solid var(--line);
-            padding-left: 15px;
-            color: var(--muted);
-            font-size: 12px;
-        }
-
-        .module-status {
-            background: var(--blue-bg);
+        ul.styled-list li::before {
+            content: "•";
             color: var(--primary);
-            padding: 8px 13px;
-            border-radius: 20px;
-            font-size: 11px;
-            font-weight: 800;
+            font-weight: bold;
+            font-size: 1.2rem;
+            position: absolute;
+            left: 0.5rem;
+            top: -0.1rem;
         }
 
-        /* HERO */
-        .hero {
-            max-width: 1120px;
-            margin: 0 auto;
-            padding: 70px 30px 55px;
-        }
-
-        .eyebrow {
-            display: inline-block;
-            background: var(--blue-bg);
-            color: var(--primary);
-            padding: 7px 11px;
-            border-radius: 20px;
-            font-size: 11px;
-            font-weight: 800;
-            letter-spacing: .7px;
-        }
-
-        .hero h1 {
-            font-size: 52px;
-            line-height: 1.05;
-            max-width: 750px;
-            margin: 18px 0 15px;
-            color: var(--dark);
-        }
-
-        .hero p {
-            max-width: 720px;
-            font-size: 16px;
-            line-height: 1.7;
-            color: var(--muted);
-        }
-
-        .meta {
+        /* Architectural Diagram Styling */
+        .diagram-box {
+            background: #F8FAFC;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
             display: flex;
-            gap: 10px;
-            margin-top: 22px;
+            flex-direction: column;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .diagram-row {
+            display: flex;
+            gap: 1rem;
+            width: 100%;
+            justify-content: center;
             flex-wrap: wrap;
         }
 
-        .meta span {
-            background: white;
-            border: 1px solid var(--line);
-            padding: 8px 12px;
-            border-radius: 9px;
-            font-size: 11px;
-            font-weight: 700;
-        }
-
-        /* MAIN CONTENT */
-        .container {
-            max-width: 1120px;
-            margin: auto;
-            padding: 0 30px 80px;
-        }
-
-        .section {
-            margin: 30px 0;
-        }
-
-        .section-title {
-            margin-bottom: 16px;
-        }
-
-        .section-title h2 {
-            margin: 0;
-            font-size: 27px;
-            color: var(--dark);
-        }
-
-        .section-title p {
-            margin: 6px 0;
-            color: var(--muted);
-            font-size: 13px;
-        }
-
-        /* CONCEPT CARDS */
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 15px;
-        }
-
-        .card {
-            background: white;
-            border: 1px solid var(--line);
-            border-radius: 16px;
-            padding: 22px;
-            box-shadow: 0 5px 20px rgba(16, 24, 43, .035);
-        }
-
-        .number {
-            width: 32px;
-            height: 32px;
-            display: grid;
-            place-items: center;
-            border-radius: 9px;
-            background: var(--blue-bg);
-            color: var(--primary);
-            font-size: 11px;
-            font-weight: 900;
-        }
-
-        .card h3 {
-            margin: 14px 0 7px;
-            font-size: 16px;
-        }
-
-        .card p {
-            margin: 0;
-            color: var(--muted);
-            font-size: 12px;
-            line-height: 1.6;
-        }
-
-        /* ARCHITECTURE FLOW */
-        .architecture {
-            background: var(--dark);
-            color: white;
-            border-radius: 20px;
-            padding: 30px;
-            overflow: hidden;
-        }
-
-        .architecture h2 {
-            margin-top: 0;
-        }
-
-        .flow {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            overflow-x: auto;
-            padding: 20px 0;
-        }
-
         .node {
-            min-width: 125px;
-            padding: 16px 12px;
+            background: white;
+            border: 2px solid var(--primary);
+            color: var(--secondary);
+            padding: 0.75rem 1.25rem;
+            border-radius: 6px;
+            font-weight: 600;
             text-align: center;
-            border-radius: 12px;
-            background: #1d2943;
-            border: 1px solid #33415f;
-            flex-shrink: 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            min-width: 140px;
         }
 
-        .node strong {
-            display: block;
-            font-size: 12px;
-        }
-
-        .node small {
-            color: #9ba8bf;
-            font-size: 9px;
+        .node.highlight {
+            background: var(--primary);
+            color: white;
         }
 
         .arrow {
-            color: #6d9aff;
-            font-weight: 900;
-            font-size: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-muted);
+            font-weight: bold;
+        }
+
+        /* 5-Step Program Flow */
+        .step-container {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .step-card {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            background: #F8FAFC;
+            padding: 1rem 1.25rem;
+            border-radius: 6px;
+            border-left: 4px solid var(--primary);
+        }
+
+        .step-num {
+            background: var(--primary);
+            color: white;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 0.85rem;
             flex-shrink: 0;
         }
 
-        .architecture-note {
-            color: #aeb9cc;
-            font-size: 12px;
-            line-height: 1.6;
-        }
-
-        /* FIVE PHASES */
-        .phases {
-            display: grid;
-            grid-template-columns: repeat(5, 1fr);
-            gap: 10px;
-        }
-
-        .phase {
-            background: white;
-            border: 1px solid var(--line);
-            border-radius: 14px;
-            padding: 18px;
-            text-align: center;
-        }
-
-        .phase b {
+        /* Interactive Quiz Layout */
+        .quiz-option {
             display: block;
-            color: var(--primary);
-            font-size: 11px;
-        }
-
-        .phase strong {
-            display: block;
-            margin-top: 8px;
-            font-size: 14px;
-        }
-
-        .phase span {
-            display: block;
-            margin-top: 5px;
-            color: var(--muted);
-            font-size: 10px;
-        }
-
-        /* JVM GRID */
-        .jvm {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 16px;
-        }
-
-        .highlight {
-            background: var(--blue-bg);
-            border: 1px solid #d6e2ff;
-        }
-
-        .highlight strong {
-            color: var(--primary);
-        }
-
-        /* QUIZ CTA */
-        .quiz-cta {
-            margin-top: 55px;
-            background: linear-gradient(135deg, #10182b, #1c315d);
-            border-radius: 24px;
-            padding: 45px;
-            color: white;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 30px;
-            box-shadow: 0 15px 40px rgba(16, 24, 43, .12);
-        }
-
-        .quiz-cta h2 {
-            font-size: 30px;
-            margin: 0 0 8px;
-        }
-
-        .quiz-cta p {
-            margin: 0;
-            color: #b9c5d9;
-            font-size: 13px;
-            line-height: 1.6;
-        }
-
-        .quiz-btn {
-            border: 0;
             background: white;
-            color: var(--dark);
-            padding: 14px 22px;
-            border-radius: 11px;
-            font-size: 13px;
-            font-weight: 900;
-            white-space: nowrap;
-            transition: transform 0.15s ease;
+            border: 1px solid var(--border-color);
+            padding: 0.875rem 1.25rem;
+            margin-bottom: 0.5rem;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s;
         }
 
-        .quiz-btn:hover {
-            transform: translateY(-2px);
+        .quiz-option:hover {
+            border-color: var(--primary);
+            background: #F0F9FF;
         }
 
-        /* MODAL & QUIZ */
-        .modal {
-            position: fixed;
-            inset: 0;
-            background: rgba(8, 13, 25, .72);
-            display: none;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-            z-index: 100;
+        .quiz-option.correct {
+            border-color: var(--accent-green);
+            background: #F0FDF4;
+            color: #15803D;
+            font-weight: bold;
         }
 
-        .modal.active {
-            display: flex;
+        .quiz-option.incorrect {
+            border-color: var(--accent-red);
+            background: #FEF2F2;
+            color: #B91C1C;
         }
 
-        .quiz-box {
-            width: min(700px, 100%);
-            max-height: 90vh;
-            overflow-y: auto;
-            background: white;
-            border-radius: 20px;
-            padding: 30px;
-            box-shadow: 0 25px 70px rgba(0, 0, 0, .25);
+        .quiz-feedback {
+            margin-top: 0.5rem;
+            font-size: 0.9rem;
+            font-weight: 500;
         }
 
-        .quiz-header {
+        /* Footer Controls */
+        footer {
+            background: var(--card-bg);
+            border-top: 1px solid var(--border-color);
+            padding: 1rem 2rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
 
-        .quiz-header h2 {
-            margin: 0;
-            color: var(--dark);
-        }
-
-        .close {
-            border: 0;
-            background: #f1f3f7;
-            width: 34px;
-            height: 34px;
-            border-radius: 50%;
-            font-size: 17px;
-            display: grid;
-            place-items: center;
-            transition: background 0.15s ease;
-        }
-
-        .close:hover {
-            background: #e2e7ef;
-        }
-
-        .quiz-progress {
-            margin: 18px 0;
-            height: 6px;
-            background: #e8ecf3;
-            border-radius: 20px;
-            overflow: hidden;
-        }
-
-        .quiz-progress span {
-            display: block;
-            height: 100%;
-            background: var(--primary);
-            width: 0%;
-            transition: width 0.3s ease;
-        }
-
-        .question {
-            font-size: 19px;
-            line-height: 1.5;
-            font-weight: 800;
-            margin: 25px 0 18px;
-        }
-
-        .options {
-            display: grid;
-            gap: 10px;
-        }
-
-        .option {
-            text-align: left;
-            padding: 14px 16px;
-            border-radius: 11px;
-            background: white;
-            border: 1px solid var(--line);
-            font-size: 13px;
-            font-weight: 600;
-            transition: all 0.15s ease;
-        }
-
-        .option:hover:not(:disabled) {
-            border-color: #9eb7f4;
-            background: #f7f9ff;
-        }
-
-        .option.correct {
-            border-color: #63bd9f;
-            background: var(--success-bg);
-            color: #0d775a;
-        }
-
-        .option.wrong {
-            border-color: #e5a0a0;
-            background: #fff1f1;
-            color: #a42c2c;
-        }
-
-        .explanation {
-            margin-top: 15px;
-            padding: 13px;
-            border-radius: 10px;
-            background: #f6f8fb;
-            font-size: 12px;
-            line-height: 1.6;
-            color: #566175;
-        }
-
-        .quiz-footer {
-            margin-top: 22px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .quiz-next {
-            border: 0;
+        .btn-control {
             background: var(--primary);
             color: white;
-            padding: 11px 17px;
-            border-radius: 9px;
-            font-weight: 800;
-            font-size: 12px;
+            border: none;
+            padding: 0.6rem 1.25rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: background 0.2s;
         }
 
-        .quiz-next:disabled {
-            opacity: .4;
+        .btn-control:hover {
+            background: var(--primary-dark);
+        }
+
+        .btn-control:disabled {
+            background: #CBD5E0;
             cursor: not-allowed;
         }
 
-        /* RESULT VIEW */
-        .result {
-            text-align: center;
-            padding: 25px 10px;
+        .footer-note {
+            font-size: 0.8rem;
+            color: var(--text-muted);
         }
 
-        .score-circle {
-            width: 110px;
-            height: 110px;
-            margin: 10px auto 20px;
-            border-radius: 50%;
-            display: grid;
-            place-items: center;
-            background: var(--blue-bg);
-            color: var(--primary);
-            font-size: 25px;
-            font-weight: 900;
-        }
-
-        .result h2 {
-            margin: 0;
-        }
-
-        .result p {
-            color: var(--muted);
-            font-size: 13px;
-            line-height: 1.6;
-        }
-
-        .result button {
-            margin-top: 15px;
-            border: 0;
-            background: var(--primary);
-            color: white;
-            padding: 12px 20px;
-            border-radius: 9px;
-            font-weight: 800;
-        }
-
-        footer {
-            text-align: center;
-            color: #8993a5;
-            font-size: 11px;
-            padding: 20px;
-        }
-
-        /* RESPONSIVE DESIGN */
-        @media(max-width: 800px) {
-            .topbar {
-                padding: 0 18px;
-            }
-
-            .course-label {
-                display: none;
-            }
-
-            .hero {
-                padding: 45px 20px;
-            }
-
-            .hero h1 {
-                font-size: 38px;
-            }
-
-            .container {
-                padding: 0 20px 60px;
-            }
-
-            .grid {
-                grid-template-columns: 1fr;
-            }
-
-            .phases {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .jvm {
-                grid-template-columns: 1fr;
-            }
-
-            .quiz-cta {
+        @media (max-width: 900px) {
+            .main-container {
                 flex-direction: column;
-                align-items: flex-start;
-                padding: 30px;
+            }
+            nav.sidebar {
+                width: 100%;
             }
         }
     </style>
 </head>
-
 <body>
 
-    <!-- TOP BAR -->
-    <header class="topbar">
-        <div class="brand">
-            <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEifNPZFTKmd-JE8699chAt2JJZPxCdJOrhYfzr28gNe_rMcrCJBUxD-X1S7hGTYNna1BtsfR0Gvx6iLlPbXrDtmdjftXrogJM8Bfk9ApKvRSiRENmYqFo_jEA8qmT3Qlk7lHxp4RxRwGKdj-pxe3smCQtDF41Krlz4gFkafALnhTBUjdUyFSP5_2gXIPARs/s320/grow_together__1_-removebg-preview.png" alt="Openbox GP Logo">
-            <span class="course-label">BTech First Year • Java</span>
-        </div>
-        <span class="module-status">MODULE 01</span>
+    <header>
+        <h1>Java Architecture</h1>
+        <div class="slide-counter" id="slideCounter">Slide 1 of 8</div>
     </header>
 
-    <!-- HERO SECTION -->
-    <section class="hero">
-        <span class="eyebrow">JAVA PROGRAMMING</span>
-        <h1>Java Architecture</h1>
-        <p>Understand how a Java program moves from source code to bytecode and finally gets executed by the Java Virtual Machine.</p>
-        <div class="meta">
-            <span>⏱ 20–25 Minutes</span>
-            <span>📖 Beginner</span>
-            <span>🧠 Quiz Included</span>
-            <span>🎯 Concept Module</span>
-        </div>
-    </section>
+    <div class="main-container">
+        <!-- Sidebar Navigation -->
+        <nav class="sidebar">
+            <h2>Modules</h2>
+            <button class="nav-btn active" onclick="goToSlide(0)">1. Course Overview</button>
+            <button class="nav-btn" onclick="goToSlide(1)">2. Evolution & Origins</button>
+            <button class="nav-btn" onclick="goToSlide(2)">3. Primary Design Goals</button>
+            <button class="nav-btn" onclick="goToSlide(3)">4. Java Architecture</button>
+            <button class="nav-btn" onclick="goToSlide(4)">5. Execution Workflow</button>
+            <button class="nav-btn" onclick="goToSlide(5)">6. 5 Phases of Java</button>
+            <button class="nav-btn" onclick="goToSlide(6)">7. Deep Dive: The JVM</button>
+            <button class="nav-btn" onclick="goToSlide(7)">8. Knowledge Check</button>
+        </nav>
 
-    <main class="container">
-        <!-- LEARNING OBJECTIVES -->
-        <section class="section">
-            <div class="section-title">
-                <h2>What you'll learn</h2>
-                <p>By the end of this module, you should be able to explain the basic architecture and execution flow of a Java program.</p>
-            </div>
-
-            <div class="grid">
-                <div class="card">
-                    <div class="number">01</div>
-                    <h3>Evolution of Java</h3>
-                    <p>Learn about Java's origins, its initial name Oak, and the original goal of platform-neutral software.</p>
+        <!-- Slide Display Area -->
+        <main class="content-area">
+            
+            <!-- Slide 1: Welcome -->
+            <section class="slide active">
+                <h2 class="slide-title">Java Architecture</h2>
+                <div class="info-card">
+                    <h3>Agenda</h3>
+                    <ul class="styled-list">
+                        <li>Evolution of Java & Core Principles</li>
+                        <li>High-Level Architecture Pipeline</li>
+                        <li>The 5 Phases of Java Execution</li>
+                        <li>Detailed Breakdown of the JVM & Runtime System</li>
+                        <li>Interactive Knowledge Check</li>
+                    </ul>
                 </div>
+            </section>
 
-                <div class="card">
-                    <div class="number">02</div>
-                    <h3>Java Architecture</h3>
-                    <p>Understand how Java source code becomes bytecode and moves through the runtime environment.</p>
-                </div>
-
-                <div class="card">
-                    <div class="number">03</div>
-                    <h3>JVM Concepts</h3>
-                    <p>Understand the role of the JVM, interpreter, JIT compiler, and adaptive optimization.</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- EVOLUTION SECTION -->
-        <section class="section">
-            <div class="section-title">
-                <h2>Evolution of Java</h2>
-                <p>Java originated in the early 1990s and was initially called Oak.</p>
-            </div>
-
-            <div class="card">
-                <h3>Key Founders</h3>
-                <p>The material identifies James Gosling, Patrick Naughton, Chris Warth, Ed Frank, and Frank Sheridan as key founders.</p>
-                <br>
-                <h3>Original Design Goal</h3>
-                <p>Java was originally intended as a platform-neutral language for embedded software in consumer devices. The goal was to move away from OS-specific compilers toward portable, platform-independent code.</p>
-            </div>
-        </section>
-
-        <!-- ARCHITECTURE FLOW -->
-        <section class="section">
-            <div class="section-title">
-                <h2>Java Architecture</h2>
-                <p>Follow the complete journey of a Java program.</p>
-            </div>
-
-            <div class="architecture">
-                <h2>From Source Code to Execution</h2>
-                <div class="flow">
-                    <div class="node">
-                        <strong>Java Source</strong>
-                        <small>.java</small>
+            <!-- Slide 2: Evolution -->
+            <section class="slide">
+                <h2 class="slide-title">Evolution of Java</h2>
+                <div class="card-grid">
+                    <div class="info-card">
+                        <h3>Key Founders</h3>
+                        <p style="margin-bottom: 0.75rem;">Java was created as a joint venture by key computer scientists:</p>
+                        <ul class="styled-list">
+                            <li><strong>James Gosling</strong> (Father of Java)</li>
+                            <li>Patrick Naughton</li>
+                            <li>Chris Warth</li>
+                            <li>Ed Frank</li>
+                            <li>Frank Sheridan</li>
+                        </ul>
                     </div>
-                    <div class="arrow">→</div>
-                    <div class="node">
-                        <strong>Java Compiler</strong>
-                        <small>javac</small>
-                    </div>
-                    <div class="arrow">→</div>
-                    <div class="node">
-                        <strong>Java Bytecode</strong>
-                        <small>.class</small>
-                    </div>
-                    <div class="arrow">→</div>
-                    <div class="node">
-                        <strong>Class Loader</strong>
-                        <small>Loads classes</small>
-                    </div>
-                    <div class="arrow">→</div>
-                    <div class="node">
-                        <strong>Bytecode Verifier</strong>
-                        <small>Validates</small>
-                    </div>
-                    <div class="arrow">→</div>
-                    <div class="node">
-                        <strong>JVM Engine</strong>
-                        <small>Execution</small>
+                    <div class="info-card">
+                        <h3>Historical Timeline</h3>
+                        <ul class="styled-list">
+                            <li><strong>Fall 1992:</strong> Origin traced back to project development at Sun Microsystems. Originally named <strong>Oak</strong>.</li>
+                            <li><strong>1995:</strong> Renamed from Oak to <strong>Java</strong> due to trademark conflicts, aligning with web application expansion.</li>
+                        </ul>
                     </div>
                 </div>
-                <p class="architecture-note">The core architecture breaks execution into five distinct phases: Edit → Compile → Loading → Verify → Execute.</p>
-            </div>
-        </section>
+            </section>
 
-        <!-- FIVE PHASES -->
-        <section class="section">
-            <div class="section-title">
-                <h2>The 5 Phases of a Java Program</h2>
-                <p>Remember this sequence before taking the quick quiz.</p>
-            </div>
-
-            <div class="phases">
-                <div class="phase">
-                    <b>01</b>
-                    <strong>Edit</strong>
-                    <span>Create the .java source file</span>
+            <!-- Slide 3: Design Goal -->
+            <section class="slide">
+                <h2 class="slide-title">Design Goals</h2>
+                <div class="info-card" style="margin-bottom: 1rem;">
+                    <h3>Platform Neutrality</h3>
+                    <p style="line-height: 1.6;">
+                        Java was originally conceived to serve as a platform-neutral language for embedded software running on various smart consumer electronic devices.
+                    </p>
                 </div>
-                <div class="phase">
-                    <b>02</b>
-                    <strong>Compile</strong>
-                    <span>javac creates .class bytecode</span>
+                <div class="card-grid">
+                    <div class="info-card">
+                        <h3>Problem</h3>
+                        <p style="line-height: 1.5; color: var(--text-muted);">
+                            Traditional languages (like C/C++) relied on OS-specific compilers. Code built for one platform could not execute on another target machine without re-compilation.
+                        </p>
+                    </div>
+                    <div class="info-card">
+                        <h3>Solution</h3>
+                        <p style="line-height: 1.5; color: var(--primary-dark);">
+                            Move to a fully portable, platform-independent runtime ecosystem capable of producing single, platform-neutral binary components.
+                        </p>
+                    </div>
                 </div>
-                <div class="phase">
-                    <b>03</b>
-                    <strong>Loading</strong>
-                    <span>Class Loader loads bytecodes</span>
+            </section>
+
+            <!-- Slide 4: Architecture Diagram -->
+            <section class="slide">
+                <h2 class="slide-title">Java Architecture Overview</h2>
+                <p style="margin-bottom: 1rem;">The transition from source code to machine execution involves distinct compile-time and runtime environments:</p>
+                
+                <div class="diagram-box">
+                    <div style="font-weight: bold; color: var(--text-muted); font-size: 0.85rem; width: 100%;">COMPILE-TIME ENVIRONMENT</div>
+                    <div class="diagram-row">
+                        <div class="node">Java Source (.java)</div>
+                        <div class="arrow">➔</div>
+                        <div class="node highlight">Java Compiler (javac)</div>
+                        <div class="arrow">➔</div>
+                        <div class="node">Bytecode (.class)</div>
+                    </div>
+
+                    <div style="font-weight: bold; color: var(--text-muted); font-size: 0.85rem; width: 100%; margin-top: 1rem;">RUN-TIME ENVIRONMENT (JVM)</div>
+                    <div class="diagram-row">
+                        <div class="node">Class Loader</div>
+                        <div class="arrow">➔</div>
+                        <div class="node">Bytecode Verifier</div>
+                        <div class="arrow">➔</div>
+                        <div class="node highlight">Execution Engine</div>
+                    </div>
+                    <div class="diagram-row">
+                        <span style="font-size: 0.8rem; color: var(--text-muted);">(Interpreter & JIT Compiler)</span>
+                    </div>
+                    <div class="diagram-row" style="margin-top: 0.5rem;">
+                        <div class="node" style="border-style: dashed; width: 100%;">Operating System & Hardware</div>
+                    </div>
                 </div>
-                <div class="phase">
-                    <b>04</b>
-                    <strong>Verify</strong>
-                    <span>Verifier checks bytecodes</span>
+            </section>
+
+            <!-- Slide 5: Step-by-Step Architecture -->
+            <section class="slide">
+                <h2 class="slide-title">Architecture Execution Flow</h2>
+                <div class="step-container">
+                    <div class="step-card">
+                        <div class="step-num">1</div>
+                        <div>
+                            <strong>Source Code Creation:</strong> Write Java program files saved with the <code>.java</code> extension.
+                        </div>
+                    </div>
+                    <div class="step-card">
+                        <div class="step-num">2</div>
+                        <div>
+                            <strong>Compilation:</strong> The Java compiler translates source code into standard bytecode files saved with the <code>.class</code> extension.
+                        </div>
+                    </div>
+                    <div class="step-card">
+                        <div class="step-num">3</div>
+                        <div>
+                            <strong>Class Loading:</strong> The Class Loader reads both user-defined classes and core API library classes into memory.
+                        </div>
+                    </div>
+                    <div class="step-card">
+                        <div class="step-num">4</div>
+                        <div>
+                            <strong>Bytecode Verification:</strong> The Bytecode Verifier validates structure to ensure code does not violate security parameters.
+                        </div>
+                    </div>
+                    <div class="step-card">
+                        <div class="step-num">5</div>
+                        <div>
+                            <strong>Execution:</strong> The JVM converts bytecodes into machine code using interpretation and JIT compilation, interfacing directly with host OS/hardware.
+                        </div>
+                    </div>
                 </div>
-                <div class="phase">
-                    <b>05</b>
-                    <strong>Execute</strong>
-                    <span>JVM executes the program</span>
+            </section>
+
+            <!-- Slide 6: The 5 Phases -->
+            <section class="slide">
+                <h2 class="slide-title">The 5 Phases of Java Programs</h2>
+                <div class="card-grid">
+                    <div class="info-card">
+                        <h3>1. Edit</h3>
+                        <p>Write and modify the Java code inside an editor or IDE. File saved as <code>Welcome.java</code>.</p>
+                    </div>
+                    <div class="info-card">
+                        <h3>2. Compile</h3>
+                        <p>Translate source to bytecodes using <code>javac Welcome.java</code>. Generates <code>Welcome.class</code>.</p>
+                    </div>
+                    <div class="info-card">
+                        <h3>3. Loading</h3>
+                        <p>Class Loader transfers bytecodes from storage into primary system memory for execution preparation.</p>
+                    </div>
+                    <div class="info-card">
+                        <h3>4. Verify</h3>
+                        <p>Bytecode Verifier ensures formatting compliance and confirms security boundaries are enforced.</p>
+                    </div>
+                    <div class="info-card" style="grid-column: span 2;">
+                        <h3>5. Execute</h3>
+                        <p>The JVM executes instructions via <code>java Welcome</code>, translating bytecode into machine-level instructions using interpretation and Just-In-Time (JIT) compilation.</p>
+                    </div>
                 </div>
-            </div>
-        </section>
+            </section>
 
-        <!-- INSIDE THE JVM -->
-        <section class="section">
-            <div class="section-title">
-                <h2>Inside the JVM</h2>
-                <p>Key internal components and execution mechanisms.</p>
-            </div>
+            <!-- Slide 7: The JVM Components -->
+            <section class="slide">
+                <h2 class="slide-title">Java Virtual Machine (JVM)</h2>
+                <div class="card-grid">
+                    <div class="info-card">
+                        <h3>Execution Engine</h3>
+                        <ul class="styled-list">
+                            <li><strong>Interpreter:</strong> Converts bytecode into machine instructions step-by-step.</li>
+                            <li><strong>JIT Compiler:</strong> Compiles frequently hit bytecode segments directly into native code for performance.</li>
+                            <li><strong>Adaptive Optimizer:</strong> Dynamically identifies "hot spots" in execution and compiles only those high-frequency paths.</li>
+                        </ul>
+                    </div>
+                    <div class="info-card">
+                        <h3>Class Loader & Mobility</h3>
+                        <ul class="styled-list">
+                            <li><strong>Class Loader:</strong> Handles security loading boundaries and enables loading over networks.</li>
+                            <li><strong>Platform Specificity:</strong> Bytecode is uniform globally, but the target JVM is tailored specifically to each target OS and hardware architecture.</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
 
-            <div class="jvm">
-                <div class="card highlight">
-                    <h3>Java Virtual Machine</h3>
-                    <p>The output of the compiler is platform-neutral bytecode. The bytecodes are executed by the JVM, which itself is platform-specific.</p>
+            <!-- Slide 8: Quiz -->
+            <section class="slide">
+                <h2 class="slide-title">Knowledge Check</h2>
+                
+                <div class="info-card" style="margin-bottom: 1.5rem;">
+                    <p style="font-weight: 600; margin-bottom: 0.75rem;">1. Which component loads a compiled .class file into system memory?</p>
+                    <div class="quiz-option" onclick="checkAnswer(this, false, 'q1')">A. Bytecode Verifier</div>
+                    <div class="quiz-option" onclick="checkAnswer(this, true, 'q1')">B. Class Loader</div>
+                    <div class="quiz-option" onclick="checkAnswer(this, false, 'q1')">C. JIT Compiler</div>
+                    <div class="quiz-option" onclick="checkAnswer(this, false, 'q1')">D. Adaptive Optimizer</div>
+                    <div class="quiz-feedback" id="q1-feedback"></div>
                 </div>
 
-                <div class="card">
-                    <h3>Execution Engine</h3>
-                    <p>Combines direct interpretation with Just-In-Time (JIT) compilation to convert bytecode to native machine instructions efficiently.</p>
+                <div class="info-card">
+                    <p style="font-weight: 600; margin-bottom: 0.75rem;">2. What type of file is produced after executing the standard Java compiler (javac)?</p>
+                    <div class="quiz-option" onclick="checkAnswer(this, false, 'q2')">A. An executable .exe file</div>
+                    <div class="quiz-option" onclick="checkAnswer(this, true, 'q2')">B. A platform-neutral .class bytecode file</div>
+                    <div class="quiz-option" onclick="checkAnswer(this, false, 'q2')">C. An object (.obj) file</div>
+                    <div class="quiz-option" onclick="checkAnswer(this, false, 'q2')">D. A shell script (.sh) file</div>
+                    <div class="quiz-feedback" id="q2-feedback"></div>
                 </div>
+            </section>
 
-                <div class="card">
-                    <h3>Adaptive Optimizer</h3>
-                    <p>Identifies heavily used code paths ("hotspots") and compiles them directly into native binary code while interpreting the rest.</p>
-                </div>
-
-                <div class="card">
-                    <h3>Class Loader</h3>
-                    <p>Dynamically loads compiled Java `.class` files into runtime memory while reinforcing security boundaries.</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- QUIZ CALL TO ACTION -->
-        <section class="quiz-cta">
-            <div>
-                <h2>Ready to test yourself?</h2>
-                <p>Take the Java Architecture Quick Quiz. Answer questions about execution order, bytecode, Class Loader, JVM, and JDK/JRE relationships.</p>
-            </div>
-            <button class="quiz-btn" onclick="openQuiz()">Start Quick Quiz →</button>
-        </section>
-    </main>
-
-    <footer>
-        Openbox GP • BTech First Year • Java Architecture
-    </footer>
-
-    <!-- QUIZ MODAL -->
-    <div class="modal" id="quizModal" role="dialog" aria-modal="true">
-        <div class="quiz-box">
-            <div class="quiz-header">
-                <h2>Java Architecture Quiz</h2>
-                <button class="close" onclick="closeQuiz()" aria-label="Close Quiz">&times;</button>
-            </div>
-
-            <div class="quiz-progress">
-                <span id="progress"></span>
-            </div>
-
-            <div id="quizContent">
-                <div class="question" id="question"></div>
-                <div class="options" id="options"></div>
-                <div class="explanation" id="explanation" style="display:none"></div>
-
-                <div class="quiz-footer">
-                    <span id="questionNumber" style="font-size:11px;color:#768095"></span>
-                    <button class="quiz-next" id="next" onclick="nextQuestion()" disabled>Next →</button>
-                </div>
-            </div>
-        </div>
+        </main>
     </div>
 
+    <!-- Controls -->
+    <footer>
+        <button class="btn-control" id="prevBtn" onclick="changeSlide(-1)">Previous</button>
+        <div class="footer-note">Sensitivity: Internal & Restricted | Java Foundations</div>
+        <button class="btn-control" id="nextBtn" onclick="changeSlide(1)">Next</button>
+    </footer>
+
     <script>
-        const quiz = [
-            {
-                question: "Write the correct order of the Java program execution.",
-                options: [
-                    "Class Loader → Compilation → Source Code → Verification → Execution",
-                    "Java Source Code → Compilation → Class Loader → Bytecode Verification → Interpretation → Execution",
-                    "Compilation → Java Source Code → Execution → Class Loader",
-                    "Java Source Code → Class Loader → Compilation → Execution"
-                ],
-                answer: 1,
-                explanation: "Execution flows from writing source code to compiling it into bytecode, followed by loading, bytecode verification, and execution by the JVM."
-            },
-            {
-                question: "Which of the following is used to load a .class file?",
-                options: [
-                    "Class Loader",
-                    "Byte Code Verifier",
-                    "JIT Compiler",
-                    "Interpreter"
-                ],
-                answer: 0,
-                explanation: "The Class Loader subsystem reads compiled .class bytecode files into JVM runtime memory."
-            },
-            {
-                question: "When a Java program is compiled, it creates a:",
-                options: [
-                    "an .obj file",
-                    "an .exe file",
-                    "a .class file",
-                    "a .sh file"
-                ],
-                answer: 2,
-                explanation: "The Java compiler (javac) creates a .class file containing intermediate Java bytecode."
-            },
-            {
-                question: "The JDK is a superset of the JRE and contains the JRE plus development tools such as compilers and debuggers.",
-                options: [
-                    "TRUE",
-                    "FALSE"
-                ],
-                answer: 0,
-                explanation: "TRUE: JDK = JRE + Development Tools (compiler, debugger, javadoc, etc.)."
-            },
-            {
-                question: "Which component validates bytecodes and checks that they do not violate Java security restrictions?",
-                options: [
-                    "Class Loader",
-                    "Bytecode Verifier",
-                    "Java Compiler",
-                    "Operating System"
-                ],
-                answer: 1,
-                explanation: "The Bytecode Verifier inspects loaded bytecode to ensure memory integrity and security rule compliance before execution."
-            }
-        ];
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const navButtons = document.querySelectorAll('.nav-btn');
+        const slideCounter = document.getElementById('slideCounter');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
 
-        let current = 0;
-        let score = 0;
-        let answered = false;
-
-        function openQuiz() {
-            document.getElementById("quizModal").classList.add("active");
-            resetQuizState();
-        }
-
-        function closeQuiz() {
-            document.getElementById("quizModal").classList.remove("active");
-        }
-
-        function resetQuizState() {
-            current = 0;
-            score = 0;
-            renderQuizContainer();
-            renderQuestion();
-        }
-
-        function renderQuizContainer() {
-            const quizContent = document.getElementById("quizContent");
-            quizContent.innerHTML = `
-                <div class="question" id="question"></div>
-                <div class="options" id="options"></div>
-                <div class="explanation" id="explanation" style="display:none"></div>
-                <div class="quiz-footer">
-                    <span id="questionNumber" style="font-size:11px;color:#768095"></span>
-                    <button class="quiz-next" id="next" onclick="nextQuestion()" disabled>Next →</button>
-                </div>
-            `;
-        }
-
-        function renderQuestion() {
-            answered = false;
-            const q = quiz[current];
-
-            document.getElementById("question").textContent = q.question;
-            document.getElementById("questionNumber").textContent = `Question ${current + 1} of ${quiz.length}`;
-            document.getElementById("progress").style.width = `${((current) / quiz.length) * 100}%`;
-
-            const optionsContainer = document.getElementById("options");
-            optionsContainer.innerHTML = "";
-
-            const explanationEl = document.getElementById("explanation");
-            explanationEl.style.display = "none";
-
-            document.getElementById("next").disabled = true;
-
-            q.options.forEach((option, index) => {
-                const button = document.createElement("button");
-                button.className = "option";
-                button.textContent = option;
-                button.onclick = () => selectAnswer(index, button);
-                optionsContainer.appendChild(button);
-            });
-        }
-
-        function selectAnswer(index, selectedBtn) {
-            if (answered) return;
-            answered = true;
-
-            const q = quiz[current];
-            const allOptions = document.querySelectorAll(".option");
-
-            allOptions.forEach((btn, i) => {
-                btn.disabled = true;
-                if (i === q.answer) {
-                    btn.classList.add("correct");
-                }
+        function updateSlideDisplay() {
+            slides.forEach((slide, index) => {
+                slide.classList.toggle('active', index === currentSlide);
             });
 
-            if (index === q.answer) {
-                score++;
+            navButtons.forEach((btn, index) => {
+                btn.classList.toggle('active', index === currentSlide);
+            });
+
+            slideCounter.textContent = `Slide ${currentSlide + 1} of ${slides.length}`;
+            prevBtn.disabled = currentSlide === 0;
+            nextBtn.disabled = currentSlide === slides.length - 1;
+        }
+
+        function goToSlide(index) {
+            currentSlide = index;
+            updateSlideDisplay();
+        }
+
+        function changeSlide(direction) {
+            currentSlide += direction;
+            if (currentSlide < 0) currentSlide = 0;
+            if (currentSlide >= slides.length) currentSlide = slides.length - 1;
+            updateSlideDisplay();
+        }
+
+        function checkAnswer(element, isCorrect, questionId) {
+            const parent = element.parentElement;
+            const options = parent.querySelectorAll('.quiz-option');
+            const feedback = document.getElementById(`${questionId}-feedback`);
+
+            options.forEach(opt => {
+                opt.classList.remove('correct', 'incorrect');
+            });
+
+            if (isCorrect) {
+                element.classList.add('correct');
+                feedback.textContent = "Correct! Well done.";
+                feedback.style.color = "var(--accent-green)";
             } else {
-                selectedBtn.classList.add("wrong");
-            }
-
-            const explanationEl = document.getElementById("explanation");
-            explanationEl.textContent = q.explanation;
-            explanationEl.style.display = "block";
-
-            document.getElementById("next").disabled = false;
-        }
-
-        function nextQuestion() {
-            if (!answered) return;
-            current++;
-
-            if (current >= quiz.length) {
-                showResult();
-            } else {
-                renderQuestion();
+                element.classList.add('incorrect');
+                feedback.textContent = "Incorrect. Try again!";
+                feedback.style.color = "var(--accent-red)";
             }
         }
 
-        function showResult() {
-            document.getElementById("progress").style.width = "100%";
-
-            const percentage = Math.round((score / quiz.length) * 100);
-            let feedback = "Review the module and try the quiz again.";
-            if (score >= 4) {
-                feedback = "Excellent! You have a strong understanding of Java Architecture.";
-            } else if (score >= 3) {
-                feedback = "Good attempt. Review the architecture flow once more.";
-            }
-
-            document.getElementById("quizContent").innerHTML = `
-                <div class="result">
-                    <div class="score-circle">${score}/${quiz.length}</div>
-                    <h2>Quiz Complete 🎉</h2>
-                    <p>You scored <strong>${score}</strong> out of <strong>${quiz.length}</strong> (${percentage}%).</p>
-                    <p>${feedback}</p>
-                    <button onclick="resetQuizState()">Try Again</button>
-                </div>
-            `;
-        }
-
-        // Close modal on backdrop click
-        document.getElementById("quizModal").addEventListener("click", function(e) {
-            if (e.target === this) {
-                closeQuiz();
-            }
-        });
+        // Initialize state
+        updateSlideDisplay();
     </script>
 </body>
 </html>
