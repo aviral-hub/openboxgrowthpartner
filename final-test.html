@@ -1,2022 +1,2681 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
-
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<meta name="viewport"
-content="width=device-width,initial-scale=1">
-
-<title>Openbox Academy</title>
+<title>Openbox Academy | Python Programming Fundamentals</title>
 
 <style>
-
 * {
-  box-sizing: border-box;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    --bg: #070b14;
+    --card: #101725;
+    --card2: #151e2e;
+    --border: #263247;
+    --text: #f4f7fb;
+    --muted: #9aa7ba;
+    --primary: #7c5cff;
+    --primary2: #5c3df5;
+    --success: #19c37d;
+    --danger: #ff4d61;
+    --warning: #f5b83d;
 }
 
 body {
-  margin: 0;
-  font-family: Arial, Helvetica, sans-serif;
-  background: #f5f7fb;
-  color: #111827;
+    font-family: Inter, Arial, sans-serif;
+    background:
+        radial-gradient(circle at top right, rgba(124,92,255,.18), transparent 35%),
+        radial-gradient(circle at bottom left, rgba(25,195,125,.08), transparent 30%),
+        var(--bg);
+    color: var(--text);
+    min-height: 100vh;
 }
 
-button,
+/* Security deterrents */
+
+body,
+* {
+    user-select: none;
+    -webkit-user-select: none;
+}
+
 input,
 textarea {
-  font: inherit;
+    user-select: text;
+    -webkit-user-select: text;
 }
 
-button {
-  cursor: pointer;
+@media print {
+    body {
+        display: none !important;
+    }
 }
 
-/* =========================================
-   LOGIN
-========================================= */
-
-.login-page {
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 24px;
-  background:
-    radial-gradient(circle at top left,
-    #e0e7ff,
-    transparent 40%),
-    #f5f7fb;
+.app {
+    min-height: 100vh;
 }
 
-.login-card {
-  width: 100%;
-  max-width: 440px;
-  background: white;
-  border-radius: 24px;
-  padding: 40px;
-  box-shadow:
-    0 20px 60px rgba(0,0,0,.10);
+/* HEADER */
+
+.header {
+    height: 70px;
+    border-bottom: 1px solid var(--border);
+    background: rgba(7,11,20,.85);
+    backdrop-filter: blur(15px);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 5%;
+    position: sticky;
+    top: 0;
+    z-index: 100;
 }
 
 .logo {
-  font-size: 14px;
-  font-weight: 800;
-  letter-spacing: 2px;
-  color: #4f46e5;
-  margin-bottom: 12px;
+    font-weight: 800;
+    font-size: 19px;
+    letter-spacing: -.5px;
 }
 
-.login-card h1 {
-  margin: 0;
-  font-size: 32px;
+.logo span {
+    color: var(--primary);
 }
 
-.subtitle {
-  color: #6b7280;
-  line-height: 1.6;
-  margin-bottom: 30px;
-}
-
-.field {
-  margin-bottom: 18px;
-}
-
-.field label {
-  display: block;
-  font-size: 14px;
-  font-weight: 700;
-  margin-bottom: 8px;
-}
-
-.field input {
-  width: 100%;
-  padding: 14px 15px;
-  border: 1px solid #d1d5db;
-  border-radius: 12px;
-  outline: none;
-}
-
-.field input:focus {
-  border-color: #4f46e5;
-  box-shadow:
-    0 0 0 3px rgba(79,70,229,.10);
-}
-
-.primary-btn {
-  width: 100%;
-  border: 0;
-  padding: 15px;
-  border-radius: 12px;
-  background: #111827;
-  color: white;
-  font-weight: 700;
-  margin-top: 8px;
-}
-
-.primary-btn:hover {
-  opacity: .9;
-}
-
-.error {
-  margin-top: 15px;
-  color: #dc2626;
-  font-size: 14px;
-}
-
-/* =========================================
-   APP
-========================================= */
-
-.app {
-  display: none;
-}
-
-.navbar {
-  height: 70px;
-  background: white;
-  border-bottom: 1px solid #e5e7eb;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 5%;
-  position: sticky;
-  top: 0;
-  z-index: 20;
-}
-
-.brand {
-  font-weight: 800;
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 18px;
 }
 
 .student-name {
-  color: #6b7280;
-  font-size: 14px;
+    color: var(--muted);
+    font-size: 14px;
 }
 
-.container {
-  width: min(1100px, 92%);
-  margin: 40px auto;
+/* SCREENS */
+
+.screen {
+    display: none;
 }
 
-/* =========================================
-   DASHBOARD
-========================================= */
+.screen.active {
+    display: block;
+}
+
+/* LOGIN */
+
+.login-wrapper {
+    min-height: calc(100vh - 70px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 30px 20px;
+}
+
+.login-card {
+    width: 100%;
+    max-width: 460px;
+    background: rgba(16,23,37,.96);
+    border: 1px solid var(--border);
+    border-radius: 22px;
+    padding: 38px;
+    box-shadow: 0 30px 80px rgba(0,0,0,.35);
+}
+
+.badge {
+    display: inline-flex;
+    padding: 7px 11px;
+    border-radius: 999px;
+    background: rgba(124,92,255,.13);
+    color: #b8aaff;
+    border: 1px solid rgba(124,92,255,.25);
+    font-size: 12px;
+    font-weight: 700;
+    margin-bottom: 18px;
+}
+
+.login-card h1 {
+    font-size: 31px;
+    line-height: 1.15;
+    margin-bottom: 12px;
+}
+
+.login-card p {
+    color: var(--muted);
+    line-height: 1.7;
+    margin-bottom: 28px;
+}
+
+.form-group {
+    margin-bottom: 17px;
+}
+
+.form-group label {
+    display: block;
+    font-size: 13px;
+    margin-bottom: 8px;
+    color: #c8d0dd;
+}
+
+.form-group input {
+    width: 100%;
+    height: 50px;
+    background: #0b111d;
+    color: white;
+    border: 1px solid var(--border);
+    border-radius: 11px;
+    padding: 0 14px;
+    outline: none;
+    font-size: 15px;
+}
+
+.form-group input:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(124,92,255,.12);
+}
+
+.primary-btn {
+    width: 100%;
+    height: 52px;
+    border: none;
+    border-radius: 11px;
+    color: white;
+    background: linear-gradient(135deg,var(--primary),var(--primary2));
+    font-size: 15px;
+    font-weight: 800;
+    cursor: pointer;
+    transition: .2s;
+}
+
+.primary-btn:hover {
+    transform: translateY(-1px);
+}
+
+.small-note {
+    margin-top: 17px;
+    font-size: 12px;
+    color: #68758a;
+    line-height: 1.6;
+}
+
+.error {
+    display: none;
+    padding: 12px;
+    background: rgba(255,77,97,.1);
+    color: #ff8290;
+    border: 1px solid rgba(255,77,97,.25);
+    border-radius: 10px;
+    font-size: 13px;
+    margin-bottom: 16px;
+}
+
+.error.show {
+    display: block;
+}
+
+/* COURSE */
+
+.course-container {
+    max-width: 1100px;
+    margin: auto;
+    padding: 45px 20px;
+}
 
 .hero {
-  background: #111827;
-  color: white;
-  padding: 40px;
-  border-radius: 24px;
-  margin-bottom: 25px;
+    padding: 42px;
+    border: 1px solid var(--border);
+    background: linear-gradient(145deg,#111a2a,#0e1421);
+    border-radius: 24px;
+    margin-bottom: 25px;
+}
+
+.hero .badge {
+    margin-bottom: 15px;
 }
 
 .hero h1 {
-  margin-top: 0;
-  font-size: 34px;
+    font-size: 42px;
+    line-height: 1.1;
+    max-width: 750px;
 }
 
 .hero p {
-  color: #d1d5db;
+    color: var(--muted);
+    margin-top: 15px;
+    max-width: 750px;
+    line-height: 1.7;
 }
 
-.course-card {
-  background: white;
-  border-radius: 20px;
-  padding: 28px;
-  margin-bottom: 20px;
-  border: 1px solid #e5e7eb;
+.section {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 25px;
+    margin-bottom: 20px;
 }
 
-.course-card h2 {
-  margin-top: 0;
+.section h2 {
+    margin-bottom: 18px;
 }
 
 .resource-grid {
-  display: grid;
-  grid-template-columns:
-    repeat(auto-fit,minmax(220px,1fr));
-  gap: 15px;
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 12px;
 }
 
 .resource {
-  padding: 20px;
-  border: 1px solid #e5e7eb;
-  border-radius: 16px;
+    display: block;
+    text-decoration: none;
+    color: white;
+    background: var(--card2);
+    border: 1px solid var(--border);
+    border-radius: 13px;
+    padding: 18px;
+    transition: .2s;
 }
 
-.resource a {
-  display: inline-block;
-  margin-top: 10px;
-  color: #4f46e5;
-  font-weight: 700;
-  text-decoration: none;
+.resource:hover {
+    border-color: var(--primary);
+    transform: translateY(-2px);
 }
 
-.start-test {
-  background: #4f46e5;
-  color: white;
-  border: 0;
-  padding: 14px 22px;
-  border-radius: 12px;
-  font-weight: 700;
+.resource strong {
+    display: block;
+    margin-bottom: 5px;
 }
 
-/* =========================================
-   EXAM
-========================================= */
-
-.exam {
-  display: none;
+.resource span {
+    color: var(--muted);
+    font-size: 12px;
 }
 
-.exam-header {
-  background: white;
-  border-bottom: 1px solid #ddd;
-  position: sticky;
-  top: 0;
-  z-index: 50;
-  padding: 15px 5%;
+/* LECTURES */
+
+.lecture-list {
+    display: grid;
+    gap: 10px;
 }
 
-.exam-top {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 15px;
+.lecture {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 17px;
+    background: #0c1320;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+}
+
+.lecture-left {
+    display: flex;
+    gap: 13px;
+    align-items: center;
+}
+
+.lecture-number {
+    width: 35px;
+    height: 35px;
+    border-radius: 9px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(124,92,255,.13);
+    color: #b8aaff;
+    font-size: 12px;
+    font-weight: 800;
+}
+
+.lecture-title {
+    font-weight: 700;
+    font-size: 14px;
+}
+
+.lecture-links {
+    display: flex;
+    gap: 7px;
+}
+
+.lecture-links a {
+    text-decoration: none;
+    color: #b7aaff;
+    border: 1px solid rgba(124,92,255,.3);
+    padding: 7px 10px;
+    border-radius: 8px;
+    font-size: 11px;
+}
+
+/* PROGRESS */
+
+.progress-box {
+    margin-bottom: 20px;
+}
+
+.progress-top {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+    font-size: 13px;
+}
+
+.progress-bar {
+    height: 9px;
+    background: #080d16;
+    border-radius: 999px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg,var(--primary),#9b87ff);
+    transition: width .3s;
+}
+
+/* TEST */
+
+.test-wrapper {
+    max-width: 950px;
+    margin: auto;
+    padding: 35px 20px;
+}
+
+.test-header {
+    position: sticky;
+    top: 70px;
+    z-index: 50;
+    background: rgba(7,11,20,.94);
+    backdrop-filter: blur(12px);
+    padding: 15px 0;
+}
+
+.test-header-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+}
+
+.test-title {
+    font-weight: 800;
 }
 
 .timer {
-  background: #111827;
-  color: white;
-  padding: 10px 15px;
-  border-radius: 10px;
-  font-weight: 800;
+    background: rgba(245,184,61,.1);
+    color: var(--warning);
+    border: 1px solid rgba(245,184,61,.25);
+    border-radius: 10px;
+    padding: 9px 13px;
+    font-weight: 800;
+    font-size: 13px;
 }
 
-.exam-warning {
-  color: #dc2626;
-  font-size: 13px;
-  margin-top: 8px;
+.question-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 30px;
+    margin-top: 20px;
 }
 
-.exam-container {
-  width: min(900px,92%);
-  margin: 30px auto 100px;
+.question-meta {
+    display: flex;
+    justify-content: space-between;
+    color: var(--muted);
+    font-size: 13px;
+    margin-bottom: 22px;
 }
 
 .question {
-  background: white;
-  border-radius: 18px;
-  padding: 25px;
-  margin-bottom: 20px;
-  border: 1px solid #e5e7eb;
-}
-
-.question-number {
-  font-size: 13px;
-  color: #6b7280;
-  font-weight: 800;
-  margin-bottom: 8px;
-}
-
-.question h3 {
-  line-height: 1.6;
-  margin-top: 0;
+    font-size: 20px;
+    line-height: 1.5;
+    margin-bottom: 25px;
 }
 
 .option {
-  display: block;
-  padding: 14px;
-  border: 1px solid #e5e7eb;
-  border-radius: 12px;
-  margin: 10px 0;
-  cursor: pointer;
+    display: block;
+    width: 100%;
+    text-align: left;
+    padding: 16px;
+    margin-bottom: 10px;
+    border-radius: 11px;
+    background: #0c1320;
+    border: 1px solid var(--border);
+    color: white;
+    cursor: pointer;
+    font-size: 14px;
+    transition: .2s;
 }
 
 .option:hover {
-  background: #f9fafb;
+    border-color: var(--primary);
 }
 
-.option input {
-  margin-right: 10px;
+.option.selected {
+    border-color: var(--primary);
+    background: rgba(124,92,255,.13);
 }
 
-.code-editor {
-  width: 100%;
-  min-height: 180px;
-  resize: vertical;
-  padding: 15px;
-  border-radius: 12px;
-  border: 1px solid #d1d5db;
-  background: #111827;
-  color: #f9fafb;
-  font-family: Consolas, monospace;
-  line-height: 1.6;
+.code-answer {
+    width: 100%;
+    min-height: 230px;
+    background: #080d15;
+    color: #e9edf5;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 15px;
+    resize: vertical;
+    font-family: Consolas, monospace;
+    font-size: 14px;
+    line-height: 1.6;
+    outline: none;
 }
 
-.submit-test {
-  width: 100%;
-  padding: 16px;
-  border: 0;
-  border-radius: 14px;
-  background: #4f46e5;
-  color: white;
-  font-weight: 800;
-  font-size: 16px;
+.code-answer:focus {
+    border-color: var(--primary);
 }
 
-/* =========================================
-   RESULT
-========================================= */
+.question-actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 25px;
+    gap: 10px;
+}
 
-.result {
-  display: none;
-  text-align: center;
+.secondary-btn {
+    border: 1px solid var(--border);
+    background: #0c1320;
+    color: white;
+    padding: 12px 18px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.submit-btn {
+    background: linear-gradient(135deg,var(--success),#0fa968);
+    border: none;
+    color: white;
+    padding: 12px 22px;
+    border-radius: 10px;
+    font-weight: 800;
+    cursor: pointer;
+}
+
+/* VIOLATION */
+
+.violation {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,.97);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.violation.show {
+    display: flex;
+}
+
+.violation-card {
+    max-width: 480px;
+    text-align: center;
+    padding: 35px;
+    background: #101725;
+    border: 1px solid var(--border);
+    border-radius: 20px;
+}
+
+.violation-card h2 {
+    color: var(--danger);
+    margin-bottom: 12px;
+}
+
+.violation-card p {
+    color: var(--muted);
+    line-height: 1.6;
+}
+
+/* RESULT */
+
+.result-wrapper {
+    max-width: 800px;
+    margin: auto;
+    padding: 70px 20px;
+    text-align: center;
 }
 
 .result-card {
-  max-width: 600px;
-  margin: 80px auto;
-  background: white;
-  padding: 45px;
-  border-radius: 25px;
-  box-shadow: 0 20px 60px rgba(0,0,0,.08);
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 24px;
+    padding: 45px 30px;
+}
+
+.result-icon {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: rgba(25,195,125,.12);
+    color: var(--success);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 38px;
+    margin: auto auto 20px;
+}
+
+.result-card h1 {
+    font-size: 36px;
+    margin-bottom: 12px;
 }
 
 .score {
-  font-size: 60px;
-  font-weight: 900;
-  margin: 20px 0;
+    font-size: 55px;
+    font-weight: 900;
+    margin: 20px 0;
 }
-
-.pass {
-  color: #16a34a;
-}
-
-.fail {
-  color: #dc2626;
-}
-
-/* =========================================
-   CERTIFICATE
-========================================= */
 
 .certificate {
-  display: none;
-  padding: 30px;
+    margin-top: 25px;
+    padding: 25px;
+    border-radius: 17px;
+    background:
+        linear-gradient(145deg,#fff,#f5f0e5);
+    color: #171717;
+    text-align: center;
 }
 
-.certificate-box {
-  max-width: 1000px;
-  min-height: 650px;
-  margin: 30px auto;
-  background: white;
-  border: 14px solid #111827;
-  padding: 65px;
-  text-align: center;
-  box-shadow: 0 20px 60px rgba(0,0,0,.15);
+.certificate small {
+    display: block;
+    margin-top: 12px;
+    color: #555;
 }
 
-.certificate-brand {
-  letter-spacing: 4px;
-  font-weight: 900;
-}
-
-.certificate-box h1 {
-  font-family: Georgia, serif;
-  font-size: 48px;
-  margin: 35px 0;
-}
-
-.certificate-name {
-  font-size: 42px;
-  font-weight: 800;
-  margin: 25px 0;
-}
-
-.certificate-course {
-  font-size: 20px;
-  line-height: 1.7;
-  max-width: 700px;
-  margin: auto;
-}
-
-.certificate-footer {
-  margin-top: 60px;
-  display: flex;
-  justify-content: space-between;
-  text-align: left;
-  font-size: 13px;
+.cert-id {
+    margin-top: 15px;
+    font-weight: 800;
+    letter-spacing: 1px;
 }
 
 .disclaimer {
-  margin-top: 35px;
-  color: #6b7280;
-  font-size: 11px;
-  line-height: 1.5;
+    font-size: 10px;
+    color: #666;
+    line-height: 1.5;
+    margin-top: 18px;
 }
 
-.print-btn {
-  display: block;
-  margin: 20px auto;
-  padding: 13px 22px;
-  border: 0;
-  border-radius: 10px;
-  background: #111827;
-  color: white;
-  font-weight: 700;
+/* MOBILE */
+
+@media(max-width:750px) {
+
+    .header {
+        padding: 0 18px;
+    }
+
+    .student-name {
+        display: none;
+    }
+
+    .hero {
+        padding: 25px;
+    }
+
+    .hero h1 {
+        font-size: 31px;
+    }
+
+    .resource-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .lecture {
+        align-items: flex-start;
+        gap: 12px;
+    }
+
+    .lecture-links {
+        flex-direction: column;
+    }
+
+    .question-card {
+        padding: 21px;
+    }
+
+    .question {
+        font-size: 18px;
+    }
+
+    .test-header-inner {
+        align-items: flex-start;
+    }
 }
-
-@media(max-width:600px) {
-
-  .login-card {
-    padding: 28px;
-  }
-
-  .hero {
-    padding: 28px;
-  }
-
-  .certificate-box {
-    padding: 30px 20px;
-    border-width: 7px;
-  }
-
-  .certificate-box h1 {
-    font-size: 32px;
-  }
-
-  .certificate-name {
-    font-size: 28px;
-  }
-
-  .certificate-footer {
-    flex-direction: column;
-    gap: 25px;
-  }
-}
-
-
-/* =========================================
-   PRINT
-========================================= */
-
-@media print {
-
-  body * {
-    visibility: hidden;
-  }
-
-  #certificateArea,
-  #certificateArea * {
-    visibility: visible;
-  }
-
-  #certificateArea {
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
-  }
-
-  .print-btn {
-    display: none;
-  }
-}
-
 </style>
-
 </head>
-
 
 <body>
 
+<div class="app">
 
-<!-- =========================================
-     LOGIN
-========================================= -->
-
-<div id="loginPage" class="login-page">
-
-  <div class="login-card">
-
+<header class="header">
     <div class="logo">
-      OPENBOX ACADEMY
+        OPENBOX <span>Academy</span>
     </div>
 
-    <h1>Welcome.</h1>
-
-    <p class="subtitle">
-      Sign in to access your Python Programming
-      Fundamentals course and assessment.
-    </p>
-
-
-    <div class="field">
-
-      <label>Your Name</label>
-
-      <input
-        id="name"
-        type="text"
-        placeholder="Enter your full name"
-        autocomplete="name"
-      >
-
+    <div class="header-right">
+        <div class="student-name" id="headerStudent"></div>
     </div>
+</header>
 
 
-    <div class="field">
+<!-- ================= LOGIN ================= -->
 
-      <label>Mobile Number</label>
+<section id="loginScreen" class="screen active">
 
-      <input
-        id="mobile"
-        type="tel"
-        maxlength="10"
-        placeholder="10-digit mobile number"
-        autocomplete="tel"
-      >
+<div class="login-wrapper">
 
-    </div>
+<div class="login-card">
+
+<div class="badge">OPENBOX ACADEMY</div>
+
+<h1>Python Programming Fundamentals</h1>
+
+<p>
+Complete the course resources and final assessment to earn
+your Openbox Certificate of Completion.
+</p>
+
+<div id="loginError" class="error"></div>
+
+<form id="loginForm">
+
+<div class="form-group">
+<label>Full Name</label>
+<input
+    id="name"
+    type="text"
+    placeholder="Enter your registered name"
+    required
+>
+</div>
+
+<div class="form-group">
+<label>Email Address</label>
+<input
+    id="email"
+    type="email"
+    placeholder="Enter your registered email"
+    required
+>
+</div>
+
+<div class="form-group">
+<label>Mobile Number / Password</label>
+<input
+    id="mobile"
+    type="password"
+    inputmode="numeric"
+    maxlength="10"
+    placeholder="Enter your registered mobile number"
+    required
+>
+</div>
+
+<button class="primary-btn" type="submit">
+    Login & Continue
+</button>
+
+</form>
+
+<div class="small-note">
+Your name, email and mobile number must match the
+registration information stored by Openbox.
+</div>
+
+</div>
+
+</div>
+
+</section>
 
 
-    <div class="field">
+<!-- ================= COURSE ================= -->
 
-      <label>Email Address</label>
+<section id="courseScreen" class="screen">
 
-      <input
-        id="email"
-        type="email"
-        placeholder="you@example.com"
-        autocomplete="email"
-      >
+<div class="course-container">
 
-    </div>
+<div class="hero">
 
+<div class="badge">MIT OCW BASED LEARNING PATH</div>
 
-    <button
-      class="primary-btn"
-      onclick="login()"
-    >
-      Continue to Course
-    </button>
+<h1>
+6.100L Introduction to Computer Science
+and Programming Using Python
+</h1>
 
-
-    <div
-      id="loginError"
-      class="error"
-    ></div>
-
-  </div>
+<p>
+Complete the lecture resources and problem sets before
+attempting the final assessment.
+</p>
 
 </div>
 
 
-<!-- =========================================
-     MAIN APP
-========================================= -->
+<div class="section">
 
-<div id="app" class="app">
+<h2>Course Resource Hub</h2>
 
-  <div class="navbar">
+<div class="resource-grid">
 
-    <div class="brand">
-      OPENBOX ACADEMY
-    </div>
+<a class="resource"
+href="https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/video_galleries/lecture-videos/"
+target="_blank">
+<strong>Lecture Videos</strong>
+<span>Watch all course lectures</span>
+</a>
 
-    <div class="student-name"
-         id="studentDisplay">
-    </div>
+<a class="resource"
+href="https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/lists/lecture-notes/"
+target="_blank">
+<strong>Lecture Notes</strong>
+<span>Read the official course notes</span>
+</a>
 
-  </div>
+<a class="resource"
+href="https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/lists/lecture-code/"
+target="_blank">
+<strong>Lecture Code</strong>
+<span>Review lecture programming examples</span>
+</a>
 
+<a class="resource"
+href="https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/pages/finger-exercises/"
+target="_blank">
+<strong>Finger Exercises</strong>
+<span>Practice programming concepts</span>
+</a>
 
-  <div class="container">
+<a class="resource"
+href="https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/lists/problem-sets/"
+target="_blank">
+<strong>Problem Sets</strong>
+<span>Practice course problems</span>
+</a>
 
-    <div class="hero">
+<a class="resource"
+href="https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/lists/recitations/"
+target="_blank">
+<strong>Recitations</strong>
+<span>Additional course material</span>
+</a>
 
-      <h1>
-        Python Programming Fundamentals
-      </h1>
-
-      <p>
-        Introduction to computer science,
-        programming, algorithms and Python.
-      </p>
-
-    </div>
-
-
-    <div class="course-card">
-
-      <h2>Course Resources</h2>
-
-      <div class="resource-grid">
-
-        <div class="resource">
-          <strong>MIT Lecture Videos</strong>
-          <br>
-          <a
-            href="https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/video_galleries/lecture-videos/"
-            target="_blank"
-          >
-            Watch lectures →
-          </a>
-        </div>
-
-
-        <div class="resource">
-          <strong>MIT Lecture Notes</strong>
-          <br>
-          <a
-            href="https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/lists/lecture-notes/"
-            target="_blank"
-          >
-            Open notes →
-          </a>
-        </div>
-
-
-        <div class="resource">
-          <strong>MIT Lecture Code</strong>
-          <br>
-          <a
-            href="https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/lists/lecture-code/"
-            target="_blank"
-          >
-            Open code →
-          </a>
-        </div>
-
-
-        <div class="resource">
-          <strong>Problem Sets</strong>
-          <br>
-          <a
-            href="https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/lists/problem-sets/"
-            target="_blank"
-          >
-            Open problem sets →
-          </a>
-        </div>
-
-      </div>
-
-    </div>
-
-
-    <div class="course-card">
-
-      <h2>Final Assessment</h2>
-
-      <p>
-        The final assessment contains 50 questions:
-        40 MCQs and 10 programming questions.
-      </p>
-
-      <p>
-        Passing score: <strong>70%</strong>
-      </p>
-
-      <button
-        class="start-test"
-        onclick="startExam()"
-      >
-        Start Final Assessment
-      </button>
-
-    </div>
-
-  </div>
+</div>
 
 </div>
 
 
-<!-- =========================================
-     EXAM
-========================================= -->
+<div class="section">
 
-<div id="exam" class="exam">
+<div class="progress-box">
 
-  <div class="exam-header">
+<div class="progress-top">
+<span>Course Progress</span>
+<strong id="lectureProgress">0 / 26</strong>
+</div>
 
-    <div class="exam-top">
+<div class="progress-bar">
+<div class="progress-fill" id="progressFill"></div>
+</div>
 
-      <strong>
-        Python Programming Fundamentals
-      </strong>
-
-      <div
-        class="timer"
-        id="timer"
-      >
-        60:00
-      </div>
-
-    </div>
-
-    <div class="exam-warning">
-
-      Exam mode is active. Do not leave this tab,
-      copy content, print the page, or use
-      browser developer tools.
-
-    </div>
-
-  </div>
-
-
-  <div
-    id="examContainer"
-    class="exam-container"
-  ></div>
+</div>
 
 </div>
 
 
-<!-- =========================================
-     RESULT
-========================================= -->
+<div class="section">
 
-<div id="result" class="result">
+<h2>26 Lecture Resources</h2>
 
-  <div class="result-card">
-
-    <h1>Assessment Result</h1>
-
-    <div
-      id="score"
-      class="score"
-    >
-    </div>
-
-    <h2 id="resultStatus"></h2>
-
-    <p id="resultMessage"></p>
-
-    <button
-      id="certificateButton"
-      class="primary-btn"
-      style="display:none"
-      onclick="showCertificate()"
-    >
-      View Certificate
-    </button>
-
-    <button
-      id="retryButton"
-      class="primary-btn"
-      style="display:none"
-      onclick="location.reload()"
-    >
-      Return to Course
-    </button>
-
-  </div>
+<div id="lectureList" class="lecture-list"></div>
 
 </div>
 
 
-<!-- =========================================
-     CERTIFICATE
-========================================= -->
+<div class="section">
+
+<h2>Final Assessment</h2>
+
+<p style="color:#9aa7ba;line-height:1.7;margin-bottom:20px;">
+The final assessment contains 50 questions:
+40 multiple-choice questions and 10 programming questions.
+A passing score is required to receive the Openbox certificate.
+</p>
+
+<button
+    class="primary-btn"
+    id="startTestBtn"
+    onclick="startTest()">
+    Start Final Assessment
+</button>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ================= TEST ================= -->
+
+<section id="testScreen" class="screen">
+
+<div class="test-wrapper">
+
+<div class="test-header">
+
+<div class="test-header-inner">
+
+<div>
+<div class="test-title">
+Python Programming Final Assessment
+</div>
+
+<div style="font-size:12px;color:#7f8ba0;margin-top:4px;">
+50 Questions
+</div>
+</div>
+
+<div class="timer" id="timer">
+60:00
+</div>
+
+</div>
+
+<div class="progress-bar" style="margin-top:12px;">
+<div class="progress-fill" id="testProgress"></div>
+</div>
+
+</div>
+
+
+<div class="question-card">
+
+<div class="question-meta">
+
+<span id="questionNumber">
+Question 1 of 50
+</span>
+
+<span id="questionType">
+MCQ
+</span>
+
+</div>
+
+<div class="question" id="questionText"></div>
+
+<div id="answerArea"></div>
+
+<div class="question-actions">
+
+<button
+    class="secondary-btn"
+    onclick="previousQuestion()">
+    Previous
+</button>
+
+<button
+    class="secondary-btn"
+    id="nextButton"
+    onclick="nextQuestion()">
+    Next
+</button>
+
+<button
+    class="submit-btn"
+    id="submitButton"
+    onclick="submitTest()"
+    style="display:none;">
+    Submit Test
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ================= RESULT ================= -->
+
+<section id="resultScreen" class="screen">
+
+<div class="result-wrapper">
+
+<div class="result-card">
+
+<div class="result-icon">
+✓
+</div>
+
+<h1>Assessment Complete</h1>
+
+<p style="color:#9aa7ba;">
+Your final assessment has been evaluated.
+</p>
+
+<div class="score" id="finalScore">
+0%
+</div>
+
+<div id="resultMessage"></div>
 
 <div
-  id="certificateArea"
-  class="certificate"
->
+    id="certificateBox"
+    class="certificate"
+    style="display:none;">
 
-  <div class="certificate-box">
+<div style="font-size:12px;letter-spacing:2px;">
+OPENBOX
+</div>
 
-    <div class="certificate-brand">
-      OPENBOX ACADEMY OF TECHNOLOGY
-    </div>
+<h2 style="margin:12px 0;">
+Academy of Technology
+</h2>
 
-    <h1>
-      CERTIFICATE OF COMPLETION
-    </h1>
+<div style="font-size:27px;font-family:Georgia,serif;">
+CERTIFICATE OF COMPLETION
+</div>
 
-    <p>
-      This is to certify that
-    </p>
+<p style="margin-top:25px;">
+This is to certify that
+</p>
 
-    <div
-      id="certificateName"
-      class="certificate-name"
-    ></div>
+<h2 id="certificateName">
+Student Name
+</h2>
 
-    <div class="certificate-course">
+<p style="line-height:1.7;margin-top:10px;">
+has successfully completed the
+<strong>Python Programming Fundamentals Course</strong>
+demonstrating proficiency in core software development
+principles and coding exercises.
+</p>
 
-      has successfully completed the
-      <strong>
-        Python Programming Fundamentals Course
-      </strong>
-      demonstrating proficiency in core software
-      development principles and coding exercises.
+<div style="margin-top:25px;">
+Date: <span id="certificateDate"></span>
+</div>
 
-    </div>
+<div class="cert-id">
+Certificate ID:
+<span id="certificateId"></span>
+</div>
 
+<div class="disclaimer">
+This certificate is issued by Openbox and confirms the
+student's successful completion of the course assessment.
+Course curriculum was adapted from MIT OpenCourseWare
+6.100L under the Creative Commons Attribution-NonCommercial-
+ShareAlike 4.0 license. This certificate is not endorsed
+by or affiliated with MIT.
+</div>
 
-    <div class="certificate-footer">
+</div>
 
-      <div>
+<br>
 
-        <strong>Date</strong>
-        <br>
+<button
+    class="primary-btn"
+    onclick="location.reload()">
+    Exit
+</button>
 
-        <span id="certificateDate"></span>
+</div>
 
-      </div>
+</div>
 
-
-      <div>
-
-        <strong>Certificate ID</strong>
-        <br>
-
-        <span id="certificateId"></span>
-
-      </div>
-
-    </div>
-
-
-    <div class="disclaimer">
-
-      This certificate is issued by Openbox and confirms
-      the student's successful completion of the course
-      assessment. Course curriculum was adapted from
-      MIT OpenCourseWare 6.100L under the Creative
-      Commons Attribution-NonCommercial-ShareAlike
-      (CC BY-NC-SA 4.0) license. This certificate is
-      not endorsed or affiliated with MIT.
-
-    </div>
-
-  </div>
+</section>
 
 
-  <button
-    class="print-btn"
-    onclick="window.print()"
-  >
-    Print / Save as PDF
-  </button>
+<!-- SECURITY WARNING -->
+
+<div id="violationScreen" class="violation">
+
+<div class="violation-card">
+
+<h2>Assessment Security Warning</h2>
+
+<p id="violationMessage">
+Leaving the assessment or attempting to copy content
+has been detected.
+</p>
+
+<br>
+
+<button
+    class="primary-btn"
+    onclick="closeViolation()">
+    Continue Assessment
+</button>
+
+</div>
+
+</div>
+
 
 </div>
 
 
 <script>
 
+/* =========================================================
+   CONFIGURATION
+========================================================= */
 
-/* =========================================
+const API_URL =
+"https://script.google.com/macros/s/AKfycbwjRkXFrh0x0GFWOmlq-woTIFXOOTIykfSYlF9u2rTXIYSwfhr-zDTpg4W6Cq9sdJVb/exec";
+
+const PASS_PERCENTAGE = 70;
+
+const TEST_DURATION = 60 * 60;
+
+
+/* =========================================================
    STUDENT
-========================================= */
+========================================================= */
 
 let student = null;
 
-let examStarted = false;
 
-let examTimer = null;
+/* =========================================================
+   LECTURES
+========================================================= */
 
-let timeRemaining = 60 * 60;
+const lectures = [
+
+["01","Introduction",
+"mit6_100l_f22_lec01.pdf",
+"mit6_100l_f22_lec01_code.py"],
+
+["02","Strings, Input/Output, Branching",
+"mit6_100l_f22_lec02.pdf",
+"mit6_100l_f22_lec02_code.py"],
+
+["03","Iteration",
+"mit6_100l_f22_lec03.pdf",
+"mit6_100l_f22_lec03_code.py"],
+
+["04","Loops, Guess/Check, Binary",
+"mit6_100l_f22_lec04.pdf",
+"mit6_100l_f22_lec04_code.py"],
+
+["05","Floats & Approximation",
+"mit6_100l_f22_lec05.pdf",
+"mit6_100l_f22_lec05_code.py"],
+
+["06","Bisection Search",
+"mit6_100l_f22_lec06.pdf",
+"mit6_100l_f22_lec06_code.py"],
+
+["07","Decomposition, Abstraction",
+"mit6_100l_f22_lec07.pdf",
+"mit6_100l_f22_lec07_code.py"],
+
+["08","Functions as Objects",
+"mit6_100l_f22_lec08.pdf",
+"mit6_100l_f22_lec08_code.py"],
+
+["09","Lambda, Tuples, Lists",
+"mit6_100l_f22_lec09.pdf",
+"mit6_100l_f22_lec09_code.py"],
+
+["10","Lists, Mutability",
+"mit6_100l_f22_lec10.pdf",
+"mit6_100l_f22_lec10_code.py"],
+
+["11","Aliasing, Cloning",
+"mit6_100l_f22_lec11.pdf",
+"mit6_100l_f22_lec11_code.py"],
+
+["12","List Comprehension, Debugging",
+"mit6_100l_f22_lec12.pdf",
+"mit6_100l_f22_lec12_code.zip"],
+
+["13","Exceptions, Assertions",
+"mit6_100l_f22_lec13.pdf",
+"mit6_100l_f22_lec13_code.py"],
+
+["14","Dictionaries",
+"mit6_100l_f22_lec14.pdf",
+"mit6_100l_f22_lec14_code.py"],
+
+["15","Recursion",
+"mit6_100l_f22_lec15.pdf",
+"mit6_100l_f22_lec15_code.py"],
+
+["16","Recursion (Non-Numeric)",
+"mit6_100l_f22_lec16.pdf",
+"mit6_100l_f22_lec16_code.py"],
+
+["17","Python Classes",
+"mit6_100l_f22_lec17.pdf",
+"mit6_100l_f22_lec17_code.py"],
+
+["18","Class Methods",
+"mit6_100l_f22_lec18.pdf",
+"mit6_100l_f22_lec18_code.py"],
+
+["19","Inheritance",
+"mit6_100l_f22_lec19.pdf",
+"mit6_100l_f22_lec19_code.py"],
+
+["20","OOP Example",
+"mit6_100l_f22_lec20.pdf",
+"mit6_100l_f22_lec20_code.zip"],
+
+["21","Timing Programs",
+"mit6_100l_f22_lec21.pdf",
+"mit6_100l_f22_lec21_code.py"],
+
+["22","Big Oh and Theta",
+"mit6_100l_f22_lec22.pdf",
+"mit6_100l_f22_lec22_code.py"],
+
+["23","Complexity Classes",
+"mit6_100l_f22_lec23.pdf",
+"mit6_100l_f22_lec23_code.py"],
+
+["24","Sorting Algorithms",
+"mit6_100l_f22_lec24.pdf",
+"mit6_100l_f22_lec24_code.py"],
+
+["25","Plotting",
+"mit6_100l_f22_lec25.pdf",
+"mit6_100l_f22_lec25_code.zip"],
+
+["26","Wrap-Up",
+"mit6_100l_f22_lec26.pdf",
+"mit6_100l_f22_lec26_code.py"]
+
+];
 
 
-/* =========================================
+/* =========================================================
+   LECTURE RENDERING
+========================================================= */
+
+function renderLectures() {
+
+const container =
+document.getElementById("lectureList");
+
+const base =
+"https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/";
+
+container.innerHTML = lectures.map((lec,index)=>{
+
+const num = lec[0];
+const title = lec[1];
+const pdf = lec[2];
+const code = lec[3];
+
+const pdfURL = base + pdf;
+const codeURL = base + code;
+
+return `
+
+<div class="lecture">
+
+<div class="lecture-left">
+
+<div class="lecture-number">
+${num}
+</div>
+
+<div>
+<div class="lecture-title">
+${title}
+</div>
+
+<div style="font-size:11px;color:#657287;margin-top:4px;">
+Lecture ${num}
+</div>
+</div>
+
+</div>
+
+<div class="lecture-links">
+
+<a href="${pdfURL}"
+target="_blank"
+rel="noopener noreferrer">
+PDF
+</a>
+
+<a href="${codeURL}"
+target="_blank"
+rel="noopener noreferrer">
+Code
+</a>
+
+</div>
+
+</div>
+
+`;
+
+}).join("");
+
+}
+
+
+/* =========================================================
    LOGIN
-========================================= */
+========================================================= */
 
-function login() {
+document
+.getElementById("loginForm")
+.addEventListener("submit", async function(e){
 
-  const name =
-    document.getElementById("name").value.trim();
+e.preventDefault();
 
-  const mobile =
-    document.getElementById("mobile").value.trim();
+const name =
+document.getElementById("name").value.trim();
 
-  const email =
-    document.getElementById("email").value.trim();
+const email =
+document.getElementById("email").value.trim();
 
+const mobile =
+document.getElementById("mobile").value.trim();
 
-  document.getElementById("loginError")
-    .textContent = "";
+const error =
+document.getElementById("loginError");
 
+error.classList.remove("show");
 
-  if (!name || !mobile || !email) {
+if(!/^\d{10}$/.test(mobile)) {
 
-    document.getElementById("loginError")
-      .textContent =
-      "Please complete all fields.";
+error.innerText =
+"Please enter a valid 10-digit mobile number.";
 
-    return;
-  }
+error.classList.add("show");
 
+return;
 
-  const button =
-    document.querySelector(".primary-btn");
-
-  button.disabled = true;
-
-  button.textContent = "Checking...";
-
-
-  google.script.run
-
-    .withSuccessHandler(function(result) {
-
-      button.disabled = false;
-
-      button.textContent =
-        "Continue to Course";
-
-
-      if (!result.success) {
-
-        document.getElementById("loginError")
-          .textContent = result.message;
-
-        return;
-      }
-
-
-      student = result;
-
-      document.getElementById("loginPage")
-        .style.display = "none";
-
-      document.getElementById("app")
-        .style.display = "block";
-
-
-      document.getElementById("studentDisplay")
-        .textContent =
-        result.name;
-
-    })
-
-    .withFailureHandler(function(error) {
-
-      button.disabled = false;
-
-      button.textContent =
-        "Continue to Course";
-
-      document.getElementById("loginError")
-        .textContent =
-        error.message ||
-        "Something went wrong.";
-
-    })
-
-    .loginStudent(
-      name,
-      mobile,
-      email
-    );
 }
 
+const button =
+document.querySelector("#loginForm button");
 
-/* =========================================
-   START EXAM
-========================================= */
+button.disabled = true;
+button.innerText = "Verifying...";
 
-function startExam() {
+try {
 
-  if (!student) return;
+const url =
+API_URL +
+"?action=login" +
+"&name=" + encodeURIComponent(name) +
+"&email=" + encodeURIComponent(email) +
+"&mobile=" + encodeURIComponent(mobile);
+
+const response =
+await fetch(url);
+
+const data =
+await response.json();
+
+if(data.success) {
+
+student = {
+
+name: data.name || name,
+email: data.email || email,
+mobile: data.mobile || mobile,
+certificateId: data.certificateId || ""
+};
+
+document.getElementById("headerStudent").innerText =
+student.name;
+
+showScreen("courseScreen");
+
+} else {
+
+throw new Error(
+data.message || "Login details were not found."
+);
+
+}
+
+} catch(errorObject) {
+
+error.innerText =
+errorObject.message ||
+"Unable to connect to the server.";
+
+error.classList.add("show");
+
+}
+
+button.disabled = false;
+button.innerText = "Login & Continue";
+
+});
 
 
-  if (
-    student.status === "Passed"
-  ) {
+/* =========================================================
+   SCREEN SYSTEM
+========================================================= */
 
-    alert(
-      "You have already passed the assessment."
-    );
+function showScreen(id) {
 
-    if (student.certificateId) {
-      showCertificate();
-    }
+document
+.querySelectorAll(".screen")
+.forEach(screen =>
+screen.classList.remove("active")
+);
 
-    return;
-  }
+document
+.getElementById(id)
+.classList.add("active");
 
-
-  examStarted = true;
-
-  document.getElementById("app")
-    .style.display = "none";
-
-  document.getElementById("exam")
-    .style.display = "block";
-
-
-  buildExam();
-
-  startTimer();
-
-  activateExamSecurity();
-
-
-  // Request fullscreen
-  try {
-
-    document.documentElement
-      .requestFullscreen();
-
-  } catch(e) {}
+window.scrollTo({
+top:0,
+behavior:"smooth"
+});
 
 }
 
 
-/* =========================================
-   QUESTIONS
-========================================= */
+/* =========================================================
+   TEST QUESTIONS
+========================================================= */
 
 const questions = [
 
 {
+type:"mcq",
 q:"What is imperative knowledge?",
 options:[
 "Statements of fact.",
-"A recipe or \"how-to\" process.",
+"A recipe or how-to process.",
 "A list of computer components.",
 "The final result of a calculation."
-]
+],
+answer:1
 },
 
 {
+type:"mcq",
 q:"Which operator is used to repeat a string in Python?",
 options:[
 "+",
 "-",
 "*",
 "^"
-]
+],
+answer:2
 },
 
 {
+type:"mcq",
 q:"What is the default return type of the input() function?",
 options:[
 "int",
 "float",
 "bool",
 "str"
-]
+],
+answer:3
 },
 
 {
+type:"mcq",
 q:"Which logical operator returns True only if both operands are True?",
 options:[
 "not",
 "or",
 "and",
 "xor"
-]
+],
+answer:2
 },
 
 {
+type:"mcq",
 q:"How are blocks of code defined in Python?",
 options:[
 "Using curly braces {}.",
 "Using parentheses ().",
 "Using indentation.",
-"Using keywords like begin and end."
-]
+"Using begin and end."
+],
+answer:2
 },
 
 {
+type:"mcq",
 q:"What does the break statement do?",
 options:[
-"Skips the rest of the current iteration.",
-"Immediately exits the innermost loop it is in.",
+"Skips the current iteration.",
+"Immediately exits the innermost loop.",
 "Stops the entire program.",
 "Restarts the loop."
-]
+],
+answer:1
 },
 
 {
+type:"mcq",
 q:"What is another name for the guess-and-check algorithm?",
 options:[
 "Bisection search.",
 "Exhaustive enumeration.",
 "Recursive decomposition.",
 "Linear regression."
-]
+],
+answer:1
 },
 
 {
-q:"What is a Boolean flag used for in programming?",
+type:"mcq",
+q:"What is a Boolean flag used for?",
 options:[
 "To store numerical values.",
 "As a signal that a specific event has occurred.",
 "To count loop iterations.",
 "To define function parameters."
-]
+],
+answer:1
 },
 
 {
+type:"mcq",
 q:"Why might 0.1 + 0.1 + 0.1 == 0.3 evaluate to False?",
 options:[
 "Precision issues with binary floating-point representation.",
-"Python cannot add three numbers at once.",
+"Python cannot add three numbers.",
 "== is only for integers.",
 "The result is actually an integer."
-]
+],
+answer:0
 },
 
 {
+type:"mcq",
 q:"What is a requirement for using bisection search on a list?",
 options:[
 "The list must contain strings.",
 "The list must be small.",
 "The list must be sorted.",
 "The list must be empty."
-]
+],
+answer:2
 },
 
 {
+type:"mcq",
 q:"The concept of hiding details to reduce complexity is called:",
 options:[
 "Decomposition.",
 "Abstraction.",
 "Recursion.",
 "Iteration."
-]
+],
+answer:1
 },
 
 {
+type:"mcq",
 q:"What is a docstring?",
 options:[
 "A type of computer error.",
-"A contract between the coder and user documenting specifications.",
+"A contract documenting specifications.",
 "A string that cannot be modified.",
-"A way to print text to the console."
-]
+"A way to print text."
+],
+answer:1
 },
 
 {
-q:"What happens if a function reaches the end of its body without hitting a return statement?",
+type:"mcq",
+q:"What happens if a function reaches the end without hitting a return statement?",
 options:[
-"It throws a ValueError.",
+"It throws ValueError.",
 "It returns None.",
 "It returns 0.",
-"It restarts the function."
-]
+"It restarts."
+],
+answer:1
 },
 
 {
-q:"When defining a function, the names used for inputs are called:",
+type:"mcq",
+q:"When defining a function, names used for inputs are called:",
 options:[
 "Arguments.",
 "Actual parameters.",
 "Formal parameters.",
 "Constants."
-]
+],
+answer:2
 },
 
 {
+type:"mcq",
 q:"What is scope in Python?",
 options:[
-"The speed of the program.",
-"The memory limit of a variable.",
+"The speed of a program.",
+"The memory limit.",
 "The environment where variable names are mapped to objects.",
-"The physical size of the code file."
-]
+"The physical size of a code file."
+],
+answer:2
 },
 
 {
+type:"mcq",
 q:"Functions are considered objects in Python because:",
 options:[
 "They have data attributes.",
-"They can be assigned to other names or passed as parameters.",
+"They can be assigned to names or passed as parameters.",
 "They are only used in OOP.",
 "They cannot be modified."
-]
+],
+answer:1
 },
 
 {
+type:"mcq",
 q:"A function without a name is called a:",
 options:[
 "Recursive function.",
 "Wrapper function.",
 "Lambda function.",
 "Default function."
-]
+],
+answer:2
 },
 
 {
-q:"Which of the following is true about tuples?",
+type:"mcq",
+q:"Which statement is true about tuples?",
 options:[
 "They are mutable.",
-"They use square brackets [].",
-"They are immutable ordered sequences of objects.",
-"They cannot contain other tuples."
-]
+"They use square brackets.",
+"They are immutable ordered sequences.",
+"They cannot contain tuples."
+],
+answer:2
 },
 
 {
+type:"mcq",
 q:"What is cloning a list?",
 options:[
-"Assigning a list to a new variable name.",
-"Creating a new list that contains the same elements as the original.",
-"Deleting all elements in a list.",
-"Converting a list to a tuple."
-]
+"Assigning a list to a new variable.",
+"Creating a new list containing the same elements.",
+"Deleting all elements.",
+"Converting it to a tuple."
+],
+answer:1
 },
 
 {
+type:"mcq",
 q:"What is the complexity of looking up a value in a Python dictionary?",
 options:[
 "Θ(n)",
 "Θ(1)",
 "Θ(log n)",
 "Θ(n²)"
-]
+],
+answer:1
 },
 
 {
+type:"mcq",
 q:"In recursion, what is the purpose of the base case?",
 options:[
 "To call the function again.",
-"To solve the most complex part of the problem.",
-"To stop the recursion and prevent infinite calls.",
-"To initialize the variables."
-]
+"To solve the most complex part.",
+"To stop recursion.",
+"To initialize variables."
+],
+answer:2
 },
 
 {
+type:"mcq",
 q:"What occurs during infinite recursion?",
 options:[
 "The program runs faster.",
 "The base case is never reached.",
 "The function returns None.",
-"The memory is cleared."
-]
+"Memory is cleared."
+],
+answer:1
 },
 
 {
+type:"mcq",
 q:"How does memoization improve recursive Fibonacci efficiency?",
 options:[
 "It removes the base case.",
-"It uses a dictionary to store and look up previously calculated values.",
-"It converts recursion into a for loop.",
-"It increases the number of function calls."
-]
+"It stores previously calculated values.",
+"It converts recursion to a loop.",
+"It increases function calls."
+],
+answer:1
 },
 
 {
+type:"mcq",
 q:"When writing a recursive function, all return statements should:",
 options:[
 "Return different types.",
 "Return the same type of object.",
 "Return only integers.",
 "Return a list."
-]
+],
+answer:1
 },
 
 {
-q:"What does Asymptotic Complexity describe?",
+type:"mcq",
+q:"What does asymptotic complexity describe?",
 options:[
-"The exact number of milliseconds a program runs.",
-"How the running time grows as the input size n becomes very large.",
-"The number of lines of code.",
-"The amount of disk space used."
-]
+"Exact milliseconds.",
+"How running time grows as n becomes very large.",
+"Number of lines.",
+"Disk space."
+],
+answer:1
 },
 
 {
-q:"Which complexity class is denoted by Θ(log n)?",
+type:"mcq",
+q:"Which complexity class is Θ(log n)?",
 options:[
 "Linear.",
 "Exponential.",
 "Logarithmic.",
 "Constant."
-]
+],
+answer:2
 },
 
 {
-q:"A simple loop that depends on the input size n has what complexity?",
+type:"mcq",
+q:"A simple loop dependent on input size n has what complexity?",
 options:[
 "Θ(1)",
 "Θ(n)",
 "Θ(n²)",
 "Θ(2ⁿ)"
-]
+],
+answer:1
 },
 
 {
-q:"Bisection search has what algorithmic complexity?",
+type:"mcq",
+q:"Bisection search has what complexity?",
 options:[
 "Θ(n)",
 "Θ(n log n)",
 "Θ(log n)",
 "Θ(n²)"
-]
+],
+answer:2
 },
 
 {
+type:"mcq",
 q:"What complexity usually results from nested loops over the same input n?",
 options:[
 "Linear.",
-"Quadratic (Polynomial).",
+"Quadratic.",
 "Constant.",
 "Logarithmic."
-]
+],
+answer:1
 },
 
 {
-q:"Which complexity class grows the fastest as n increases?",
+type:"mcq",
+q:"Which complexity grows fastest as n increases?",
 options:[
 "Θ(n log n)",
-"Θ(n^c)",
-"Θ(c^n) (Exponential)",
+"Θ(nᶜ)",
+"Θ(cⁿ)",
 "Θ(n)"
-]
+],
+answer:2
 },
 
 {
+type:"mcq",
 q:"What is Defensive Programming?",
 options:[
 "Writing code as fast as possible.",
-"Anticipating and handling unexpected conditions through specifications and assertions.",
-"Removing all comments.",
+"Anticipating unexpected conditions through specifications and assertions.",
+"Removing comments.",
 "Using only while loops."
-]
+],
+answer:1
 },
 
 {
-q:"Which error occurs when you try to access L[5] in a list of length 5?",
+type:"mcq",
+q:"Which error occurs when accessing an invalid index in a list?",
 options:[
 "TypeError",
 "NameError",
 "IndexError",
 "SyntaxError"
-]
+],
+answer:2
 },
 
 {
+type:"mcq",
 q:"What is Glass Box Testing?",
 options:[
-"Testing without looking at the code.",
-"Using the code structure to design test cases.",
-"Testing only the final output.",
-"Randomly entering inputs."
-]
+"Testing without looking at code.",
+"Using code structure to design test cases.",
+"Testing only final output.",
+"Random input."
+],
+answer:1
 },
 
 {
+type:"mcq",
 q:"In Object-Oriented Programming, what is an instance?",
 options:[
-"The name of the class.",
-"A specific object created from a class template.",
+"The class name.",
+"A specific object created from a class.",
 "A global variable.",
 "A type of error."
-]
+],
+answer:1
 },
 
 {
+type:"mcq",
 q:"The __init__ method in a class is used for:",
 options:[
 "Deleting objects.",
-"Initializing data attributes of a new instance.",
+"Initializing data attributes.",
 "Printing objects.",
-"Comparing two objects."
-]
+"Comparing objects."
+],
+answer:1
 },
 
 {
-q:"In class methods, what does the self parameter represent?",
+type:"mcq",
+q:"In class methods, what does self represent?",
 options:[
 "A keyword to stop the method.",
-"The specific instance of the class being operated on.",
-"A link to the global scope.",
+"The specific instance of the class.",
+"A link to global scope.",
 "The parent class."
-]
+],
+answer:1
 },
 
 {
+type:"mcq",
 q:"What is inheritance in OOP?",
 options:[
 "Copying a list.",
-"A mechanism where a subclass takes on attributes and methods from a parent class.",
-"Deleting variables to save memory.",
-"Hiding private methods."
-]
+"A subclass taking attributes and methods from a parent.",
+"Deleting variables.",
+"Hiding methods."
+],
+answer:1
 },
 
 {
-q:"Which operation on a list is Θ(n)?",
+type:"mcq",
+q:"Which list operation is Θ(n)?",
 options:[
 "L.append(e)",
-"L[i] (Indexing)",
-"e in L (Membership check)",
+"L[i]",
+"e in L",
 "len(L)"
-]
+],
+answer:2
 },
 
 {
-q:"What is partial execution in the context of returning functions?",
+type:"mcq",
+q:"What is partial execution in returning functions?",
 options:[
-"A program that crashes halfway.",
-"Executing some code, grabbing a function back, and finishing it later.",
-"A loop that stops early.",
-"Using only half of the memory."
-]
+"A program crashing halfway.",
+"Executing some code, returning a function, and finishing later.",
+"A loop stopping early.",
+"Using half the memory."
+],
+answer:1
 },
 
 {
+type:"mcq",
 q:"The assert statement is primarily used to:",
 options:[
-"Print messages to the user.",
+"Print messages.",
 "Stop execution if an expected condition is not met.",
-"Define new variables.",
-"Speed up the program."
+"Define variables.",
+"Speed up a program."
+],
+answer:1
+},
+
+
+/* ================= CODE QUESTIONS ================= */
+
+{
+type:"code",
+q:"Write Python code that creates total as the sum of a and b multiplied by c, then prints it.",
+expected:[
+"total",
+"a+b",
+"a + b",
+"* c",
+"print"
+]
+},
+
+{
+type:"code",
+q:"Given number, print positive if > 0, negative if < 0, and zero otherwise.",
+expected:[
+"if number > 0",
+"elif number < 0",
+"else",
+"print"
+]
+},
+
+{
+type:"code",
+q:"Write a loop that prints hello world exactly N times.",
+expected:[
+"for",
+"range",
+"N",
+"print"
+]
+},
+
+{
+type:"code",
+q:"Find the cube root of N using a while loop, assuming N is a perfect cube.",
+expected:[
+"while",
+"i**3",
+"N",
+"print"
+]
+},
+
+{
+type:"code",
+q:"Create Lnew containing the squares of all even numbers in L.",
+expected:[
+"Lnew",
+"e**2",
+"for e in L",
+"% 2 == 0"
+]
+},
+
+{
+type:"code",
+q:"Define div_by(n, d) that returns True if d divides n evenly.",
+expected:[
+"def div_by",
+"n % d",
+"== 0",
+"return"
+]
+},
+
+{
+type:"code",
+q:"Write a loop counting dictionary items where the key equals the value.",
+expected:[
+"for",
+"d.items",
+"k == v",
+"count"
+]
+},
+
+{
+type:"code",
+q:"Write recursive recur_power(base, exp) to calculate base to the power exp.",
+expected:[
+"def recur_power",
+"if exp",
+"return 1",
+"base * recur_power"
+]
+},
+
+{
+type:"code",
+q:"Write recursive total_recur(L) to sum the elements of a list.",
+expected:[
+"def total_recur",
+"len(L) == 0",
+"return 0",
+"L[1:]"
+]
+},
+
+{
+type:"code",
+q:"Define a Container class whose __init__ creates an empty self.myList.",
+expected:[
+"class Container",
+"def __init__",
+"self.myList",
+"[]"
 ]
 }
 
 ];
 
 
-/* =========================================
-   BUILD EXAM
-========================================= */
+/* =========================================================
+   TEST STATE
+========================================================= */
 
-function buildExam() {
+let currentQuestion = 0;
 
-  const container =
-    document.getElementById(
-      "examContainer"
-    );
+let answers = new Array(questions.length).fill(null);
 
-  container.innerHTML = "";
+let remainingSeconds = TEST_DURATION;
 
+let timerInterval = null;
 
-  questions.forEach(function(item,index) {
+let testStarted = false;
 
-    const number = index + 1;
-
-    const div =
-      document.createElement("div");
-
-    div.className = "question";
+let violations = 0;
 
 
-    let optionsHTML = "";
+/* =========================================================
+   START TEST
+========================================================= */
 
-    item.options.forEach(
-      function(option, optionIndex) {
+function startTest() {
 
-        const letter =
-          String.fromCharCode(
-            65 + optionIndex
-          );
+testStarted = true;
 
-        optionsHTML += `
+currentQuestion = 0;
 
-          <label class="option">
+answers =
+new Array(questions.length).fill(null);
 
-            <input
-              type="radio"
-              name="q${number}"
-              value="${letter}"
-            >
+remainingSeconds = TEST_DURATION;
 
-            <strong>${letter}.</strong>
-            ${escapeHTML(option)}
+showScreen("testScreen");
 
-          </label>
+renderQuestion();
 
-        `;
-      }
-    );
+startTimer();
 
+enterFullscreen();
 
-    div.innerHTML = `
-
-      <div class="question-number">
-        QUESTION ${number} OF 50
-      </div>
-
-      <h3>
-        ${escapeHTML(item.q)}
-      </h3>
-
-      ${optionsHTML}
-
-    `;
-
-
-    container.appendChild(div);
-
-  });
-
-
-  // Code questions
-
-  const codeQuestions = [
-
-    "Variable Math: Create total as the sum of a and b, multiplied by c, then print it.",
-
-    "Branching: Given number, print positive, negative, or zero.",
-
-    "For Loop: Print hello world exactly N times.",
-
-    "While Loop: Find the cube root of N using a while loop.",
-
-    "List Comprehension: Create Lnew containing squares of all even numbers in L.",
-
-    "Function Definition: Define div_by(n, d) that returns True when d divides n evenly.",
-
-    "Dictionary Iteration: Count items in dictionary d whose key equals their value.",
-
-    "Recursion: Define recur_power(base, exp) to calculate base^exp.",
-
-    "Recursion: Define total_recur(L) to sum elements in L.",
-
-    "OOP: Define Container with __init__ creating self.myList as an empty list."
-
-  ];
-
-
-  codeQuestions.forEach(
-    function(question,index) {
-
-      const number = 41 + index;
-
-      const div =
-        document.createElement("div");
-
-      div.className = "question";
-
-
-      div.innerHTML = `
-
-        <div class="question-number">
-          QUESTION ${number} OF 50 · CODE
-        </div>
-
-        <h3>
-          ${escapeHTML(question)}
-        </h3>
-
-        <textarea
-          class="code-editor"
-          id="code${number}"
-          placeholder="# Write your Python solution here"
-          spellcheck="false"
-        ></textarea>
-
-      `;
-
-
-      container.appendChild(div);
-
-    }
-  );
-
-
-  const submit =
-    document.createElement("button");
-
-  submit.className =
-    "submit-test";
-
-  submit.textContent =
-    "Submit Final Assessment";
-
-  submit.onclick =
-    submitExam;
-
-
-  container.appendChild(submit);
 }
 
 
-/* =========================================
-   SUBMIT
-========================================= */
-
-function submitExam() {
-
-  if (!confirm(
-    "Are you sure you want to submit your assessment?"
-  )) {
-    return;
-  }
-
-
-  const answers = {};
-
-
-  for (let i = 1; i <= 40; i++) {
-
-    const selected =
-      document.querySelector(
-        `input[name="q${i}"]:checked`
-      );
-
-    if (selected) {
-      answers[i] =
-        selected.value;
-    }
-
-  }
-
-
-  const submitButton =
-    document.querySelector(
-      ".submit-test"
-    );
-
-  submitButton.disabled = true;
-
-  submitButton.textContent =
-    "Submitting...";
-
-
-  google.script.run
-
-    .withSuccessHandler(function(result) {
-
-      clearInterval(examTimer);
-
-      examStarted = false;
-
-      document.getElementById("exam")
-        .style.display = "none";
-
-      document.getElementById("result")
-        .style.display = "block";
-
-
-      document.getElementById("score")
-        .textContent =
-        result.score + "%";
-
-
-      document.getElementById("score")
-        .className =
-        "score " +
-        (result.passed
-          ? "pass"
-          : "fail");
-
-
-      document.getElementById("resultStatus")
-        .textContent =
-        result.passed
-          ? "PASSED"
-          : "NOT PASSED";
-
-
-      document.getElementById("resultMessage")
-        .textContent =
-        result.message;
-
-
-      if (result.passed) {
-
-        document.getElementById(
-          "certificateButton"
-        ).style.display = "block";
-
-      } else {
-
-        document.getElementById(
-          "retryButton"
-        ).style.display = "block";
-
-      }
-
-    })
-
-    .withFailureHandler(function(error) {
-
-      submitButton.disabled = false;
-
-      submitButton.textContent =
-        "Submit Final Assessment";
-
-      alert(
-        error.message ||
-        "Unable to submit assessment."
-      );
-
-    })
-
-    .submitQuiz(
-      student.name,
-      student.mobile,
-      student.email,
-      answers
-    );
-}
-
-
-/* =========================================
+/* =========================================================
    TIMER
-========================================= */
+========================================================= */
 
 function startTimer() {
 
-  updateTimer();
+clearInterval(timerInterval);
 
-  examTimer =
-    setInterval(function() {
+timerInterval =
+setInterval(()=>{
 
-      timeRemaining--;
+remainingSeconds--;
 
-      updateTimer();
+updateTimer();
 
+if(remainingSeconds <= 0) {
 
-      if (timeRemaining <= 0) {
+clearInterval(timerInterval);
 
-        clearInterval(examTimer);
+submitTest(true);
 
-        alert(
-          "Time is over. Your assessment will be submitted."
-        );
+}
 
-        submitExam();
+},1000);
 
-      }
+updateTimer();
 
-    },1000);
 }
 
 
 function updateTimer() {
 
-  const minutes =
-    Math.floor(timeRemaining / 60);
+const minutes =
+Math.floor(remainingSeconds / 60);
 
-  const seconds =
-    timeRemaining % 60;
+const seconds =
+remainingSeconds % 60;
 
+document.getElementById("timer")
+.innerText =
+String(minutes).padStart(2,"0") +
+":" +
+String(seconds).padStart(2,"0");
 
-  document.getElementById("timer")
-    .textContent =
-    String(minutes).padStart(2,"0")
-    + ":" +
-    String(seconds).padStart(2,"0");
+if(remainingSeconds <= 300) {
+
+document.getElementById("timer").style.color =
+"#ff4d61";
+
 }
-
-
-/* =========================================
-   CERTIFICATE
-========================================= */
-
-function showCertificate() {
-
-  google.script.run
-
-    .withSuccessHandler(function(data) {
-
-      if (!data.success) {
-
-        alert(data.message);
-
-        return;
-      }
-
-
-      document.getElementById("result")
-        .style.display = "none";
-
-
-      document.getElementById(
-        "certificateArea"
-      ).style.display = "block";
-
-
-      document.getElementById(
-        "certificateName"
-      ).textContent =
-        data.name;
-
-
-      document.getElementById(
-        "certificateDate"
-      ).textContent =
-        data.issueDate;
-
-
-      document.getElementById(
-        "certificateId"
-      ).textContent =
-        data.certificateId;
-
-    })
-
-    .getCertificate(
-      student.mobile,
-      student.email
-    );
-}
-
-
-/* =========================================
-   SECURITY / EXAM MODE
-========================================= */
-
-function activateExamSecurity() {
-
-
-  // Right click
-
-  document.addEventListener(
-    "contextmenu",
-    blockEvent
-  );
-
-
-  // Copy
-
-  document.addEventListener(
-    "copy",
-    blockEvent
-  );
-
-
-  // Cut
-
-  document.addEventListener(
-    "cut",
-    blockEvent
-  );
-
-
-  // Paste
-
-  document.addEventListener(
-    "paste",
-    blockEvent
-  );
-
-
-  // Select
-
-  document.addEventListener(
-    "selectstart",
-    blockEvent
-  );
-
-
-  // Keyboard restrictions
-
-  document.addEventListener(
-    "keydown",
-    function(event) {
-
-      if (!examStarted) return;
-
-
-      // Ctrl/Cmd combinations
-
-      if (
-        event.ctrlKey ||
-        event.metaKey
-      ) {
-
-        event.preventDefault();
-
-        return false;
-      }
-
-
-      // F12
-
-      if (event.key === "F12") {
-
-        event.preventDefault();
-
-        return false;
-      }
-
-
-      // PrintScreen
-
-      if (
-        event.key === "PrintScreen"
-      ) {
-
-        event.preventDefault();
-
-        alert(
-          "Screenshots are not permitted during the assessment."
-        );
-
-        return false;
-      }
-
-
-      // Developer tools shortcuts
-
-      if (
-        event.key === "F12" ||
-        (
-          event.ctrlKey &&
-          event.shiftKey &&
-          (
-            event.key === "I" ||
-            event.key === "J" ||
-            event.key === "C"
-          )
-        )
-      ) {
-
-        event.preventDefault();
-
-        return false;
-      }
-
-
-      // Ctrl+P
-
-      if (
-        event.ctrlKey &&
-        event.key.toLowerCase() === "p"
-      ) {
-
-        event.preventDefault();
-
-        return false;
-      }
-
-    }
-  );
-
-
-  // Detect leaving tab
-
-  document.addEventListener(
-    "visibilitychange",
-    function() {
-
-      if (
-        examStarted &&
-        document.hidden
-      ) {
-
-        alert(
-          "Warning: You left the assessment tab. Please return immediately."
-        );
-
-      }
-
-    }
-  );
-
-
-  // Detect window blur
-
-  window.addEventListener(
-    "blur",
-    function() {
-
-      if (examStarted) {
-
-        console.warn(
-          "Exam window lost focus."
-        );
-
-      }
-
-    }
-  );
 
 }
 
 
-/* =========================================
-   HELPERS
-========================================= */
+/* =========================================================
+   RENDER QUESTION
+========================================================= */
 
-function blockEvent(event) {
+function renderQuestion() {
 
-  if (!examStarted) return;
+const q =
+questions[currentQuestion];
 
-  event.preventDefault();
+document.getElementById("questionNumber")
+.innerText =
+`Question ${currentQuestion + 1} of ${questions.length}`;
 
-  return false;
+document.getElementById("questionType")
+.innerText =
+q.type === "mcq" ? "MCQ" : "CODE";
+
+document.getElementById("questionText")
+.innerText = q.q;
+
+const area =
+document.getElementById("answerArea");
+
+area.innerHTML = "";
+
+if(q.type === "mcq") {
+
+q.options.forEach((option,index)=>{
+
+const button =
+document.createElement("button");
+
+button.className =
+"option";
+
+button.innerText =
+String.fromCharCode(65 + index) +
+". " +
+option;
+
+if(answers[currentQuestion] === index) {
+
+button.classList.add("selected");
+
+}
+
+button.onclick = ()=>{
+
+answers[currentQuestion] = index;
+
+renderQuestion();
+
+};
+
+area.appendChild(button);
+
+});
+
+} else {
+
+const textarea =
+document.createElement("textarea");
+
+textarea.className =
+"code-answer";
+
+textarea.placeholder =
+"Write your Python code here...";
+
+textarea.value =
+answers[currentQuestion] || "";
+
+textarea.addEventListener("input",()=>{
+
+answers[currentQuestion] =
+textarea.value;
+
+});
+
+area.appendChild(textarea);
+
+}
+
+const percentage =
+((currentQuestion + 1) / questions.length) * 100;
+
+document.getElementById("testProgress")
+.style.width =
+percentage + "%";
+
+document.getElementById("nextButton")
+.style.display =
+currentQuestion === questions.length - 1
+? "none"
+: "block";
+
+document.getElementById("submitButton")
+.style.display =
+currentQuestion === questions.length - 1
+? "block"
+: "none";
+
 }
 
 
-function escapeHTML(value) {
+/* =========================================================
+   NAVIGATION
+========================================================= */
 
-  return String(value)
-    .replace(/&/g,"&amp;")
-    .replace(/</g,"&lt;")
-    .replace(/>/g,"&gt;")
-    .replace(/"/g,"&quot;")
-    .replace(/'/g,"&#039;");
+function nextQuestion() {
+
+if(currentQuestion < questions.length - 1) {
+
+currentQuestion++;
+
+renderQuestion();
+
 }
+
+}
+
+
+function previousQuestion() {
+
+if(currentQuestion > 0) {
+
+currentQuestion--;
+
+renderQuestion();
+
+}
+
+}
+
+
+/* =========================================================
+   SCORE
+========================================================= */
+
+function calculateScore() {
+
+let score = 0;
+
+questions.forEach((q,index)=>{
+
+if(q.type === "mcq") {
+
+if(answers[index] === q.answer) {
+
+score++;
+
+}
+
+} else {
+
+const response =
+String(answers[index] || "")
+.toLowerCase()
+.replace(/\s+/g," ");
+
+const matches =
+q.expected.filter(keyword =>
+response.includes(
+keyword.toLowerCase()
+)
+).length;
+
+if(matches >= Math.ceil(q.expected.length * .65)) {
+
+score++;
+
+}
+
+}
+
+});
+
+return Math.round(
+(score / questions.length) * 100
+);
+
+}
+
+
+/* =========================================================
+   SUBMIT TEST
+========================================================= */
+
+async function submitTest(timeExpired=false) {
+
+if(!testStarted) return;
+
+if(!timeExpired) {
+
+const unanswered =
+answers.filter(a =>
+a === null ||
+a === ""
+).length;
+
+if(unanswered > 0) {
+
+const confirmSubmit =
+confirm(
+`You have ${unanswered} unanswered question(s).\n\nSubmit anyway?`
+);
+
+if(!confirmSubmit) return;
+
+}
+
+}
+
+testStarted = false;
+
+clearInterval(timerInterval);
+
+const score =
+calculateScore();
+
+const passed =
+score >= PASS_PERCENTAGE;
+
+showResult(score,passed);
+
+try {
+
+await saveResult(score,passed);
+
+} catch(error) {
+
+console.error(error);
+
+}
+
+}
+
+
+/* =========================================================
+   SAVE RESULT TO APPS SCRIPT
+========================================================= */
+
+async function saveResult(score,passed) {
+
+if(!student) return;
+
+const url =
+API_URL +
+"?action=submit" +
+"&name=" + encodeURIComponent(student.name) +
+"&email=" + encodeURIComponent(student.email) +
+"&mobile=" + encodeURIComponent(student.mobile) +
+"&score=" + encodeURIComponent(score) +
+"&status=" + encodeURIComponent(
+passed ? "Passed" : "Failed"
+);
+
+const response =
+await fetch(url);
+
+const data =
+await response.json();
+
+if(data.success && data.certificateId) {
+
+student.certificateId =
+data.certificateId;
+
+document.getElementById("certificateId")
+.innerText =
+data.certificateId;
+
+}
+
+}
+
+
+/* =========================================================
+   RESULT
+========================================================= */
+
+function showResult(score,passed) {
+
+showScreen("resultScreen");
+
+document.getElementById("finalScore")
+.innerText =
+score + "%";
+
+const message =
+document.getElementById("resultMessage");
+
+const cert =
+document.getElementById("certificateBox");
+
+if(passed) {
+
+message.innerHTML = `
+<div style="color:#19c37d;font-weight:800;font-size:18px;">
+Congratulations — You Passed
+</div>
+
+<p style="color:#9aa7ba;margin-top:10px;">
+You have met the minimum passing requirement of
+${PASS_PERCENTAGE}%.
+</p>
+`;
+
+cert.style.display = "block";
+
+document.getElementById("certificateName")
+.innerText =
+student.name;
+
+document.getElementById("certificateDate")
+.innerText =
+new Date().toLocaleDateString("en-IN");
+
+document.getElementById("certificateId")
+.innerText =
+student.certificateId || "Generating...";
+
+} else {
+
+cert.style.display = "none";
+
+message.innerHTML = `
+<div style="color:#ff6474;font-weight:800;font-size:18px;">
+Assessment Not Passed
+</div>
+
+<p style="color:#9aa7ba;margin-top:10px;">
+A minimum score of ${PASS_PERCENTAGE}% is required.
+</p>
+`;
+
+}
+
+}
+
+
+/* =========================================================
+   FULLSCREEN
+========================================================= */
+
+async function enterFullscreen() {
+
+try {
+
+if(document.documentElement.requestFullscreen) {
+
+await document.documentElement.requestFullscreen();
+
+}
+
+} catch(e) {}
+
+}
+
+
+/* =========================================================
+   SECURITY
+========================================================= */
+
+
+/* Disable right click */
+
+document.addEventListener("contextmenu",function(e){
+
+if(testStarted) {
+
+e.preventDefault();
+
+showSecurityWarning(
+"Right-click is disabled during the assessment."
+);
+
+}
+
+});
+
+
+/* Keyboard shortcuts */
+
+document.addEventListener("keydown",function(e){
+
+if(!testStarted) return;
+
+
+/* Ctrl+C */
+
+if(e.ctrlKey && e.key.toLowerCase() === "c") {
+
+e.preventDefault();
+
+recordViolation(
+"Copying is disabled during the assessment."
+);
+
+}
+
+
+/* Ctrl+V */
+
+if(e.ctrlKey && e.key.toLowerCase() === "v") {
+
+e.preventDefault();
+
+recordViolation(
+"Pasting is disabled during the assessment."
+);
+
+}
+
+
+/* Ctrl+U */
+
+if(e.ctrlKey && e.key.toLowerCase() === "u") {
+
+e.preventDefault();
+
+recordViolation(
+"Viewing page source is disabled during the assessment."
+);
+
+}
+
+
+/* Ctrl+P */
+
+if(e.ctrlKey && e.key.toLowerCase() === "p") {
+
+e.preventDefault();
+
+recordViolation(
+"Printing is disabled during the assessment."
+);
+
+}
+
+
+/* F12 */
+
+if(e.key === "F12") {
+
+e.preventDefault();
+
+recordViolation(
+"Developer tools are disabled during the assessment."
+);
+
+}
+
+
+/* Ctrl+Shift+I */
+
+if(
+e.ctrlKey &&
+e.shiftKey &&
+e.key.toLowerCase() === "i"
+) {
+
+e.preventDefault();
+
+recordViolation(
+"Developer tools are disabled during the assessment."
+);
+
+}
+
+});
+
+
+/* Tab switching */
+
+document.addEventListener(
+"visibilitychange",
+function(){
+
+if(
+document.hidden &&
+testStarted
+) {
+
+recordViolation(
+"Leaving the assessment tab was detected."
+);
+
+}
+
+});
+
+
+/* Window blur */
+
+window.addEventListener("blur",function(){
+
+if(testStarted) {
+
+recordViolation(
+"Leaving the assessment window was detected."
+);
+
+}
+
+});
+
+
+/* Screenshot shortcut deterrence */
+
+document.addEventListener("keydown",function(e){
+
+if(
+e.key === "PrintScreen" ||
+(
+e.metaKey &&
+e.shiftKey &&
+e.key.toLowerCase() === "s"
+)
+) {
+
+recordViolation(
+"Screen capture attempt detected."
+);
+
+}
+
+});
+
+
+function recordViolation(message) {
+
+violations++;
+
+showSecurityWarning(message);
+
+if(violations >= 3) {
+
+alert(
+"Multiple assessment security violations were detected. The test will now be submitted."
+);
+
+submitTest(true);
+
+}
+
+}
+
+
+function showSecurityWarning(message) {
+
+document.getElementById(
+"violationMessage"
+).innerText = message;
+
+document.getElementById(
+"violationScreen"
+).classList.add("show");
+
+}
+
+
+function closeViolation() {
+
+document.getElementById(
+"violationScreen"
+).classList.remove("show");
+
+}
+
+
+/* =========================================================
+   INITIALIZE
+========================================================= */
+
+renderLectures();
 
 </script>
 
 </body>
-
 </html>
