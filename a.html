@@ -1,0 +1,4109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Openbox Academy — Python Programming Fundamentals</title>
+
+<style>
+
+:root{
+    --primary:#111827;
+    --secondary:#4f46e5;
+    --secondary-light:#eef2ff;
+    --success:#16a34a;
+    --success-light:#dcfce7;
+    --warning:#f59e0b;
+    --danger:#dc2626;
+    --background:#f5f7fb;
+    --surface:#ffffff;
+    --border:#e5e7eb;
+    --text:#111827;
+    --muted:#6b7280;
+    --sidebar:270px;
+    --radius:16px;
+}
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+body{
+    font-family:
+        Inter,
+        ui-sans-serif,
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+
+    background:var(--background);
+    color:var(--text);
+}
+
+button,
+input{
+    font:inherit;
+}
+
+button{
+    cursor:pointer;
+}
+
+.hidden{
+    display:none !important;
+}
+
+/* =========================================================
+   LOADING
+========================================================= */
+
+.loading-screen{
+    position:fixed;
+    inset:0;
+    background:#fff;
+    z-index:9999;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-direction:column;
+    gap:20px;
+}
+
+.loader{
+    width:46px;
+    height:46px;
+
+    border:4px solid #e5e7eb;
+    border-top-color:var(--secondary);
+
+    border-radius:50%;
+
+    animation:spin .8s linear infinite;
+}
+
+@keyframes spin{
+    to{
+        transform:rotate(360deg);
+    }
+}
+
+.loading-screen h2{
+    font-size:20px;
+}
+
+/* =========================================================
+   AUTH
+========================================================= */
+
+.auth-screen{
+    min-height:100vh;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    padding:30px;
+
+    background:
+        radial-gradient(
+            circle at top left,
+            #eef2ff,
+            transparent 40%
+        ),
+        #f8fafc;
+}
+
+.auth-card{
+    width:100%;
+    max-width:450px;
+
+    background:white;
+
+    border:1px solid var(--border);
+
+    border-radius:24px;
+
+    padding:40px;
+
+    box-shadow:
+        0 20px 60px rgba(15,23,42,.08);
+}
+
+.brand{
+    display:flex;
+    align-items:center;
+    gap:12px;
+
+    margin-bottom:30px;
+}
+
+.brand-logo{
+    width:46px;
+    height:46px;
+
+    border-radius:13px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    background:#111827;
+    color:white;
+
+    font-weight:800;
+}
+
+.brand-text h1{
+    font-size:18px;
+}
+
+.brand-text p{
+    color:var(--muted);
+    font-size:12px;
+}
+
+.auth-card h2{
+    font-size:28px;
+    margin-bottom:8px;
+}
+
+.auth-subtitle{
+    color:var(--muted);
+    margin-bottom:28px;
+}
+
+.form-group{
+    margin-bottom:18px;
+}
+
+.form-group label{
+    display:block;
+    margin-bottom:7px;
+
+    font-size:13px;
+    font-weight:600;
+}
+
+.form-group input{
+    width:100%;
+
+    border:1px solid var(--border);
+
+    border-radius:10px;
+
+    padding:13px 14px;
+
+    outline:none;
+
+    transition:.2s;
+}
+
+.form-group input:focus{
+    border-color:var(--secondary);
+
+    box-shadow:
+        0 0 0 3px rgba(79,70,229,.1);
+}
+
+.primary-btn{
+    width:100%;
+
+    border:none;
+
+    background:var(--secondary);
+    color:white;
+
+    padding:14px;
+
+    border-radius:11px;
+
+    font-weight:700;
+
+    transition:.2s;
+}
+
+.primary-btn:hover{
+    transform:translateY(-1px);
+
+    box-shadow:
+        0 8px 20px rgba(79,70,229,.25);
+}
+
+.secondary-btn{
+    border:1px solid var(--border);
+
+    background:white;
+
+    padding:11px 15px;
+
+    border-radius:9px;
+
+    font-weight:600;
+}
+
+.auth-switch{
+    text-align:center;
+
+    margin-top:20px;
+
+    color:var(--muted);
+
+    font-size:14px;
+}
+
+.auth-switch button{
+    border:none;
+    background:none;
+
+    color:var(--secondary);
+
+    font-weight:700;
+}
+
+.error-message{
+    background:#fef2f2;
+    color:#b91c1c;
+
+    border:1px solid #fecaca;
+
+    padding:12px;
+
+    border-radius:9px;
+
+    margin-bottom:16px;
+
+    font-size:13px;
+}
+
+/* =========================================================
+   APP
+========================================================= */
+
+.app{
+    min-height:100vh;
+}
+
+.sidebar{
+    position:fixed;
+
+    left:0;
+    top:0;
+    bottom:0;
+
+    width:var(--sidebar);
+
+    background:#111827;
+
+    color:white;
+
+    padding:22px 16px;
+
+    display:flex;
+    flex-direction:column;
+
+    z-index:100;
+}
+
+.sidebar-brand{
+    display:flex;
+    gap:12px;
+    align-items:center;
+
+    padding:8px 10px 28px;
+}
+
+.sidebar-logo{
+    width:40px;
+    height:40px;
+
+    border-radius:11px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    background:white;
+    color:#111827;
+
+    font-weight:800;
+}
+
+.sidebar-brand strong{
+    display:block;
+    font-size:14px;
+}
+
+.sidebar-brand span{
+    display:block;
+
+    color:#9ca3af;
+
+    font-size:11px;
+
+    margin-top:2px;
+}
+
+.course-label{
+    color:#6b7280;
+
+    text-transform:uppercase;
+
+    font-size:10px;
+
+    font-weight:800;
+
+    letter-spacing:1px;
+
+    padding:0 10px;
+
+    margin-bottom:8px;
+}
+
+.sidebar-nav{
+    display:flex;
+    flex-direction:column;
+
+    gap:5px;
+}
+
+.nav-btn{
+    width:100%;
+
+    border:none;
+
+    background:transparent;
+
+    color:#cbd5e1;
+
+    padding:11px 12px;
+
+    border-radius:9px;
+
+    text-align:left;
+
+    display:flex;
+    align-items:center;
+
+    gap:10px;
+
+    font-size:13px;
+
+    transition:.2s;
+}
+
+.nav-btn:hover,
+.nav-btn.active{
+    background:#1f2937;
+
+    color:white;
+}
+
+.sidebar-bottom{
+    margin-top:auto;
+
+    border-top:1px solid #1f2937;
+
+    padding-top:15px;
+}
+
+.user-mini{
+    padding:10px;
+
+    display:flex;
+    align-items:center;
+
+    gap:10px;
+}
+
+.avatar{
+    width:34px;
+    height:34px;
+
+    border-radius:50%;
+
+    background:#4f46e5;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    color:white;
+
+    font-size:12px;
+    font-weight:700;
+}
+
+.user-mini strong{
+    display:block;
+    font-size:12px;
+}
+
+.user-mini span{
+    color:#9ca3af;
+    font-size:10px;
+}
+
+.logout-btn{
+    width:100%;
+
+    border:none;
+
+    background:#1f2937;
+
+    color:#cbd5e1;
+
+    padding:10px;
+
+    border-radius:9px;
+
+    margin-top:8px;
+}
+
+/* =========================================================
+   MAIN
+========================================================= */
+
+.main{
+    margin-left:var(--sidebar);
+
+    min-height:100vh;
+}
+
+.topbar{
+    height:72px;
+
+    background:white;
+
+    border-bottom:1px solid var(--border);
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    padding:0 32px;
+
+    position:sticky;
+
+    top:0;
+
+    z-index:50;
+}
+
+.breadcrumb{
+    color:var(--muted);
+
+    font-size:13px;
+}
+
+.breadcrumb strong{
+    color:var(--text);
+}
+
+.topbar-progress{
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+.topbar-progress span{
+    font-size:12px;
+    color:var(--muted);
+}
+
+.mini-progress{
+    width:130px;
+    height:6px;
+
+    background:#e5e7eb;
+
+    border-radius:20px;
+
+    overflow:hidden;
+}
+
+.mini-progress div{
+    height:100%;
+
+    background:var(--secondary);
+
+    transition:width .4s ease;
+}
+
+/* =========================================================
+   CONTENT
+========================================================= */
+
+.content{
+    max-width:1400px;
+
+    margin:auto;
+
+    padding:32px;
+}
+
+.course-hero{
+    background:
+        linear-gradient(
+            135deg,
+            #111827,
+            #312e81
+        );
+
+    color:white;
+
+    border-radius:22px;
+
+    padding:34px;
+
+    position:relative;
+
+    overflow:hidden;
+}
+
+.course-hero::after{
+    content:"";
+
+    position:absolute;
+
+    width:300px;
+    height:300px;
+
+    border-radius:50%;
+
+    background:rgba(255,255,255,.05);
+
+    right:-100px;
+    top:-100px;
+}
+
+.hero-content{
+    position:relative;
+    z-index:2;
+
+    max-width:760px;
+}
+
+.course-tag{
+    display:inline-block;
+
+    background:rgba(255,255,255,.1);
+
+    border:1px solid rgba(255,255,255,.15);
+
+    padding:6px 10px;
+
+    border-radius:20px;
+
+    font-size:11px;
+
+    margin-bottom:15px;
+}
+
+.course-hero h1{
+    font-size:34px;
+
+    line-height:1.15;
+
+    margin-bottom:12px;
+}
+
+.course-hero p{
+    color:#d1d5db;
+
+    line-height:1.7;
+
+    font-size:14px;
+
+    max-width:680px;
+}
+
+.hero-meta{
+    display:flex;
+
+    gap:20px;
+
+    margin-top:22px;
+
+    flex-wrap:wrap;
+}
+
+.hero-meta-item{
+    color:#d1d5db;
+
+    font-size:12px;
+}
+
+.hero-meta-item strong{
+    display:block;
+
+    color:white;
+
+    font-size:15px;
+
+    margin-bottom:2px;
+}
+
+/* =========================================================
+   DASHBOARD CARDS
+========================================================= */
+
+.stats-grid{
+    display:grid;
+
+    grid-template-columns:
+        repeat(4,1fr);
+
+    gap:16px;
+
+    margin-top:22px;
+}
+
+.stat-card{
+    background:white;
+
+    border:1px solid var(--border);
+
+    border-radius:15px;
+
+    padding:20px;
+}
+
+.stat-label{
+    color:var(--muted);
+
+    font-size:12px;
+
+    margin-bottom:8px;
+}
+
+.stat-value{
+    font-size:25px;
+
+    font-weight:800;
+}
+
+.stat-description{
+    color:var(--muted);
+
+    font-size:11px;
+
+    margin-top:5px;
+}
+
+/* =========================================================
+   COURSE LAYOUT
+========================================================= */
+
+.course-layout{
+    display:grid;
+
+    grid-template-columns:
+        minmax(0,1fr)
+        350px;
+
+    gap:22px;
+
+    margin-top:22px;
+}
+
+.panel{
+    background:white;
+
+    border:1px solid var(--border);
+
+    border-radius:16px;
+
+    overflow:hidden;
+}
+
+.panel-header{
+    padding:20px;
+
+    border-bottom:1px solid var(--border);
+}
+
+.panel-header h2{
+    font-size:17px;
+}
+
+.panel-header p{
+    color:var(--muted);
+
+    font-size:12px;
+
+    margin-top:4px;
+}
+
+/* =========================================================
+   MODULE
+========================================================= */
+
+.module{
+    border-bottom:1px solid var(--border);
+}
+
+.module:last-child{
+    border-bottom:none;
+}
+
+.module-header{
+    padding:18px 20px;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    cursor:pointer;
+}
+
+.module-left{
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+}
+
+.module-number{
+    width:34px;
+    height:34px;
+
+    border-radius:10px;
+
+    background:var(--secondary-light);
+
+    color:var(--secondary);
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    font-weight:800;
+
+    font-size:12px;
+}
+
+.module-title strong{
+    display:block;
+
+    font-size:14px;
+}
+
+.module-title span{
+    color:var(--muted);
+
+    font-size:11px;
+}
+
+.module-status{
+    font-size:11px;
+
+    color:var(--muted);
+}
+
+.module-lessons{
+    padding:0 14px 14px;
+}
+
+.lesson{
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+    padding:13px 12px;
+
+    border-radius:10px;
+
+    transition:.2s;
+
+    cursor:pointer;
+}
+
+.lesson:hover{
+    background:#f8fafc;
+}
+
+.lesson.locked{
+    opacity:.45;
+
+    cursor:not-allowed;
+}
+
+.lesson-icon{
+    width:30px;
+    height:30px;
+
+    border-radius:8px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    background:#f3f4f6;
+
+    font-size:12px;
+}
+
+.lesson.completed .lesson-icon{
+    background:var(--success-light);
+
+    color:var(--success);
+}
+
+.lesson-info{
+    flex:1;
+}
+
+.lesson-info strong{
+    display:block;
+
+    font-size:12px;
+}
+
+.lesson-info span{
+    display:block;
+
+    color:var(--muted);
+
+    font-size:10px;
+
+    margin-top:2px;
+}
+
+.lesson-check{
+    color:var(--success);
+
+    font-size:14px;
+}
+
+/* =========================================================
+   PROGRESS PANEL
+========================================================= */
+
+.progress-panel{
+    padding:22px;
+}
+
+.progress-circle{
+    width:145px;
+    height:145px;
+
+    border-radius:50%;
+
+    margin:10px auto 20px;
+
+    background:
+        conic-gradient(
+            var(--secondary) var(--progress),
+            #e5e7eb 0
+        );
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    position:relative;
+}
+
+.progress-circle::before{
+    content:"";
+
+    position:absolute;
+
+    inset:11px;
+
+    border-radius:50%;
+
+    background:white;
+}
+
+.progress-circle span{
+    position:relative;
+
+    font-size:28px;
+
+    font-weight:800;
+}
+
+.progress-text{
+    text-align:center;
+
+    color:var(--muted);
+
+    font-size:12px;
+
+    line-height:1.6;
+}
+
+.next-card{
+    margin-top:20px;
+
+    padding:16px;
+
+    background:#f8fafc;
+
+    border:1px solid var(--border);
+
+    border-radius:12px;
+}
+
+.next-card small{
+    color:var(--muted);
+
+    font-size:10px;
+
+    text-transform:uppercase;
+
+    font-weight:800;
+
+    letter-spacing:.7px;
+}
+
+.next-card strong{
+    display:block;
+
+    font-size:13px;
+
+    margin:6px 0 12px;
+}
+
+.continue-btn{
+    width:100%;
+
+    background:var(--secondary);
+
+    color:white;
+
+    border:none;
+
+    border-radius:9px;
+
+    padding:11px;
+
+    font-size:12px;
+
+    font-weight:700;
+}
+
+/* =========================================================
+   LESSON PAGE
+========================================================= */
+
+.lesson-page{
+    display:grid;
+
+    grid-template-columns:
+        minmax(0,1fr)
+        300px;
+
+    gap:22px;
+}
+
+.lesson-content{
+    background:white;
+
+    border:1px solid var(--border);
+
+    border-radius:16px;
+
+    padding:32px;
+}
+
+.lesson-badge{
+    display:inline-block;
+
+    padding:6px 10px;
+
+    background:var(--secondary-light);
+
+    color:var(--secondary);
+
+    border-radius:20px;
+
+    font-size:10px;
+
+    font-weight:800;
+
+    text-transform:uppercase;
+}
+
+.lesson-content h1{
+    font-size:30px;
+
+    margin:15px 0 10px;
+}
+
+.lesson-description{
+    color:var(--muted);
+
+    line-height:1.7;
+
+    font-size:14px;
+
+    margin-bottom:25px;
+}
+
+.lesson-section{
+    margin-top:30px;
+}
+
+.lesson-section h2{
+    font-size:18px;
+
+    margin-bottom:12px;
+}
+
+.lesson-section p{
+    color:#374151;
+
+    font-size:14px;
+
+    line-height:1.8;
+
+    margin-bottom:12px;
+}
+
+.lesson-section ul{
+    padding-left:20px;
+
+    color:#374151;
+
+    line-height:1.9;
+
+    font-size:14px;
+}
+
+.code-box{
+    background:#111827;
+
+    color:#e5e7eb;
+
+    border-radius:12px;
+
+    padding:20px;
+
+    margin:18px 0;
+
+    overflow:auto;
+
+    font-family:
+        "SFMono-Regular",
+        Consolas,
+        monospace;
+
+    font-size:13px;
+
+    line-height:1.7;
+}
+
+.lesson-actions{
+    border-top:1px solid var(--border);
+
+    margin-top:35px;
+
+    padding-top:22px;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    gap:12px;
+}
+
+.complete-btn{
+    border:none;
+
+    background:var(--success);
+
+    color:white;
+
+    padding:13px 20px;
+
+    border-radius:10px;
+
+    font-weight:700;
+}
+
+.complete-btn.completed{
+    background:#dcfce7;
+
+    color:#166534;
+}
+
+/* =========================================================
+   LESSON SIDEBAR
+========================================================= */
+
+.lesson-sidebar{
+    background:white;
+
+    border:1px solid var(--border);
+
+    border-radius:16px;
+
+    overflow:hidden;
+
+    height:max-content;
+
+    position:sticky;
+
+    top:94px;
+}
+
+.lesson-sidebar-header{
+    padding:18px;
+
+    border-bottom:1px solid var(--border);
+
+    font-size:13px;
+
+    font-weight:700;
+}
+
+.lesson-sidebar-item{
+    padding:12px 16px;
+
+    border-bottom:1px solid #f3f4f6;
+
+    font-size:11px;
+
+    display:flex;
+
+    gap:10px;
+
+    cursor:pointer;
+}
+
+.lesson-sidebar-item.active{
+    background:var(--secondary-light);
+
+    color:var(--secondary);
+
+    font-weight:700;
+}
+
+.lesson-sidebar-item.completed{
+    color:var(--success);
+}
+
+/* =========================================================
+   COMPLETION SCREEN
+========================================================= */
+
+.completion-screen{
+    min-height:500px;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    text-align:center;
+
+    background:white;
+
+    border:1px solid var(--border);
+
+    border-radius:20px;
+
+    padding:40px;
+}
+
+.completion-icon{
+    width:80px;
+    height:80px;
+
+    margin:0 auto 20px;
+
+    border-radius:50%;
+
+    background:var(--success-light);
+
+    color:var(--success);
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    font-size:36px;
+}
+
+.completion-screen h1{
+    font-size:30px;
+
+    margin-bottom:10px;
+}
+
+.completion-screen p{
+    color:var(--muted);
+
+    max-width:550px;
+
+    line-height:1.7;
+
+    margin:auto;
+}
+
+.assessment-btn{
+    margin-top:25px;
+
+    border:none;
+
+    background:var(--secondary);
+
+    color:white;
+
+    padding:14px 25px;
+
+    border-radius:10px;
+
+    font-weight:700;
+}
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+.mobile-menu{
+    display:none;
+
+    border:none;
+
+    background:none;
+
+    font-size:22px;
+}
+
+@media(max-width:1000px){
+
+    .stats-grid{
+        grid-template-columns:
+            repeat(2,1fr);
+    }
+
+    .course-layout,
+    .lesson-page{
+        grid-template-columns:1fr;
+    }
+
+    .lesson-sidebar{
+        position:static;
+    }
+
+}
+
+@media(max-width:760px){
+
+    :root{
+        --sidebar:0px;
+    }
+
+    .sidebar{
+        transform:translateX(-100%);
+
+        transition:.25s;
+
+        width:270px;
+    }
+
+    .sidebar.open{
+        transform:translateX(0);
+    }
+
+    .main{
+        margin-left:0;
+    }
+
+    .mobile-menu{
+        display:block;
+    }
+
+    .topbar{
+        padding:0 16px;
+    }
+
+    .content{
+        padding:18px;
+    }
+
+    .course-hero{
+        padding:25px;
+    }
+
+    .course-hero h1{
+        font-size:27px;
+    }
+
+    .stats-grid{
+        grid-template-columns:1fr;
+    }
+
+    .topbar-progress{
+        display:none;
+    }
+
+    .lesson-content{
+        padding:22px;
+    }
+
+    .lesson-actions{
+        flex-direction:column;
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- =====================================================
+     LOADING
+===================================================== -->
+
+<div id="loadingScreen" class="loading-screen">
+
+    <div class="loader"></div>
+
+    <h2>Loading Openbox Academy...</h2>
+
+</div>
+
+
+<!-- =====================================================
+     AUTH
+===================================================== -->
+
+<div id="authScreen" class="auth-screen hidden">
+
+    <div class="auth-card">
+
+        <div class="brand">
+
+            <div class="brand-logo">
+                OB
+            </div>
+
+            <div class="brand-text">
+
+                <h1>Openbox Academy</h1>
+
+                <p>Learn by completing</p>
+
+            </div>
+
+        </div>
+
+
+        <!-- LOGIN -->
+
+        <div id="loginForm">
+
+            <h2>Welcome back.</h2>
+
+            <p class="auth-subtitle">
+                Continue your Python learning journey.
+            </p>
+
+            <div id="loginError"></div>
+
+            <div class="form-group">
+
+                <label>Email address</label>
+
+                <input
+                    type="email"
+                    id="loginEmail"
+                    placeholder="you@example.com"
+                >
+
+            </div>
+
+            <div class="form-group">
+
+                <label>Mobile number</label>
+
+                <input
+                    type="tel"
+                    id="loginMobile"
+                    placeholder="10 digit mobile number"
+                >
+
+            </div>
+
+            <button
+                class="primary-btn"
+                onclick="login()"
+            >
+                Login
+            </button>
+
+            <div class="auth-switch">
+
+                New to Openbox?
+
+                <button onclick="showRegister()">
+                    Create account
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- REGISTER -->
+
+        <div id="registerForm" class="hidden">
+
+            <h2>Create your account.</h2>
+
+            <p class="auth-subtitle">
+                Start Python Programming Fundamentals.
+            </p>
+
+            <div id="registerError"></div>
+
+            <div class="form-group">
+
+                <label>Full name</label>
+
+                <input
+                    type="text"
+                    id="registerName"
+                    placeholder="Your full name"
+                >
+
+            </div>
+
+            <div class="form-group">
+
+                <label>Email address</label>
+
+                <input
+                    type="email"
+                    id="registerEmail"
+                    placeholder="you@example.com"
+                >
+
+            </div>
+
+            <div class="form-group">
+
+                <label>Mobile number</label>
+
+                <input
+                    type="tel"
+                    id="registerMobile"
+                    placeholder="10 digit mobile number"
+                >
+
+            </div>
+
+            <button
+                class="primary-btn"
+                onclick="register()"
+            >
+                Create account
+            </button>
+
+            <div class="auth-switch">
+
+                Already registered?
+
+                <button onclick="showLogin()">
+                    Login
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     APPLICATION
+===================================================== -->
+
+<div id="app" class="app hidden">
+
+    <!-- SIDEBAR -->
+
+    <aside id="sidebar" class="sidebar">
+
+        <div class="sidebar-brand">
+
+            <div class="sidebar-logo">
+                OB
+            </div>
+
+            <div>
+
+                <strong>
+                    Openbox Academy
+                </strong>
+
+                <span>
+                    Learning Platform
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <div class="course-label">
+            Course
+        </div>
+
+        <nav class="sidebar-nav">
+
+            <button
+                class="nav-btn active"
+                onclick="showDashboard()"
+            >
+                🏠
+                Dashboard
+            </button>
+
+            <button
+                class="nav-btn"
+                onclick="showCourse()"
+            >
+                📚
+                Course Content
+            </button>
+
+            <button
+                class="nav-btn"
+                onclick="resumeCourse()"
+            >
+                ▶️
+                Continue Learning
+            </button>
+
+            <button
+                class="nav-btn"
+                onclick="showAssessment()"
+            >
+                📝
+                Final Assessment
+            </button>
+
+        </nav>
+
+
+        <div class="sidebar-bottom">
+
+            <div class="user-mini">
+
+                <div id="userAvatar" class="avatar">
+                    A
+                </div>
+
+                <div>
+
+                    <strong id="sidebarUserName">
+                        Student
+                    </strong>
+
+                    <span id="sidebarStudentId">
+                        OB001
+                    </span>
+
+                </div>
+
+            </div>
+
+            <button
+                class="logout-btn"
+                onclick="logout()"
+            >
+                Log out
+            </button>
+
+        </div>
+
+    </aside>
+
+
+    <!-- MAIN -->
+
+    <main class="main">
+
+        <header class="topbar">
+
+            <div style="display:flex;align-items:center;gap:12px">
+
+                <button
+                    class="mobile-menu"
+                    onclick="toggleSidebar()"
+                >
+                    ☰
+                </button>
+
+                <div class="breadcrumb">
+
+                    Openbox Academy
+                    /
+                    <strong>
+                        Python Programming Fundamentals
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <div class="topbar-progress">
+
+                <span>
+                    Course progress
+                </span>
+
+                <div class="mini-progress">
+
+                    <div
+                        id="topProgress"
+                        style="width:0%"
+                    ></div>
+
+                </div>
+
+                <strong id="topProgressText">
+                    0%
+                </strong>
+
+            </div>
+
+        </header>
+
+
+        <section id="pageContent" class="content">
+
+        </section>
+
+    </main>
+
+</div>
+
+
+<script>
+
+/* =========================================================
+   API
+========================================================= */
+
+const API_URL =
+"https://script.google.com/macros/s/AKfycbwbmp19FOeDmWIK2S7n4U7EPVB34W17WrHaSYHa74hHXL06WOYF_9EL2dC6tWt4xbqc/exec";
+
+
+/* =========================================================
+   COURSE DATA
+========================================================= */
+
+const COURSE = {
+
+    id:"python-programming-fundamentals",
+
+    title:"Python Programming Fundamentals",
+
+    description:
+    "A completion-based introduction to programming using Python. Learn programming concepts by understanding, practicing and completing practical lessons.",
+
+    duration:"6–8 weeks",
+
+    level:"Beginner",
+
+    modules:[
+
+        {
+            id:"m1",
+            title:"Getting Started With Python",
+            description:"Understand Python, programming and your development environment.",
+
+            lessons:[
+
+                {
+                    id:"m1l1",
+                    title:"What is Programming?",
+                    duration:"15 min",
+
+                    description:
+                    "Understand what programming actually means and how software is built.",
+
+                    content:`
+
+                    <p>
+                    Programming is the process of giving a computer
+                    precise instructions to perform a task.
+                    </p>
+
+                    <p>
+                    Before writing Python code, you need to understand
+                    the basic idea behind programs, algorithms and
+                    problem solving.
+                    </p>
+
+                    <h3>Learning objectives</h3>
+
+                    <ul>
+                        <li>Understand what a program is</li>
+                        <li>Understand instructions and algorithms</li>
+                        <li>Learn how computers execute instructions</li>
+                        <li>Understand the role of programming languages</li>
+                    </ul>
+
+                    `
+
+                },
+
+                {
+                    id:"m1l2",
+                    title:"Why Python?",
+                    duration:"15 min",
+
+                    description:
+                    "Learn why Python is one of the most widely used programming languages.",
+
+                    content:`
+
+                    <p>
+                    Python is a high-level programming language designed
+                    to be readable and productive.
+                    </p>
+
+                    <p>
+                    It is widely used in web development, automation,
+                    data science, artificial intelligence, scripting
+                    and education.
+                    </p>
+
+                    <h3>Why beginners like Python</h3>
+
+                    <ul>
+                        <li>Readable syntax</li>
+                        <li>Large ecosystem</li>
+                        <li>Huge developer community</li>
+                        <li>Useful for automation and data analysis</li>
+                    </ul>
+
+                    `
+
+                },
+
+                {
+                    id:"m1l3",
+                    title:"Installing Python",
+                    duration:"20 min",
+
+                    description:
+                    "Set up Python and prepare your development environment.",
+
+                    content:`
+
+                    <p>
+                    Before writing programs, you need a Python environment.
+                    </p>
+
+                    <p>
+                    You can use Python locally through an editor such as
+                    VS Code, or use a browser-based environment.
+                    </p>
+
+                    <h3>Check your installation</h3>
+
+                    <div class="code-box">
+python --version
+                    </div>
+
+                    `
+
+                },
+
+                {
+                    id:"m1l4",
+                    title:"Your First Python Program",
+                    duration:"20 min",
+
+                    description:
+                    "Write and execute your first Python program.",
+
+                    content:`
+
+                    <p>
+                    The traditional first program demonstrates how
+                    Python produces output.
+                    </p>
+
+                    <div class="code-box">
+print("Hello, Openbox Academy!")
+                    </div>
+
+                    <p>
+                    The <strong>print()</strong> function displays
+                    information to the console.
+                    </p>
+
+                    `
+
+                }
+
+            ]
+        },
+
+        {
+            id:"m2",
+            title:"Variables & Data Types",
+            description:"Learn how Python stores and works with information.",
+
+            lessons:[
+
+                {
+                    id:"m2l1",
+                    title:"Variables",
+                    duration:"20 min",
+
+                    description:
+                    "Understand variables and how they store information.",
+
+                    content:`
+
+                    <p>
+                    A variable is a name that refers to a value.
+                    </p>
+
+                    <div class="code-box">
+name = "Aviral"
+age = 21
+                    </div>
+
+                    <p>
+                    Python automatically determines the type of value
+                    assigned to the variable.
+                    </p>
+
+                    `
+
+                },
+
+                {
+                    id:"m2l2",
+                    title:"Strings",
+                    duration:"20 min",
+
+                    description:
+                    "Work with text data in Python.",
+
+                    content:`
+
+                    <div class="code-box">
+name = "Openbox"
+
+print(name)
+print(len(name))
+                    </div>
+
+                    <p>
+                    Strings represent sequences of characters.
+                    </p>
+
+                    `
+
+                },
+
+                {
+                    id:"m2l3",
+                    title:"Numbers",
+                    duration:"20 min",
+
+                    description:
+                    "Understand integers, floating point numbers and arithmetic.",
+
+                    content:`
+
+                    <div class="code-box">
+age = 21
+height = 5.9
+
+print(age + 1)
+print(height)
+                    </div>
+
+                    `
+
+                },
+
+                {
+                    id:"m2l4",
+                    title:"Boolean Values",
+                    duration:"15 min",
+
+                    description:
+                    "Learn True and False values.",
+
+                    content:`
+
+                    <div class="code-box">
+is_student = True
+is_logged_in = False
+
+print(is_student)
+                    </div>
+
+                    `
+
+                }
+
+            ]
+        },
+
+        {
+            id:"m3",
+            title:"Operators & Expressions",
+            description:"Learn how Python performs calculations and comparisons.",
+
+            lessons:[
+
+                {
+                    id:"m3l1",
+                    title:"Arithmetic Operators",
+                    duration:"20 min",
+
+                    description:
+                    "Perform calculations using Python.",
+
+                    content:`
+
+                    <div class="code-box">
+a = 10
+b = 3
+
+print(a + b)
+print(a - b)
+print(a * b)
+print(a / b)
+print(a % b)
+                    </div>
+
+                    `
+
+                },
+
+                {
+                    id:"m3l2",
+                    title:"Comparison Operators",
+                    duration:"20 min",
+
+                    description:
+                    "Compare values using Python comparison operators.",
+
+                    content:`
+
+                    <div class="code-box">
+age = 20
+
+print(age >= 18)
+print(age == 20)
+print(age != 25)
+                    </div>
+
+                    `
+
+                },
+
+                {
+                    id:"m3l3",
+                    title:"Logical Operators",
+                    duration:"20 min",
+
+                    description:
+                    "Combine conditions using and, or and not.",
+
+                    content:`
+
+                    <div class="code-box">
+age = 21
+student = True
+
+print(age >= 18 and student)
+                    </div>
+
+                    `
+
+                }
+
+            ]
+        },
+
+        {
+            id:"m4",
+            title:"Conditional Logic",
+            description:"Teach your programs how to make decisions.",
+
+            lessons:[
+
+                {
+                    id:"m4l1",
+                    title:"if Statements",
+                    duration:"20 min",
+
+                    description:
+                    "Create conditional logic.",
+
+                    content:`
+
+                    <div class="code-box">
+age = 20
+
+if age >= 18:
+    print("Eligible")
+                    </div>
+
+                    `
+
+                },
+
+                {
+                    id:"m4l2",
+                    title:"if / elif / else",
+                    duration:"25 min",
+
+                    description:
+                    "Build multi-condition programs.",
+
+                    content:`
+
+                    <div class="code-box">
+marks = 75
+
+if marks >= 90:
+    grade = "A"
+elif marks >= 70:
+    grade = "B"
+else:
+    grade = "C"
+
+print(grade)
+                    </div>
+
+                    `
+
+                }
+
+            ]
+        },
+
+        {
+            id:"m5",
+            title:"Loops",
+            description:"Automate repetitive tasks using loops.",
+
+            lessons:[
+
+                {
+                    id:"m5l1",
+                    title:"for Loops",
+                    duration:"25 min",
+
+                    description:
+                    "Repeat operations over a sequence.",
+
+                    content:`
+
+                    <div class="code-box">
+for i in range(5):
+    print(i)
+                    </div>
+
+                    `
+
+                },
+
+                {
+                    id:"m5l2",
+                    title:"while Loops",
+                    duration:"25 min",
+
+                    description:
+                    "Repeat code while a condition remains true.",
+
+                    content:`
+
+                    <div class="code-box">
+count = 1
+
+while count <= 5:
+    print(count)
+    count += 1
+                    </div>
+
+                    `
+
+                }
+
+            ]
+        },
+
+        {
+            id:"m6",
+            title:"Functions",
+            description:"Create reusable blocks of Python code.",
+
+            lessons:[
+
+                {
+                    id:"m6l1",
+                    title:"Creating Functions",
+                    duration:"25 min",
+
+                    description:
+                    "Learn how to define and call functions.",
+
+                    content:`
+
+                    <div class="code-box">
+def greet():
+    print("Hello!")
+
+greet()
+                    </div>
+
+                    `
+
+                },
+
+                {
+                    id:"m6l2",
+                    title:"Parameters & Arguments",
+                    duration:"25 min",
+
+                    description:
+                    "Make functions flexible using parameters.",
+
+                    content:`
+
+                    <div class="code-box">
+def greet(name):
+    print("Hello", name)
+
+greet("Aviral")
+                    </div>
+
+                    `
+
+                },
+
+                {
+                    id:"m6l3",
+                    title:"Return Values",
+                    duration:"20 min",
+
+                    description:
+                    "Return results from functions.",
+
+                    content:`
+
+                    <div class="code-box">
+def add(a, b):
+    return a + b
+
+result = add(10, 20)
+
+print(result)
+                    </div>
+
+                    `
+
+                }
+
+            ]
+        },
+
+        {
+            id:"m7",
+            title:"Python Collections",
+            description:"Work with lists, tuples, dictionaries and sets.",
+
+            lessons:[
+
+                {
+                    id:"m7l1",
+                    title:"Lists",
+                    duration:"25 min",
+
+                    description:
+                    "Store multiple values using lists.",
+
+                    content:`
+
+                    <div class="code-box">
+students = [
+    "Aviral",
+    "Rahul",
+    "Priya"
+]
+
+print(students[0])
+                    </div>
+
+                    `
+
+                },
+
+                {
+                    id:"m7l2",
+                    title:"Dictionaries",
+                    duration:"25 min",
+
+                    description:
+                    "Store structured information using key-value pairs.",
+
+                    content:`
+
+                    <div class="code-box">
+student = {
+    "name": "Aviral",
+    "age": 21,
+    "course": "Python"
+}
+
+print(student["name"])
+                    </div>
+
+                    `
+
+                }
+
+            ]
+        },
+
+        {
+            id:"m8",
+            title:"Files & Exceptions",
+            description:"Make Python programs more practical and reliable.",
+
+            lessons:[
+
+                {
+                    id:"m8l1",
+                    title:"Reading Files",
+                    duration:"25 min",
+
+                    description:
+                    "Read information from files.",
+
+                    content:`
+
+                    <div class="code-box">
+with open("data.txt", "r") as file:
+    content = file.read()
+
+print(content)
+                    </div>
+
+                    `
+
+                },
+
+                {
+                    id:"m8l2",
+                    title:"Exception Handling",
+                    duration:"25 min",
+
+                    description:
+                    "Handle errors using try and except.",
+
+                    content:`
+
+                    <div class="code-box">
+try:
+    number = int(input("Enter number: "))
+    print(number)
+
+except ValueError:
+    print("Please enter a valid number.")
+                    </div>
+
+                    `
+
+                }
+
+            ]
+        },
+
+        {
+            id:"m9",
+            title:"Mini Project",
+            description:"Apply your Python knowledge to a practical project.",
+
+            lessons:[
+
+                {
+                    id:"m9l1",
+                    title:"Project Planning",
+                    duration:"30 min",
+
+                    description:
+                    "Break a programming problem into smaller tasks.",
+
+                    content:`
+
+                    <p>
+                    Before coding, define the problem,
+                    inputs, outputs and major steps.
+                    </p>
+
+                    <ul>
+                        <li>Define the problem</li>
+                        <li>Identify inputs</li>
+                        <li>Define expected output</li>
+                        <li>Break the solution into functions</li>
+                    </ul>
+
+                    `
+
+                },
+
+                {
+                    id:"m9l2",
+                    title:"Build the Project",
+                    duration:"60 min",
+
+                    description:
+                    "Build a small Python application using the concepts learned.",
+
+                    content:`
+
+                    <p>
+                    Your final project should combine variables,
+                    conditions, loops, functions and collections.
+                    </p>
+
+                    <p>
+                    The objective is not simply to copy code.
+                    Build your own implementation.
+                    </p>
+
+                    `
+
+                },
+
+                {
+                    id:"m9l3",
+                    title:"Project Reflection",
+                    duration:"20 min",
+
+                    description:
+                    "Review your project and identify what you learned.",
+
+                    content:`
+
+                    <p>
+                    A good programmer learns from the process,
+                    not just the final output.
+                    </p>
+
+                    <ul>
+                        <li>What problem did you solve?</li>
+                        <li>What was difficult?</li>
+                        <li>What would you improve?</li>
+                        <li>What concept did you understand best?</li>
+                    </ul>
+
+                    `
+
+                }
+
+            ]
+        }
+
+    ]
+
+};
+
+
+/* =========================================================
+   STATE
+========================================================= */
+
+let currentUser = null;
+
+let completedLessons = [];
+
+let currentLessonId = null;
+
+
+/* =========================================================
+   INIT
+========================================================= */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    initialize
+);
+
+
+function initialize(){
+
+    const savedUser =
+        localStorage.getItem("openbox_user");
+
+    if(savedUser){
+
+        try{
+
+            currentUser =
+                JSON.parse(savedUser);
+
+            loadProgress();
+
+            showApplication();
+
+        }catch(error){
+
+            localStorage.removeItem(
+                "openbox_user"
+            );
+
+            showAuth();
+
+        }
+
+    }else{
+
+        showAuth();
+
+    }
+
+}
+
+
+/* =========================================================
+   AUTH SCREEN
+========================================================= */
+
+function showAuth(){
+
+    document
+        .getElementById("loadingScreen")
+        .classList.add("hidden");
+
+    document
+        .getElementById("authScreen")
+        .classList.remove("hidden");
+
+    document
+        .getElementById("app")
+        .classList.add("hidden");
+
+}
+
+
+function showLogin(){
+
+    document
+        .getElementById("loginForm")
+        .classList.remove("hidden");
+
+    document
+        .getElementById("registerForm")
+        .classList.add("hidden");
+
+}
+
+
+function showRegister(){
+
+    document
+        .getElementById("loginForm")
+        .classList.add("hidden");
+
+    document
+        .getElementById("registerForm")
+        .classList.remove("hidden");
+
+}
+
+
+/* =========================================================
+   REGISTER
+========================================================= */
+
+async function register(){
+
+    clearErrors();
+
+    const name =
+        document
+        .getElementById("registerName")
+        .value
+        .trim();
+
+    const email =
+        document
+        .getElementById("registerEmail")
+        .value
+        .trim();
+
+    const mobile =
+        document
+        .getElementById("registerMobile")
+        .value
+        .trim();
+
+    if(!name || !email || !mobile){
+
+        showError(
+            "registerError",
+            "Please complete all fields."
+        );
+
+        return;
+
+    }
+
+    try{
+
+        const response =
+            await fetch(API_URL,{
+
+                method:"POST",
+
+                body:JSON.stringify({
+
+                    action:"register",
+
+                    name:name,
+
+                    email:email,
+
+                    mobile:mobile
+
+                })
+
+            });
+
+        const data =
+            await response.json();
+
+        if(!data.success){
+
+            showError(
+                "registerError",
+                data.message
+            );
+
+            return;
+
+        }
+
+        currentUser =
+            data.user;
+
+        localStorage.setItem(
+            "openbox_user",
+            JSON.stringify(currentUser)
+        );
+
+        initializeProgress();
+
+        showApplication();
+
+    }catch(error){
+
+        showError(
+            "registerError",
+            "Unable to connect to Openbox Academy."
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   LOGIN
+========================================================= */
+
+async function login(){
+
+    clearErrors();
+
+    const email =
+        document
+        .getElementById("loginEmail")
+        .value
+        .trim();
+
+    const mobile =
+        document
+        .getElementById("loginMobile")
+        .value
+        .trim();
+
+    if(!email || !mobile){
+
+        showError(
+            "loginError",
+            "Enter your email and mobile number."
+        );
+
+        return;
+
+    }
+
+    try{
+
+        const response =
+            await fetch(API_URL,{
+
+                method:"POST",
+
+                body:JSON.stringify({
+
+                    action:"login",
+
+                    email:email,
+
+                    mobile:mobile
+
+                })
+
+            });
+
+        const data =
+            await response.json();
+
+        if(!data.success){
+
+            showError(
+                "loginError",
+                data.message
+            );
+
+            return;
+
+        }
+
+        currentUser =
+            data.user;
+
+        localStorage.setItem(
+            "openbox_user",
+            JSON.stringify(currentUser)
+        );
+
+        loadProgress();
+
+        showApplication();
+
+    }catch(error){
+
+        showError(
+            "loginError",
+            "Unable to connect to Openbox Academy."
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   APP
+========================================================= */
+
+function showApplication(){
+
+    document
+        .getElementById("loadingScreen")
+        .classList.add("hidden");
+
+    document
+        .getElementById("authScreen")
+        .classList.add("hidden");
+
+    document
+        .getElementById("app")
+        .classList.remove("hidden");
+
+    updateUserUI();
+
+    updateProgress();
+
+    showDashboard();
+
+}
+
+
+function updateUserUI(){
+
+    if(!currentUser)
+        return;
+
+    const name =
+        currentUser.name || "Student";
+
+    document
+        .getElementById("sidebarUserName")
+        .textContent =
+        name;
+
+    document
+        .getElementById("sidebarStudentId")
+        .textContent =
+        currentUser.studentId || "";
+
+    document
+        .getElementById("userAvatar")
+        .textContent =
+        name
+        .charAt(0)
+        .toUpperCase();
+
+}
+
+
+/* =========================================================
+   PROGRESS STORAGE
+========================================================= */
+
+function progressKey(){
+
+    return (
+        "openbox_progress_" +
+        (
+            currentUser.email ||
+            currentUser.studentId ||
+            "student"
+        )
+    );
+
+}
+
+
+function initializeProgress(){
+
+    completedLessons = [];
+
+    saveProgress();
+
+}
+
+
+function loadProgress(){
+
+    const saved =
+        localStorage.getItem(
+            progressKey()
+        );
+
+    if(saved){
+
+        try{
+
+            completedLessons =
+                JSON.parse(saved);
+
+        }catch(error){
+
+            completedLessons = [];
+
+        }
+
+    }else{
+
+        completedLessons = [];
+
+    }
+
+}
+
+
+function saveProgress(){
+
+    localStorage.setItem(
+
+        progressKey(),
+
+        JSON.stringify(
+            completedLessons
+        )
+
+    );
+
+}
+
+
+/* =========================================================
+   COURSE HELPERS
+========================================================= */
+
+function allLessons(){
+
+    return COURSE.modules.flatMap(
+        module => module.lessons
+    );
+
+}
+
+
+function totalLessons(){
+
+    return allLessons().length;
+
+}
+
+
+function completedCount(){
+
+    return completedLessons.length;
+
+}
+
+
+function progressPercentage(){
+
+    if(totalLessons() === 0)
+        return 0;
+
+    return Math.round(
+        (
+            completedCount() /
+            totalLessons()
+        ) * 100
+    );
+
+}
+
+
+function isCompleted(id){
+
+    return completedLessons.includes(id);
+
+}
+
+
+function getLesson(id){
+
+    return allLessons()
+        .find(
+            lesson => lesson.id === id
+        );
+
+}
+
+
+function getModuleForLesson(id){
+
+    return COURSE.modules.find(
+        module =>
+            module.lessons.some(
+                lesson =>
+                    lesson.id === id
+            )
+    );
+
+}
+
+
+/* =========================================================
+   LOCKING SYSTEM
+========================================================= */
+
+function isLessonUnlocked(id){
+
+    const lessons =
+        allLessons();
+
+    const index =
+        lessons.findIndex(
+            lesson =>
+                lesson.id === id
+        );
+
+    if(index <= 0)
+        return true;
+
+    return isCompleted(
+        lessons[index - 1].id
+    );
+
+}
+
+
+/* =========================================================
+   DASHBOARD
+========================================================= */
+
+function showDashboard(){
+
+    setActiveNav(0);
+
+    const progress =
+        progressPercentage();
+
+    const next =
+        getNextLesson();
+
+    document
+        .getElementById("pageContent")
+        .innerHTML = `
+
+        <div class="course-hero">
+
+            <div class="hero-content">
+
+                <span class="course-tag">
+                    OPENBOX ACADEMY
+                </span>
+
+                <h1>
+                    ${COURSE.title}
+                </h1>
+
+                <p>
+                    ${COURSE.description}
+                </p>
+
+                <div class="hero-meta">
+
+                    <div class="hero-meta-item">
+                        <strong>
+                            ${COURSE.modules.length}
+                        </strong>
+                        Modules
+                    </div>
+
+                    <div class="hero-meta-item">
+                        <strong>
+                            ${totalLessons()}
+                        </strong>
+                        Lessons
+                    </div>
+
+                    <div class="hero-meta-item">
+                        <strong>
+                            ${COURSE.duration}
+                        </strong>
+                        Duration
+                    </div>
+
+                    <div class="hero-meta-item">
+                        <strong>
+                            ${COURSE.level}
+                        </strong>
+                        Level
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="stats-grid">
+
+            <div class="stat-card">
+
+                <div class="stat-label">
+                    Course progress
+                </div>
+
+                <div class="stat-value">
+                    ${progress}%
+                </div>
+
+                <div class="stat-description">
+                    ${completedCount()} of ${totalLessons()} lessons completed
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-label">
+                    Modules
+                </div>
+
+                <div class="stat-value">
+                    ${completedModules()}
+                </div>
+
+                <div class="stat-description">
+                    of ${COURSE.modules.length} modules completed
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-label">
+                    Learning status
+                </div>
+
+                <div class="stat-value">
+                    ${progress === 100 ? "Completed" : "Active"}
+                </div>
+
+                <div class="stat-description">
+                    ${progress === 100
+                        ? "Ready for final assessment"
+                        : "Keep progressing"}
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-label">
+                    Student
+                </div>
+
+                <div class="stat-value">
+                    ${escapeHTML(
+                        currentUser.name || "Student"
+                    )}
+                </div>
+
+                <div class="stat-description">
+                    ${currentUser.studentId || ""}
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="course-layout">
+
+            <div class="panel">
+
+                <div class="panel-header">
+
+                    <h2>
+                        Course Curriculum
+                    </h2>
+
+                    <p>
+                        Complete lessons in sequence.
+                        Your progress updates automatically.
+                    </p>
+
+                </div>
+
+                ${renderModules()}
+
+            </div>
+
+
+            <div class="panel progress-panel">
+
+                <div class="panel-header"
+                     style="padding:0 0 15px;border:none">
+
+                    <h2>
+                        Your Progress
+                    </h2>
+
+                </div>
+
+                <div
+                    class="progress-circle"
+                    style="--progress:${progress}%"
+                >
+
+                    <span>
+                        ${progress}%
+                    </span>
+
+                </div>
+
+                <div class="progress-text">
+
+                    You've completed
+
+                    <strong>
+                        ${completedCount()}
+                    </strong>
+
+                    of
+
+                    <strong>
+                        ${totalLessons()}
+                    </strong>
+
+                    lessons.
+
+                </div>
+
+                ${
+                    next
+                    ?
+                    `
+
+                    <div class="next-card">
+
+                        <small>
+                            Continue learning
+                        </small>
+
+                        <strong>
+                            ${next.title}
+                        </strong>
+
+                        <button
+                            class="continue-btn"
+                            onclick="openLesson('${next.id}')"
+                        >
+                            Continue →
+                        </button>
+
+                    </div>
+
+                    `
+                    :
+                    `
+
+                    <div class="next-card">
+
+                        <small>
+                            Course complete
+                        </small>
+
+                        <strong>
+                            All lessons completed.
+                        </strong>
+
+                        <button
+                            class="continue-btn"
+                            onclick="showAssessment()"
+                        >
+                            Start Assessment →
+                        </button>
+
+                    </div>
+
+                    `
+                }
+
+            </div>
+
+        </div>
+
+    `;
+
+}
+
+
+/* =========================================================
+   COURSE PAGE
+========================================================= */
+
+function showCourse(){
+
+    setActiveNav(1);
+
+    document
+        .getElementById("pageContent")
+        .innerHTML = `
+
+        <div class="panel">
+
+            <div class="panel-header">
+
+                <h2>
+                    ${COURSE.title}
+                </h2>
+
+                <p>
+                    Follow the curriculum from beginning
+                    to completion.
+                </p>
+
+            </div>
+
+            ${renderModules()}
+
+        </div>
+
+    `;
+
+}
+
+
+function renderModules(){
+
+    return COURSE.modules.map(
+
+        (module,index)=>{
+
+            const moduleCompleted =
+                module.lessons.every(
+                    lesson =>
+                        isCompleted(
+                            lesson.id
+                        )
+                );
+
+            return `
+
+            <div class="module">
+
+                <div class="module-header">
+
+                    <div class="module-left">
+
+                        <div class="module-number">
+
+                            ${String(index+1).padStart(2,"0")}
+
+                        </div>
+
+                        <div class="module-title">
+
+                            <strong>
+                                ${module.title}
+                            </strong>
+
+                            <span>
+                                ${module.lessons.length}
+                                lessons
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                    <div class="module-status">
+
+                        ${
+                            moduleCompleted
+                            ? "✓ Completed"
+                            : getModuleProgress(module) +
+                              "% complete"
+                        }
+
+                    </div>
+
+                </div>
+
+
+                <div class="module-lessons">
+
+                    ${module.lessons.map(
+                        lesson =>
+                            renderLessonRow(
+                                lesson
+                            )
+                    ).join("")}
+
+                </div>
+
+            </div>
+
+            `;
+
+        }
+
+    ).join("");
+
+}
+
+
+function renderLessonRow(lesson){
+
+    const completed =
+        isCompleted(
+            lesson.id
+        );
+
+    const unlocked =
+        isLessonUnlocked(
+            lesson.id
+        );
+
+    return `
+
+        <div
+
+            class="
+                lesson
+                ${completed ? "completed" : ""}
+                ${!unlocked ? "locked" : ""}
+            "
+
+            onclick="
+                ${
+                    unlocked
+                    ?
+                    `openLesson('${lesson.id}')`
+                    :
+                    ""
+                }
+            "
+
+        >
+
+            <div class="lesson-icon">
+
+                ${
+                    completed
+                    ? "✓"
+                    : unlocked
+                    ? "▶"
+                    : "🔒"
+                }
+
+            </div>
+
+            <div class="lesson-info">
+
+                <strong>
+                    ${lesson.title}
+                </strong>
+
+                <span>
+                    ${lesson.duration}
+                </span>
+
+            </div>
+
+            ${
+                completed
+                ?
+                `<div class="lesson-check">✓</div>`
+                :
+                ""
+            }
+
+        </div>
+
+    `;
+
+}
+
+
+/* =========================================================
+   MODULE PROGRESS
+========================================================= */
+
+function getModuleProgress(module){
+
+    if(!module.lessons.length)
+        return 0;
+
+    const count =
+        module.lessons.filter(
+            lesson =>
+                isCompleted(
+                    lesson.id
+                )
+        ).length;
+
+    return Math.round(
+        count /
+        module.lessons.length *
+        100
+    );
+
+}
+
+
+function completedModules(){
+
+    return COURSE.modules.filter(
+        module =>
+            module.lessons.length &&
+            module.lessons.every(
+                lesson =>
+                    isCompleted(
+                        lesson.id
+                    )
+            )
+    ).length;
+
+}
+
+
+/* =========================================================
+   OPEN LESSON
+========================================================= */
+
+function openLesson(id){
+
+    if(!isLessonUnlocked(id)){
+
+        alert(
+            "Complete the previous lesson first."
+        );
+
+        return;
+
+    }
+
+    currentLessonId = id;
+
+    const lesson =
+        getLesson(id);
+
+    const module =
+        getModuleForLesson(id);
+
+    if(!lesson)
+        return;
+
+    document
+        .getElementById("pageContent")
+        .innerHTML = `
+
+        <div class="lesson-page">
+
+            <article class="lesson-content">
+
+                <span class="lesson-badge">
+
+                    ${module.title}
+
+                </span>
+
+                <h1>
+                    ${lesson.title}
+                </h1>
+
+                <p class="lesson-description">
+
+                    ${lesson.description}
+
+                </p>
+
+
+                <div class="lesson-section">
+
+                    <h2>
+                        Lesson
+                    </h2>
+
+                    ${lesson.content}
+
+                </div>
+
+
+                <div class="lesson-actions">
+
+                    <button
+                        class="secondary-btn"
+                        onclick="showCourse()"
+                    >
+                        ← Course Content
+                    </button>
+
+
+                    ${
+                        isCompleted(id)
+                        ?
+                        `
+
+                        <button
+                            class="complete-btn completed"
+                            onclick="goNextLesson()"
+                        >
+                            ✓ Completed — Continue →
+                        </button>
+
+                        `
+                        :
+                        `
+
+                        <button
+                            class="complete-btn"
+                            onclick="completeLesson('${id}')"
+                        >
+                            Mark Lesson Complete →
+                        </button>
+
+                        `
+                    }
+
+                </div>
+
+            </article>
+
+
+            <aside class="lesson-sidebar">
+
+                <div class="lesson-sidebar-header">
+
+                    ${module.title}
+
+                </div>
+
+                ${module.lessons.map(
+
+                    item => `
+
+                    <div
+
+                        class="
+                            lesson-sidebar-item
+                            ${item.id === id ? "active" : ""}
+                            ${isCompleted(item.id) ? "completed" : ""}
+                        "
+
+                        onclick="
+                            ${
+                                isLessonUnlocked(item.id)
+                                ?
+                                `openLesson('${item.id}')`
+                                :
+                                ""
+                            }
+                        "
+
+                    >
+
+                        <span>
+                            ${
+                                isCompleted(item.id)
+                                ? "✓"
+                                : isLessonUnlocked(item.id)
+                                ? "○"
+                                : "🔒"
+                            }
+                        </span>
+
+                        <span>
+                            ${item.title}
+                        </span>
+
+                    </div>
+
+                    `
+
+                ).join("")}
+
+            </aside>
+
+        </div>
+
+    `;
+
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
+    });
+
+}
+
+
+/* =========================================================
+   COMPLETE LESSON
+========================================================= */
+
+function completeLesson(id){
+
+    if(!isCompleted(id)){
+
+        completedLessons.push(id);
+
+        saveProgress();
+
+    }
+
+    updateProgress();
+
+    /*
+     * IMPORTANT:
+     * The UI is updated immediately.
+     */
+
+    const next =
+        getNextLessonAfter(id);
+
+    if(next){
+
+        showCompletionToast(
+            "Lesson completed! Next lesson unlocked."
+        );
+
+        setTimeout(
+            () => openLesson(next.id),
+            700
+        );
+
+    }else{
+
+        showCourseCompletion();
+
+    }
+
+}
+
+
+/* =========================================================
+   NEXT LESSON
+========================================================= */
+
+function getNextLesson(){
+
+    const lessons =
+        allLessons();
+
+    return lessons.find(
+        lesson =>
+            !isCompleted(
+                lesson.id
+            )
+    ) || null;
+
+}
+
+
+function getNextLessonAfter(id){
+
+    const lessons =
+        allLessons();
+
+    const index =
+        lessons.findIndex(
+            lesson =>
+                lesson.id === id
+        );
+
+    if(index === -1)
+        return null;
+
+    return lessons[index + 1] || null;
+
+}
+
+
+function goNextLesson(){
+
+    const next =
+        getNextLessonAfter(
+            currentLessonId
+        );
+
+    if(next){
+
+        openLesson(
+            next.id
+        );
+
+    }else{
+
+        showCourseCompletion();
+
+    }
+
+}
+
+
+/* =========================================================
+   RESUME
+========================================================= */
+
+function resumeCourse(){
+
+    const next =
+        getNextLesson();
+
+    if(next){
+
+        openLesson(
+            next.id
+        );
+
+    }else{
+
+        showCourseCompletion();
+
+    }
+
+}
+
+
+/* =========================================================
+   COURSE COMPLETION
+========================================================= */
+
+function showCourseCompletion(){
+
+    setActiveNav(1);
+
+    document
+        .getElementById("pageContent")
+        .innerHTML = `
+
+        <div class="completion-screen">
+
+            <div>
+
+                <div class="completion-icon">
+                    ✓
+                </div>
+
+                <h1>
+                    Course Completed!
+                </h1>
+
+                <p>
+
+                    Congratulations,
+                    <strong>
+                        ${escapeHTML(
+                            currentUser.name
+                        )}
+                    </strong>.
+
+                    You have successfully completed
+                    all lessons in
+
+                    <strong>
+                        ${COURSE.title}
+                    </strong>.
+
+                    Your next step is the final assessment.
+
+                </p>
+
+
+                <button
+                    class="assessment-btn"
+                    onclick="showAssessment()"
+                >
+                    Start Final Assessment →
+                </button>
+
+            </div>
+
+        </div>
+
+    `;
+
+}
+
+
+/* =========================================================
+   ASSESSMENT
+========================================================= */
+
+function showAssessment(){
+
+    if(progressPercentage() < 100){
+
+        alert(
+            "Complete all course lessons before starting the assessment."
+        );
+
+        return;
+
+    }
+
+    setActiveNav(3);
+
+    document
+        .getElementById("pageContent")
+        .innerHTML = `
+
+        <div class="completion-screen">
+
+            <div>
+
+                <div class="completion-icon">
+                    📝
+                </div>
+
+                <h1>
+                    Final Assessment
+                </h1>
+
+                <p>
+
+                    You have completed the learning
+                    portion of the course.
+
+                    The final assessment contains
+                    50 questions and requires a minimum
+                    score of 70% to pass.
+
+                </p>
+
+
+                <button
+                    class="assessment-btn"
+                    onclick="startAssessment()"
+                >
+                    Begin Assessment →
+                </button>
+
+            </div>
+
+        </div>
+
+    `;
+
+}
+
+
+async function startAssessment(){
+
+    /*
+     * Redirect to your assessment page.
+     *
+     * CHANGE THIS URL to your actual quiz page.
+     */
+
+    window.location.href =
+        "assessment.html";
+
+}
+
+
+/* =========================================================
+   PROGRESS UI
+========================================================= */
+
+function updateProgress(){
+
+    const progress =
+        progressPercentage();
+
+    const top =
+        document
+        .getElementById("topProgress");
+
+    const text =
+        document
+        .getElementById("topProgressText");
+
+    if(top)
+        top.style.width =
+            progress + "%";
+
+    if(text)
+        text.textContent =
+            progress + "%";
+
+}
+
+
+/* =========================================================
+   NAVIGATION
+========================================================= */
+
+function setActiveNav(index){
+
+    document
+        .querySelectorAll(".nav-btn")
+        .forEach(
+            (button,i)=>{
+
+                button.classList.toggle(
+                    "active",
+                    i === index
+                );
+
+            }
+        );
+
+}
+
+
+function toggleSidebar(){
+
+    document
+        .getElementById("sidebar")
+        .classList.toggle("open");
+
+}
+
+
+/* =========================================================
+   LOGOUT
+========================================================= */
+
+function logout(){
+
+    localStorage.removeItem(
+        "openbox_user"
+    );
+
+    currentUser = null;
+
+    completedLessons = [];
+
+    document
+        .getElementById("app")
+        .classList.add("hidden");
+
+    showAuth();
+
+}
+
+
+/* =========================================================
+   ERRORS
+========================================================= */
+
+function clearErrors(){
+
+    document
+        .getElementById("loginError")
+        .innerHTML = "";
+
+    document
+        .getElementById("registerError")
+        .innerHTML = "";
+
+}
+
+
+function showError(id,message){
+
+    document
+        .getElementById(id)
+        .innerHTML = `
+
+        <div class="error-message">
+
+            ${escapeHTML(message)}
+
+        </div>
+
+    `;
+
+}
+
+
+/* =========================================================
+   TOAST
+========================================================= */
+
+function showCompletionToast(message){
+
+    const toast =
+        document.createElement("div");
+
+    toast.style.position =
+        "fixed";
+
+    toast.style.bottom =
+        "25px";
+
+    toast.style.right =
+        "25px";
+
+    toast.style.background =
+        "#111827";
+
+    toast.style.color =
+        "white";
+
+    toast.style.padding =
+        "14px 18px";
+
+    toast.style.borderRadius =
+        "10px";
+
+    toast.style.fontSize =
+        "13px";
+
+    toast.style.fontWeight =
+        "600";
+
+    toast.style.zIndex =
+        "9999";
+
+    toast.textContent =
+        "✓ " + message;
+
+    document.body.appendChild(
+        toast
+    );
+
+    setTimeout(
+        () => toast.remove(),
+        2500
+    );
+
+}
+
+
+/* =========================================================
+   ESCAPE HTML
+========================================================= */
+
+function escapeHTML(value){
+
+    return String(value || "")
+        .replace(/&/g,"&amp;")
+        .replace(/</g,"&lt;")
+        .replace(/>/g,"&gt;")
+        .replace(/"/g,"&quot;")
+        .replace(/'/g,"&#039;");
+
+}
+
+
+/* =========================================================
+   AUTO SAVE / REAL TIME REFRESH
+========================================================= */
+
+setInterval(
+    function(){
+
+        updateProgress();
+
+    },
+    1000
+);
+
+
+/* =========================================================
+   KEYBOARD SHORTCUT
+========================================================= */
+
+document.addEventListener(
+    "keydown",
+    function(event){
+
+        if(
+            event.key === "Escape" &&
+            window.innerWidth <= 760
+        ){
+
+            document
+                .getElementById("sidebar")
+                .classList.remove("open");
+
+        }
+
+    }
+);
+
+</script>
+
+</body>
+</html>
