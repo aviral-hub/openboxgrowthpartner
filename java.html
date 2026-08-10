@@ -3,1258 +3,1214 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Java Architecture | Openbox Growth Partner</title>
+
+<title>Openbox GP | Java Architecture</title>
 
 <style>
-@page {
-    size: A4 landscape;
-    margin: 0;
+:root{
+    --primary:#2864e8;
+    --dark:#10182b;
+    --text:#172033;
+    --muted:#6d7789;
+    --bg:#f5f7fb;
+    --card:#ffffff;
+    --line:#e2e7ef;
+    --success:#159570;
+    --success-bg:#eaf8f3;
+    --blue-bg:#edf3ff;
+    --orange:#e58b00;
 }
 
-* {
-    box-sizing: border-box;
+*{
+    box-sizing:border-box;
 }
 
-body {
-    margin: 0;
-    font-family: Arial, Helvetica, sans-serif;
-    background: #111827;
-    color: #172033;
+html{
+    scroll-behavior:smooth;
 }
 
-.slide {
-    width: 297mm;
-    height: 210mm;
-    position: relative;
-    overflow: hidden;
-    background: #f7f9fc;
-    page-break-after: always;
-    padding: 18mm 17mm;
+body{
+    margin:0;
+    font-family:Inter,Arial,sans-serif;
+    background:var(--bg);
+    color:var(--text);
 }
 
-.slide:last-child {
-    page-break-after: auto;
+button{
+    font-family:inherit;
+    cursor:pointer;
 }
 
-/* ---------- BRAND ---------- */
+/* =========================
+   TOP BAR
+========================= */
 
-.logo {
-    position: absolute;
-    top: 10mm;
-    right: 14mm;
-    width: 42mm;
-    height: auto;
+.topbar{
+    height:68px;
+    background:white;
+    border-bottom:1px solid var(--line);
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    padding:0 7%;
+
+    position:sticky;
+    top:0;
+    z-index:20;
 }
 
-.brand {
-    color: #2864e8;
-    font-weight: 700;
-    letter-spacing: 3px;
-    font-size: 12px;
+.brand{
+    display:flex;
+    align-items:center;
+    gap:12px;
 }
 
-.brand-bottom {
-    position: absolute;
-    bottom: 7mm;
-    left: 17mm;
-    font-size: 9px;
-    color: #718096;
-    letter-spacing: .5px;
+.brand img{
+    width:125px;
+    max-height:45px;
+    object-fit:contain;
 }
 
-/* ---------- TYPOGRAPHY ---------- */
+.course-label{
+    border-left:1px solid var(--line);
+    padding-left:15px;
+    color:var(--muted);
+    font-size:12px;
+}
 
-h1 {
-    font-size: 40px;
-    line-height: 1.05;
-    margin: 0;
-    color: #10182b;
+.module-status{
+    background:var(--blue-bg);
+    color:var(--primary);
+    padding:8px 13px;
+    border-radius:20px;
+    font-size:11px;
+    font-weight:800;
 }
 
-h2 {
-    font-size: 29px;
-    margin: 0 0 6px;
-    color: #10182b;
+/* =========================
+   HERO
+========================= */
+
+.hero{
+    max-width:1120px;
+    margin:0 auto;
+    padding:70px 30px 55px;
 }
+
+.eyebrow{
+    display:inline-block;
 
-h3 {
-    font-size: 18px;
-    margin: 0 0 8px;
-    color: #10182b;
+    background:var(--blue-bg);
+    color:var(--primary);
+
+    padding:7px 11px;
+
+    border-radius:20px;
+
+    font-size:11px;
+    font-weight:800;
+    letter-spacing:.7px;
 }
 
-.subtitle {
-    color: #657089;
-    font-size: 14px;
-    margin-top: 7px;
+.hero h1{
+    font-size:52px;
+    line-height:1.05;
+    max-width:750px;
+    margin:18px 0 15px;
+
+    color:var(--dark);
 }
+
+.hero p{
+    max-width:720px;
 
-.small {
-    font-size: 11px;
-    color: #657089;
+    font-size:16px;
+    line-height:1.7;
+
+    color:var(--muted);
 }
 
-p {
-    font-size: 13px;
-    line-height: 1.55;
+.meta{
+    display:flex;
+    gap:10px;
+    margin-top:22px;
+    flex-wrap:wrap;
 }
+
+.meta span{
+    background:white;
+    border:1px solid var(--line);
 
-/* ---------- HEADER ---------- */
+    padding:8px 12px;
+    border-radius:9px;
 
-.header {
-    margin-bottom: 14mm;
+    font-size:11px;
+    font-weight:700;
 }
 
-.header-line {
-    width: 28mm;
-    height: 2mm;
-    background: #2864e8;
-    border-radius: 5px;
-    margin-bottom: 8px;
+/* =========================
+   MAIN
+========================= */
+
+.container{
+    max-width:1120px;
+    margin:auto;
+    padding:0 30px 80px;
 }
 
-/* ---------- CARDS ---------- */
+.section{
+    margin:30px 0;
+}
 
-.cards {
-    display: flex;
-    gap: 8mm;
+.section-title{
+    margin-bottom:16px;
 }
 
-.card {
-    background: white;
-    border: 1px solid #dde3ee;
-    border-radius: 14px;
-    padding: 9mm;
-    flex: 1;
-    box-shadow: 0 5px 20px rgba(20, 35, 70, .04);
+.section-title h2{
+    margin:0;
+    font-size:27px;
+    color:var(--dark);
 }
 
-.card.blue {
-    background: #eaf1ff;
-    border-color: #c9d8ff;
+.section-title p{
+    margin:6px 0;
+    color:var(--muted);
+    font-size:13px;
 }
+
+/* =========================
+   CONCEPT CARDS
+========================= */
 
-.card.green {
-    background: #ecf9f5;
-    border-color: #c9e9dd;
+.grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:15px;
 }
 
-.card.orange {
-    background: #fff8e8;
-    border-color: #f4d99b;
+.card{
+    background:white;
+    border:1px solid var(--line);
+    border-radius:16px;
+
+    padding:22px;
+
+    box-shadow:0 5px 20px rgba(16,24,43,.035);
 }
+
+.number{
+    width:32px;
+    height:32px;
 
-/* ---------- BULLETS ---------- */
+    display:grid;
+    place-items:center;
 
-ul {
-    padding-left: 20px;
-    margin-top: 10px;
+    border-radius:9px;
+
+    background:var(--blue-bg);
+    color:var(--primary);
+
+    font-size:11px;
+    font-weight:900;
 }
 
-li {
-    margin: 9px 0;
-    font-size: 13px;
-    line-height: 1.45;
+.card h3{
+    margin:14px 0 7px;
+    font-size:16px;
 }
 
-li::marker {
-    color: #2864e8;
+.card p{
+    margin:0;
+    color:var(--muted);
+    font-size:12px;
+    line-height:1.6;
 }
+
+/* =========================
+   ARCHITECTURE FLOW
+========================= */
 
-/* ---------- BADGES ---------- */
+.architecture{
+    background:var(--dark);
+    color:white;
 
-.badges {
-    display: flex;
-    gap: 10px;
-    margin-top: 15px;
+    border-radius:20px;
+
+    padding:30px;
+
+    overflow:hidden;
 }
 
-.badge {
-    display: inline-block;
-    padding: 7px 13px;
-    border-radius: 20px;
-    background: #eaf1ff;
-    color: #2864e8;
-    font-size: 10px;
-    font-weight: bold;
-    letter-spacing: .8px;
+.architecture h2{
+    margin-top:0;
 }
+
+.flow{
+    display:flex;
+    align-items:center;
+    gap:8px;
+
+    overflow-x:auto;
 
-.badge.green {
-    background: #ecf9f5;
-    color: #20a67a;
+    padding:20px 0;
 }
 
-/* ---------- FLOW ---------- */
+.node{
+    min-width:125px;
 
-.flow {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 5px;
-    margin-top: 28mm;
+    padding:16px 12px;
+
+    text-align:center;
+
+    border-radius:12px;
+
+    background:#1d2943;
+
+    border:1px solid #33415f;
+}
+
+.node strong{
+    display:block;
+    font-size:12px;
 }
 
-.flow-box {
-    width: 34mm;
-    min-height: 23mm;
-    padding: 7px;
-    background: white;
-    border: 1px solid #dde3ee;
-    border-radius: 12px;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+.node small{
+    color:#9ba8bf;
+    font-size:9px;
 }
 
-.flow-box strong {
-    color: #10182b;
-    font-size: 12px;
+.arrow{
+    color:#6d9aff;
+    font-weight:900;
+    font-size:20px;
 }
 
-.flow-box span {
-    color: #657089;
-    font-size: 9px;
-    margin-top: 5px;
+.architecture-note{
+    color:#aeb9cc;
+    font-size:12px;
+    line-height:1.6;
 }
 
-.arrow {
-    color: #2864e8;
-    font-size: 22px;
-    font-weight: bold;
+/* =========================
+   FIVE PHASES
+========================= */
+
+.phases{
+    display:grid;
+    grid-template-columns:repeat(5,1fr);
+    gap:10px;
 }
 
-/* ---------- PHASES ---------- */
+.phase{
+    background:white;
+    border:1px solid var(--line);
+    border-radius:14px;
 
-.phase-grid {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 5mm;
-    margin-top: 12mm;
+    padding:18px;
+
+    text-align:center;
 }
 
-.phase {
-    background: white;
-    border: 1px solid #dde3ee;
-    border-radius: 13px;
-    min-height: 70mm;
-    padding: 7mm;
+.phase b{
+    display:block;
+    color:var(--primary);
+    font-size:11px;
 }
 
-.number {
-    font-size: 27px;
-    font-weight: bold;
-    color: #2864e8;
+.phase strong{
+    display:block;
+    margin-top:8px;
+    font-size:14px;
 }
 
-.phase-title {
-    font-size: 15px;
-    font-weight: bold;
-    margin-top: 8px;
+.phase span{
+    display:block;
+    margin-top:5px;
+    color:var(--muted);
+    font-size:10px;
 }
+
+/* =========================
+   JVM
+========================= */
 
-.phase-text {
-    color: #657089;
-    font-size: 10px;
-    line-height: 1.5;
-    margin-top: 9px;
+.jvm{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:16px;
 }
 
-/* ---------- TIMELINE ---------- */
+.highlight{
+    background:var(--blue-bg);
+    border:1px solid #d6e2ff;
+}
 
-.timeline {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-top: 25mm;
+.highlight strong{
+    color:var(--primary);
 }
+
+/* =========================
+   QUIZ CTA
+========================= */
+
+.quiz-cta{
+    margin-top:55px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #10182b,
+            #1c315d
+        );
 
-.timeline-item {
-    width: 42mm;
-    text-align: center;
+    border-radius:24px;
+
+    padding:45px;
+
+    color:white;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    gap:30px;
+
+    box-shadow:0 15px 40px rgba(16,24,43,.12);
 }
 
-.circle {
-    width: 20mm;
-    height: 20mm;
-    margin: auto;
-    border-radius: 50%;
-    background: #2864e8;
-    color: white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-weight: bold;
-    font-size: 12px;
+.quiz-cta h2{
+    font-size:30px;
+    margin:0 0 8px;
 }
 
-.timeline-item strong {
-    display: block;
-    margin-top: 8px;
-    font-size: 12px;
+.quiz-cta p{
+    margin:0;
+    color:#b9c5d9;
+    font-size:13px;
+    line-height:1.6;
 }
+
+.quiz-btn{
+    border:0;
 
-.timeline-item span {
-    display: block;
-    margin-top: 4px;
-    color: #657089;
-    font-size: 9px;
+    background:white;
+    color:var(--dark);
+
+    padding:14px 22px;
+
+    border-radius:11px;
+
+    font-size:13px;
+    font-weight:900;
+
+    white-space:nowrap;
 }
 
-.timeline-arrow {
-    color: #2864e8;
-    font-size: 24px;
+.quiz-btn:hover{
+    transform:translateY(-2px);
 }
+
+/* =========================
+   QUIZ MODAL
+========================= */
+
+.modal{
+    position:fixed;
+    inset:0;
+
+    background:rgba(8,13,25,.72);
 
-/* ---------- TASK ---------- */
+    display:none;
+    align-items:center;
+    justify-content:center;
 
-.task-box {
-    background: white;
-    border-radius: 16px;
-    border: 1px solid #dde3ee;
-    padding: 10mm;
-    margin-top: 8mm;
+    padding:20px;
+
+    z-index:100;
+}
+
+.modal.active{
+    display:flex;
 }
+
+.quiz-box{
+    width:min(700px,100%);
+
+    max-height:90vh;
+    overflow:auto;
+
+    background:white;
 
-.task-label {
-    display: inline-block;
-    background: #2864e8;
-    color: white;
-    padding: 6px 12px;
-    border-radius: 15px;
-    font-size: 10px;
-    font-weight: bold;
-    letter-spacing: 1px;
+    border-radius:20px;
+
+    padding:30px;
+
+    box-shadow:0 25px 70px rgba(0,0,0,.25);
 }
 
-.task-grid {
-    display: grid;
-    grid-template-columns: 1.5fr 1fr;
-    gap: 10mm;
-    margin-top: 8mm;
+.quiz-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
 }
 
-.checklist {
-    list-style: none;
-    padding: 0;
+.quiz-header h2{
+    margin:0;
+    color:var(--dark);
 }
+
+.close{
+    border:0;
+    background:#f1f3f7;
 
-.checklist li::before {
-    content: "✓";
-    color: #20a67a;
-    font-weight: bold;
-    margin-right: 8px;
+    width:34px;
+    height:34px;
+
+    border-radius:50%;
+
+    font-size:17px;
 }
+
+.quiz-progress{
+    margin:18px 0;
+
+    height:6px;
 
-/* ---------- CODE ---------- */
+    background:#e8ecf3;
 
-pre {
-    background: #10182b;
-    color: #eaf1ff;
-    padding: 10mm;
-    border-radius: 13px;
-    font-size: 13px;
-    line-height: 1.6;
+    border-radius:20px;
+
+    overflow:hidden;
 }
+
+.quiz-progress span{
+    display:block;
+
+    height:100%;
 
-/* ---------- QUIZ ---------- */
+    background:var(--primary);
 
-.question {
-    background: white;
-    border: 1px solid #dde3ee;
-    border-radius: 12px;
-    padding: 6mm;
-    margin-bottom: 5mm;
+    width:0%;
+
+    transition:.3s;
 }
 
-.question-number {
-    color: #2864e8;
-    font-weight: bold;
-    margin-right: 10px;
+.question{
+    font-size:19px;
+    line-height:1.5;
+    font-weight:800;
+
+    margin:25px 0 18px;
 }
 
-.answer {
-    color: #657089;
-    font-size: 10px;
-    margin-top: 5px;
+.options{
+    display:grid;
+    gap:10px;
 }
+
+.option{
+    text-align:left;
 
-/* ---------- FOOTER ---------- */
+    padding:14px 16px;
 
-.page-number {
-    position: absolute;
-    right: 17mm;
-    bottom: 7mm;
-    font-size: 9px;
-    color: #718096;
+    border-radius:11px;
+
+    background:white;
+
+    border:1px solid var(--line);
+
+    font-size:13px;
+    font-weight:650;
+
+    transition:.15s;
 }
 
-/* ---------- COVER ---------- */
+.option:hover{
+    border-color:#9eb7f4;
+    background:#f7f9ff;
+}
 
-.cover {
-    background: #f7f9fc;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+.option.correct{
+    border-color:#63bd9f;
+    background:var(--success-bg);
+    color:#0d775a;
 }
 
-.cover .logo {
-    top: 13mm;
-    right: 15mm;
-    width: 48mm;
+.option.wrong{
+    border-color:#e5a0a0;
+    background:#fff1f1;
+    color:#a42c2c;
 }
+
+.explanation{
+    margin-top:15px;
+
+    padding:13px;
 
-.cover-line {
-    width: 30mm;
-    height: 3px;
-    background: #2864e8;
-    margin-bottom: 10mm;
+    border-radius:10px;
+
+    background:#f6f8fb;
+
+    font-size:12px;
+    line-height:1.6;
+
+    color:#566175;
 }
 
-.cover h1 {
-    font-size: 52px;
-    max-width: 190mm;
+.quiz-footer{
+    margin-top:22px;
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
 }
+
+.quiz-next{
+    border:0;
+
+    background:var(--primary);
+    color:white;
 
-.cover-subtitle {
-    font-size: 20px;
-    color: #657089;
-    margin-top: 8px;
+    padding:11px 17px;
+
+    border-radius:9px;
+
+    font-weight:800;
+
+    font-size:12px;
 }
 
-.cover-description {
-    margin-top: 18mm;
-    font-size: 13px;
-    color: #344054;
+.quiz-next:disabled{
+    opacity:.4;
+    cursor:not-allowed;
 }
 
-.cover-footer {
-    position: absolute;
-    bottom: 12mm;
-    left: 17mm;
-    color: #657089;
-    font-size: 10px;
+/* =========================
+   RESULT
+========================= */
+
+.result{
+    text-align:center;
+    padding:25px 10px;
 }
+
+.score-circle{
+    width:110px;
+    height:110px;
+
+    margin:10px auto 20px;
+
+    border-radius:50%;
 
-/* ---------- DARK END ---------- */
+    display:grid;
+    place-items:center;
 
-.dark {
-    background: #10182b;
-    color: white;
+    background:var(--blue-bg);
+
+    color:var(--primary);
+
+    font-size:25px;
+    font-weight:900;
+}
+
+.result h2{
+    margin:0;
 }
 
-.dark h1,
-.dark h2,
-.dark h3 {
-    color: white;
+.result p{
+    color:var(--muted);
+    font-size:13px;
+    line-height:1.6;
 }
+
+.result button{
+    margin-top:15px;
+
+    border:0;
+
+    background:var(--primary);
+    color:white;
 
-.dark .subtitle {
-    color: #b9c3d8;
+    padding:12px 20px;
+
+    border-radius:9px;
+
+    font-weight:800;
 }
+
+/* =========================
+   FOOTER
+========================= */
 
-.center {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    height: 100%;
+footer{
+    text-align:center;
+
+    color:#8993a5;
+
+    font-size:10px;
+
+    padding:20px;
 }
+
+/* =========================
+   MOBILE
+========================= */
 
-/* ---------- PRINT ---------- */
+@media(max-width:800px){
 
-@media print {
-    body {
-        background: white;
+    .topbar{
+        padding:0 18px;
     }
 
-    .slide {
-        width: 297mm;
-        height: 210mm;
-        page-break-after: always;
+    .course-label{
+        display:none;
     }
+
+    .hero{
+        padding:45px 20px;
+    }
+
+    .hero h1{
+        font-size:38px;
+    }
+
+    .container{
+        padding:0 20px 60px;
+    }
+
+    .grid{
+        grid-template-columns:1fr;
+    }
+
+    .phases{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .jvm{
+        grid-template-columns:1fr;
+    }
+
+    .quiz-cta{
+        flex-direction:column;
+        align-items:flex-start;
+        padding:30px;
+    }
+
 }
 </style>
 </head>
 
 <body>
 
-<!-- =====================================================
-     SLIDE 1 — COVER
-===================================================== -->
+<!-- =========================
+     TOP BAR
+========================= -->
 
-<section class="slide cover">
+<header class="topbar">
 
-    <!-- Replace logo filename if necessary -->
-    <img class="logo" src="ae26e29b-49ad-412d-affb-dadc03b21a40.png">
+    <div class="brand">
 
-    <div class="cover-line"></div>
+        <img
+        src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEifNPZFTKmd-JE8699chAt2JJZPxCdJOrhYfzr28gNe_rMcrCJBUxD-X1S7hGTYNna1BtsfR0Gvx6iLlPbXrDtmdjftXrogJM8Bfk9ApKvRSiRENmYqFo_jEA8qmT3Qlk7lHxp4RxRwGKdj-pxe3smCQtDF41Krlz4gFkafALnhTBUjdUyFSP5_2gXIPARs/s320/grow_together__1_-removebg-preview.png"
+        alt="Openbox GP">
 
-    <h1>Java Architecture</h1>
+        <span class="course-label">
+            BTech First Year • Java
+        </span>
 
-    <div class="cover-subtitle">
-        How Java Code Moves From Source to Execution
     </div>
 
-    <div class="badges">
-        <span class="badge">FIRST-YEAR BTECH</span>
-        <span class="badge green">TASK-BASED LEARNING</span>
-    </div>
+    <span class="module-status">
+        MODULE 01
+    </span>
 
-    <div class="cover-description">
-        Concepts • JVM • Bytecode • Class Loader • Verification • Execution
-    </div>
+</header>
 
-    <div class="cover-footer">
-        Openbox Growth Partner • First-Year BTech Learning Module
+
+<!-- =========================
+     HERO
+========================= -->
+
+<section class="hero">
+
+    <span class="eyebrow">
+        JAVA PROGRAMMING
+    </span>
+
+    <h1>
+        Java Architecture
+    </h1>
+
+    <p>
+        Understand how a Java program moves from source code
+        to bytecode and finally gets executed by the Java
+        Virtual Machine.
+    </p>
+
+    <div class="meta">
+
+        <span>⏱ 20–25 Minutes</span>
+
+        <span>📖 Beginner</span>
+
+        <span>🧠 Quiz Included</span>
+
+        <span>🎯 Concept Module</span>
+
     </div>
 
 </section>
 
 
-<!-- =====================================================
-     SLIDE 2 — OBJECTIVES
-===================================================== -->
+<main class="container">
 
-<section class="slide">
 
-    <img class="logo" src="ae26e29b-49ad-412d-affb-dadc03b21a40.png">
+<!-- =========================
+     LEARNING OBJECTIVES
+========================= -->
 
-    <div class="header">
+<section class="section">
 
-        <div class="header-line"></div>
+    <div class="section-title">
 
-        <h2>Learning Objectives</h2>
+        <h2>What you'll learn</h2>
 
-        <div class="subtitle">
-            What you should be able to explain after this module
+        <p>
+            By the end of this module, you should be able to
+            explain the basic architecture and execution flow
+            of a Java program.
+        </p>
+
+    </div>
+
+
+    <div class="grid">
+
+        <div class="card">
+
+            <div class="number">01</div>
+
+            <h3>Evolution of Java</h3>
+
+            <p>
+                Learn about Java's origins, its initial name
+                Oak, and the original goal of platform-neutral
+                software.
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="number">02</div>
+
+            <h3>Java Architecture</h3>
+
+            <p>
+                Understand how Java source code becomes
+                bytecode and moves through the runtime
+                environment.
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="number">03</div>
+
+            <h3>JVM Concepts</h3>
+
+            <p>
+                Understand the role of the JVM, interpreter,
+                JIT compiler and adaptive optimization.
+            </p>
+
         </div>
 
     </div>
+
+</section>
+
+
+<!-- =========================
+     EVOLUTION
+========================= -->
+
+<section class="section">
+
+    <div class="section-title">
+
+        <h2>Evolution of Java</h2>
+
+        <p>
+            Java originated in the early 1990s and was
+            initially called Oak.
+        </p>
+
+    </div>
+
 
     <div class="card">
 
-        <ul>
-            <li>
-                Describe why Java was designed around portability
-                and platform independence.
-            </li>
+        <h3>Key Founders</h3>
 
-            <li>
-                Explain the relationship between Java source code,
-                bytecode and the JVM.
-            </li>
+        <p>
+            The material identifies James Gosling, Patrick
+            Naughton, Chris Warth, Ed Frank and Frank Sheridan
+            as key founders.
+        </p>
 
-            <li>
-                Explain the five phases:
-                Edit, Compile, Load, Verify and Execute.
-            </li>
+        <br>
 
-            <li>
-                Explain the roles of the Class Loader
-                and Bytecode Verifier.
-            </li>
+        <h3>Original Design Goal</h3>
 
-            <li>
-                Understand interpretation, JIT/native compilation
-                and adaptive optimization.
-            </li>
-        </ul>
+        <p>
+            Java was originally intended as a platform-neutral
+            language for embedded software in devices.
+            The goal was to move away from platform and
+            OS-specific compilers toward portable,
+            platform-independent code.
+        </p>
 
     </div>
-
-    <div class="brand-bottom">
-        OPENBOX GROWTH PARTNER
-    </div>
-
-    <div class="page-number">02</div>
 
 </section>
 
 
-<!-- =====================================================
-     SLIDE 3 — EVOLUTION
-===================================================== -->
+<!-- =========================
+     ARCHITECTURE
+========================= -->
 
-<section class="slide">
+<section class="section">
 
-    <img class="logo" src="ae26e29b-49ad-412d-affb-dadc03b21a40.png">
+    <div class="section-title">
 
-    <div class="header">
+        <h2>Java Architecture</h2>
 
-        <div class="header-line"></div>
+        <p>
+            Follow the complete journey of a Java program.
+        </p>
 
-        <h2>1. Evolution of Java</h2>
+    </div>
 
-        <div class="subtitle">
-            The original design goal shaped the architecture we use today.
+
+    <div class="architecture">
+
+        <h2>
+            From Source Code to Execution
+        </h2>
+
+
+        <div class="flow">
+
+            <div class="node">
+                <strong>Java Source</strong>
+                <small>.java</small>
+            </div>
+
+            <div class="arrow">→</div>
+
+            <div class="node">
+                <strong>Java Compiler</strong>
+                <small>javac</small>
+            </div>
+
+            <div class="arrow">→</div>
+
+            <div class="node">
+                <strong>Java Bytecode</strong>
+                <small>.class</small>
+            </div>
+
+            <div class="arrow">→</div>
+
+            <div class="node">
+                <strong>Class Loader</strong>
+                <small>Loads classes</small>
+            </div>
+
+            <div class="arrow">→</div>
+
+            <div class="node">
+                <strong>Bytecode Verifier</strong>
+                <small>Validates</small>
+            </div>
+
+            <div class="arrow">→</div>
+
+            <div class="node">
+                <strong>JVM</strong>
+                <small>Execution</small>
+            </div>
+
+        </div>
+
+
+        <p class="architecture-note">
+
+            The source material describes five stages:
+            Edit → Compile → Loading → Verify → Execute.
+
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     FIVE PHASES
+========================= -->
+
+<section class="section">
+
+    <div class="section-title">
+
+        <h2>The 5 Phases of a Java Program</h2>
+
+        <p>
+            Remember this sequence before taking the quiz.
+        </p>
+
+    </div>
+
+
+    <div class="phases">
+
+        <div class="phase">
+            <b>01</b>
+            <strong>Edit</strong>
+            <span>Create the .java source file</span>
+        </div>
+
+        <div class="phase">
+            <b>02</b>
+            <strong>Compile</strong>
+            <span>javac creates .class bytecode</span>
+        </div>
+
+        <div class="phase">
+            <b>03</b>
+            <strong>Loading</strong>
+            <span>Class Loader loads bytecodes</span>
+        </div>
+
+        <div class="phase">
+            <b>04</b>
+            <strong>Verify</strong>
+            <span>Verifier checks bytecodes</span>
+        </div>
+
+        <div class="phase">
+            <b>05</b>
+            <strong>Execute</strong>
+            <span>JVM executes the program</span>
         </div>
 
     </div>
 
-    <div class="cards">
+</section>
 
-        <div class="card blue">
 
-            <h3>1992</h3>
+<!-- =========================
+     JVM
+========================= -->
 
-            <h2>Oak</h2>
+<section class="section">
+
+    <div class="section-title">
+
+        <h2>Inside the JVM</h2>
+
+        <p>
+            Key concepts from the module.
+        </p>
+
+    </div>
+
+
+    <div class="jvm">
+
+        <div class="card highlight">
+
+            <h3>Java Virtual Machine</h3>
 
             <p>
-                The origin of Java can be traced to the fall of 1992.
-                The language was initially called Oak.
+                The output of the compiler is bytecode.
+                The bytecodes are executed by the JVM.
+                The provided material describes the JVM
+                as platform-specific.
             </p>
 
         </div>
 
-        <div class="card green">
 
-            <h3>1995</h3>
+        <div class="card">
 
-            <h2>Java</h2>
+            <h3>Execution Engine</h3>
 
             <p>
-                Oak was renamed as Java in 1995.
+                The material describes interpretation,
+                just-in-time compilation and adaptive
+                optimization as mechanisms involved in
+                execution.
             </p>
 
         </div>
 
-        <div class="card">
-
-            <h3>Design Goal</h3>
-
-            <ul>
-                <li>Platform-neutral language</li>
-                <li>Portable and platform-independent</li>
-                <li>Move away from OS-specific compilers</li>
-                <li>Produce platform-neutral code</li>
-            </ul>
-
-        </div>
-
-    </div>
-
-    <div class="brand-bottom">
-        OPENBOX GROWTH PARTNER
-    </div>
-
-    <div class="page-number">03</div>
-
-</section>
-
-
-<!-- =====================================================
-     SLIDE 4 — ARCHITECTURE
-===================================================== -->
-
-<section class="slide">
-
-    <img class="logo" src="ae26e29b-49ad-412d-affb-dadc03b21a40.png">
-
-    <div class="header">
-
-        <div class="header-line"></div>
-
-        <h2>2. Java Architecture at a Glance</h2>
-
-        <div class="subtitle">
-            From Java source code to execution
-        </div>
-
-    </div>
-
-    <div class="flow">
-
-        <div class="flow-box">
-            <strong>Java Source</strong>
-            <span>.java</span>
-        </div>
-
-        <div class="arrow">→</div>
-
-        <div class="flow-box">
-            <strong>Java Compiler</strong>
-            <span>javac</span>
-        </div>
-
-        <div class="arrow">→</div>
-
-        <div class="flow-box">
-            <strong>Bytecode</strong>
-            <span>.class</span>
-        </div>
-
-        <div class="arrow">→</div>
-
-        <div class="flow-box">
-            <strong>Class Loader</strong>
-            <span>Load</span>
-        </div>
-
-        <div class="arrow">→</div>
-
-        <div class="flow-box">
-            <strong>Verifier</strong>
-            <span>Check</span>
-        </div>
-
-        <div class="arrow">→</div>
-
-        <div class="flow-box">
-            <strong>JVM</strong>
-            <span>Execute</span>
-        </div>
-
-    </div>
-
-    <div class="card blue" style="margin-top:18mm;text-align:center;">
-
-        <strong>
-            Core idea:
-        </strong>
-
-        Write Java source → compile to bytecode →
-        execute through a platform-specific JVM.
-
-    </div>
-
-    <div class="page-number">04</div>
-
-</section>
-
-
-<!-- =====================================================
-     SLIDE 5 — COMPILE VS RUNTIME
-===================================================== -->
-
-<section class="slide">
-
-    <img class="logo" src="ae26e29b-49ad-412d-affb-dadc03b21a40.png">
-
-    <div class="header">
-
-        <div class="header-line"></div>
-
-        <h2>3. Compile-Time vs Runtime</h2>
-
-        <div class="subtitle">
-            Understanding these two environments makes Java Architecture easier.
-        </div>
-
-    </div>
-
-    <div class="cards">
-
-        <div class="card blue">
-
-            <h3>Compile-Time Environment</h3>
-
-            <ul>
-                <li>Create Java source code using the <b>.java</b> extension.</li>
-                <li>Use the Java compiler.</li>
-                <li>Compiler creates bytecode.</li>
-                <li>Output is a <b>.class</b> file.</li>
-            </ul>
-
-        </div>
-
-        <div class="card green">
-
-            <h3>Runtime Environment</h3>
-
-            <ul>
-                <li>Class Loader reads classes into memory.</li>
-                <li>Bytecode Verifier validates bytecode.</li>
-                <li>JVM reads the bytecodes.</li>
-                <li>Execution interacts with the OS and hardware.</li>
-            </ul>
-
-        </div>
-
-    </div>
-
-    <div class="page-number">05</div>
-
-</section>
-
-
-<!-- =====================================================
-     SLIDE 6 — FIVE PHASES
-===================================================== -->
-
-<section class="slide">
-
-    <img class="logo" src="ae26e29b-49ad-412d-affb-dadc03b21a40.png">
-
-    <div class="header">
-
-        <div class="header-line"></div>
-
-        <h2>4. The Five Phases of a Java Program</h2>
-
-        <div class="subtitle">
-            A simple sequence to understand and remember
-        </div>
-
-    </div>
-
-    <div class="phase-grid">
-
-        <div class="phase">
-            <div class="number">01</div>
-            <div class="phase-title">EDIT</div>
-            <div class="phase-text">
-                Use an editor to type the Java program.
-                Example: Welcome.java
-            </div>
-        </div>
-
-        <div class="phase">
-            <div class="number">02</div>
-            <div class="phase-title">COMPILE</div>
-            <div class="phase-text">
-                javac translates the Java program into
-                bytecode and creates a .class file.
-            </div>
-        </div>
-
-        <div class="phase">
-            <div class="number">03</div>
-            <div class="phase-title">LOAD</div>
-            <div class="phase-text">
-                Class Loader reads the bytecodes from
-                the .class file into memory.
-            </div>
-        </div>
-
-        <div class="phase">
-            <div class="number">04</div>
-            <div class="phase-title">VERIFY</div>
-            <div class="phase-text">
-                Bytecode Verifier checks that bytecodes
-                are valid and satisfy security restrictions.
-            </div>
-        </div>
-
-        <div class="phase">
-            <div class="number">05</div>
-            <div class="phase-title">EXECUTE</div>
-            <div class="phase-text">
-                JVM uses interpretation and
-                just-in-time compilation to execute.
-            </div>
-        </div>
-
-    </div>
-
-    <div class="page-number">06</div>
-
-</section>
-
-
-<!-- =====================================================
-     SLIDE 7 — JVM
-===================================================== -->
-
-<section class="slide">
-
-    <img class="logo" src="ae26e29b-49ad-412d-affb-dadc03b21a40.png">
-
-    <div class="header">
-
-        <div class="header-line"></div>
-
-        <h2>5. What Is the JVM?</h2>
-
-        <div class="subtitle">
-            The runtime engine responsible for executing Java bytecode
-        </div>
-
-    </div>
-
-    <div class="cards">
 
         <div class="card">
 
-            <h2 style="color:#2864e8;">JVM</h2>
+            <h3>Adaptive Optimizer</h3>
 
-            <ul>
-                <li>The compiler produces bytecode.</li>
-                <li>Bytecodes are executed by the JVM.</li>
-                <li>
-                    JVM converts bytecode into
-                    machine-specific instructions.
-                </li>
-                <li>
-                    The JVM is platform-specific.
-                </li>
-            </ul>
-
-        </div>
-
-        <div class="card blue">
-
-            <h3>Why does this help portability?</h3>
-
-            <ul>
-                <li>
-                    The same Java bytecode can execute
-                    in a wide variety of environments.
-                </li>
-
-                <li>
-                    Only the JVM needs to be implemented
-                    for each platform.
-                </li>
-
-                <li>
-                    Different JVMs interpret the same
-                    Java bytecode.
-                </li>
-            </ul>
-
-        </div>
-
-    </div>
-
-    <div class="page-number">07</div>
-
-</section>
-
-
-<!-- =====================================================
-     SLIDE 8 — CLASS LOADER
-===================================================== -->
-
-<section class="slide">
-
-    <img class="logo" src="ae26e29b-49ad-412d-affb-dadc03b21a40.png">
-
-    <div class="header">
-
-        <div class="header-line"></div>
-
-        <h2>6. Class Loader & Bytecode Verifier</h2>
-
-        <div class="subtitle">
-            Important runtime components before execution
-        </div>
-
-    </div>
-
-    <div class="cards">
-
-        <div class="card">
-
-            <h2 style="color:#2864e8;">Class Loader</h2>
-
-            <ul>
-                <li>
-                    Loads compiled Java source files
-                    represented as bytecode.
-                </li>
-
-                <li>
-                    Loads user-defined and library classes
-                    into the JVM.
-                </li>
-
-                <li>
-                    Important from a security standpoint.
-                </li>
-
-                <li>
-                    Important for network mobility.
-                </li>
-            </ul>
-
-        </div>
-
-        <div class="card orange">
-
-            <h2 style="color:#d88900;">Bytecode Verifier</h2>
-
-            <ul>
-                <li>
-                    Validates that bytecodes are valid.
-                </li>
-
-                <li>
-                    Checks that security restrictions
-                    are not violated.
-                </li>
-
-                <li>
-                    Comes after loading and before
-                    execution in the simplified flow.
-                </li>
-            </ul>
-
-        </div>
-
-    </div>
-
-    <div class="page-number">08</div>
-
-</section>
-
-
-<!-- =====================================================
-     SLIDE 9 — BYTECODE
-===================================================== -->
-
-<section class="slide">
-
-    <img class="logo" src="ae26e29b-49ad-412d-affb-dadc03b21a40.png">
-
-    <div class="header">
-
-        <div class="header-line"></div>
-
-        <h2>7. Bytecode & Platform Independence</h2>
-
-        <div class="subtitle">
-            The .class file forms the bridge between source code and the JVM.
-        </div>
-
-    </div>
-
-    <div class="flow">
-
-        <div class="flow-box" style="width:45mm;height:32mm;">
-            <strong>.java</strong>
-            <span>Java Source Code</span>
-        </div>
-
-        <div class="arrow">→</div>
-
-        <div class="flow-box" style="width:45mm;height:32mm;background:#eaf1ff;">
-            <strong>.class</strong>
-            <span>Java Bytecode</span>
-        </div>
-
-        <div class="arrow">→</div>
-
-        <div class="flow-box" style="width:45mm;height:32mm;background:#ecf9f5;">
-            <strong>JVM</strong>
-            <span>Platform-specific</span>
-        </div>
-
-    </div>
-
-    <div class="cards" style="margin-top:20mm;">
-
-        <div class="card blue">
-            <h3>Java Class File</h3>
             <p>
-                Designed for platform independence
-                and network mobility.
+                The virtual machine can identify heavily
+                used areas of code and compile those areas
+                into native code while other code continues
+                to be interpreted.
             </p>
+
         </div>
+
 
         <div class="card">
-            <h3>Important</h3>
-            <p>
-                The class file is compiled to a target JVM,
-                but is independent of the underlying host platform.
-            </p>
-        </div>
 
-        <div class="card green">
-            <h3>Key Takeaway</h3>
+            <h3>Class Loader</h3>
+
             <p>
-                Bytecode allows Java programs to run
-                across different platforms through their JVMs.
+                The Class Loader loads compiled Java
+                bytecode into the JVM. The source material
+                also highlights its security and network
+                mobility importance.
             </p>
+
         </div>
 
     </div>
-
-    <div class="page-number">09</div>
 
 </section>
 
 
-<!-- =====================================================
-     SLIDE 10 — JIT
-===================================================== -->
+<!-- =========================
+     QUIZ CTA
+========================= -->
 
-<section class="slide">
+<section class="quiz-cta">
 
-    <img class="logo" src="ae26e29b-49ad-412d-affb-dadc03b21a40.png">
+    <div>
 
-    <div class="header">
+        <h2>
+            Ready to test yourself?
+        </h2>
 
-        <div class="header-line"></div>
-
-        <h2>8. Interpreter, JIT & Adaptive Optimization</h2>
-
-        <div class="subtitle">
-            Java execution can combine interpretation and on-the-fly compilation.
-        </div>
-
-    </div>
-
-    <div class="cards">
-
-        <div class="card">
-
-            <h3 style="color:#2864e8;">Interpreter</h3>
-
-            <ul>
-                <li>
-                    JVM can begin by interpreting bytecodes.
-                </li>
-
-                <li>
-                    Bytecode is translated into
-                    machine-specific instructions.
-                </li>
-            </ul>
-
-        </div>
-
-        <div class="card blue">
-
-            <h3 style="color:#2864e8;">JIT / Native Code</h3>
-
-            <ul>
-                <li>
-                    Java can compile bytecode into
-                    native code on the fly.
-                </li>
-
-                <li>
-                    This can make frequently executed
-                    code faster.
-                </li>
-            </ul>
-
-        </div>
-
-        <div class="card green">
-
-            <h3 style="color:#20a67a;">Adaptive Optimizer</h3>
-
-            <ul>
-                <li>
-                    Tracks code that is running.
-                </li>
-
-                <li>
-                    Identifies heavily used areas.
-                </li>
-
-                <li>
-                    Compiles heavily used areas into native code.
-                </li>
-
-                <li>
-                    Less-used code can continue to be interpreted.
-                </li>
-            </ul>
-
-        </div>
+        <p>
+            Take the Java Architecture Quick Quiz.
+            Answer questions about execution order,
+            bytecode, Class Loader, JVM and the JDK/JRE
+            statement from this module.
+        </p>
 
     </div>
 
-    <div class="page-number">10</div>
+
+    <button
+        class="quiz-btn"
+        onclick="openQuiz()">
+
+        Start Quick Quiz →
+        
+    </button>
 
 </section>
 
 
-<!-- =====================================================
-     SLIDE 11 — TASK
-===================================================== -->
+</main>
 
-<section class="slide">
 
-    <img class="logo" src="ae26e29b-49ad-412d-affb-dadc03b21a40.png">
+<footer>
 
-    <div class="header">
+    Openbox GP • BTech First Year • Java Architecture
 
-        <div class="header-line"></div>
+</footer>
 
-        <h2>9. Mini Task — Trace a Java Program</h2>
 
-        <div class="subtitle">
-            Task-based activity for first-year students
+<!-- =========================
+     QUIZ MODAL
+========================= -->
+
+<div
+    class="modal"
+    id="quizModal">
+
+    <div class="quiz-box">
+
+        <div class="quiz-header">
+
+            <h2>
+                Java Architecture Quiz
+            </h2>
+
+            <button
+                class="close"
+                onclick="closeQuiz()">
+
+                ×
+
+            </button>
+
         </div>
 
-    </div>
 
-    <div class="task-box">
+        <div class="quiz-progress">
 
-        <span class="task-label">
-            TASK #01
-        </span>
+            <span id="progress"></span>
 
-        <div class="task-grid">
+        </div>
 
-            <div>
 
-                <h3 style="margin-top:10px;">
-                    Your Mission
-                </h3>
+        <div id="quizContent">
 
-                <ul class="checklist">
-
-                    <li>
-                        Create a file named
-                        <b>Welcome.java</b>.
-                    </li>
-
-                    <li>
-                        Compile it using:
-                        <b>javac Welcome.java</b>
-                    </li>
-
-                    <li>
-                        Identify the generated
-                        <b>.class</b> file.
-                    </li>
-
-                    <li>
-                        Run it using:
-                        <b>java Welcome</b>
-                    </li>
-
-                    <li>
-                        Write the five phases
-                        in the correct order.
-                    </li>
-
-                </ul>
-
+            <div
+                class="question"
+                id="question">
             </div>
 
-            <div>
 
-                <h3>Submission</h3>
+            <div
+                class="options"
+                id="options">
+            </div>
 
-                <ul class="checklist">
 
-                    <li>Source code</li>
-                    <li>Terminal screenshot</li>
-                    <li>Five-phase flow</li>
-                    <li>2–3 line JVM explanation</li>
+            <div
+                class="explanation"
+                id="explanation"
+                style="display:none">
+            </div>
 
-                </ul>
 
-                <div class="card green" style="margin-top:10px;">
+            <div class="quiz-footer">
 
-                    <strong>
-                        Success Check
-                    </strong>
+                <span
+                    id="questionNumber"
+                    style="font-size:11px;color:#768095">
 
-                    <p>
-                        Can you explain
-                        <b>.java → .class → JVM</b>?
-                    </p>
+                </span>
 
-                </div>
+
+                <button
+                    class="quiz-next"
+                    id="next"
+                    onclick="nextQuestion()"
+                    disabled>
+
+                    Next →
+
+                </button>
 
             </div>
 
@@ -1262,288 +1218,417 @@ pre {
 
     </div>
 
-    <div class="page-number">11</div>
-
-</section>
+</div>
 
 
-<!-- =====================================================
-     SLIDE 12 — CODE
-===================================================== -->
+<script>
 
-<section class="slide">
+/* =================================================
+   QUIZ DATA
+   Based on the supplied Java Architecture material
+================================================= */
 
-    <img class="logo" src="ae26e29b-49ad-412d-affb-dadc03b21a40.png">
+const quiz = [
 
-    <div class="header">
+{
+    question:
+    "Write the correct order of the Java program execution.",
 
-        <div class="header-line"></div>
+    options:[
 
-        <h2>10. Try It Yourself</h2>
+        "Class Loader → Compilation → Source Code → Verification → Execution",
 
-        <div class="subtitle">
-            Connect the architecture to an actual Java program.
-        </div>
+        "Java Source Code → Compilation → Class Loader → Bytecode Verification → Interpretation → Execution",
 
-    </div>
+        "Compilation → Java Source Code → Execution → Class Loader",
 
-<pre>
-public class Welcome {
+        "Java Source Code → Class Loader → Compilation → Execution"
 
-    public static void main(String[] args) {
+    ],
 
-        System.out.println("Hello, Openbox!");
+    answer:1,
+
+    explanation:
+    "The module presents the flow as source code, compilation to bytecode, loading, verification and execution. The JVM execution involves interpretation/JIT-related mechanisms."
+},
+
+
+{
+    question:
+    "Which of the following is used to load a .class file?",
+
+    options:[
+
+        "Class Loader",
+
+        "Byte Code Verifier",
+
+        "JIT Compiler",
+
+        "Interpreter"
+
+    ],
+
+    answer:0,
+
+    explanation:
+    "The Class Loader reads compiled .class bytecode into memory for execution."
+},
+
+
+{
+    question:
+    "When a Java program is compiled, it creates a:",
+
+    options:[
+
+        "an .obj file",
+
+        "an .exe file",
+
+        "a .class file",
+
+        "a .sh file"
+
+    ],
+
+    answer:2,
+
+    explanation:
+    "The Java compiler creates a .class file containing Java bytecode."
+},
+
+
+{
+    question:
+    "The JDK is a superset of the JRE and contains the JRE plus development tools such as compilers and debuggers.",
+
+    options:[
+
+        "TRUE",
+
+        "FALSE"
+
+    ],
+
+    answer:0,
+
+    explanation:
+    "This statement is given as TRUE in the supplied quiz material."
+},
+
+
+{
+    question:
+    "Which component validates bytecodes and checks that they do not violate Java security restrictions?",
+
+    options:[
+
+        "Class Loader",
+
+        "Bytecode Verifier",
+
+        "Java Compiler",
+
+        "Operating System"
+
+    ],
+
+    answer:1,
+
+    explanation:
+    "The Bytecode Verifier validates bytecodes and checks them against Java's security restrictions."
+}
+
+];
+
+
+/* =================================================
+   QUIZ STATE
+================================================= */
+
+let current = 0;
+let score = 0;
+let answered = false;
+
+
+/* =================================================
+   OPEN QUIZ
+================================================= */
+
+function openQuiz(){
+
+    document
+        .getElementById("quizModal")
+        .classList.add("active");
+
+    current = 0;
+    score = 0;
+
+    document
+        .getElementById("quizContent")
+        .style.display = "block";
+
+    renderQuestion();
+
+}
+
+
+/* =================================================
+   CLOSE QUIZ
+================================================= */
+
+function closeQuiz(){
+
+    document
+        .getElementById("quizModal")
+        .classList.remove("active");
+
+}
+
+
+/* =================================================
+   RENDER QUESTION
+================================================= */
+
+function renderQuestion(){
+
+    answered = false;
+
+    const q = quiz[current];
+
+    document
+        .getElementById("question")
+        .textContent = q.question;
+
+
+    document
+        .getElementById("questionNumber")
+        .textContent =
+        `Question ${current + 1} of ${quiz.length}`;
+
+
+    document
+        .getElementById("progress")
+        .style.width =
+        ((current) / quiz.length * 100) + "%";
+
+
+    const options =
+        document.getElementById("options");
+
+    options.innerHTML = "";
+
+
+    document
+        .getElementById("explanation")
+        .style.display = "none";
+
+
+    document
+        .getElementById("next")
+        .disabled = true;
+
+
+    q.options.forEach((option,index)=>{
+
+        const button =
+            document.createElement("button");
+
+        button.className = "option";
+
+        button.textContent = option;
+
+        button.onclick = function(){
+
+            selectAnswer(index,button);
+
+        };
+
+        options.appendChild(button);
+
+    });
+
+}
+
+
+/* =================================================
+   ANSWER
+================================================= */
+
+function selectAnswer(index,button){
+
+    if(answered) return;
+
+    answered = true;
+
+    const q = quiz[current];
+
+    const allOptions =
+        document.querySelectorAll(".option");
+
+
+    allOptions.forEach((item,i)=>{
+
+        if(i === q.answer){
+
+            item.classList.add("correct");
+
+        }
+
+    });
+
+
+    if(index === q.answer){
+
+        score++;
+
+        button.classList.add("correct");
+
+    }else{
+
+        button.classList.add("wrong");
 
     }
+
+
+    const explanation =
+        document.getElementById("explanation");
+
+    explanation.textContent =
+        q.explanation;
+
+    explanation.style.display = "block";
+
+
+    document
+        .getElementById("next")
+        .disabled = false;
+
 }
-</pre>
 
-    <div class="cards" style="margin-top:10mm;">
 
-        <div class="card blue">
-            <h3>Step 1</h3>
+/* =================================================
+   NEXT QUESTION
+================================================= */
+
+function nextQuestion(){
+
+    if(!answered) return;
+
+    current++;
+
+    if(current >= quiz.length){
+
+        showResult();
+
+        return;
+
+    }
+
+    renderQuestion();
+
+}
+
+
+/* =================================================
+   RESULT
+================================================= */
+
+function showResult(){
+
+    document
+        .getElementById("progress")
+        .style.width = "100%";
+
+
+    document
+        .getElementById("quizContent")
+        .innerHTML = `
+
+        <div class="result">
+
+            <div class="score-circle">
+
+                ${score}/${quiz.length}
+
+            </div>
+
+            <h2>
+                Quiz Complete 🎉
+            </h2>
+
             <p>
-                Save the file as <b>Welcome.java</b>
-            </p>
-        </div>
 
-        <div class="card">
-            <h3>Step 2</h3>
+                You scored
+                <strong>${score}</strong>
+                out of
+                <strong>${quiz.length}</strong>.
+
+            </p>
+
             <p>
-                Compile:
-                <b>javac Welcome.java</b>
+
+                ${
+                    score >= 4
+                    ? "Excellent! You have a strong understanding of Java Architecture."
+                    : score >= 3
+                    ? "Good attempt. Review the architecture flow once more."
+                    : "Review the module and try the quiz again."
+                }
+
             </p>
-        </div>
 
-        <div class="card green">
-            <h3>Step 3</h3>
-            <p>
-                Run:
-                <b>java Welcome</b>
-            </p>
-        </div>
 
-    </div>
+            <button
+                onclick="restartQuiz()">
 
-    <div class="page-number">12</div>
+                Try Again
 
-</section>
-
-
-<!-- =====================================================
-     SLIDE 13 — QUIZ
-===================================================== -->
-
-<section class="slide">
-
-    <img class="logo" src="ae26e29b-49ad-412d-affb-dadc03b21a40.png">
-
-    <div class="header">
-
-        <div class="header-line"></div>
-
-        <h2>11. Quick Quiz</h2>
-
-        <div class="subtitle">
-            Check your understanding
-        </div>
-
-    </div>
-
-    <div class="question">
-
-        <span class="question-number">01</span>
-
-        Put the core Java execution stages in the correct order.
-
-        <div class="answer">
-            Answer: Source → Compilation → Class Loading →
-            Verification → Execution
-        </div>
-
-    </div>
-
-    <div class="question">
-
-        <span class="question-number">02</span>
-
-        Which component loads a .class file?
-
-        <div class="answer">
-            Answer: Class Loader
-        </div>
-
-    </div>
-
-    <div class="question">
-
-        <span class="question-number">03</span>
-
-        What file is produced when a Java program is compiled?
-
-        <div class="answer">
-            Answer: .class file
-        </div>
-
-    </div>
-
-    <div class="question">
-
-        <span class="question-number">04</span>
-
-        What validates bytecode before execution?
-
-        <div class="answer">
-            Answer: Bytecode Verifier
-        </div>
-
-    </div>
-
-    <div class="page-number">13</div>
-
-</section>
-
-
-<!-- =====================================================
-     SLIDE 14 — SUMMARY
-===================================================== -->
-
-<section class="slide">
-
-    <img class="logo" src="ae26e29b-49ad-412d-affb-dadc03b21a40.png">
-
-    <div class="header">
-
-        <div class="header-line"></div>
-
-        <h2>12. Java Architecture — The Mental Model</h2>
-
-        <div class="subtitle">
-            If you remember one diagram, remember this.
-        </div>
-
-    </div>
-
-    <div class="timeline">
-
-        <div class="timeline-item">
-            <div class="circle">01</div>
-            <strong>Source</strong>
-            <span>.java</span>
-        </div>
-
-        <div class="timeline-arrow">→</div>
-
-        <div class="timeline-item">
-            <div class="circle">02</div>
-            <strong>Compile</strong>
-            <span>javac</span>
-        </div>
-
-        <div class="timeline-arrow">→</div>
-
-        <div class="timeline-item">
-            <div class="circle">03</div>
-            <strong>Bytecode</strong>
-            <span>.class</span>
-        </div>
-
-        <div class="timeline-arrow">→</div>
-
-        <div class="timeline-item">
-            <div class="circle">04</div>
-            <strong>Load</strong>
-            <span>Class Loader</span>
-        </div>
-
-        <div class="timeline-arrow">→</div>
-
-        <div class="timeline-item">
-            <div class="circle">05</div>
-            <strong>Verify</strong>
-            <span>Verifier</span>
-        </div>
-
-        <div class="timeline-arrow">→</div>
-
-        <div class="timeline-item">
-            <div class="circle">06</div>
-            <strong>Execute</strong>
-            <span>JVM</span>
-        </div>
-
-    </div>
-
-    <div class="card blue" style="margin-top:20mm;">
-
-        <h3>Remember</h3>
-
-        <ul>
-
-            <li>
-                Java source is compiled into bytecode.
-            </li>
-
-            <li>
-                Bytecode is loaded and verified before execution.
-            </li>
-
-            <li>
-                The JVM is platform-specific while Java bytecode
-                is designed for portability.
-            </li>
-
-            <li>
-                Execution can involve interpretation and
-                on-the-fly/native compilation.
-            </li>
-
-        </ul>
-
-    </div>
-
-    <div class="page-number">14</div>
-
-</section>
-
-
-<!-- =====================================================
-     SLIDE 15 — END
-===================================================== -->
-
-<section class="slide dark">
-
-    <img class="logo" src="ae26e29b-49ad-412d-affb-dadc03b21a40.png">
-
-    <div class="center">
-
-        <div class="header-line"></div>
-
-        <h1>
-            Java Architecture
-        </h1>
-
-        <div class="subtitle">
-            Understand the flow.
-            Trace the execution.
-            Build the habit.
-        </div>
-
-        <div class="badges">
-
-            <span class="badge">
-                OPENBOX
-            </span>
-
-            <span class="badge green">
-                GROWTH PARTNER
-            </span>
+            </button>
 
         </div>
 
-    </div>
+    `;
 
-</section>
+}
+
+
+/* =================================================
+   RESTART
+================================================= */
+
+function restartQuiz(){
+
+    current = 0;
+    score = 0;
+
+    document
+        .getElementById("quizContent")
+        .style.display = "block";
+
+    location.reload();
+
+}
+
+
+/* =================================================
+   CLOSE WHEN CLICKING BACKDROP
+================================================= */
+
+document
+    .getElementById("quizModal")
+    .addEventListener("click",function(e){
+
+        if(e.target === this){
+
+            closeQuiz();
+
+        }
+
+    });
+
+</script>
 
 </body>
 </html>
