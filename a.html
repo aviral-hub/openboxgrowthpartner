@@ -1,32 +1,23 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Introduction to Computer Science & Python</title>
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
 
-<meta name="description"
-      content="Completion-based Introduction to Computer Science and Programming Using Python course.">
+<title>
+    Python & Computer Science Academy
+</title>
 
 <style>
 
-:root {
-    --bg: #f7f8fa;
-    --surface: #ffffff;
-    --surface-2: #f1f3f5;
-    --border: #e5e7eb;
-    --text: #111827;
-    --muted: #6b7280;
-    --primary: #111827;
-    --primary-soft: #eef2ff;
-    --success: #16a34a;
-    --success-soft: #dcfce7;
-    --warning: #d97706;
-    --danger: #dc2626;
-    --shadow: 0 10px 30px rgba(0,0,0,.06);
-    --radius: 16px;
-}
+/* =========================================================
+   RESET
+========================================================= */
 
 * {
     box-sizing: border-box;
@@ -40,32 +31,184 @@ body {
     margin: 0;
     font-family:
         Inter,
-        ui-sans-serif,
-        system-ui,
         -apple-system,
         BlinkMacSystemFont,
         "Segoe UI",
         sans-serif;
-    background: var(--bg);
-    color: var(--text);
+    background: #f7f8fa;
+    color: #111827;
 }
 
-/* =========================
-   HEADER
-========================= */
+button,
+input {
+    font: inherit;
+}
 
-.header {
-    height: 72px;
-    background: rgba(255,255,255,.96);
-    border-bottom: 1px solid var(--border);
+
+/* =========================================================
+   LOGIN
+========================================================= */
+
+.login-screen {
+    position: fixed;
+    inset: 0;
+    z-index: 99999;
+
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    padding: 0 32px;
+    justify-content: center;
+
+    padding: 20px;
+
+    background: #f7f8fa;
+}
+
+.login-card {
+    width: 100%;
+    max-width: 440px;
+
+    padding: 38px;
+
+    background: #ffffff;
+
+    border: 1px solid #e5e7eb;
+    border-radius: 22px;
+
+    box-shadow:
+        0 20px 70px rgba(0,0,0,.08);
+}
+
+.login-logo {
+    width: 58px;
+    height: 58px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 15px;
+
+    background: #111827;
+    color: white;
+
+    font-size: 18px;
+    font-weight: 800;
+
+    margin-bottom: 24px;
+}
+
+.login-card h1 {
+    margin: 0 0 10px;
+
+    font-size: 29px;
+    line-height: 1.2;
+}
+
+.login-card-description {
+    color: #6b7280;
+    line-height: 1.6;
+
+    margin: 0 0 28px;
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.login-form label {
+    margin-top: 8px;
+
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.login-form input {
+    width: 100%;
+
+    padding: 13px 14px;
+
+    border: 1px solid #d1d5db;
+    border-radius: 10px;
+
+    outline: none;
+
+    background: white;
+}
+
+.login-form input:focus {
+    border-color: #111827;
+}
+
+.login-button {
+    width: 100%;
+
+    margin-top: 18px;
+
+    padding: 14px;
+
+    border: none;
+    border-radius: 11px;
+
+    background: #111827;
+    color: white;
+
+    font-weight: 700;
+
+    cursor: pointer;
+}
+
+.login-button:disabled {
+    opacity: .6;
+    cursor: wait;
+}
+
+.login-message {
+    min-height: 20px;
+
+    margin-top: 8px;
+
+    font-size: 13px;
+    color: #dc2626;
+}
+
+.login-note {
+    margin-top: 20px;
+
+    color: #9ca3af;
+
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+
+/* =========================================================
+   APP
+========================================================= */
+
+#app {
+    display: none;
+}
+
+.app-header {
     position: sticky;
     top: 0;
     z-index: 1000;
-    backdrop-filter: blur(12px);
+
+    height: 72px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 28px;
+
+    background: rgba(255,255,255,.96);
+
+    border-bottom: 1px solid #e5e7eb;
+
+    backdrop-filter: blur(10px);
 }
 
 .brand {
@@ -74,67 +217,152 @@ body {
     gap: 12px;
 }
 
+.mobile-menu {
+    display: none;
+
+    border: none;
+    background: transparent;
+
+    font-size: 24px;
+
+    cursor: pointer;
+}
+
 .brand-logo {
-    width: 38px;
-    height: 38px;
+    width: 42px;
+    height: 42px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 11px;
+
     background: #111827;
     color: white;
-    border-radius: 10px;
-    display: grid;
-    place-items: center;
+
+    font-size: 13px;
     font-weight: 800;
 }
 
 .brand-title {
+    font-weight: 800;
     font-size: 15px;
-    font-weight: 700;
 }
 
 .brand-subtitle {
-    font-size: 11px;
-    color: var(--muted);
-    margin-top: 2px;
+    color: #9ca3af;
+    font-size: 12px;
 }
 
 .header-right {
     display: flex;
     align-items: center;
-    gap: 14px;
+    gap: 16px;
 }
 
 .sync-status {
+    color: #6b7280;
     font-size: 12px;
-    color: var(--muted);
+}
+
+.avatar-wrapper {
+    position: relative;
 }
 
 .avatar {
     width: 38px;
     height: 38px;
-    background: #e5e7eb;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
     border-radius: 50%;
-    display: grid;
-    place-items: center;
+
+    background: #111827;
+    color: white;
+
+    font-size: 14px;
+    font-weight: 800;
+
+    cursor: pointer;
+}
+
+.user-menu {
+    position: absolute;
+
+    top: 48px;
+    right: 0;
+
+    width: 230px;
+
+    padding: 16px;
+
+    background: white;
+
+    border: 1px solid #e5e7eb;
+    border-radius: 14px;
+
+    box-shadow: 0 15px 40px rgba(0,0,0,.12);
+
+    display: none;
+}
+
+.user-menu.show {
+    display: block;
+}
+
+.user-menu-name {
     font-weight: 700;
 }
 
-/* =========================
-   LAYOUT
-========================= */
+.user-menu-email {
+    margin-top: 4px;
 
-.app {
-    display: flex;
-    min-height: calc(100vh - 72px);
+    font-size: 12px;
+
+    color: #6b7280;
+
+    word-break: break-all;
 }
 
-.sidebar {
-    width: 290px;
+.logout-button {
+    width: 100%;
+
+    margin-top: 15px;
+
+    padding: 9px;
+
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+
     background: white;
-    border-right: 1px solid var(--border);
-    position: sticky;
+
+    cursor: pointer;
+}
+
+
+/* =========================================================
+   SIDEBAR
+========================================================= */
+
+.sidebar {
+    position: fixed;
+
     top: 72px;
-    height: calc(100vh - 72px);
+    bottom: 0;
+    left: 0;
+
+    width: 280px;
+
+    background: #ffffff;
+
+    border-right: 1px solid #e5e7eb;
+
     overflow-y: auto;
-    flex-shrink: 0;
+
+    z-index: 500;
 }
 
 .sidebar-inner {
@@ -142,18 +370,19 @@ body {
 }
 
 .course-progress-box {
-    padding: 18px;
-    background: #f9fafb;
-    border: 1px solid var(--border);
+    padding: 16px;
+
+    border: 1px solid #e5e7eb;
     border-radius: 14px;
-    margin-bottom: 24px;
+
+    background: #fafafa;
 }
 
 .progress-title-row {
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    margin-bottom: 10px;
+
+    margin-bottom: 12px;
 }
 
 .progress-title {
@@ -169,55 +398,71 @@ body {
 .progress-track {
     width: 100%;
     height: 7px;
+
     background: #e5e7eb;
-    border-radius: 999px;
+
+    border-radius: 10px;
+
     overflow: hidden;
 }
 
 .progress-bar {
-    height: 100%;
     width: 0%;
+    height: 100%;
+
     background: #111827;
-    border-radius: inherit;
-    transition: width .35s ease;
+
+    transition: width .3s ease;
 }
 
 .progress-meta {
-    margin-top: 10px;
+    margin-top: 9px;
+
+    color: #6b7280;
+
     font-size: 11px;
-    color: var(--muted);
 }
 
 .sidebar-section {
-    margin-top: 24px;
+    margin-top: 28px;
 }
 
 .sidebar-section-title {
-    font-size: 10px;
+    margin: 0 8px 10px;
+
+    color: #6b7280;
+
+    font-size: 11px;
     font-weight: 800;
-    letter-spacing: .08em;
+
     text-transform: uppercase;
-    color: #9ca3af;
-    margin: 0 12px 8px;
+    letter-spacing: .08em;
 }
 
 .lecture-nav {
     display: flex;
     flex-direction: column;
-    gap: 4px;
+    gap: 3px;
 }
 
 .lecture-nav-item {
     width: 100%;
-    border: 0;
-    background: transparent;
-    border-radius: 10px;
-    padding: 10px 11px;
-    cursor: pointer;
-    text-align: left;
+
+    padding: 10px;
+
     display: flex;
     align-items: center;
     gap: 10px;
+
+    border: none;
+    border-radius: 9px;
+
+    background: transparent;
+
+    text-align: left;
+
+    cursor: pointer;
+
     color: #374151;
 }
 
@@ -235,237 +480,528 @@ body {
     cursor: not-allowed;
 }
 
-.nav-number {
-    width: 25px;
-    height: 25px;
+.lecture-nav-number {
+    width: 27px;
+    height: 27px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
     border-radius: 50%;
-    display: grid;
-    place-items: center;
+
     background: #f3f4f6;
-    color: #4b5563;
-    font-size: 10px;
+
+    color: #374151;
+
+    font-size: 11px;
     font-weight: 800;
-    flex-shrink: 0;
 }
 
-.active .nav-number {
-    background: rgba(255,255,255,.16);
+.lecture-nav-item.active
+.lecture-nav-number {
+    background: rgba(255,255,255,.15);
     color: white;
 }
 
-.nav-info {
-    min-width: 0;
+.lecture-nav-title {
     flex: 1;
-}
 
-.nav-title {
     font-size: 12px;
-    font-weight: 600;
+
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
 }
 
-.nav-status {
-    font-size: 10px;
-    opacity: .7;
-    margin-top: 2px;
+.lecture-nav-status {
+    font-size: 12px;
 }
 
-.nav-check {
-    font-size: 13px;
-}
 
-/* =========================
+/* =========================================================
    MAIN
-========================= */
+========================================================= */
 
 .main {
-    flex: 1;
-    min-width: 0;
+    margin-left: 280px;
 }
 
 .main-inner {
-    max-width: 1180px;
+    width: 100%;
+    max-width: 1050px;
+
     margin: auto;
-    padding: 38px 42px 80px;
+
+    padding: 45px 30px 80px;
 }
 
-/* =========================
+
+/* =========================================================
    HERO
-========================= */
+========================================================= */
 
 .hero {
-    background: #111827;
-    color: white;
-    border-radius: 22px;
     padding: 38px;
-    margin-bottom: 30px;
-    position: relative;
-    overflow: hidden;
-}
 
-.hero:after {
-    content: "";
-    position: absolute;
-    width: 260px;
-    height: 260px;
-    border: 1px solid rgba(255,255,255,.08);
-    border-radius: 50%;
-    right: -90px;
-    top: -100px;
+    background: white;
+
+    border: 1px solid #e5e7eb;
+    border-radius: 20px;
+
+    margin-bottom: 28px;
 }
 
 .eyebrow {
+    margin-bottom: 14px;
+
+    color: #6b7280;
+
     font-size: 11px;
     font-weight: 800;
+
     text-transform: uppercase;
-    letter-spacing: .1em;
-    opacity: .65;
-    margin-bottom: 12px;
+    letter-spacing: .08em;
 }
 
 .hero h1 {
+    max-width: 800px;
+
     margin: 0;
-    font-size: clamp(26px, 4vw, 42px);
+
+    font-size: 40px;
     line-height: 1.1;
-    max-width: 760px;
+
+    letter-spacing: -.03em;
 }
 
 .hero p {
-    margin: 15px 0 0;
-    max-width: 720px;
-    color: #d1d5db;
-    line-height: 1.65;
-    font-size: 14px;
+    max-width: 750px;
+
+    margin: 18px 0 0;
+
+    color: #6b7280;
+
+    line-height: 1.7;
 }
 
 .hero-stats {
     display: flex;
     flex-wrap: wrap;
-    gap: 10px;
+    gap: 8px;
+
     margin-top: 25px;
 }
 
 .hero-stat {
-    padding: 9px 13px;
-    border: 1px solid rgba(255,255,255,.12);
-    background: rgba(255,255,255,.06);
-    border-radius: 10px;
-    font-size: 11px;
-    color: #e5e7eb;
+    padding: 8px 12px;
+
+    border: 1px solid #e5e7eb;
+    border-radius: 20px;
+
+    font-size: 12px;
+    font-weight: 600;
 }
 
-/* =========================
-   CURRENT LESSON
-========================= */
+
+/* =========================================================
+   LESSON
+========================================================= */
 
 .lesson-header {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    gap: 20px;
-    margin-bottom: 22px;
+
+    padding: 28px;
+
+    background: white;
+
+    border: 1px solid #e5e7eb;
+    border-radius: 18px;
 }
 
 .lesson-number {
+    margin-bottom: 8px;
+
+    color: #6b7280;
+
     font-size: 12px;
     font-weight: 800;
-    color: var(--muted);
+
     text-transform: uppercase;
-    letter-spacing: .08em;
+    letter-spacing: .06em;
 }
 
 .lesson-title {
-    margin: 5px 0 0;
+    margin: 0;
+
     font-size: 30px;
-    line-height: 1.2;
 }
 
 .lesson-description {
-    margin: 10px 0 0;
-    color: var(--muted);
-    line-height: 1.6;
-    max-width: 760px;
+    max-width: 720px;
+
+    color: #6b7280;
+
+    line-height: 1.7;
 }
 
 .status-pill {
     padding: 8px 12px;
-    border-radius: 999px;
+
+    border-radius: 20px;
+
     background: #f3f4f6;
-    font-size: 11px;
+
+    font-size: 12px;
     font-weight: 700;
+
     white-space: nowrap;
 }
 
-.status-pill.complete {
-    background: var(--success-soft);
-    color: var(--success);
+.status-pill.completed {
+    background: #111827;
+    color: white;
 }
 
-/* =========================
-   RESOURCE CARDS
-========================= */
+
+/* =========================================================
+   RESOURCES
+========================================================= */
 
 .resource-grid {
     display: grid;
-    grid-template-columns: repeat(2, minmax(0,1fr));
-    gap: 14px;
-}
 
-.resource-card {
-    background: white;
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 20px;
-    box-shadow: 0 4px 15px rgba(0,0,0,.025);
-}
+    grid-template-columns:
+        repeat(3, minmax(0, 1fr));
 
-.resource-top {
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
     gap: 12px;
-}
 
-.resource-icon {
-    width: 42px;
-    height: 42px;
-    background: #f3f4f6;
-    border-radius: 11px;
-    display: grid;
-    place-items: center;
-    font-size: 18px;
-}
-
-.resource-name {
-    margin: 13px 0 5px;
-    font-size: 15px;
-    font-weight: 750;
-}
-
-.resource-description {
-    margin: 0;
-    color: var(--muted);
-    font-size: 12px;
-    line-height: 1.6;
-}
-
-.resource-actions {
-    display: flex;
-    align-items: center;
-    gap: 8px;
     margin-top: 18px;
 }
 
-.btn {
-    border: 0;
-    border-radius: 9px;
-    padding: 10px 13px;
+.resource-card {
+    padding: 20px;
+
+    background: white;
+
+    border: 1px solid #e5e7eb;
+    border-radius: 15px;
+}
+
+.resource-type {
+    color: #9ca3af;
+
+    font-size: 10px;
+    font-weight: 800;
+
+    text-transform: uppercase;
+}
+
+.resource-card h3 {
+    margin: 8px 0;
+
+    font-size: 16px;
+}
+
+.resource-card p {
+    color: #6b7280;
+
+    font-size: 13px;
+
+    line-height: 1.5;
+}
+
+.resource-button {
+    display: inline-block;
+
+    margin-top: 7px;
+
+    color: #111827;
+
+    font-size: 12px;
+    font-weight: 800;
+
+    text-decoration: none;
+}
+
+
+/* =========================================================
+   PRACTICE
+========================================================= */
+
+.practice-section {
+    margin-top: 30px;
+}
+
+.section-title {
+    margin: 0;
+
+    font-size: 22px;
+}
+
+.section-subtitle {
+    margin: 7px 0 17px;
+
+    color: #6b7280;
+
+    font-size: 13px;
+}
+
+.practice-card {
+    padding: 8px 18px;
+
+    background: white;
+
+    border: 1px solid #e5e7eb;
+    border-radius: 16px;
+}
+
+.practice-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+
+    padding: 17px 4px;
+
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.practice-item:last-child {
+    border-bottom: none;
+}
+
+.practice-checkbox {
+    width: 19px;
+    height: 19px;
+
+    margin-top: 1px;
+
+    accent-color: #111827;
+
     cursor: pointer;
-    font-size: 11px;
-    font-weight: 750;
-    transition: .2s;
+}
+
+.practice-content {
+    flex: 1;
+}
+
+.practice-title {
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.practice-description {
+    margin-top: 4px;
+
+    color: #6b7280;
+
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+.practice-item.completed
+.practice-title {
+    text-decoration: line-through;
+    color: #9ca3af;
+}
+
+
+/* =========================================================
+   PROBLEM SET
+========================================================= */
+
+.problem-set {
+    margin-top: 30px;
+}
+
+.problem-card {
+    padding: 22px;
+
+    background: white;
+
+    border: 1px solid #e5e7eb;
+    border-radius: 16px;
+}
+
+.problem-title {
+    font-size: 16px;
+    font-weight: 800;
+}
+
+.problem-description {
+    margin-top: 8px;
+
+    color: #6b7280;
+
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+.problem-link {
+    display: inline-block;
+
+    margin-top: 14px;
+
+    padding: 9px 12px;
+
+    border-radius: 9px;
+
+    background: #111827;
+    color: white;
+
+    text-decoration: none;
+
+    font-size: 12px;
+    font-weight: 700;
+}
+
+
+/* =========================================================
+   NEXT
+========================================================= */
+
+.next-section {
+    margin-top: 30px;
+}
+
+.next-card {
+    padding: 22px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+
+    background: white;
+
+    border: 1px solid #e5e7eb;
+    border-radius: 16px;
+}
+
+.next-card h3 {
+    margin: 0;
+    font-size: 16px;
+}
+
+.next-card p {
+    margin: 6px 0 0;
+
+    color: #6b7280;
+
+    font-size: 13px;
+}
+
+.next-button {
+    padding: 12px 17px;
+
+    border: none;
+    border-radius: 10px;
+
+    background: #111827;
+    color: white;
+
+    font-size: 13px;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    white-space: nowrap;
+}
+
+.next-button:disabled {
+    background: #e5e7eb;
+    color: #9ca3af;
+
+    cursor: not-allowed;
+}
+
+
+/* =========================================================
+   COMPLETION
+========================================================= */
+
+.completion-panel {
+    display: none;
+
+    padding: 60px 30px;
+
+    text-align: center;
+
+    background: white;
+
+    border: 1px solid #e5e7eb;
+    border-radius: 20px;
+}
+
+.completion-icon {
+    width: 70px;
+    height: 70px;
+
+    margin: auto;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: #111827;
+    color: white;
+
+    font-size: 30px;
+    font-weight: 800;
+}
+
+.completion-panel h2 {
+    margin: 20px 0 10px;
+
+    font-size: 30px;
+}
+
+.completion-panel p {
+    max-width: 600px;
+
+    margin: auto;
+
+    color: #6b7280;
+
+    line-height: 1.7;
+}
+
+.certificate-box {
+    max-width: 400px;
+
+    margin: 25px auto;
+
+    padding: 20px;
+
+    border: 1px dashed #d1d5db;
+    border-radius: 12px;
+}
+
+.certificate-id {
+    margin-top: 7px;
+
+    font-family: monospace;
+
+    color: #6b7280;
+}
+
+
+/* =========================================================
+   BUTTON
+========================================================= */
+
+.btn {
+    padding: 12px 17px;
+
+    border-radius: 10px;
+
+    border: none;
+
+    cursor: pointer;
 }
 
 .btn-primary {
@@ -473,277 +1009,72 @@ body {
     color: white;
 }
 
-.btn-primary:hover {
-    transform: translateY(-1px);
-}
 
-.btn-secondary {
-    background: #f3f4f6;
-    color: #374151;
-}
-
-.btn-success {
-    background: var(--success-soft);
-    color: var(--success);
-}
-
-.btn:disabled {
-    cursor: not-allowed;
-    opacity: .55;
-}
-
-.resource-completed {
-    margin-left: auto;
-    color: var(--success);
-    font-size: 11px;
-    font-weight: 750;
-}
-
-/* =========================
-   PRACTICE
-========================= */
-
-.practice-section {
-    margin-top: 32px;
-}
-
-.section-title {
-    margin: 0;
-    font-size: 19px;
-}
-
-.section-subtitle {
-    margin: 6px 0 18px;
-    color: var(--muted);
-    font-size: 12px;
-}
-
-.practice-card {
-    background: white;
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 24px;
-}
-
-.practice-list {
-    display: grid;
-    gap: 10px;
-}
-
-.practice-item {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 13px;
-    border: 1px solid var(--border);
-    border-radius: 10px;
-}
-
-.practice-item input {
-    width: 17px;
-    height: 17px;
-    accent-color: #111827;
-}
-
-.practice-item label {
-    font-size: 12px;
-    font-weight: 600;
-    cursor: pointer;
-}
-
-/* =========================
-   PROBLEM SET
-========================= */
-
-.problem-set {
-    margin-top: 32px;
-}
-
-.problem-card {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 20px;
-    background: white;
-    border: 1px solid var(--border);
-    border-radius: 15px;
-    padding: 20px;
-}
-
-.problem-info h3 {
-    margin: 0;
-    font-size: 15px;
-}
-
-.problem-info p {
-    margin: 6px 0 0;
-    color: var(--muted);
-    font-size: 12px;
-}
-
-/* =========================
-   NEXT LESSON
-========================= */
-
-.next-section {
-    margin-top: 38px;
-}
-
-.next-card {
-    background: #111827;
-    color: white;
-    border-radius: 18px;
-    padding: 25px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 20px;
-}
-
-.next-card h3 {
-    margin: 0;
-    font-size: 17px;
-}
-
-.next-card p {
-    color: #9ca3af;
-    margin: 5px 0 0;
-    font-size: 12px;
-}
-
-.next-button {
-    background: white;
-    color: #111827;
-    border: 0;
-    padding: 11px 16px;
-    border-radius: 9px;
-    cursor: pointer;
-    font-weight: 750;
-    font-size: 11px;
-    white-space: nowrap;
-}
-
-/* =========================
-   COURSE COMPLETION
-========================= */
-
-.completion-panel {
-    display: none;
-    background: white;
-    border: 1px solid var(--border);
-    border-radius: 22px;
-    padding: 45px;
-    text-align: center;
-}
-
-.completion-panel.show {
-    display: block;
-}
-
-.completion-icon {
-    width: 72px;
-    height: 72px;
-    margin: 0 auto 20px;
-    border-radius: 50%;
-    background: var(--success-soft);
-    color: var(--success);
-    display: grid;
-    place-items: center;
-    font-size: 30px;
-}
-
-.completion-panel h2 {
-    margin: 0;
-    font-size: 30px;
-}
-
-.completion-panel p {
-    max-width: 600px;
-    margin: 12px auto;
-    color: var(--muted);
-    line-height: 1.6;
-}
-
-.certificate-box {
-    max-width: 520px;
-    margin: 28px auto;
-    border: 1px dashed #d1d5db;
-    padding: 25px;
-    border-radius: 15px;
-    background: #fafafa;
-}
-
-.certificate-id {
-    font-size: 12px;
-    color: var(--muted);
-    margin-top: 8px;
-}
-
-/* =========================
+/* =========================================================
    TOAST
-========================= */
+========================================================= */
 
 .toast {
     position: fixed;
-    bottom: 25px;
-    right: 25px;
+
+    right: 20px;
+    bottom: 20px;
+
+    z-index: 99999;
+
+    padding: 12px 16px;
+
     background: #111827;
     color: white;
-    padding: 13px 17px;
+
     border-radius: 10px;
+
     font-size: 12px;
-    box-shadow: var(--shadow);
+
     transform: translateY(100px);
-    opacity: 0;
-    transition: .3s;
-    z-index: 9999;
+
+    transition: transform .25s ease;
 }
 
 .toast.show {
     transform: translateY(0);
-    opacity: 1;
 }
 
-/* =========================
+
+/* =========================================================
    MOBILE
-========================= */
+========================================================= */
 
-.mobile-menu {
-    display: none;
-    border: 0;
-    background: #f3f4f6;
-    border-radius: 8px;
-    width: 38px;
-    height: 38px;
-    cursor: pointer;
-}
+@media(max-width: 850px) {
 
-@media(max-width: 900px) {
+    .mobile-menu {
+        display: block;
+    }
 
     .sidebar {
-        position: fixed;
-        left: -300px;
-        top: 72px;
-        z-index: 900;
-        transition: .3s;
-        box-shadow: 10px 0 30px rgba(0,0,0,.1);
+        transform: translateX(-100%);
+
+        transition: transform .25s ease;
     }
 
     .sidebar.open {
-        left: 0;
+        transform: translateX(0);
     }
 
-    .mobile-menu {
-        display: grid;
-        place-items: center;
-    }
-
-    .header {
-        padding: 0 16px;
+    .main {
+        margin-left: 0;
     }
 
     .main-inner {
         padding: 25px 16px 60px;
+    }
+
+    .hero {
+        padding: 25px;
+    }
+
+    .hero h1 {
+        font-size: 30px;
     }
 
     .resource-grid {
@@ -752,6 +1083,7 @@ body {
 
     .lesson-header {
         flex-direction: column;
+        gap: 15px;
     }
 
     .next-card {
@@ -763,57 +1095,145 @@ body {
         width: 100%;
     }
 
-    .hero {
-        padding: 27px;
-    }
-}
-
-@media(max-width: 600px) {
-
-    .brand-title {
-        font-size: 12px;
-    }
-
-    .brand-subtitle {
-        display: none;
-    }
-
     .sync-status {
         display: none;
     }
 
-    .lesson-title {
-        font-size: 25px;
+    .app-header {
+        padding: 0 16px;
     }
 
-    .problem-card {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-
-    .problem-card .btn {
-        width: 100%;
-    }
 }
 
 </style>
+
 </head>
+
 
 <body>
 
-<header class="header">
+
+<!-- =====================================================
+     LOGIN SCREEN
+===================================================== -->
+
+<div class="login-screen"
+     id="loginScreen">
+
+    <div class="login-card">
+
+        <div class="login-logo">
+            CS
+        </div>
+
+        <h1>
+            Welcome to the Academy
+        </h1>
+
+        <p class="login-card-description">
+            Enter your details to access the course
+            and save your learning progress.
+        </p>
+
+
+        <div class="login-form">
+
+            <label for="loginName">
+                Full Name
+            </label>
+
+            <input
+                id="loginName"
+                type="text"
+                placeholder="Enter your full name"
+                autocomplete="name"
+            >
+
+
+            <label for="loginEmail">
+                Email
+            </label>
+
+            <input
+                id="loginEmail"
+                type="email"
+                placeholder="you@example.com"
+                autocomplete="email"
+            >
+
+
+            <label for="loginPhone">
+                Phone Number
+            </label>
+
+            <input
+                id="loginPhone"
+                type="tel"
+                placeholder="9876543210"
+                autocomplete="tel"
+            >
+
+
+            <button
+                class="login-button"
+                id="loginButton"
+                onclick="login()">
+
+                Continue Learning →
+
+            </button>
+
+
+            <div
+                class="login-message"
+                id="loginMessage">
+            </div>
+
+        </div>
+
+
+        <div class="login-note">
+
+            Your progress is saved to the learning
+            system so you can continue your course later.
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     APPLICATION
+===================================================== -->
+
+<div id="app">
+
+
+<!-- HEADER -->
+
+<header class="app-header">
+
 
     <div class="brand">
 
-        <button class="mobile-menu" onclick="toggleSidebar()">
+        <button
+            class="mobile-menu"
+            onclick="toggleSidebar()">
+
             ☰
+
         </button>
+
 
         <div class="brand-logo">
             CS
         </div>
 
+
         <div>
+
             <div class="brand-title">
                 Python & Computer Science
             </div>
@@ -821,18 +1241,61 @@ body {
             <div class="brand-subtitle">
                 Completion-Based Learning
             </div>
+
         </div>
 
     </div>
 
+
     <div class="header-right">
 
-        <span class="sync-status" id="syncStatus">
+
+        <span
+            class="sync-status"
+            id="syncStatus">
+
             Loading progress...
+
         </span>
 
-        <div class="avatar" id="avatar">
-            U
+
+        <div class="avatar-wrapper">
+
+            <div
+                class="avatar"
+                id="avatar"
+                onclick="toggleUserMenu()">
+
+                U
+
+            </div>
+
+
+            <div
+                class="user-menu"
+                id="userMenu">
+
+                <div
+                    class="user-menu-name"
+                    id="userMenuName">
+                </div>
+
+                <div
+                    class="user-menu-email"
+                    id="userMenuEmail">
+                </div>
+
+
+                <button
+                    class="logout-button"
+                    onclick="logout()">
+
+                    Logout
+
+                </button>
+
+            </div>
+
         </div>
 
     </div>
@@ -840,1393 +1303,1154 @@ body {
 </header>
 
 
-<div class="app">
+<!-- SIDEBAR -->
 
-    <!-- SIDEBAR -->
+<aside
+    class="sidebar"
+    id="sidebar">
 
-    <aside class="sidebar" id="sidebar">
 
-        <div class="sidebar-inner">
+    <div class="sidebar-inner">
 
-            <div class="course-progress-box">
 
-                <div class="progress-title-row">
+        <div class="course-progress-box">
 
-                    <span class="progress-title">
-                        Course Progress
-                    </span>
 
-                    <span class="progress-percent"
-                          id="sidebarPercent">
-                        0%
-                    </span>
+            <div class="progress-title-row">
 
-                </div>
+                <span class="progress-title">
+                    Course Progress
+                </span>
 
-                <div class="progress-track">
-                    <div class="progress-bar"
-                         id="sidebarProgress">
-                    </div>
-                </div>
+                <span
+                    class="progress-percent"
+                    id="sidebarPercent">
 
-                <div class="progress-meta"
-                     id="sidebarMeta">
-                    0 of 26 lectures completed
+                    0%
+
+                </span>
+
+            </div>
+
+
+            <div class="progress-track">
+
+                <div
+                    class="progress-bar"
+                    id="sidebarProgress">
                 </div>
 
             </div>
 
 
-            <div class="sidebar-section">
+            <div
+                class="progress-meta"
+                id="sidebarMeta">
 
-                <div class="sidebar-section-title">
-                    Curriculum
-                </div>
-
-                <div class="lecture-nav"
-                     id="lectureNav">
-                </div>
+                0 of 26 lectures completed
 
             </div>
 
         </div>
 
-    </aside>
+
+        <div class="sidebar-section">
 
 
-    <!-- MAIN -->
+            <div class="sidebar-section-title">
+                Curriculum
+            </div>
 
-    <main class="main">
 
-        <div class="main-inner">
+            <div
+                class="lecture-nav"
+                id="lectureNav">
+            </div>
 
-            <!-- HERO -->
 
-            <section class="hero">
+        </div>
 
-                <div class="eyebrow">
-                    MIT OpenCourseWare Based Curriculum
+    </div>
+
+</aside>
+
+
+<!-- MAIN -->
+
+<main class="main">
+
+
+    <div class="main-inner">
+
+
+        <!-- HERO -->
+
+        <section class="hero">
+
+
+            <div class="eyebrow">
+                MIT OpenCourseWare Based Curriculum
+            </div>
+
+
+            <h1>
+                Introduction to Computer Science
+                and Programming Using Python
+            </h1>
+
+
+            <p>
+                A completion-based learning pathway built around
+                lectures, notes, code, exercises, problem sets,
+                and practical programming activities.
+            </p>
+
+
+            <div class="hero-stats">
+
+                <div class="hero-stat">
+                    26 Lectures
                 </div>
 
-                <h1>
-                    Introduction to Computer Science
-                    and Programming Using Python
-                </h1>
+                <div class="hero-stat">
+                    6 Problem Sets
+                </div>
 
-                <p>
-                    A completion-based learning pathway built around
-                    lectures, notes, code, exercises, problem sets,
-                    and practical programming activities.
+                <div class="hero-stat">
+                    Python
+                </div>
+
+                <div class="hero-stat">
+                    Completion Based
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- LESSON -->
+
+        <section id="lessonSection">
+
+
+            <div class="lesson-header">
+
+
+                <div>
+
+                    <div
+                        class="lesson-number"
+                        id="lessonNumber">
+
+                        Lecture 1
+
+                    </div>
+
+
+                    <h2
+                        class="lesson-title"
+                        id="lessonTitle">
+
+                        Introduction
+
+                    </h2>
+
+
+                    <p
+                        class="lesson-description"
+                        id="lessonDescription">
+
+                    </p>
+
+                </div>
+
+
+                <div
+                    class="status-pill"
+                    id="lessonStatus">
+
+                    In Progress
+
+                </div>
+
+            </div>
+
+
+            <!-- RESOURCES -->
+
+            <div
+                class="resource-grid"
+                id="resourceGrid">
+            </div>
+
+
+            <!-- PRACTICE -->
+
+            <section class="practice-section">
+
+
+                <h2 class="section-title">
+                    Completion Checklist
+                </h2>
+
+
+                <p class="section-subtitle">
+
+                    Complete every required activity before
+                    the lecture is marked as complete.
+
                 </p>
 
-                <div class="hero-stats">
 
-                    <div class="hero-stat">
-                        26 Lectures
+                <div class="practice-card">
+
+
+                    <div
+                        class="practice-list"
+                        id="practiceList">
                     </div>
 
-                    <div class="hero-stat">
-                        6 Problem Sets
-                    </div>
-
-                    <div class="hero-stat">
-                        Python
-                    </div>
-
-                    <div class="hero-stat">
-                        Completion Based
-                    </div>
 
                 </div>
 
             </section>
 
 
-            <!-- LESSON -->
+            <!-- PROBLEM SET -->
 
-            <section id="lessonSection">
+            <section
+                class="problem-set"
+                id="problemSetSection">
 
-                <div class="lesson-header">
+
+                <h2 class="section-title">
+                    Assessment
+                </h2>
+
+
+                <p class="section-subtitle">
+
+                    Complete the assigned MIT problem set.
+
+                </p>
+
+
+                <div
+                    class="problem-card"
+                    id="problemCard">
+                </div>
+
+
+            </section>
+
+
+            <!-- NEXT -->
+
+            <section class="next-section">
+
+
+                <div class="next-card">
+
 
                     <div>
 
-                        <div class="lesson-number"
-                             id="lessonNumber">
-                            Lecture 1
-                        </div>
+                        <h3 id="nextTitle">
+                            Complete this lecture
+                        </h3>
 
-                        <h2 class="lesson-title"
-                            id="lessonTitle">
-                            Introduction
-                        </h2>
 
-                        <p class="lesson-description"
-                           id="lessonDescription">
+                        <p id="nextDescription">
+
+                            Finish all required activities
+                            to unlock the next lecture.
+
                         </p>
 
                     </div>
 
-                    <div class="status-pill"
-                         id="lessonStatus">
-                        In Progress
-                    </div>
+
+                    <button
+                        class="next-button"
+                        id="nextButton"
+                        onclick="goNext()"
+                        disabled>
+
+                        Next Lecture →
+
+                    </button>
 
                 </div>
-
-
-                <!-- RESOURCES -->
-
-                <div class="resource-grid"
-                     id="resourceGrid">
-                </div>
-
-
-                <!-- PRACTICE -->
-
-                <section class="practice-section">
-
-                    <h2 class="section-title">
-                        Completion Checklist
-                    </h2>
-
-                    <p class="section-subtitle">
-                        Complete every required activity before
-                        the lecture is marked as complete.
-                    </p>
-
-                    <div class="practice-card">
-
-                        <div class="practice-list"
-                             id="practiceList">
-                        </div>
-
-                    </div>
-
-                </section>
-
-
-                <!-- PROBLEM SET -->
-
-                <section class="problem-set"
-                         id="problemSetSection">
-
-                    <h2 class="section-title">
-                        Assessment
-                    </h2>
-
-                    <p class="section-subtitle">
-                        Complete the assigned MIT problem set.
-                    </p>
-
-                    <div class="problem-card"
-                         id="problemCard">
-                    </div>
-
-                </section>
-
-
-                <!-- NEXT -->
-
-                <section class="next-section">
-
-                    <div class="next-card">
-
-                        <div>
-
-                            <h3 id="nextTitle">
-                                Complete this lecture
-                            </h3>
-
-                            <p id="nextDescription">
-                                Finish all required activities
-                                to unlock the next lecture.
-                            </p>
-
-                        </div>
-
-                        <button class="next-button"
-                                id="nextButton"
-                                onclick="goNext()"
-                                disabled>
-                            Next Lecture →
-                        </button>
-
-                    </div>
-
-                </section>
 
             </section>
 
 
-            <!-- COMPLETION -->
+        </section>
 
-            <section class="completion-panel"
-                     id="completionPanel">
 
-                <div class="completion-icon">
-                    ✓
+        <!-- COMPLETION -->
+
+        <section
+            class="completion-panel"
+            id="completionPanel">
+
+
+            <div class="completion-icon">
+                ✓
+            </div>
+
+
+            <h2>
+                Course Completed
+            </h2>
+
+
+            <p>
+
+                Congratulations. You have completed all
+                required lectures, learning activities,
+                assessments, and final requirements.
+
+            </p>
+
+
+            <div class="certificate-box">
+
+                <strong>
+                    Completion Certificate
+                </strong>
+
+
+                <div
+                    class="certificate-id"
+                    id="certificateId">
                 </div>
 
-                <h2>
-                    Course Completed
-                </h2>
+            </div>
 
-                <p>
-                    Congratulations. You have completed all
-                    required lectures, learning activities,
-                    assessments, and final requirements.
-                </p>
 
-                <div class="certificate-box">
+            <button
+                class="btn btn-primary"
+                onclick="openCertificate()">
 
-                    <strong>
-                        Completion Certificate
-                    </strong>
+                Continue to Certificate
 
-                    <div class="certificate-id"
-                         id="certificateId">
-                    </div>
+            </button>
 
-                </div>
 
-                <button class="btn btn-primary"
-                        onclick="openCertificate()">
-                    Continue to Certificate
-                </button>
+        </section>
 
-            </section>
 
-        </div>
+    </div>
 
-    </main>
+</main>
 
 </div>
 
 
-<div class="toast"
-     id="toast">
+<!-- TOAST -->
+
+<div
+    class="toast"
+    id="toast">
+
 </div>
 
 
 <script>
 
-/* ============================================================
+/* =========================================================
    CONFIGURATION
-============================================================ */
+========================================================= */
 
 const API_URL =
-"https://script.google.com/macros/s/AKfycbwbmp19FOeDmWIK2S7n4U7EPVB34W17WrHaSYHa74hHXL06WOYF_9EL2dC6tWt4xbqc/exec";
+    "https://script.google.com/macros/s/AKfycbw1G5noWowhqjF487mG2XtNCQroj-EeieOMEP5NbBoM3w3cQxX6IDTyC6vVAdmqE4mCng/exec";
 
 
-/*
-    Change this to your actual completion/certificate page.
-
-    Example:
-
-    const COMPLETION_REDIRECT =
-        "https://yourdomain.com/completed.html";
-
-*/
-
-const COMPLETION_REDIRECT =
-    "completed.html";
-
-
-/* ============================================================
-   USER
-============================================================ */
-
-const urlParams = new URLSearchParams(window.location.search);
-
-let USER_ID =
-    urlParams.get("userId") ||
-    localStorage.getItem("course_user_id");
-
-if (!USER_ID) {
-
-    USER_ID =
-        "user_" +
-        Date.now() +
-        "_" +
-        Math.random()
-            .toString(36)
-            .substring(2,8);
-
-    localStorage.setItem(
-        "course_user_id",
-        USER_ID
-    );
-}
-
-
-/* ============================================================
+/* =========================================================
    COURSE DATA
-============================================================ */
+
+   Replace/add your actual resources here.
+========================================================= */
 
 const lectures = [
 
-{
-    id: 1,
-    title: "Introduction",
-    description:
-        "Understand the fundamentals of computer science, computational thinking and Python programming.",
-    video:
-        "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/video_galleries/lecture-videos/",
-    notes:
-        "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/resources/mit6_100l_f22_lec01_pdf/",
-    code:
-        "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/resources/mit6_100l_f22_lec01_code_py/",
-    exercise:
-        "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/pages/finger-exercises/",
-    practice: [
-        "Watch the lecture",
-        "Review the lecture notes",
-        "Run the accompanying Python code",
-        "Complete the finger exercises",
-        "Write a simple Python program"
-    ]
-},
+    {
+        id: 1,
+        title: "Introduction",
+        description:
+            "Introduction to computation, programming and the Python learning journey.",
+        checklist: [
+            "Watch the lecture",
+            "Read the lecture notes",
+            "Write and run your first Python program"
+        ],
+        resources: [],
+        problemSet: null
+    },
 
-{
-    id: 2,
-    title: "Strings, Input/Output, and Branching",
-    description:
-        "Learn strings, user input, output and conditional branching.",
-    video:
-        "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/video_galleries/lecture-videos/",
-    notes:
-        "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/resources/mit6_100l_f22_lec02_pdf/",
-    code:
-        "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/resources/mit6_100l_f22_lec02_code_py/",
-    exercise:
-        "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/pages/finger-exercises/",
-    practice: [
-        "Watch the lecture",
-        "Review the lecture notes",
-        "Run the lecture code",
-        "Complete finger exercises",
-        "Build an input-based branching program"
-    ]
-},
+    {
+        id: 2,
+        title: "Core Elements of Programs",
+        description:
+            "Learn variables, expressions, operators and the basic structure of Python programs.",
+        checklist: [
+            "Watch the lecture",
+            "Study variables and expressions",
+            "Complete the coding exercises"
+        ],
+        resources: [],
+        problemSet: null
+    },
 
-{
-    id: 3,
-    title: "Iteration",
-    description:
-        "Understand loops and repeated computation using Python.",
-    video: "#",
-    notes:
-        "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/resources/mit6_100l_f22_lec03_pdf/",
-    code:
-        "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/resources/mit6_100l_f22_lec03_code_py/",
-    exercise:
-        "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/pages/finger-exercises/",
-    practice: [
-        "Watch the lecture",
-        "Review the notes",
-        "Run lecture examples",
-        "Complete exercises",
-        "Build a loop-based program"
-    ]
-},
+    {
+        id: 3,
+        title: "Computations",
+        description:
+            "Understand computation, values, operators and mathematical expressions.",
+        checklist: [
+            "Watch the lecture",
+            "Practice Python expressions",
+            "Complete the exercises"
+        ],
+        resources: [],
+        problemSet: null
+    },
 
-{
-    id: 4,
-    title: "Loops over Strings, Guess-and-Check, Binary",
-    description:
-        "Explore loops over strings, guess-and-check algorithms and binary concepts.",
-    video: "#",
-    notes:
-        "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/resources/mit6_100l_f22_lec04_pdf/",
-    code:
-        "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/resources/mit6_100l_f22_lec04_code_py/",
-    exercise:
-        "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/pages/finger-exercises/",
-    practice: [
-        "Watch the lecture",
-        "Review the notes",
-        "Study lecture code",
-        "Complete exercises",
-        "Implement guess-and-check"
-    ]
-},
+    {
+        id: 4,
+        title: "Branching",
+        description:
+            "Learn conditional logic and decision making using if, elif and else.",
+        checklist: [
+            "Study conditional statements",
+            "Write branching programs",
+            "Complete the exercises"
+        ],
+        resources: [],
+        problemSet: null
+    },
 
-{
-    id: 5,
-    title: "Floats and Approximation Methods",
-    description:
-        "Learn floating point numbers and numerical approximation.",
-    video: "#",
-    notes:
-        "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/resources/mit6_100l_f22_lec05_pdf/",
-    code:
-        "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/resources/mit6_100l_f22_lec05_code_py/",
-    exercise:
-        "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/pages/finger-exercises/",
-    practice: [
-        "Watch lecture",
-        "Review notes",
-        "Run code",
-        "Complete exercises",
-        "Implement approximation"
-    ]
-},
+    {
+        id: 5,
+        title: "Iteration",
+        description:
+            "Learn loops and repeated computation using Python.",
+        checklist: [
+            "Study for loops",
+            "Study while loops",
+            "Complete iteration exercises"
+        ],
+        resources: [],
+        problemSet: null
+    },
 
-{
-    id: 6,
-    title: "Bisection Search",
-    description:
-        "Understand bisection search and efficient search-space reduction.",
-    video: "#",
-    notes:
-        "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/resources/mit6_100l_f22_lec06_pdf/",
-    code:
-        "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/resources/mit6_100l_f22_lec06_code_py/",
-    exercise:
-        "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/pages/finger-exercises/",
-    practice: [
-        "Watch lecture",
-        "Review notes",
-        "Run code",
-        "Complete exercises",
-        "Implement bisection search"
-    ]
-},
+    {
+        id: 6,
+        title: "Functions",
+        description:
+            "Understand functions, parameters, arguments and return values.",
+        checklist: [
+            "Study function definitions",
+            "Write reusable functions",
+            "Complete the exercises"
+        ],
+        resources: [],
+        problemSet: null
+    },
 
-{
-    id: 7,
-    title: "Decomposition, Abstraction, Functions",
-    description:
-        "Break complex problems into smaller reusable functions.",
-    video: "#",
-    notes:
-        "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/resources/mit6_100l_f22_lec07_pdf/",
-    code:
-        "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/resources/mit6_100l_f22_lec07_code_py/",
-    exercise:
-        "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/pages/finger-exercises/",
-    practice: [
-        "Watch lecture",
-        "Read notes",
-        "Run examples",
-        "Complete exercises",
-        "Refactor a program into functions"
-    ]
-},
+    {
+        id: 7,
+        title: "Testing and Debugging",
+        description:
+            "Learn systematic approaches to testing programs and finding errors.",
+        checklist: [
+            "Study common programming errors",
+            "Practice debugging",
+            "Complete the debugging exercises"
+        ],
+        resources: [],
+        problemSet: null
+    },
 
-{
-    id: 8,
-    title: "Functions as Objects",
-    description:
-        "Understand how Python treats functions as first-class objects.",
-    video: "#",
-    notes:
-        "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/resources/mit6_100l_f22_lec08_pdf/",
-    code:
-        "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/resources/mit6_100l_f22_lec08_code_py/",
-    exercise:
-        "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/pages/finger-exercises/",
-    practice: [
-        "Watch lecture",
-        "Read notes",
-        "Run code",
-        "Complete exercises",
-        "Pass functions as arguments"
-    ]
-},
+    {
+        id: 8,
+        title: "Exceptions and Assertions",
+        description:
+            "Learn how programs handle unexpected situations and validate assumptions.",
+        checklist: [
+            "Study exceptions",
+            "Practice try and except",
+            "Complete the exercises"
+        ],
+        resources: [],
+        problemSet: null
+    },
 
-{
-    id: 9,
-    title: "Lambda Functions, Tuples, and Lists",
-    description:
-        "Learn lambda expressions, tuples and Python lists.",
-    video: "#",
-    notes:
-        "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/resources/mit6_100l_f22_lec09_pdf/",
-    code:
-        "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/resources/mit6_100l_f22_lec09_code_py/",
-    exercise:
-        "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/pages/finger-exercises/",
-    practice: [
-        "Watch lecture",
-        "Review notes",
-        "Run code",
-        "Complete exercises",
-        "Manipulate lists and tuples"
-    ]
-},
+    {
+        id: 9,
+        title: "Lists",
+        description:
+            "Learn Python lists and collections of values.",
+        checklist: [
+            "Study list operations",
+            "Practice indexing and iteration",
+            "Complete list exercises"
+        ],
+        resources: [],
+        problemSet: null
+    },
 
-{
-    id: 10,
-    title: "Lists, Mutability",
-    description:
-        "Understand Python lists and mutable objects.",
-    video: "#",
-    notes:
-        "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/resources/mit6_100l_f22_lec10_pdf/",
-    code:
-        "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/resources/mit6_100l_f22_lec10_code_py/",
-    exercise:
-        "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/pages/finger-exercises/",
-    practice: [
-        "Watch lecture",
-        "Review notes",
-        "Run code",
-        "Complete exercises",
-        "Build a list-processing application"
-    ]
-},
+    {
+        id: 10,
+        title: "Tuples and Dictionaries",
+        description:
+            "Explore tuples, dictionaries and structured data.",
+        checklist: [
+            "Study tuples",
+            "Study dictionaries",
+            "Complete collection exercises"
+        ],
+        resources: [],
+        problemSet: null
+    },
 
-{
-    id: 11,
-    title: "Aliasing, Cloning",
-    description:
-        "Understand references, aliasing and object cloning.",
-    video: "#",
-    notes:
-        "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/resources/mit6_100l_f22_lec11_pdf/",
-    code:
-        "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/resources/mit6_100l_f22_lec11_code_py/",
-    exercise:
-        "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/pages/finger-exercises/",
-    practice: [
-        "Watch lecture",
-        "Review notes",
-        "Run code",
-        "Complete exercises",
-        "Demonstrate aliasing and cloning"
-    ]
-},
+    {
+        id: 11,
+        title: "Functions as Objects",
+        description:
+            "Understand functions as first-class objects and higher-order programming.",
+        checklist: [
+            "Study functions as objects",
+            "Practice passing functions",
+            "Complete the exercises"
+        ],
+        resources: [],
+        problemSet: null
+    },
 
-{
-    id: 12,
-    title: "List Comprehension, Functions as Objects, Testing, Debugging",
-    description:
-        "Learn list comprehensions and improve program quality through testing and debugging.",
-    video: "#",
-    notes:
-        "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/resources/mit6_100l_f22_lec12_pdf/",
-    code:
-        "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/resources/mit6_100l_f22_lec12_code_zip/",
-    exercise:
-        "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/pages/finger-exercises/",
-    practice: [
-        "Watch lecture",
-        "Review notes",
-        "Study code",
-        "Complete exercises",
-        "Debug a Python program"
-    ]
-},
+    {
+        id: 12,
+        title: "Recursion",
+        description:
+            "Learn recursive problem solving and recursive function design.",
+        checklist: [
+            "Understand recursion",
+            "Trace recursive functions",
+            "Complete recursion exercises"
+        ],
+        resources: [],
+        problemSet: null
+    },
 
-{
-    id: 13,
-    title: "Exceptions, Assertions",
-    description:
-        "Learn error handling and defensive programming.",
-    video: "#",
-    notes:
-        "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/resources/mit6_100l_f22_lec13_pdf/",
-    code:
-        "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/resources/mit6_100l_f22_lec13_code_py/",
-    exercise:
-        "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/pages/finger-exercises/",
-    practice: [
-        "Watch lecture",
-        "Read notes",
-        "Run examples",
-        "Complete exercises",
-        "Implement error handling"
-    ]
-},
+    {
+        id: 13,
+        title: "Searching and Sorting",
+        description:
+            "Understand fundamental searching and sorting techniques.",
+        checklist: [
+            "Study searching",
+            "Study sorting",
+            "Implement the algorithms"
+        ],
+        resources: [],
+        problemSet: null
+    },
 
-{
-    id: 14,
-    title: "Dictionaries",
-    description:
-        "Learn key-value data structures and dictionary operations.",
-    video: "#",
-    notes:
-        "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/resources/mit6_100l_f22_lec14_pdf/",
-    code:
-        "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/resources/mit6_100l_f22_lec14_code_py/",
-    exercise:
-        "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/pages/finger-exercises/",
-    practice: [
-        "Watch lecture",
-        "Read notes",
-        "Run code",
-        "Complete exercises",
-        "Build a dictionary-based application"
-    ]
-},
+    {
+        id: 14,
+        title: "Complexity",
+        description:
+            "Learn how to reason about computational complexity and efficiency.",
+        checklist: [
+            "Study algorithm complexity",
+            "Compare algorithms",
+            "Complete complexity exercises"
+        ],
+        resources: [],
+        problemSet: null
+    },
 
-{
-    id: 15,
-    title: "Recursion",
-    description:
-        "Understand recursive problem solving and recursive functions.",
-    video: "#",
-    notes:
-        "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/resources/mit6_100l_f22_lec15_pdf/",
-    code:
-        "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/resources/mit6_100l_f22_lec15_code_py/",
-    exercise:
-        "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/pages/finger-exercises/",
-    practice: [
-        "Watch lecture",
-        "Review notes",
-        "Run recursive examples",
-        "Complete exercises",
-        "Write recursive functions"
-    ]
-},
+    {
+        id: 15,
+        title: "Classes and Objects",
+        description:
+            "Introduction to object-oriented programming with Python.",
+        checklist: [
+            "Study classes",
+            "Create objects",
+            "Complete OOP exercises"
+        ],
+        resources: [],
+        problemSet: null
+    },
 
-{
-    id: 16,
-    title: "Recursion on Non-Numerics",
-    description:
-        "Apply recursion to strings, collections and non-numerical problems.",
-    video: "#",
-    notes:
-        "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/resources/mit6_100l_f22_lec16_pdf/",
-    code:
-        "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/resources/mit6_100l_f22_lec16_code_py/",
-    exercise:
-        "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/pages/finger-exercises/",
-    practice: [
-        "Watch lecture",
-        "Review notes",
-        "Run code",
-        "Complete exercises",
-        "Solve a recursive non-numerical problem"
-    ]
-},
+    {
+        id: 16,
+        title: "Inheritance",
+        description:
+            "Learn inheritance and relationships between classes.",
+        checklist: [
+            "Study inheritance",
+            "Create subclasses",
+            "Complete the exercises"
+        ],
+        resources: [],
+        problemSet: null
+    },
 
-{
-    id: 17,
-    title: "Python Classes",
-    description:
-        "Learn the fundamentals of classes and objects.",
-    video: "#",
-    notes:
-        "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/resources/mit6_100l_f22_lec17_pdf/",
-    code:
-        "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/resources/mit6_100l_f22_lec17_code_py/",
-    exercise:
-        "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/pages/finger-exercises/",
-    practice: [
-        "Watch lecture",
-        "Review notes",
-        "Run class examples",
-        "Complete exercises",
-        "Create a Python class"
-    ]
-},
+    {
+        id: 17,
+        title: "Abstract Data Types",
+        description:
+            "Understand abstraction and data structure design.",
+        checklist: [
+            "Study abstraction",
+            "Implement an abstract data type",
+            "Complete exercises"
+        ],
+        resources: [],
+        problemSet: null
+    },
 
-{
-    id: 18,
-    title: "More Python Class Methods",
-    description:
-        "Work with class methods, object state and object behavior.",
-    video: "#",
-    notes:
-        "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/resources/mit6_100l_f22_lec18_pdf/",
-    code:
-        "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/resources/mit6_100l_f22_lec18_code_py/",
-    exercise:
-        "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/pages/finger-exercises/",
-    practice: [
-        "Watch lecture",
-        "Review notes",
-        "Run code",
-        "Complete exercises",
-        "Extend a Python class"
-    ]
-},
+    {
+        id: 18,
+        title: "Linked Lists",
+        description:
+            "Understand linked data structures and node-based representations.",
+        checklist: [
+            "Study linked lists",
+            "Implement a linked list",
+            "Complete exercises"
+        ],
+        resources: [],
+        problemSet: null
+    },
 
-{
-    id: 19,
-    title: "Inheritance",
-    description:
-        "Understand inheritance and class hierarchies.",
-    video: "#",
-    notes:
-        "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/resources/mit6_100l_f22_lec19_pdf/",
-    code:
-        "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/resources/mit6_100l_f22_lec19_code_py/",
-    exercise:
-        "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/pages/finger-exercises/",
-    practice: [
-        "Watch lecture",
-        "Review notes",
-        "Run code",
-        "Complete exercises",
-        "Create an inheritance hierarchy"
-    ]
-},
+    {
+        id: 19,
+        title: "Stacks and Queues",
+        description:
+            "Learn stack and queue data structures and their applications.",
+        checklist: [
+            "Study stacks",
+            "Study queues",
+            "Implement both structures"
+        ],
+        resources: [],
+        problemSet: null
+    },
 
-{
-    id: 20,
-    title: "Fitness Tracker Object Oriented Programming Example",
-    description:
-        "Apply object-oriented programming to a realistic fitness-tracking example.",
-    video: "#",
-    notes:
-        "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/resources/mit6_100l_f22_lec20_pdf/",
-    code:
-        "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/resources/mit6_100l_f22_lec20_code_zip/",
-    exercise:
-        "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/pages/finger-exercises/",
-    practice: [
-        "Watch lecture",
-        "Review notes",
-        "Study example",
-        "Complete exercises",
-        "Build a small OOP application"
-    ]
-},
+    {
+        id: 20,
+        title: "Trees",
+        description:
+            "Introduction to tree structures and hierarchical data.",
+        checklist: [
+            "Study tree terminology",
+            "Implement a basic tree",
+            "Complete exercises"
+        ],
+        resources: [],
+        problemSet: null
+    },
 
-{
-    id: 21,
-    title: "Timing Programs, Counting Operations",
-    description:
-        "Understand program performance and operation counting.",
-    video: "#",
-    notes:
-        "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/resources/mit6_100l_f22_lec21_pdf/",
-    code:
-        "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/resources/mit6_100l_f22_lec21_code_py/",
-    exercise:
-        "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/pages/finger-exercises/",
-    practice: [
-        "Watch lecture",
-        "Review notes",
-        "Run examples",
-        "Complete exercises",
-        "Compare algorithm performance"
-    ]
-},
+    {
+        id: 21,
+        title: "Graphs",
+        description:
+            "Learn graph representations and graph-based problem solving.",
+        checklist: [
+            "Study graph concepts",
+            "Explore graph representations",
+            "Complete exercises"
+        ],
+        resources: [],
+        problemSet: null
+    },
 
-{
-    id: 22,
-    title: "Big Oh and Theta",
-    description:
-        "Learn Big O, Theta notation and algorithmic growth rates.",
-    video: "#",
-    notes:
-        "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/resources/mit6_100l_f22_lec22_pdf/",
-    code:
-        "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/resources/mit6_100l_f22_lec22_code_py/",
-    exercise:
-        "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/pages/finger-exercises/",
-    practice: [
-        "Watch lecture",
-        "Read notes",
-        "Run code",
-        "Complete exercises",
-        "Analyze algorithm complexity"
-    ]
-},
+    {
+        id: 22,
+        title: "Dynamic Programming",
+        description:
+            "Learn how to break complex problems into reusable subproblems.",
+        checklist: [
+            "Study dynamic programming",
+            "Solve a simple DP problem",
+            "Complete exercises"
+        ],
+        resources: [],
+        problemSet: null
+    },
 
-{
-    id: 23,
-    title: "Complexity Classes Examples",
-    description:
-        "Compare complexity classes and understand algorithmic trade-offs.",
-    video: "#",
-    notes:
-        "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/resources/mit6_100l_f22_lec23_pdf/",
-    code:
-        "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/resources/mit6_100l_f22_lec23_code_py/",
-    exercise:
-        "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/pages/finger-exercises/",
-    practice: [
-        "Watch lecture",
-        "Review notes",
-        "Run code",
-        "Complete exercises",
-        "Classify algorithm complexity"
-    ]
-},
+    {
+        id: 23,
+        title: "Randomized Algorithms",
+        description:
+            "Explore algorithms involving randomness and probabilistic approaches.",
+        checklist: [
+            "Study randomized algorithms",
+            "Implement a randomized example",
+            "Complete exercises"
+        ],
+        resources: [],
+        problemSet: null
+    },
 
-{
-    id: 24,
-    title: "Sorting Algorithms",
-    description:
-        "Understand sorting algorithms and compare their efficiency.",
-    video: "#",
-    notes:
-        "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/resources/mit6_100l_f22_lec24_pdf/",
-    code:
-        "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/resources/mit6_100l_f22_lec24_code_py/",
-    exercise:
-        "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/pages/finger-exercises/",
-    practice: [
-        "Watch lecture",
-        "Review notes",
-        "Run sorting code",
-        "Complete exercises",
-        "Implement sorting algorithms"
-    ]
-},
+    {
+        id: 24,
+        title: "Data and Visualization",
+        description:
+            "Apply programming concepts to data processing and visualization.",
+        checklist: [
+            "Explore data processing",
+            "Create a simple visualization",
+            "Complete exercises"
+        ],
+        resources: [],
+        problemSet: null
+    },
 
-{
-    id: 25,
-    title: "Plotting",
-    description:
-        "Use Python plotting to visualize data and computational results.",
-    video: "#",
-    notes:
-        "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/resources/mit6_100l_f22_lec25_pdf/",
-    code:
-        "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/resources/mit6_100l_f22_lec25_code_zip/",
-    exercise:
-        "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/pages/finger-exercises/",
-    practice: [
-        "Watch lecture",
-        "Review notes",
-        "Run plotting examples",
-        "Complete exercises",
-        "Create a Python visualization"
-    ]
-},
+    {
+        id: 25,
+        title: "Final Project",
+        description:
+            "Apply the concepts learned throughout the course in a practical project.",
+        checklist: [
+            "Select a project",
+            "Build the project",
+            "Submit the project"
+        ],
+        resources: [],
+        problemSet: null
+    },
 
-{
-    id: 26,
-    title: "List Access, Hashing, Simulations, and Wrap-Up",
-    description:
-        "Review list access, hashing, simulations and the major concepts from the course.",
-    video: "#",
-    notes:
-        "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/resources/mit6_100l_f22_lec26_pdf/",
-    code:
-        "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/resources/mit6_100l_f22_lec26_code_py/",
-    exercise:
-        "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/pages/finger-exercises/",
-    practice: [
-        "Watch lecture",
-        "Review notes",
-        "Study final code",
-        "Complete exercises",
-        "Build a final Python simulation"
-    ]
-}
+    {
+        id: 26,
+        title: "Final Review",
+        description:
+            "Review the complete learning pathway and finalize all requirements.",
+        checklist: [
+            "Review the course",
+            "Complete the final assessment",
+            "Submit final requirements"
+        ],
+        resources: [],
+        problemSet: null
+    }
 
 ];
 
 
-/* ============================================================
-   STATE
-============================================================ */
+/* =========================================================
+   GLOBAL STATE
+========================================================= */
 
-let currentLecture = 1;
+let currentUser = null;
 
-let progress = {
-    lectures: {}
-};
+let sessionToken = null;
+
+let currentLectureIndex = 0;
+
+let studentProgress = {};
+
+let saving = false;
 
 
-/* ============================================================
-   INITIALIZE
-============================================================ */
+/* =========================================================
+   INITIALIZATION
+========================================================= */
 
 document.addEventListener(
     "DOMContentLoaded",
-    async () => {
+    function () {
 
-        initializeProgress();
+        const savedUser =
+            localStorage.getItem("academyUser");
 
-        renderSidebar();
+        const savedToken =
+            localStorage.getItem("academyToken");
 
-        await loadProgress();
 
-        determineStartingLecture();
+        if (
+            savedUser &&
+            savedToken
+        ) {
 
-        renderLecture();
+            try {
 
-        updateGlobalProgress();
+                currentUser =
+                    JSON.parse(savedUser);
+
+                sessionToken =
+                    savedToken;
+
+                showApp();
+
+                loadProgress();
+
+            } catch (error) {
+
+                clearSession();
+
+            }
+
+        } else {
+
+            showLogin();
+
+        }
 
     }
 );
 
 
-/* ============================================================
-   DEFAULT PROGRESS
-============================================================ */
+/* =========================================================
+   LOGIN
+========================================================= */
 
-function initializeProgress() {
+function login() {
 
-    lectures.forEach(lecture => {
+    const name =
+        document
+            .getElementById("loginName")
+            .value
+            .trim();
 
-        if (!progress.lectures[lecture.id]) {
+    const email =
+        document
+            .getElementById("loginEmail")
+            .value
+            .trim();
 
-            progress.lectures[lecture.id] = {
-
-                video: false,
-
-                notes: false,
-
-                code: false,
-
-                exercise: false,
-
-                practice: lecture.practice.map(
-                    () => false
-                ),
-
-                problemSet: false
-
-            };
-
-        }
-
-    });
-
-}
+    const phone =
+        document
+            .getElementById("loginPhone")
+            .value
+            .trim();
 
 
-/* ============================================================
-   LOAD PROGRESS FROM SERVER
-============================================================ */
-
-async function loadProgress() {
-
-    setSyncStatus("Syncing...");
-
-    try {
-
-        const response =
-            await fetch(
-                API_URL +
-                "?action=getProgress" +
-                "&userId=" +
-                encodeURIComponent(USER_ID)
-            );
-
-        const data =
-            await response.json();
-
-        if (
-            data &&
-            data.progress
-        ) {
-
-            progress =
-                normalizeServerProgress(
-                    data.progress
-                );
-
-        }
-
-        localStorage.setItem(
-            "course_progress",
-            JSON.stringify(progress)
+    const message =
+        document.getElementById(
+            "loginMessage"
         );
 
-        setSyncStatus(
-            "Progress synced"
+    const button =
+        document.getElementById(
+            "loginButton"
         );
+
+
+    if (!name) {
+
+        message.textContent =
+            "Please enter your name.";
+
+        return;
 
     }
 
-    catch(error) {
 
-        console.warn(
-            "Server sync failed:",
-            error
-        );
+    if (!email) {
 
-        const saved =
-            localStorage.getItem(
-                "course_progress"
-            );
+        message.textContent =
+            "Please enter your email.";
 
-        if(saved) {
+        return;
 
-            try {
+    }
 
-                progress =
-                    normalizeServerProgress(
-                        JSON.parse(saved)
-                    );
+
+    if (!phone) {
+
+        message.textContent =
+            "Please enter your phone number.";
+
+        return;
+
+    }
+
+
+    button.disabled = true;
+
+    button.textContent =
+        "Connecting...";
+
+    message.textContent = "";
+
+
+    jsonpRequest(
+
+        "login",
+
+        {
+            name: name,
+            email: email,
+            phone: phone
+        },
+
+        function (response) {
+
+            button.disabled = false;
+
+            button.textContent =
+                "Continue Learning →";
+
+
+            if (
+                !response ||
+                !response.success
+            ) {
+
+                message.textContent =
+                    response?.message ||
+                    "Unable to login. Please try again.";
+
+                return;
 
             }
-            catch(e) {}
+
+
+            currentUser =
+                response.user;
+
+            sessionToken =
+                response.token;
+
+
+            localStorage.setItem(
+                "academyUser",
+                JSON.stringify(currentUser)
+            );
+
+
+            localStorage.setItem(
+                "academyToken",
+                sessionToken
+            );
+
+
+            showApp();
+
+            loadProgress();
 
         }
 
-        setSyncStatus(
-            "Offline progress"
+    );
+
+}
+
+
+/* =========================================================
+   SHOW APP
+========================================================= */
+
+function showApp() {
+
+    document.getElementById(
+        "loginScreen"
+    ).style.display = "none";
+
+
+    document.getElementById(
+        "app"
+    ).style.display = "block";
+
+
+    updateUserUI();
+
+    renderSidebar();
+
+}
+
+
+/* =========================================================
+   SHOW LOGIN
+========================================================= */
+
+function showLogin() {
+
+    document.getElementById(
+        "loginScreen"
+    ).style.display = "flex";
+
+
+    document.getElementById(
+        "app"
+    ).style.display = "none";
+
+}
+
+
+/* =========================================================
+   USER UI
+========================================================= */
+
+function updateUserUI() {
+
+    if (!currentUser) return;
+
+
+    const avatar =
+        document.getElementById(
+            "avatar"
         );
 
-    }
+
+    avatar.textContent =
+        currentUser.name
+            .charAt(0)
+            .toUpperCase();
+
+
+    document.getElementById(
+        "userMenuName"
+    ).textContent =
+        currentUser.name;
+
+
+    document.getElementById(
+        "userMenuEmail"
+    ).textContent =
+        currentUser.email;
 
 }
 
 
-/* ============================================================
-   NORMALIZE SERVER DATA
-============================================================ */
+/* =========================================================
+   LOAD PROGRESS
+========================================================= */
 
-function normalizeServerProgress(serverProgress) {
+function loadProgress() {
 
-    const normalized = {
-        lectures: {}
-    };
+    if (!sessionToken) return;
 
-    lectures.forEach(
-        lecture => {
 
-            const source =
-                serverProgress.lectures &&
-                serverProgress.lectures[lecture.id]
-                    ? serverProgress.lectures[lecture.id]
-                    : {};
-
-            normalized.lectures[
-                lecture.id
-            ] = {
-
-                video:
-                    !!source.video,
-
-                notes:
-                    !!source.notes,
-
-                code:
-                    !!source.code,
-
-                exercise:
-                    !!source.exercise,
-
-                practice:
-                    Array.isArray(source.practice)
-                        ? source.practice
-                        : lecture.practice.map(
-                            () => false
-                        ),
-
-                problemSet:
-                    !!source.problemSet
-
-            };
-
-        }
+    setSyncStatus(
+        "Syncing progress..."
     );
 
-    return normalized;
 
-}
+    jsonpRequest(
+
+        "getProgress",
+
+        {
+            token: sessionToken
+        },
+
+        function (response) {
+
+            if (
+                !response ||
+                !response.success
+            ) {
+
+                handleSessionExpired();
+
+                return;
+
+            }
 
 
-/* ============================================================
-   SAVE LOCAL
-============================================================ */
-
-function saveLocalProgress() {
-
-    localStorage.setItem(
-        "course_progress",
-        JSON.stringify(progress)
-    );
-
-}
+            studentProgress =
+                response.progress || {};
 
 
-/* ============================================================
-   SERVER UPDATE
-============================================================ */
+            determineStartingLecture();
 
-async function syncCompletion(
-    lectureId,
-    resource,
-    value = true
-) {
+            renderSidebar();
 
-    setSyncStatus("Saving...");
+            renderLecture(
+                currentLectureIndex
+            );
 
-    try {
-
-        const url =
-            API_URL +
-            "?action=complete" +
-            "&userId=" +
-            encodeURIComponent(USER_ID) +
-            "&lectureId=" +
-            encodeURIComponent(lectureId) +
-            "&resource=" +
-            encodeURIComponent(resource) +
-            "&value=" +
-            encodeURIComponent(value);
-
-        const response =
-            await fetch(url);
-
-        const data =
-            await response.json();
-
-        if(data.success !== false) {
+            updateCourseProgress();
 
             setSyncStatus(
-                "Progress saved"
+                "Progress synced"
             );
 
         }
-        else {
 
-            setSyncStatus(
-                "Saved locally"
-            );
-
-        }
-
-    }
-
-    catch(error) {
-
-        console.warn(
-            "Completion sync error:",
-            error
-        );
-
-        setSyncStatus(
-            "Saved locally"
-        );
-
-    }
-
-}
-
-
-/* ============================================================
-   RESOURCE COMPLETE
-============================================================ */
-
-async function completeResource(
-    lectureId,
-    resource
-) {
-
-    const lectureProgress =
-        progress.lectures[lectureId];
-
-    if(!lectureProgress) {
-        return;
-    }
-
-    lectureProgress[resource] =
-        true;
-
-    saveLocalProgress();
-
-    await syncCompletion(
-        lectureId,
-        resource,
-        true
-    );
-
-    renderLecture();
-
-    updateGlobalProgress();
-
-    showToast(
-        "Activity completed ✓"
-    );
-
-    checkLectureCompletion(
-        lectureId
     );
 
 }
 
 
-/* ============================================================
-   PRACTICE COMPLETE
-============================================================ */
-
-async function completePractice(
-    lectureId,
-    index,
-    checked
-) {
-
-    progress
-        .lectures[lectureId]
-        .practice[index] =
-        checked;
-
-    saveLocalProgress();
-
-    await syncCompletion(
-        lectureId,
-        "practice_" + index,
-        checked
-    );
-
-    renderLecture();
-
-    updateGlobalProgress();
-
-    checkLectureCompletion(
-        lectureId
-    );
-
-}
-
-
-/* ============================================================
-   PROBLEM SET
-============================================================ */
-
-async function completeProblemSet(
-    lectureId
-) {
-
-    progress
-        .lectures[lectureId]
-        .problemSet =
-        true;
-
-    saveLocalProgress();
-
-    await syncCompletion(
-        lectureId,
-        "problemSet",
-        true
-    );
-
-    renderLecture();
-
-    updateGlobalProgress();
-
-    checkLectureCompletion(
-        lectureId
-    );
-
-}
-
-
-/* ============================================================
-   LECTURE COMPLETION
-============================================================ */
-
-function isLectureComplete(
-    lectureId
-) {
-
-    const p =
-        progress.lectures[
-            lectureId
-        ];
-
-    if(!p) {
-        return false;
-    }
-
-    const practiceComplete =
-        p.practice.every(
-            value => value === true
-        );
-
-    return (
-        p.video &&
-        p.notes &&
-        p.code &&
-        p.exercise &&
-        practiceComplete &&
-        p.problemSet
-    );
-
-}
-
-
-/* ============================================================
-   CHECK LECTURE COMPLETION
-============================================================ */
-
-async function checkLectureCompletion(
-    lectureId
-) {
-
-    if(
-        !isLectureComplete(
-            lectureId
-        )
-    ) {
-        return;
-    }
-
-    await syncCompletion(
-        lectureId,
-        "lectureCompleted",
-        true
-    );
-
-    showToast(
-        "Lecture " +
-        lectureId +
-        " completed ✓"
-    );
-
-    updateGlobalProgress();
-
-}
-
-
-/* ============================================================
-   LECTURE UNLOCKING
-============================================================ */
-
-function isLectureUnlocked(
-    lectureId
-) {
-
-    if(lectureId === 1) {
-        return true;
-    }
-
-    return isLectureComplete(
-        lectureId - 1
-    );
-
-}
-
-
-/* ============================================================
-   DETERMINE START
-============================================================ */
+/* =========================================================
+   DETERMINE WHERE STUDENT SHOULD START
+========================================================= */
 
 function determineStartingLecture() {
 
-    for(
-        let i = 1;
-        i <= lectures.length;
+    let firstIncomplete = 0;
+
+
+    for (
+        let i = 0;
+        i < lectures.length;
         i++
     ) {
 
-        if(
-            !isLectureComplete(i)
+        const progress =
+            getLectureProgress(
+                lectures[i].id
+            );
+
+
+        if (
+            !progress ||
+            !progress.completed
         ) {
 
-            currentLecture =
-                i;
+            firstIncomplete = i;
 
-            return;
+            break;
+
+        }
+
+
+        if (
+            i === lectures.length - 1
+        ) {
+
+            firstIncomplete = i;
 
         }
 
     }
 
-    currentLecture =
-        lectures.length;
+
+    currentLectureIndex =
+        firstIncomplete;
 
 }
 
 
-/* ============================================================
-   SIDEBAR
-============================================================ */
+/* =========================================================
+   GET LECTURE PROGRESS
+========================================================= */
+
+function getLectureProgress(
+    lectureId
+) {
+
+    return (
+        studentProgress[
+            String(lectureId)
+        ] || {
+            completed: false,
+            checklist: []
+        }
+    );
+
+}
+
+
+/* =========================================================
+   RENDER SIDEBAR
+========================================================= */
 
 function renderSidebar() {
 
@@ -2235,32 +2459,47 @@ function renderSidebar() {
             "lectureNav"
         );
 
+
     container.innerHTML = "";
 
+
     lectures.forEach(
-        lecture => {
+        function (
+            lecture,
+            index
+        ) {
+
+            const progress =
+                getLectureProgress(
+                    lecture.id
+                );
+
+
+            const previousCompleted =
+                index === 0 ||
+                getLectureProgress(
+                    lectures[index - 1].id
+                ).completed;
+
 
             const unlocked =
-                isLectureUnlocked(
-                    lecture.id
-                );
+                index === 0 ||
+                previousCompleted;
 
-            const complete =
-                isLectureComplete(
-                    lecture.id
-                );
 
             const button =
                 document.createElement(
                     "button"
                 );
 
+
             button.className =
                 "lecture-nav-item";
 
-            if(
-                lecture.id ===
-                currentLecture
+
+            if (
+                index ===
+                currentLectureIndex
             ) {
 
                 button.classList.add(
@@ -2269,7 +2508,8 @@ function renderSidebar() {
 
             }
 
-            if(!unlocked) {
+
+            if (!unlocked) {
 
                 button.classList.add(
                     "locked"
@@ -2277,52 +2517,34 @@ function renderSidebar() {
 
             }
 
+
             button.innerHTML = `
 
-                <div class="nav-number">
-                    ${
-                        complete
+                <span class="lecture-nav-number">
+                    ${progress.completed
                         ? "✓"
-                        : lecture.id
-                    }
-                </div>
+                        : lecture.id}
+                </span>
 
-                <div class="nav-info">
+                <span class="lecture-nav-title">
+                    ${escapeHTML(lecture.title)}
+                </span>
 
-                    <div class="nav-title">
-                        ${escapeHtml(
-                            lecture.title
-                        )}
-                    </div>
-
-                    <div class="nav-status">
-                        ${
-                            complete
-                            ? "Completed"
-                            : unlocked
-                                ? "Available"
-                                : "Locked"
-                        }
-                    </div>
-
-                </div>
-
-                <div class="nav-check">
-                    ${
-                        complete
+                <span class="lecture-nav-status">
+                    ${progress.completed
                         ? "✓"
                         : unlocked
-                            ? "›"
-                            : "🔒"
-                    }
-                </div>
+                            ? ""
+                            : "🔒"}
+                </span>
 
             `;
 
-            button.onclick =
-                () => {
 
-                    if(!unlocked) {
+            button.onclick =
+                function () {
+
+                    if (!unlocked) {
 
                         showToast(
                             "Complete the previous lecture first."
@@ -2332,12 +2554,17 @@ function renderSidebar() {
 
                     }
 
-                    currentLecture =
-                        lecture.id;
+
+                    currentLectureIndex =
+                        index;
+
 
                     renderSidebar();
 
-                    renderLecture();
+                    renderLecture(
+                        index
+                    );
+
 
                     window.scrollTo({
                         top: 0,
@@ -2345,6 +2572,7 @@ function renderSidebar() {
                     });
 
                 };
+
 
             container.appendChild(
                 button
@@ -2356,27 +2584,36 @@ function renderSidebar() {
 }
 
 
-/* ============================================================
+/* =========================================================
    RENDER LECTURE
-============================================================ */
+========================================================= */
 
-function renderLecture() {
+function renderLecture(index) {
 
     const lecture =
-        lectures.find(
-            l =>
-                l.id ===
-                currentLecture
+        lectures[index];
+
+
+    if (!lecture) return;
+
+
+    const progress =
+        getLectureProgress(
+            lecture.id
         );
 
-    if(!lecture) {
-        return;
-    }
 
-    const p =
-        progress.lectures[
-            lecture.id
-        ];
+    document.getElementById(
+        "completionPanel"
+    ).style.display =
+        "none";
+
+
+    document.getElementById(
+        "lessonSection"
+    ).style.display =
+        "block";
+
 
     document.getElementById(
         "lessonNumber"
@@ -2384,10 +2621,12 @@ function renderLecture() {
         "Lecture " +
         lecture.id;
 
+
     document.getElementById(
         "lessonTitle"
     ).textContent =
         lecture.title;
+
 
     document.getElementById(
         "lessonDescription"
@@ -2395,57 +2634,66 @@ function renderLecture() {
         lecture.description;
 
 
-    const complete =
-        isLectureComplete(
-            lecture.id
-        );
-
     const status =
         document.getElementById(
             "lessonStatus"
         );
 
-    status.textContent =
-        complete
-        ? "Completed"
-        : "In Progress";
 
-    status.className =
-        "status-pill" +
-        (
-            complete
-            ? " complete"
-            : ""
+    if (progress.completed) {
+
+        status.textContent =
+            "Completed";
+
+        status.classList.add(
+            "completed"
         );
+
+    } else {
+
+        status.textContent =
+            "In Progress";
+
+        status.classList.remove(
+            "completed"
+        );
+
+    }
 
 
     renderResources(
-        lecture,
-        p
+        lecture
     );
 
-    renderPractice(
+
+    renderChecklist(
         lecture,
-        p
+        progress
     );
+
 
     renderProblemSet(
-        lecture,
-        p
+        lecture
     );
 
-    renderNextLecture();
+
+    updateNextButton(
+        lecture,
+        progress
+    );
+
+
+    renderSidebar();
 
 }
 
 
-/* ============================================================
-   RESOURCE CARDS
-============================================================ */
+/* =========================================================
+   RENDER RESOURCES
+========================================================= */
 
 function renderResources(
-    lecture,
-    p
+    lecture
 ) {
 
     const container =
@@ -2453,146 +2701,88 @@ function renderResources(
             "resourceGrid"
         );
 
-    const resources = [
-
-        {
-            key: "video",
-            icon: "▶",
-            name: "Lecture Video",
-            description:
-                "Watch the assigned MIT lecture video.",
-            url: lecture.video
-        },
-
-        {
-            key: "notes",
-            icon: "▤",
-            name: "Lecture Notes",
-            description:
-                "Read the official lecture notes and slides.",
-            url: lecture.notes
-        },
-
-        {
-            key: "code",
-            icon: "</>",
-            name: "Lecture Code",
-            description:
-                "Study and run the accompanying code.",
-            url: lecture.code
-        },
-
-        {
-            key: "exercise",
-            icon: "✓",
-            name: "Finger Exercises",
-            description:
-                "Practice the concepts with short exercises.",
-            url: lecture.exercise
-        }
-
-    ];
 
     container.innerHTML = "";
 
-    resources.forEach(
-        resource => {
 
-            const completed =
-                p[resource.key];
+    if (
+        !lecture.resources ||
+        lecture.resources.length === 0
+    ) {
 
-            const card =
-                document.createElement(
-                    "div"
-                );
+        container.innerHTML = `
 
-            card.className =
-                "resource-card";
+            <div class="resource-card">
 
-            card.innerHTML = `
+                <div class="resource-type">
+                    Resources
+                </div>
 
-                <div class="resource-top">
+                <h3>
+                    Learning Resources
+                </h3>
 
-                    <div class="resource-icon">
-                        ${resource.icon}
+                <p>
+                    Add your lecture videos, MIT notes,
+                    readings, code files or external
+                    resources to this lecture.
+                </p>
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    lecture.resources.forEach(
+        function(resource) {
+
+            container.innerHTML += `
+
+                <div class="resource-card">
+
+                    <div class="resource-type">
+                        ${escapeHTML(
+                            resource.type || "Resource"
+                        )}
                     </div>
 
+                    <h3>
+                        ${escapeHTML(
+                            resource.title
+                        )}
+                    </h3>
+
+                    <p>
+                        ${escapeHTML(
+                            resource.description || ""
+                        )}
+                    </p>
+
                     ${
-                        completed
+                        resource.url
                         ? `
-                            <span
-                                class="resource-completed">
-                                ✓ Complete
-                            </span>
+                            <a
+                                class="resource-button"
+                                href="${escapeAttribute(
+                                    resource.url
+                                )}"
+                                target="_blank"
+                                rel="noopener">
+
+                                Open Resource →
+
+                            </a>
                         `
                         : ""
                     }
 
                 </div>
 
-                <div class="resource-name">
-                    ${resource.name}
-                </div>
-
-                <p class="resource-description">
-                    ${resource.description}
-                </p>
-
-                <div class="resource-actions">
-
-                    <button
-                        class="btn btn-secondary"
-                        onclick="openResource(
-                            '${resource.url}',
-                            ${lecture.id},
-                            '${resource.key}'
-                        )">
-
-                        ${
-                            completed
-                            ? "Open Again"
-                            : "Open Resource"
-                        }
-
-                    </button>
-
-                    <button
-                        class="
-                            btn
-                            ${
-                                completed
-                                ? "btn-success"
-                                : "btn-primary"
-                            }
-                        "
-                        ${
-                            completed
-                            ? "disabled"
-                            : ""
-                        }
-                        onclick="
-                            completeResource(
-                                ${lecture.id},
-                                '${resource.key}'
-                            )
-                        "
-                    >
-
-                        ${
-                            completed
-                            ? "Completed ✓"
-                            : "Mark Complete"
-                        }
-
-                    </button>
-
-                </div>
-
             `;
-
-            container.appendChild(
-                card
-            );
 
         }
     );
@@ -2600,45 +2790,13 @@ function renderResources(
 }
 
 
-/* ============================================================
-   OPEN RESOURCE
-============================================================ */
+/* =========================================================
+   RENDER CHECKLIST
+========================================================= */
 
-function openResource(
-    url,
-    lectureId,
-    resource
-) {
-
-    if(
-        !url ||
-        url === "#"
-    ) {
-
-        showToast(
-            "Resource link not configured yet."
-        );
-
-        return;
-
-    }
-
-    window.open(
-        url,
-        "_blank",
-        "noopener,noreferrer"
-    );
-
-}
-
-
-/* ============================================================
-   PRACTICE
-============================================================ */
-
-function renderPractice(
+function renderChecklist(
     lecture,
-    p
+    progress
 ) {
 
     const container =
@@ -2646,58 +2804,88 @@ function renderPractice(
             "practiceList"
         );
 
+
     container.innerHTML = "";
 
-    lecture.practice.forEach(
-        (item, index) => {
+
+    const savedChecklist =
+        Array.isArray(
+            progress.checklist
+        )
+            ? progress.checklist
+            : [];
+
+
+    lecture.checklist.forEach(
+        function (
+            item,
+            index
+        ) {
 
             const checked =
-                !!p.practice[index];
+                savedChecklist[index] === true;
+
 
             const row =
                 document.createElement(
                     "div"
                 );
 
+
             row.className =
                 "practice-item";
+
+
+            if (checked) {
+
+                row.classList.add(
+                    "completed"
+                );
+
+            }
+
 
             row.innerHTML = `
 
                 <input
+                    class="practice-checkbox"
                     type="checkbox"
-                    id="practice_${lecture.id}_${index}"
-                    ${
-                        checked
-                        ? "checked"
-                        : ""
-                    }
+                    ${checked ? "checked" : ""}
                 >
 
-                <label
-                    for="practice_${lecture.id}_${index}">
-                    ${escapeHtml(item)}
-                </label>
+                <div class="practice-content">
+
+                    <div class="practice-title">
+                        ${escapeHTML(item)}
+                    </div>
+
+                    <div class="practice-description">
+                        Complete this required activity
+                        before moving to the next lecture.
+                    </div>
+
+                </div>
 
             `;
 
+
             const checkbox =
                 row.querySelector(
-                    "input"
+                    ".practice-checkbox"
                 );
+
 
             checkbox.addEventListener(
                 "change",
-                () => {
+                function () {
 
-                    completePractice(
-                        lecture.id,
-                        index,
-                        checkbox.checked
+                    updateChecklist(
+                        lecture
                     );
 
                 }
             );
+
 
             container.appendChild(
                 row
@@ -2709,219 +2897,210 @@ function renderPractice(
 }
 
 
-/* ============================================================
-   PROBLEM SET
-============================================================ */
+/* =========================================================
+   UPDATE CHECKLIST
+========================================================= */
 
-function getProblemSet(
-    lectureId
+function updateChecklist(
+    lecture
 ) {
 
-    if(
-        lectureId <= 4
-    ) {
+    const checkboxes =
+        document.querySelectorAll(
+            ".practice-checkbox"
+        );
 
-        return {
-            id: 0,
-            title:
-                "Problem Set 0",
-            description:
-                "Course orientation, survey and programming environment setup.",
-            url:
-                "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/resources/mit6_100l_f22_ps0_pdf/"
-        };
 
-    }
+    const checklist =
+        Array.from(
+            checkboxes
+        ).map(
+            checkbox =>
+                checkbox.checked
+        );
 
-    if(
-        lectureId <= 8
-    ) {
 
-        return {
-            id: 1,
-            title:
-                "Problem Set 1",
-            description:
-                "Foundational Python programming and computational problem solving.",
-            url:
-                "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/resources/mit6_100l_f22_ps1_pdf/"
-        };
+    const completed =
+        checklist.length > 0 &&
+        checklist.every(
+            value => value === true
+        );
 
-    }
 
-    if(
-        lectureId <= 12
-    ) {
+    studentProgress[
+        String(lecture.id)
+    ] = {
 
-        return {
-            id: 2,
-            title:
-                "Problem Set 2",
-            description:
-                "Programming logic, algorithms and structured problem solving.",
-            url:
-                "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/resources/mit6_100l_f22_ps2_pdf/"
-        };
+        completed:
+            completed,
 
-    }
+        checklist:
+            checklist,
 
-    if(
-        lectureId <= 16
-    ) {
+        updatedAt:
+            new Date().toISOString()
 
-        return {
-            id: 3,
-            title:
-                "Problem Set 3",
-            description:
-                "Functions, data structures and program decomposition.",
-            url:
-                "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/resources/mit6_100l_f22_ps3_pdf/"
-        };
-
-    }
-
-    if(
-        lectureId <= 20
-    ) {
-
-        return {
-            id: 4,
-            title:
-                "Problem Set 4",
-            description:
-                "Advanced programming concepts and algorithmic thinking.",
-            url:
-                "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/resources/mit6_100l_f22_ps4_pdf/"
-        };
-
-    }
-
-    return {
-        id: 5,
-        title:
-            "Problem Set 5",
-        description:
-            "Advanced computational problem solving and integration.",
-        url:
-            "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/resources/mit6_100l_f22_ps5_pdf/"
     };
 
+
+    renderChecklist(
+        lecture,
+        studentProgress[
+            String(lecture.id)
+        ]
+    );
+
+
+    updateNextButton(
+        lecture,
+        studentProgress[
+            String(lecture.id)
+        ]
+    );
+
+
+    updateCourseProgress();
+
+    renderSidebar();
+
+
+    saveLectureProgress(
+        lecture.id,
+        completed,
+        checklist
+    );
+
 }
 
 
-/* ============================================================
-   RENDER PROBLEM SET
-============================================================ */
+/* =========================================================
+   SAVE PROGRESS
+========================================================= */
 
-function renderProblemSet(
-    lecture,
-    p
+function saveLectureProgress(
+    lectureId,
+    completed,
+    checklist
 ) {
 
-    const ps =
-        getProblemSet(
-            lecture.id
-        );
+    if (
+        !sessionToken ||
+        saving
+    ) {
 
-    const container =
-        document.getElementById(
-            "problemCard"
-        );
+        return;
 
-    container.innerHTML = `
+    }
 
-        <div class="problem-info">
 
-            <h3>
-                ${ps.title}
-            </h3>
+    saving = true;
 
-            <p>
-                ${ps.description}
-            </p>
 
-        </div>
+    setSyncStatus(
+        "Saving..."
+    );
 
-        <div
-            style="
-                display:flex;
-                gap:8px;
-                flex-wrap:wrap;
-            "
-        >
 
-            <button
-                class="btn btn-secondary"
-                onclick="
-                    window.open(
-                        '${ps.url}',
-                        '_blank'
-                    )
-                "
-            >
-                Open Problem Set
-            </button>
+    jsonpRequest(
 
-            <button
-                class="
-                    btn
-                    ${
-                        p.problemSet
-                        ? "btn-success"
-                        : "btn-primary"
-                    }
-                "
-                ${
-                    p.problemSet
-                    ? "disabled"
-                    : ""
-                }
-                onclick="
-                    completeProblemSet(
-                        ${lecture.id}
-                    )
-                "
-            >
+        "saveProgress",
 
-                ${
-                    p.problemSet
-                    ? "Completed ✓"
-                    : "Mark Complete"
-                }
+        {
 
-            </button>
+            token:
+                sessionToken,
 
-        </div>
+            lectureId:
+                lectureId,
 
-    `;
+            completed:
+                completed,
+
+            checklist:
+                JSON.stringify(
+                    checklist
+                )
+
+        },
+
+        function(response) {
+
+            saving = false;
+
+
+            if (
+                !response ||
+                !response.success
+            ) {
+
+                handleSessionExpired();
+
+                return;
+
+            }
+
+
+            studentProgress[
+                String(lectureId)
+            ] = {
+
+                completed:
+                    response.completed,
+
+                checklist:
+                    response.checklist,
+
+                updatedAt:
+                    response.updatedAt
+
+            };
+
+
+            setSyncStatus(
+                "Progress saved"
+            );
+
+
+            if (completed) {
+
+                showToast(
+                    "Lecture completed ✓"
+                );
+
+            }
+
+
+            renderSidebar();
+
+            updateCourseProgress();
+
+        }
+
+    );
 
 }
 
 
-/* ============================================================
-   NEXT LECTURE
-============================================================ */
+/* =========================================================
+   UPDATE NEXT BUTTON
+========================================================= */
 
-function renderNextLecture() {
-
-    const next =
-        currentLecture + 1;
-
-    const complete =
-        isLectureComplete(
-            currentLecture
-        );
+function updateNextButton(
+    lecture,
+    progress
+) {
 
     const button =
         document.getElementById(
             "nextButton"
         );
 
+
     const title =
         document.getElementById(
             "nextTitle"
         );
+
 
     const description =
         document.getElementById(
@@ -2929,109 +3108,158 @@ function renderNextLecture() {
         );
 
 
-    if(
-        currentLecture ===
-        lectures.length &&
-        complete
+    if (
+        progress &&
+        progress.completed
     ) {
-
-        title.textContent =
-            "All lectures completed";
-
-        description.textContent =
-            "You have completed the entire curriculum.";
-
-        button.textContent =
-            "Complete Course →";
 
         button.disabled = false;
 
-        return;
 
-    }
+        if (
+            currentLectureIndex <
+            lectures.length - 1
+        ) {
 
+            title.textContent =
+                "Lecture completed ✓";
 
-    if(!complete) {
+            description.textContent =
+                "Your progress has been saved. Continue to the next lecture.";
+
+            button.textContent =
+                "Next Lecture →";
+
+        } else {
+
+            title.textContent =
+                "Course completed ✓";
+
+            description.textContent =
+                "You have completed every required lecture.";
+
+            button.textContent =
+                "Finish Course";
+
+        }
+
+    } else {
+
+        button.disabled = true;
 
         title.textContent =
             "Complete this lecture";
 
         description.textContent =
-            "Finish every required activity to unlock the next lecture.";
+            "Finish all required activities to unlock the next lecture.";
 
         button.textContent =
             "Next Lecture →";
 
-        button.disabled =
-            true;
-
-        return;
-
     }
-
-
-    title.textContent =
-        "Next Lecture";
-
-    description.textContent =
-        `Lecture ${next}: ${
-            lectures[next - 1].title
-        }`;
-
-    button.textContent =
-        "Continue →";
-
-    button.disabled =
-        false;
 
 }
 
 
-/* ============================================================
-   NEXT
-============================================================ */
+/* =========================================================
+   GO NEXT
+========================================================= */
 
 function goNext() {
 
-    if(
-        currentLecture ===
-        lectures.length
-    ) {
+    const lecture =
+        lectures[
+            currentLectureIndex
+        ];
 
-        if(
-            calculateOverallProgress()
-            >= 100
-        ) {
 
-            redirectToCompletion();
+    const progress =
+        getLectureProgress(
+            lecture.id
+        );
 
-        }
 
-        return;
-
-    }
-
-    if(
-        !isLectureComplete(
-            currentLecture
-        )
+    if (
+        !progress.completed
     ) {
 
         showToast(
-            "Complete all activities first."
+            "Complete all checklist activities first."
         );
 
         return;
 
     }
 
-    currentLecture++;
 
-    renderSidebar();
+    if (
+        currentLectureIndex <
+        lectures.length - 1
+    ) {
 
-    renderLecture();
+        currentLectureIndex++;
 
-    updateGlobalProgress();
+
+        renderSidebar();
+
+        renderLecture(
+            currentLectureIndex
+        );
+
+
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+
+
+        return;
+
+    }
+
+
+    showCompletion();
+
+}
+
+
+/* =========================================================
+   SHOW COMPLETION
+========================================================= */
+
+function showCompletion() {
+
+    document.getElementById(
+        "lessonSection"
+    ).style.display =
+        "none";
+
+
+    const panel =
+        document.getElementById(
+            "completionPanel"
+        );
+
+
+    panel.style.display =
+        "block";
+
+
+    const certificateId =
+        generateCertificateId();
+
+
+    document.getElementById(
+        "certificateId"
+    ).textContent =
+        certificateId;
+
+
+    localStorage.setItem(
+        "certificateId",
+        certificateId
+    );
+
 
     window.scrollTo({
         top: 0,
@@ -3041,239 +3269,39 @@ function goNext() {
 }
 
 
-/* ============================================================
-   GLOBAL PROGRESS
-============================================================ */
-
-function calculateCompletedActivities() {
-
-    let completed = 0;
-
-    let total = 0;
-
-    lectures.forEach(
-        lecture => {
-
-            const p =
-                progress.lectures[
-                    lecture.id
-                ];
-
-            total += 6;
-
-            if(p.video)
-                completed++;
-
-            if(p.notes)
-                completed++;
-
-            if(p.code)
-                completed++;
-
-            if(p.exercise)
-                completed++;
-
-            if(
-                p.practice.every(
-                    Boolean
-                )
-            )
-                completed++;
-
-            if(p.problemSet)
-                completed++;
-
-        }
-    );
-
-    return {
-        completed,
-        total
-    };
-
-}
-
-
-/* ============================================================
-   OVERALL PROGRESS
-============================================================ */
-
-function calculateOverallProgress() {
-
-    const stats =
-        calculateCompletedActivities();
-
-    return Math.round(
-        (
-            stats.completed /
-            stats.total
-        ) * 100
-    );
-
-}
-
-
-/* ============================================================
-   UPDATE PROGRESS
-============================================================ */
-
-function updateGlobalProgress() {
-
-    const completedLectures =
-        lectures.filter(
-            lecture =>
-                isLectureComplete(
-                    lecture.id
-                )
-        ).length;
-
-    const percent =
-        calculateOverallProgress();
-
-    document.getElementById(
-        "sidebarPercent"
-    ).textContent =
-        percent + "%";
-
-    document.getElementById(
-        "sidebarProgress"
-    ).style.width =
-        percent + "%";
-
-    document.getElementById(
-        "sidebarMeta"
-    ).textContent =
-        `${completedLectures} of ${lectures.length} lectures completed`;
-
-    renderSidebar();
-
-    renderNextLecture();
-
-
-    if(
-        percent >= 100
-    ) {
-
-        courseCompleted();
-
-    }
-
-}
-
-
-/* ============================================================
-   COURSE COMPLETION
-============================================================ */
-
-let completionTriggered =
-    false;
-
-function courseCompleted() {
-
-    if(
-        completionTriggered
-    ) {
-        return;
-    }
-
-    completionTriggered =
-        true;
-
-    document.getElementById(
-        "lessonSection"
-    ).style.display =
-        "none";
-
-    const panel =
-        document.getElementById(
-            "completionPanel"
-        );
-
-    panel.classList.add(
-        "show"
-    );
-
-    document.getElementById(
-        "certificateId"
-    ).textContent =
-        "Certificate ID: " +
-        generateCertificateId();
-
-    /*
-        REAL-TIME REDIRECT
-
-        Give the learner a moment to see
-        the completion message before redirecting.
-    */
-
-    setTimeout(
-        () => {
-
-            redirectToCompletion();
-
-        },
-        2500
-    );
-
-}
-
-
-/* ============================================================
-   COMPLETION REDIRECT
-============================================================ */
-
-function redirectToCompletion() {
-
-    const certificateId =
-        generateCertificateId();
-
-    const redirectUrl =
-        COMPLETION_REDIRECT +
-        "?userId=" +
-        encodeURIComponent(USER_ID) +
-        "&certificateId=" +
-        encodeURIComponent(
-            certificateId
-        ) +
-        "&progress=100";
-
-    window.location.href =
-        redirectUrl;
-
-}
-
-
-/* ============================================================
+/* =========================================================
    CERTIFICATE
-============================================================ */
+========================================================= */
 
 function generateCertificateId() {
 
     const existing =
         localStorage.getItem(
-            "certificate_id"
+            "certificateId"
         );
 
-    if(existing) {
+
+    if (existing) {
 
         return existing;
 
     }
 
-    const id =
-        "PY-" +
-        new Date()
-            .getFullYear() +
-        "-" +
-        Math.random()
-            .toString(36)
-            .substring(2,10)
-            .toUpperCase();
 
-    localStorage.setItem(
-        "certificate_id",
-        id
-    );
+    const userPart =
+        currentUser &&
+        currentUser.userId
+            ? currentUser.userId
+            : "USER";
+
+
+    const id =
+        "PCA-" +
+        userPart +
+        "-" +
+        new Date()
+            .getFullYear();
+
 
     return id;
 
@@ -3282,49 +3310,239 @@ function generateCertificateId() {
 
 function openCertificate() {
 
-    redirectToCompletion();
+    const certificateId =
+        document.getElementById(
+            "certificateId"
+        ).textContent;
+
+
+    alert(
+        "Certificate ID: " +
+        certificateId +
+        "\n\nConnect this button to your certificate page."
+    );
 
 }
 
 
-/* ============================================================
-   SIDEBAR MOBILE
-============================================================ */
+/* =========================================================
+   COURSE PROGRESS
+========================================================= */
+
+function updateCourseProgress() {
+
+    let completed = 0;
+
+
+    lectures.forEach(
+        function(lecture) {
+
+            const progress =
+                getLectureProgress(
+                    lecture.id
+                );
+
+
+            if (
+                progress.completed
+            ) {
+
+                completed++;
+
+            }
+
+        }
+    );
+
+
+    const total =
+        lectures.length;
+
+
+    const percentage =
+        total
+            ? Math.round(
+                completed /
+                total *
+                100
+              )
+            : 0;
+
+
+    document.getElementById(
+        "sidebarPercent"
+    ).textContent =
+        percentage + "%";
+
+
+    document.getElementById(
+        "sidebarProgress"
+    ).style.width =
+        percentage + "%";
+
+
+    document.getElementById(
+        "sidebarMeta"
+    ).textContent =
+        completed +
+        " of " +
+        total +
+        " lectures completed";
+
+
+    if (
+        completed === total &&
+        total > 0
+    ) {
+
+        setTimeout(
+            showCompletion,
+            300
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   SIDEBAR
+========================================================= */
 
 function toggleSidebar() {
 
     document
-        .getElementById(
-            "sidebar"
-        )
-        .classList.toggle(
-            "open"
-        );
+        .getElementById("sidebar")
+        .classList.toggle("open");
 
 }
 
 
-/* ============================================================
-   SYNC STATUS
-============================================================ */
+/* =========================================================
+   USER MENU
+========================================================= */
 
-function setSyncStatus(
-    text
-) {
+function toggleUserMenu() {
+
+    document
+        .getElementById("userMenu")
+        .classList.toggle("show");
+
+}
+
+
+/* =========================================================
+   LOGOUT
+========================================================= */
+
+function logout() {
+
+    if (!sessionToken) {
+
+        clearSession();
+
+        return;
+
+    }
+
+
+    setSyncStatus(
+        "Logging out..."
+    );
+
+
+    jsonpRequest(
+
+        "logout",
+
+        {
+            token: sessionToken
+        },
+
+        function() {
+
+            clearSession();
+
+        }
+
+    );
+
+}
+
+
+/* =========================================================
+   CLEAR SESSION
+========================================================= */
+
+function clearSession() {
+
+    localStorage.removeItem(
+        "academyUser"
+    );
+
+    localStorage.removeItem(
+        "academyToken"
+    );
+
+
+    currentUser = null;
+
+    sessionToken = null;
+
+    studentProgress = {};
+
+    currentLectureIndex = 0;
+
+
+    showLogin();
+
+}
+
+
+/* =========================================================
+   SESSION EXPIRED
+========================================================= */
+
+function handleSessionExpired() {
+
+    clearSession();
+
 
     document.getElementById(
-        "syncStatus"
+        "loginMessage"
     ).textContent =
-        text;
+        "Your session expired. Please login again.";
 
 }
 
 
-/* ============================================================
-   TOAST
-============================================================ */
+/* =========================================================
+   SYNC STATUS
+========================================================= */
 
-let toastTimer;
+function setSyncStatus(
+    message
+) {
+
+    const element =
+        document.getElementById(
+            "syncStatus"
+        );
+
+
+    if (element) {
+
+        element.textContent =
+            message;
+
+    }
+
+}
+
+
+/* =========================================================
+   TOAST
+========================================================= */
 
 function showToast(
     message
@@ -3335,138 +3553,312 @@ function showToast(
             "toast"
         );
 
+
     toast.textContent =
         message;
+
 
     toast.classList.add(
         "show"
     );
 
-    clearTimeout(
-        toastTimer
+
+    setTimeout(
+        function() {
+
+            toast.classList.remove(
+                "show"
+            );
+
+        },
+        2500
     );
 
-    toastTimer =
-        setTimeout(
-            () => {
-
-                toast.classList.remove(
-                    "show"
-                );
-
-            },
-            2500
-        );
-
 }
 
 
-/* ============================================================
-   HTML ESCAPE
-============================================================ */
+/* =========================================================
+   JSONP API REQUEST
 
-function escapeHtml(
-    value
+   This works with Apps Script without requiring
+   browser CORS configuration.
+========================================================= */
+
+function jsonpRequest(
+    action,
+    params,
+    callback
 ) {
 
-    return String(value)
-        .replace(
-            /&/g,
-            "&amp;"
-        )
-        .replace(
-            /</g,
-            "&lt;"
-        )
-        .replace(
-            />/g,
-            "&gt;"
-        )
-        .replace(
-            /"/g,
-            "&quot;"
-        )
-        .replace(
-            /'/g,
-            "&#039;"
+    const callbackName =
+        "academyCallback_" +
+        Date.now() +
+        "_" +
+        Math.floor(
+            Math.random() * 100000
         );
 
-}
+
+    const script =
+        document.createElement(
+            "script"
+        );
 
 
-/* ============================================================
-   CROSS-TAB REAL-TIME UPDATE
-============================================================ */
-
-window.addEventListener(
-    "storage",
-    event => {
-
-        if(
-            event.key ===
-            "course_progress"
-        ) {
+    window[callbackName] =
+        function(response) {
 
             try {
 
-                progress =
-                    normalizeServerProgress(
-                        JSON.parse(
-                            event.newValue
-                        )
-                    );
+                callback(
+                    response
+                );
 
-                renderSidebar();
+            } finally {
 
-                renderLecture();
+                delete window[
+                    callbackName
+                ];
 
-                updateGlobalProgress();
-
-            }
-            catch(error) {
-
-                console.warn(error);
+                script.remove();
 
             }
 
-        }
-
-    }
-);
+        };
 
 
-/* ============================================================
-   PERIODIC SERVER SYNC
-============================================================ */
+    const query =
+        new URLSearchParams();
+
+
+    query.set(
+        "action",
+        action
+    );
+
+
+    query.set(
+        "callback",
+        callbackName
+    );
+
+
+    Object.keys(params || {})
+        .forEach(
+            function(key) {
+
+                query.set(
+                    key,
+                    params[key]
+                );
+
+            }
+        );
+
+
+    script.src =
+        API_URL +
+        "?" +
+        query.toString();
+
+
+    script.onerror =
+        function() {
+
+            delete window[
+                callbackName
+            ];
+
+            script.remove();
+
+
+            callback({
+
+                success: false,
+
+                message:
+                    "Unable to connect to the learning server."
+
+            });
+
+        };
+
+
+    document.body.appendChild(
+        script
+    );
+
+}
+
+
+/* =========================================================
+   AUTO SYNC
+
+   Checks server progress every 15 seconds.
+========================================================= */
 
 setInterval(
-    async () => {
+    function() {
 
-        await loadProgress();
+        if (
+            sessionToken &&
+            document.visibilityState ===
+            "visible"
+        ) {
 
-        updateGlobalProgress();
+            silentLoadProgress();
+
+        }
 
     },
     15000
 );
 
 
-/* ============================================================
-   PAGE VISIBILITY SYNC
-============================================================ */
+/* =========================================================
+   SILENT PROGRESS SYNC
+========================================================= */
+
+function silentLoadProgress() {
+
+    jsonpRequest(
+
+        "getProgress",
+
+        {
+            token: sessionToken
+        },
+
+        function(response) {
+
+            if (
+                !response ||
+                !response.success
+            ) {
+
+                return;
+
+            }
+
+
+            studentProgress =
+                response.progress || {};
+
+
+            renderSidebar();
+
+            updateCourseProgress();
+
+
+            const currentLecture =
+                lectures[
+                    currentLectureIndex
+                ];
+
+
+            if (currentLecture) {
+
+                const progress =
+                    getLectureProgress(
+                        currentLecture.id
+                    );
+
+
+                updateNextButton(
+                    currentLecture,
+                    progress
+                );
+
+            }
+
+
+            setSyncStatus(
+                "Synced " +
+                new Date()
+                    .toLocaleTimeString()
+            );
+
+        }
+
+    );
+
+}
+
+
+/* =========================================================
+   SECURITY / HTML HELPERS
+========================================================= */
+
+function escapeHTML(
+    value
+) {
+
+    return String(value || "")
+        .replace(
+            /[&<>"']/g,
+            function(character) {
+
+                const entities = {
+
+                    "&": "&amp;",
+                    "<": "&lt;",
+                    ">": "&gt;",
+                    '"': "&quot;",
+                    "'": "&#039;"
+
+                };
+
+                return entities[
+                    character
+                ];
+
+            }
+        );
+
+}
+
+
+function escapeAttribute(
+    value
+) {
+
+    return String(value || "")
+        .replace(
+            /"/g,
+            "&quot;"
+        );
+
+}
+
+
+/* =========================================================
+   CLOSE USER MENU WHEN CLICKING OUTSIDE
+========================================================= */
 
 document.addEventListener(
-    "visibilitychange",
-    async () => {
+    "click",
+    function(event) {
 
-        if(
-            document.visibilityState ===
-            "visible"
+        const wrapper =
+            document.querySelector(
+                ".avatar-wrapper"
+            );
+
+
+        if (
+            wrapper &&
+            !wrapper.contains(
+                event.target
+            )
         ) {
 
-            await loadProgress();
-
-            updateGlobalProgress();
+            document
+                .getElementById(
+                    "userMenu"
+                )
+                .classList.remove(
+                    "show"
+                );
 
         }
 
@@ -3476,4 +3868,6 @@ document.addEventListener(
 </script>
 
 </body>
+
 </html>
+```
