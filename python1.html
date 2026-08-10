@@ -1,2633 +1,1674 @@
-```html
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0">
-
-<meta
-    name="description"
-    content="Openbox Academy Python Programming Fundamentals course and assessment.">
-
-<title>
-    Openbox Academy · Python Programming Fundamentals
-</title>
-
+<title>Openbox Academy — Python Programming Fundamentals</title>
 
 <style>
-
-/* =========================================================
-   RESET
-========================================================= */
-
-*{
-    box-sizing:border-box;
-    margin:0;
-    padding:0;
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
+:root {
+    --primary: #111827;
+    --secondary: #2563eb;
+    --accent: #7c3aed;
+    --success: #16a34a;
+    --danger: #dc2626;
+    --warning: #d97706;
+    --bg: #f5f7fb;
+    --card: #ffffff;
+    --text: #111827;
+    --muted: #6b7280;
+    --border: #e5e7eb;
+}
 
-body{
-
+body {
     font-family:
         Inter,
         -apple-system,
         BlinkMacSystemFont,
         "Segoe UI",
+        Roboto,
+        Arial,
         sans-serif;
 
-    background:#f5f7fb;
-
-    color:#111827;
-
-    min-height:100vh;
-
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
 }
 
+/* =========================
+   GLOBAL
+========================= */
 
 button,
-input,
-textarea{
-
-    font:inherit;
-
+input {
+    font-family: inherit;
 }
 
-
-button{
-
-    cursor:pointer;
-
+button {
+    cursor: pointer;
 }
 
-
-a{
-
-    color:inherit;
-    text-decoration:none;
-
+.hidden {
+    display: none !important;
 }
 
-
-.hidden{
-
-    display:none !important;
-
+.container {
+    width: min(1180px, calc(100% - 32px));
+    margin: auto;
 }
 
-
-/* =========================================================
-   HEADER
-========================================================= */
-
-header{
-
-    width:100%;
-
-    padding:20px 6%;
-
-    display:flex;
-
-    justify-content:space-between;
-
-    align-items:center;
-
-    background:#ffffff;
-
-    border-bottom:1px solid #e5e7eb;
-
-    position:sticky;
-
-    top:0;
-
-    z-index:100;
-
+.page {
+    min-height: 100vh;
 }
 
+/* =========================
+   NAVBAR
+========================= */
 
-.logo{
-
-    display:flex;
-
-    align-items:center;
-
-    gap:10px;
-
-    font-size:21px;
-
-    font-weight:800;
-
+.navbar {
+    height: 72px;
+    background: rgba(255,255,255,.95);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    backdrop-filter: blur(12px);
 }
 
-
-.logo span{
-
-    color:#6b7280;
-
-    font-weight:500;
-
+.nav-inner {
+    width: min(1180px, calc(100% - 32px));
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
-
-.logo-mark{
-
-    width:40px;
-
-    height:40px;
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-    background:#111827;
-
-    color:white;
-
-    border-radius:11px;
-
-    font-size:14px;
-
-    font-weight:800;
-
+.logo {
+    font-weight: 900;
+    font-size: 20px;
+    letter-spacing: -0.5px;
 }
 
-
-.header-right{
-
-    display:flex;
-
-    align-items:center;
-
-    gap:12px;
-
+.logo span {
+    color: var(--accent);
 }
 
-
-.user-pill{
-
-    background:#f1f5f9;
-
-    padding:8px 14px;
-
-    border-radius:999px;
-
-    font-size:13px;
-
-    font-weight:700;
-
+.nav-right {
+    display: flex;
+    align-items: center;
+    gap: 12px;
 }
 
-
-.logout{
-
-    border:0;
-
-    background:#111827;
-
-    color:white;
-
-    padding:9px 15px;
-
-    border-radius:9px;
-
-    font-size:13px;
-
-    font-weight:700;
-
+.student-name {
+    font-size: 14px;
+    font-weight: 600;
 }
 
-
-/* =========================================================
-   MAIN
-========================================================= */
-
-main{
-
-    width:min(1050px,92%);
-
-    margin:0 auto;
-
-    padding:60px 0 100px;
-
-}
-
-
-/* =========================================================
-   HERO
-========================================================= */
-
-.hero{
-
-    margin-bottom:30px;
-
-}
-
-
-.eyebrow{
-
-    font-size:12px;
-
-    letter-spacing:2px;
-
-    font-weight:800;
-
-    color:#6b7280;
-
-    margin-bottom:14px;
-
-}
-
-
-.hero h1{
-
-    font-size:
-        clamp(38px,6vw,68px);
-
-    line-height:1.02;
-
-    letter-spacing:-3px;
-
-    margin-bottom:20px;
-
-}
-
-
-.hero h1 span{
-
-    color:#6b7280;
-
-}
-
-
-.hero p{
-
-    max-width:650px;
-
-    color:#6b7280;
-
-    font-size:17px;
-
-    line-height:1.7;
-
-}
-
-
-/* =========================================================
-   CARDS
-========================================================= */
-
-.card{
-
-    background:#ffffff;
-
-    border:1px solid #e5e7eb;
-
-    border-radius:22px;
-
-    padding:28px;
-
-    margin-bottom:20px;
-
-    box-shadow:
-        0 10px 30px
-        rgba(15,23,42,.04);
-
-}
-
-
-.form-card{
-
-    max-width:560px;
-
-}
-
-
-/* =========================================================
-   TABS
-========================================================= */
-
-.tabs{
-
-    display:flex;
-
-    gap:5px;
-
-    padding:5px;
-
-    background:#f1f5f9;
-
-    border-radius:12px;
-
-    margin-bottom:25px;
-
-}
-
-
-.tab{
-
-    flex:1;
-
-    border:0;
-
-    padding:12px;
-
-    border-radius:9px;
-
-    background:transparent;
-
-    color:#64748b;
-
-    font-weight:700;
-
-}
-
-
-.tab.active{
-
-    background:white;
-
-    color:#111827;
-
-    box-shadow:
-        0 2px 8px
-        rgba(0,0,0,.06);
-
-}
-
-
-/* =========================================================
-   FORM
-========================================================= */
-
-.card h2{
-
-    font-size:25px;
-
-    margin-bottom:8px;
-
-}
-
-
-.card > p{
-
-    color:#6b7280;
-
-    line-height:1.6;
-
-    margin-bottom:22px;
-
-}
-
-
-.field{
-
-    margin-bottom:18px;
-
-}
-
-
-.field label{
-
-    display:block;
-
-    font-size:13px;
-
-    font-weight:700;
-
-    margin-bottom:7px;
-
-}
-
-
-.field input,
-.field textarea{
-
-    width:100%;
-
-    border:1px solid #dbe1e8;
-
-    border-radius:11px;
-
-    padding:13px 14px;
-
-    outline:none;
-
-    background:#fff;
-
-}
-
-
-.field input:focus,
-.field textarea:focus{
-
-    border-color:#111827;
-
-    box-shadow:
-        0 0 0 3px
-        rgba(17,24,39,.08);
-
-}
-
-
-/* =========================================================
+/* =========================
    BUTTONS
-========================================================= */
+========================= */
 
-.btn{
-
-    border:0;
-
-    border-radius:11px;
-
-    padding:13px 18px;
-
-    font-weight:800;
-
-    display:inline-flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-    gap:8px;
-
+.btn {
+    border: none;
+    border-radius: 10px;
+    padding: 12px 18px;
+    font-size: 14px;
+    font-weight: 700;
+    transition: .2s;
 }
 
-
-.btn-primary{
-
-    background:#111827;
-
-    color:white;
-
+.btn:hover {
+    transform: translateY(-1px);
 }
 
-
-.btn-secondary{
-
-    background:#e5e7eb;
-
-    color:#111827;
-
+.btn-primary {
+    background: var(--primary);
+    color: white;
 }
 
-
-.btn-green{
-
-    background:#15803d;
-
-    color:white;
-
+.btn-blue {
+    background: var(--secondary);
+    color: white;
 }
 
-
-.btn:disabled{
-
-    opacity:.5;
-
-    cursor:not-allowed;
-
+.btn-success {
+    background: var(--success);
+    color: white;
 }
 
-
-/* =========================================================
-   MESSAGE
-========================================================= */
-
-.message{
-
-    display:none;
-
-    padding:12px 14px;
-
-    border-radius:10px;
-
-    margin-bottom:18px;
-
-    font-size:14px;
-
+.btn-danger {
+    background: var(--danger);
+    color: white;
 }
 
-
-.message.success{
-
-    display:block;
-
-    background:#dcfce7;
-
-    color:#166534;
-
+.btn-light {
+    background: #f3f4f6;
+    color: #111827;
 }
 
-
-.message.error{
-
-    display:block;
-
-    background:#fee2e2;
-
-    color:#991b1b;
-
+.btn:disabled {
+    opacity: .5;
+    cursor: not-allowed;
+    transform: none;
 }
 
+/* =========================
+   AUTH
+========================= */
 
-/* =========================================================
-   PROFILE
-========================================================= */
-
-.profile-label{
-
-    font-size:11px;
-
-    letter-spacing:1.5px;
-
-    color:#6b7280;
-
-    font-weight:800;
-
-    margin-bottom:8px;
-
+.auth-page {
+    min-height: calc(100vh - 72px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 0;
 }
 
-
-.profile-name{
-
-    font-size:32px;
-
-    font-weight:850;
-
-    margin-bottom:5px;
-
+.auth-card {
+    width: min(460px, 100%);
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 34px;
+    box-shadow: 0 20px 60px rgba(0,0,0,.06);
 }
 
-
-.profile-email{
-
-    color:#6b7280;
-
+.auth-brand {
+    text-align: center;
+    margin-bottom: 28px;
 }
 
-
-/* =========================================================
-   DASHBOARD GRID
-========================================================= */
-
-.dashboard-grid{
-
-    display:grid;
-
-    grid-template-columns:
-        repeat(3,1fr);
-
-    gap:15px;
-
-    margin-bottom:20px;
-
+.auth-brand .academy {
+    font-size: 13px;
+    color: var(--accent);
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
-
-.stat{
-
-    background:white;
-
-    border:1px solid #e5e7eb;
-
-    border-radius:18px;
-
-    padding:22px;
-
+.auth-brand h1 {
+    font-size: 28px;
+    margin-top: 8px;
+    letter-spacing: -1px;
 }
 
-
-.stat small{
-
-    display:block;
-
-    color:#6b7280;
-
-    margin-bottom:8px;
-
+.auth-brand p {
+    color: var(--muted);
+    font-size: 14px;
+    margin-top: 8px;
 }
 
-
-.stat strong{
-
-    font-size:28px;
-
+.form-group {
+    margin-bottom: 18px;
 }
 
-
-/* =========================================================
-   PROGRESS
-========================================================= */
-
-.progress-wrap{
-
-    margin-top:20px;
-
+.form-group label {
+    display: block;
+    font-size: 13px;
+    font-weight: 700;
+    margin-bottom: 7px;
 }
 
-
-.progress-top{
-
-    display:flex;
-
-    justify-content:space-between;
-
-    margin-bottom:10px;
-
-    font-size:14px;
-
+.form-group input {
+    width: 100%;
+    height: 46px;
+    border: 1px solid #d1d5db;
+    border-radius: 10px;
+    padding: 0 14px;
+    outline: none;
+    font-size: 14px;
 }
 
-
-.progress{
-
-    width:100%;
-
-    height:10px;
-
-    background:#e5e7eb;
-
-    border-radius:999px;
-
-    overflow:hidden;
-
+.form-group input:focus {
+    border-color: var(--secondary);
+    box-shadow: 0 0 0 3px rgba(37,99,235,.1);
 }
 
-
-.progress-bar{
-
-    height:100%;
-
-    width:0%;
-
-    background:#111827;
-
-    transition:.3s;
-
+.auth-submit {
+    width: 100%;
+    margin-top: 5px;
 }
 
-
-/* =========================================================
-   RESOURCES
-========================================================= */
-
-.resource-grid{
-
-    display:grid;
-
-    grid-template-columns:
-        repeat(2,1fr);
-
-    gap:15px;
-
+.auth-switch {
+    text-align: center;
+    margin-top: 20px;
+    color: var(--muted);
+    font-size: 14px;
 }
 
-
-.resource{
-
-    padding:20px;
-
-    border:1px solid #e5e7eb;
-
-    border-radius:15px;
-
-    background:#fafafa;
-
+.auth-switch button {
+    border: none;
+    background: none;
+    color: var(--secondary);
+    font-weight: 700;
 }
 
+/* =========================
+   ALERT
+========================= */
 
-.resource h3{
-
-    margin-bottom:7px;
-
+.alert {
+    padding: 12px 14px;
+    border-radius: 10px;
+    margin-bottom: 18px;
+    font-size: 14px;
+    line-height: 1.5;
 }
 
-
-.resource p{
-
-    color:#6b7280;
-
-    line-height:1.5;
-
-    font-size:14px;
-
-    margin-bottom:15px;
-
+.alert-error {
+    background: #fef2f2;
+    color: #991b1b;
+    border: 1px solid #fecaca;
 }
 
-
-.resource a{
-
-    font-size:14px;
-
-    font-weight:800;
-
+.alert-success {
+    background: #f0fdf4;
+    color: #166534;
+    border: 1px solid #bbf7d0;
 }
 
-
-/* =========================================================
-   QUIZ
-========================================================= */
-
-.quiz-shell{
-
-    background:white;
-
-    border:1px solid #e5e7eb;
-
-    border-radius:22px;
-
-    overflow:hidden;
-
+.alert-info {
+    background: #eff6ff;
+    color: #1e40af;
+    border: 1px solid #bfdbfe;
 }
 
+/* =========================
+   DASHBOARD
+========================= */
 
-.quiz-top{
-
-    padding:22px;
-
-    border-bottom:1px solid #e5e7eb;
-
+.dashboard {
+    padding: 40px 0 70px;
 }
 
-
-.quiz-info{
-
-    display:flex;
-
-    justify-content:space-between;
-
-    align-items:center;
-
-    margin-bottom:16px;
-
-}
-
-
-.timer{
-
-    background:#111827;
-
-    color:white;
-
-    padding:8px 13px;
-
-    border-radius:9px;
-
-    font-weight:800;
-
-    font-variant-numeric:tabular-nums;
-
-}
-
-
-#quizContent{
-
-    padding:30px;
-
-}
-
-
-.question-number{
-
-    color:#6b7280;
-
-    font-size:13px;
-
-    font-weight:800;
-
-    margin-bottom:10px;
-
-}
-
-
-.question-title{
-
-    font-size:25px;
-
-    line-height:1.4;
-
-    margin-bottom:25px;
-
-}
-
-
-.options{
-
-    display:grid;
-
-    gap:12px;
-
-}
-
-
-.option{
-
-    display:flex;
-
-    gap:12px;
-
-    align-items:flex-start;
-
-    padding:16px;
-
-    border:1px solid #dbe1e8;
-
-    border-radius:13px;
-
-    cursor:pointer;
-
-    transition:.2s;
-
-}
-
-
-.option:hover{
-
-    border-color:#111827;
-
-}
-
-
-.option.selected{
-
-    border-color:#111827;
-
-    background:#f8fafc;
-
-}
-
-
-.option input{
-
-    margin-top:4px;
-
-}
-
-
-.code-answer{
-
-    width:100%;
-
-    min-height:220px;
-
-    resize:vertical;
-
-    padding:18px;
-
-    border:1px solid #dbe1e8;
-
-    border-radius:13px;
-
-    font-family:
-        "Courier New",
-        monospace;
-
-    line-height:1.5;
-
-}
-
-
-.warning{
-
-    margin:0 30px 20px;
-
-    padding:15px;
-
-    background:#fff7ed;
-
-    color:#9a3412;
-
-    border-radius:12px;
-
-    font-size:13px;
-
-    line-height:1.6;
-
-}
-
-
-.quiz-nav{
-
-    display:flex;
-
-    justify-content:space-between;
-
-    padding:20px 30px 30px;
-
-}
-
-
-/* =========================================================
-   RESULT
-========================================================= */
-
-.result{
-
-    text-align:center;
-
-    padding:55px 30px;
-
-}
-
-
-.result-icon{
-
-    width:70px;
-
-    height:70px;
-
-    border-radius:50%;
-
-    background:#dcfce7;
-
-    color:#15803d;
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-    margin:0 auto 20px;
-
-    font-size:32px;
-
-    font-weight:900;
-
-}
-
-
-.result.fail .result-icon{
-
-    background:#fee2e2;
-
-    color:#b91c1c;
-
-}
-
-
-.score-big{
-
-    font-size:80px;
-
-    font-weight:900;
-
-    letter-spacing:-4px;
-
-    margin:20px 0;
-
-}
-
-
-/* =========================================================
-   CERTIFICATE
-========================================================= */
-
-.certificate-area{
-
-    padding:10px;
-
-}
-
-
-.certificate{
-
-    background:#fff;
-
-    border:12px solid #111827;
-
-    outline:2px solid #c9a227;
-
-    outline-offset:-25px;
-
-    padding:90px 70px;
-
-    text-align:center;
-
-    min-height:700px;
-
-    display:flex;
-
-    flex-direction:column;
-
-    justify-content:center;
-
-}
-
-
-.cert-header{
-
-    font-size:18px;
-
-    letter-spacing:5px;
-
-    font-weight:900;
-
-    margin-bottom:35px;
-
-}
-
-
-.cert-title{
-
-    font-family:Georgia,serif;
-
-    font-size:38px;
-
-    font-weight:800;
-
-    margin-bottom:20px;
-
-}
-
-
-.cert-subtitle{
-
-    color:#6b7280;
-
-    margin-bottom:25px;
-
-}
-
-
-.cert-name{
-
-    font-family:Georgia,serif;
-
-    font-size:44px;
-
-    font-weight:800;
-
-    margin-bottom:30px;
-
-}
-
-
-.cert-body{
-
-    max-width:700px;
-
-    margin:0 auto;
-
-    line-height:1.8;
-
-    color:#374151;
-
-}
-
-
-.cert-meta{
-
-    display:flex;
-
-    justify-content:center;
-
-    gap:60px;
-
-    margin-top:40px;
-
-    font-size:14px;
-
-}
-
-
-.cert-meta div{
-
-    display:flex;
-
-    flex-direction:column;
-
-    gap:5px;
-
-}
-
-
-.cert-id{
-
-    margin-top:35px;
-
-    font-weight:800;
-
-    letter-spacing:1px;
-
-}
-
-
-.cert-footer{
-
-    margin-top:35px;
-
-    font-size:10px;
-
-    line-height:1.5;
-
-    color:#6b7280;
-
-}
-
-
-.certificate-actions{
-
-    display:flex;
-
-    justify-content:center;
-
-    gap:12px;
-
-    flex-wrap:wrap;
-
-    margin-top:25px;
-
-}
-
-
-/* =========================================================
-   LOADER
-========================================================= */
-
-#loader{
-
-    position:fixed;
-
-    inset:0;
-
+.hero {
     background:
-        rgba(255,255,255,.85);
+        linear-gradient(
+            135deg,
+            #111827,
+            #312e81
+        );
 
-    backdrop-filter:blur(5px);
+    color: white;
+    border-radius: 24px;
+    padding: 40px;
+    margin-bottom: 24px;
+}
 
-    display:none;
+.hero small {
+    color: #c7d2fe;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
 
-    align-items:center;
+.hero h1 {
+    font-size: clamp(30px, 5vw, 48px);
+    margin-top: 10px;
+    letter-spacing: -1.5px;
+}
 
-    justify-content:center;
+.hero p {
+    color: #d1d5db;
+    margin-top: 10px;
+    max-width: 650px;
+    line-height: 1.6;
+}
 
-    z-index:9999;
+.hero-actions {
+    margin-top: 24px;
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+/* =========================
+   CARDS
+========================= */
+
+.stats {
+    display: grid;
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+.stat-card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 22px;
+}
+
+.stat-label {
+    font-size: 12px;
+    color: var(--muted);
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.stat-value {
+    font-size: 27px;
+    font-weight: 900;
+    margin-top: 7px;
+}
+
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 20px;
+}
+
+.card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 26px;
+}
+
+.card h2 {
+    font-size: 20px;
+    margin-bottom: 8px;
+}
+
+.card-description {
+    color: var(--muted);
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.course-list {
+    margin-top: 22px;
+}
+
+.course-item {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+    padding: 18px;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    margin-bottom: 12px;
+}
+
+.course-title {
+    font-weight: 800;
+}
+
+.course-meta {
+    color: var(--muted);
+    font-size: 13px;
+    margin-top: 4px;
+}
+
+/* =========================
+   PROGRESS
+========================= */
+
+.progress-container {
+    margin-top: 18px;
+}
+
+.progress-header {
+    display: flex;
+    justify-content: space-between;
+    font-size: 13px;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.progress-bar {
+    height: 9px;
+    background: #e5e7eb;
+    border-radius: 999px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        #2563eb,
+        #7c3aed
+    );
+    width: 0%;
+    transition: width .4s;
+}
+
+/* =========================
+   ASSESSMENT
+========================= */
+
+.quiz-page {
+    padding: 30px 0 70px;
+}
+
+.quiz-top {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.quiz-title h1 {
+    font-size: 28px;
+}
+
+.quiz-title p {
+    color: var(--muted);
+    margin-top: 5px;
+    font-size: 14px;
+}
+
+.timer {
+    background: #111827;
+    color: white;
+    border-radius: 12px;
+    padding: 12px 18px;
+    font-weight: 900;
+    font-size: 18px;
+    min-width: 105px;
+    text-align: center;
+}
+
+.timer.warning {
+    background: var(--danger);
+}
+
+.question-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+    margin-bottom: 18px;
+}
+
+.q-number {
+    width: 38px;
+    height: 38px;
+    border-radius: 9px;
+    border: 1px solid var(--border);
+    background: white;
+    font-size: 12px;
+    font-weight: 800;
+}
+
+.q-number.active {
+    background: #111827;
+    color: white;
+}
+
+.q-number.answered {
+    background: #dcfce7;
+    color: #166534;
+    border-color: #bbf7d0;
+}
+
+.question-card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 30px;
+}
+
+.question-count {
+    color: var(--accent);
+    font-size: 13px;
+    font-weight: 800;
+    text-transform: uppercase;
+}
+
+.question-text {
+    font-size: 22px;
+    line-height: 1.45;
+    margin-top: 12px;
+    font-weight: 800;
+}
+
+.options {
+    margin-top: 26px;
+    display: grid;
+    gap: 12px;
+}
+
+.option {
+    border: 1px solid #d1d5db;
+    border-radius: 12px;
+    padding: 17px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    cursor: pointer;
+    transition: .2s;
+}
+
+.option:hover {
+    border-color: #9ca3af;
+}
+
+.option.selected {
+    border-color: var(--secondary);
+    background: #eff6ff;
+}
+
+.option input {
+    display: none;
+}
+
+.option-letter {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: #f3f4f6;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 900;
+    font-size: 13px;
+}
+
+.option.selected .option-letter {
+    background: var(--secondary);
+    color: white;
+}
+
+.quiz-actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+    gap: 10px;
+}
+
+/* =========================
+   RESULT
+========================= */
+
+.result-page {
+    padding: 60px 0;
+}
+
+.result-card {
+    width: min(650px, 100%);
+    margin: auto;
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 24px;
+    padding: 45px;
+    text-align: center;
+}
+
+.result-icon {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    font-size: 36px;
+    font-weight: 900;
+}
+
+.result-icon.pass {
+    background: #dcfce7;
+    color: #15803d;
+}
+
+.result-icon.fail {
+    background: #fee2e2;
+    color: #b91c1c;
+}
+
+.result-card h1 {
+    margin-top: 20px;
+    font-size: 32px;
+}
+
+.result-score {
+    font-size: 56px;
+    font-weight: 900;
+    margin-top: 15px;
+}
+
+.result-card p {
+    color: var(--muted);
+    line-height: 1.6;
+    margin-top: 8px;
+}
+
+.certificate-box {
+    background: #f5f3ff;
+    border: 1px solid #ddd6fe;
+    border-radius: 12px;
+    padding: 18px;
+    margin-top: 24px;
+}
+
+.certificate-id {
+    font-weight: 900;
+    font-size: 18px;
+    color: var(--accent);
+    margin-top: 5px;
+}
+
+/* =========================
+   LOADER
+========================= */
+
+.loading-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(255,255,255,.85);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+    backdrop-filter: blur(5px);
+}
+
+.loader-box {
+    text-align: center;
+}
+
+.spinner {
+    width: 42px;
+    height: 42px;
+    border: 4px solid #e5e7eb;
+    border-top-color: var(--secondary);
+    border-radius: 50%;
+    animation: spin .8s linear infinite;
+    margin: auto;
+}
+
+.loader-box p {
+    margin-top: 12px;
+    font-weight: 700;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width: 850px) {
+
+    .stats {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+    }
 
 }
 
+@media(max-width: 600px) {
 
-#loader.active{
+    .navbar {
+        height: 64px;
+    }
 
-    display:flex;
+    .nav-right .student-name {
+        display: none;
+    }
 
-}
+    .hero {
+        padding: 28px;
+        border-radius: 18px;
+    }
 
+    .hero h1 {
+        font-size: 32px;
+    }
 
-.loader-box{
+    .stats {
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+    }
 
-    background:white;
+    .stat-card {
+        padding: 17px;
+    }
 
-    padding:25px 30px;
+    .stat-value {
+        font-size: 21px;
+    }
 
-    border-radius:15px;
+    .auth-card {
+        padding: 25px;
+    }
 
-    box-shadow:
-        0 20px 50px
-        rgba(0,0,0,.15);
+    .quiz-top {
+        align-items: flex-start;
+    }
 
-    text-align:center;
+    .timer {
+        font-size: 15px;
+        min-width: 90px;
+    }
 
-    font-weight:700;
+    .question-card {
+        padding: 22px;
+    }
 
-}
+    .question-text {
+        font-size: 19px;
+    }
 
+    .quiz-actions {
+        flex-direction: column;
+    }
 
-.spinner{
+    .quiz-actions button {
+        width: 100%;
+    }
 
-    width:35px;
-
-    height:35px;
-
-    border:4px solid #e5e7eb;
-
-    border-top-color:#111827;
-
-    border-radius:50%;
-
-    animation:
-        spin .8s linear infinite;
-
-    margin:0 auto 12px;
-
-}
-
-
-@keyframes spin{
-
-    to{
-        transform:rotate(360deg);
+    .result-card {
+        padding: 30px 20px;
     }
 
 }
-
-
-/* =========================================================
-   FOOTER
-========================================================= */
-
-footer{
-
-    text-align:center;
-
-    color:#6b7280;
-
-    font-size:12px;
-
-    line-height:1.7;
-
-    padding:30px 20px;
-
-}
-
-
-/* =========================================================
-   PRINT
-========================================================= */
-
-@media print{
-
-    body{
-
-        background:white;
-
-    }
-
-
-    header,
-    footer,
-    .no-print{
-
-        display:none !important;
-
-    }
-
-
-    main{
-
-        width:100%;
-
-        padding:0;
-
-    }
-
-
-    .certificate-area{
-
-        padding:0;
-
-    }
-
-
-    .certificate{
-
-        min-height:100vh;
-
-        border:10px solid #111827;
-
-    }
-
-}
-
-
-/* =========================================================
-   RESPONSIVE
-========================================================= */
-
-@media(max-width:700px){
-
-    header{
-
-        padding:15px 4%;
-
-    }
-
-
-    .user-pill{
-
-        display:none;
-
-    }
-
-
-    main{
-
-        width:92%;
-
-        padding-top:40px;
-
-    }
-
-
-    .dashboard-grid{
-
-        grid-template-columns:1fr;
-
-    }
-
-
-    .resource-grid{
-
-        grid-template-columns:1fr;
-
-    }
-
-
-    .hero h1{
-
-        letter-spacing:-2px;
-
-    }
-
-
-    .card{
-
-        padding:20px;
-
-    }
-
-
-    #quizContent{
-
-        padding:20px;
-
-    }
-
-
-    .warning{
-
-        margin:
-            0 20px 20px;
-
-    }
-
-
-    .quiz-nav{
-
-        padding:
-            15px 20px 25px;
-
-    }
-
-
-    .certificate{
-
-        padding:70px 25px;
-
-        outline-offset:-15px;
-
-    }
-
-
-    .cert-title{
-
-        font-size:27px;
-
-    }
-
-
-    .cert-name{
-
-        font-size:32px;
-
-    }
-
-
-    .cert-meta{
-
-        flex-direction:column;
-
-        gap:15px;
-
-    }
-
-}
-
 </style>
-
 </head>
-
 
 <body>
 
-
-<header>
-
-    <div class="logo">
-
-        <div class="logo-mark">
-            OB
-        </div>
-
-        Openbox
-        <span>Academy</span>
-
-    </div>
-
-
-    <div class="header-right">
-
-        <div
-            id="userPill"
-            class="user-pill hidden">
-        </div>
-
-
-        <button
-            id="logoutBtn"
-            class="logout hidden"
-            onclick="logout()">
-
-            Logout
-
-        </button>
-
-    </div>
-
-</header>
-
-
-<main>
-
-
-<!-- =====================================================
-AUTH PAGE
-===================================================== -->
-
-<section
-    id="authPage">
-
-
-    <div class="hero">
-
-        <div class="eyebrow">
-            OPENBOX ACADEMY
-        </div>
-
-
-        <h1>
-
-            Python Programming
-            <br>
-
-            <span>Fundamentals</span>
-
-        </h1>
-
-
-        <p>
-
-            Build your Python foundations through
-            Openbox Academy's structured learning
-            experience, complete the final assessment
-            and earn your Openbox certificate.
-
-        </p>
-
-    </div>
-
-
-    <div class="card form-card">
-
-
-        <div class="tabs">
-
-
-            <button
-                class="tab active"
-                id="loginTab"
-                onclick="showAuth('login')">
-
-                Login
-
-            </button>
-
-
-            <button
-                class="tab"
-                id="registerTab"
-                onclick="showAuth('register')">
-
-                New Learner
-
-            </button>
-
-
-        </div>
-
-
-        <div
-            id="authMessage"
-            class="message">
-        </div>
-
-
-        <!-- LOGIN -->
-
-        <div id="loginForm">
-
-
-            <h2>
-                Welcome back
-            </h2>
-
-
-            <p>
-                Enter the email and mobile number
-                used during registration.
-            </p>
-
-
-            <div class="field">
-
-                <label>
-                    Email Address
-                </label>
-
-
-                <input
-                    id="loginEmail"
-                    type="email"
-                    placeholder="you@example.com"
-                    autocomplete="email">
-
-            </div>
-
-
-            <div class="field">
-
-                <label>
-                    Mobile Number
-                </label>
-
-
-                <input
-                    id="loginMobile"
-                    type="tel"
-                    maxlength="10"
-                    placeholder="10-digit mobile number"
-                    autocomplete="tel">
-
-            </div>
-
-
-            <button
-                class="btn btn-primary"
-                id="loginBtn"
-                onclick="loginUser()">
-
-                Login to Course
-
-            </button>
-
-
-        </div>
-
-
-        <!-- REGISTER -->
-
-        <div
-            id="registerForm"
-            class="hidden">
-
-
-            <h2>
-                Create your account
-            </h2>
-
-
-            <p>
-                New learners can register here.
-                Your details will be recorded in
-                the Openbox course database.
-            </p>
-
-
-            <div class="field">
-
-                <label>
-                    Full Name
-                </label>
-
-
-                <input
-                    id="registerName"
-                    type="text"
-                    placeholder="Your full name">
-
-            </div>
-
-
-            <div class="field">
-
-                <label>
-                    Email Address
-                </label>
-
-
-                <input
-                    id="registerEmail"
-                    type="email"
-                    placeholder="you@example.com">
-
-            </div>
-
-
-            <div class="field">
-
-                <label>
-                    Mobile Number
-                </label>
-
-
-                <input
-                    id="registerMobile"
-                    type="tel"
-                    maxlength="10"
-                    placeholder="10-digit mobile number">
-
-            </div>
-
-
-            <button
-                class="btn btn-primary"
-                id="registerBtn"
-                onclick="registerUser()">
-
-                Create Account
-
-            </button>
-
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- =====================================================
-DASHBOARD
-===================================================== -->
-
-<section
-    id="dashboardPage"
-    class="hidden">
-
-
-    <div class="hero">
-
-        <div class="eyebrow">
-            YOUR LEARNING DASHBOARD
-        </div>
-
-
-        <h1>
-
-            Keep going,
-            <span id="dashboardName">
-                Learner
-            </span>.
-
-        </h1>
-
-
-        <p>
-
-            Complete your learning resources
-            and unlock the final assessment.
-
-        </p>
-
-    </div>
-
-
-    <div class="card profile">
-
-
-        <div class="profile-label">
-            OPENBOX LEARNER
-        </div>
-
-
-        <div
-            class="profile-name"
-            id="studentName">
-
-            Learner
-
-        </div>
-
-
-        <div
-            class="profile-email"
-            id="studentEmail">
-        </div>
-
-
-    </div>
-
-
-    <div class="dashboard-grid">
-
-
-        <div class="stat">
-
-            <small>
-                Lectures
-            </small>
-
-            <strong>
-                26
-            </strong>
-
-        </div>
-
-
-        <div class="stat">
-
-            <small>
-                Assessment
-            </small>
-
-            <strong>
-                50 Q
-            </strong>
-
-        </div>
-
-
-        <div class="stat">
-
-            <small>
-                Pass Mark
-            </small>
-
-            <strong>
-                70%
-            </strong>
-
-        </div>
-
-
-    </div>
-
-
-    <div class="card">
-
-
-        <h2>
-            Course Progress
-        </h2>
-
-
-        <div class="progress-wrap">
-
-
-            <div class="progress-top">
-
-                <span>
-                    Assessment status
-                </span>
-
-
-                <strong id="statusText">
-                    Not Started
-                </strong>
-
-            </div>
-
-
-            <div class="progress">
-
-                <div
-                    id="dashboardProgress"
-                    class="progress-bar">
-                </div>
-
-            </div>
-
-        </div>
-
-
-        <div
-            id="dashboardActions"
-            style="margin-top:22px">
-
-        </div>
-
-
-    </div>
-
-
-    <div
-        class="card"
-        style="margin-top:20px">
-
-
-        <h2>
-            Course Resources
-        </h2>
-
-
-        <p>
-            Study the Openbox learning resources
-            before attempting the final assessment.
-        </p>
-
-
-        <div class="resource-grid">
-
-
-            <div class="resource">
-
-                <h3>
-                    Lecture Videos
-                </h3>
-
-
-                <p>
-                    Watch the complete MIT OCW
-                    lecture video collection.
-                </p>
-
-
-                <a
-                    href="https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/video_galleries/lecture-videos/"
-                    target="_blank"
-                    rel="noopener">
-
-                    Open Lecture Videos →
-
-                </a>
-
-            </div>
-
-
-            <div class="resource">
-
-                <h3>
-                    Lecture Notes
-                </h3>
-
-
-                <p>
-                    Access the official lecture notes.
-                </p>
-
-
-                <a
-                    href="https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/lists/lecture-notes/"
-                    target="_blank"
-                    rel="noopener">
-
-                    Open Lecture Notes →
-
-                </a>
-
-            </div>
-
-
-            <div class="resource">
-
-                <h3>
-                    Lecture Code
-                </h3>
-
-
-                <p>
-                    Review the official course code.
-                </p>
-
-
-                <a
-                    href="https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/lists/lecture-code/"
-                    target="_blank"
-                    rel="noopener">
-
-                    Open Lecture Code →
-
-                </a>
-
-            </div>
-
-
-            <div class="resource">
-
-                <h3>
-                    Finger Exercises
-                </h3>
-
-
-                <p>
-                    Practice short Python exercises.
-                </p>
-
-
-                <a
-                    href="https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/pages/finger-exercises/"
-                    target="_blank"
-                    rel="noopener">
-
-                    Open Exercises →
-
-                </a>
-
-            </div>
-
-
-            <div class="resource">
-
-                <h3>
-                    Problem Sets
-                </h3>
-
-
-                <p>
-                    Continue your programming practice.
-                </p>
-
-
-                <a
-                    href="https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/lists/problem-sets/"
-                    target="_blank"
-                    rel="noopener">
-
-                    Open Problem Sets →
-
-                </a>
-
-            </div>
-
-
-            <div class="resource">
-
-                <h3>
-                    Recitations
-                </h3>
-
-
-                <p>
-                    Review additional course material.
-                </p>
-
-
-                <a
-                    href="https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/lists/recitations/"
-                    target="_blank"
-                    rel="noopener">
-
-                    Open Recitations →
-
-                </a>
-
-            </div>
-
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- =====================================================
-QUIZ
-===================================================== -->
-
-<section
-    id="quizPage"
-    class="hidden">
-
-
-    <div class="hero">
-
-        <div class="eyebrow">
-            OPENBOX ASSESSMENT
-        </div>
-
-
-        <h1>
-
-            Python
-            <span>Final Assessment</span>
-
-        </h1>
-
-
-        <p>
-            50 questions · 60 minutes · 70% passing score
-        </p>
-
-    </div>
-
-
-    <div class="quiz-shell">
-
-
-        <div class="quiz-top">
-
-
-            <div class="quiz-info">
-
-                <strong id="questionCounter">
-                    Question 1 of 50
-                </strong>
-
-
-                <span
-                    id="timer"
-                    class="timer">
-
-                    60:00
-
-                </span>
-
-            </div>
-
-
-            <div class="progress">
-
-                <div
-                    id="quizProgress"
-                    class="progress-bar">
-                </div>
-
-            </div>
-
-
-        </div>
-
-
-        <div id="quizContent">
-        </div>
-
-
-        <div class="warning">
-
-            <strong>
-                Assessment integrity:
-            </strong>
-
-            This assessment is intended to be
-            completed independently. Copying,
-            text selection, printing and common
-            browser shortcuts are disabled while
-            the assessment is active.
-
-            Leaving the assessment window repeatedly
-            may lock the assessment.
-
-        </div>
-
-
-        <div class="quiz-nav">
-
-
-            <button
-                class="btn btn-secondary"
-                id="prevBtn"
-                onclick="previousQuestion()">
-
-                ← Previous
-
-            </button>
-
-
-            <button
-                class="btn btn-primary"
-                id="nextBtn"
-                onclick="nextQuestion()">
-
-                Next →
-
-            </button>
-
-
-        </div>
-
-
-    </div>
-
-</section>
-
-
-<!-- =====================================================
-RESULT
-===================================================== -->
-
-<section
-    id="resultPage"
-    class="hidden">
-
-
-    <div class="hero">
-
-        <div class="eyebrow">
-            ASSESSMENT RESULT
-        </div>
-
-
-        <h1>
-
-            Assessment
-            <span>Complete</span>
-
-        </h1>
-
-
-        <p>
-            Your Openbox Academy assessment result
-            is shown below.
-        </p>
-
-    </div>
-
-
-    <div
-        class="card result"
-        id="resultCard">
-
-
-        <div
-            class="result-icon"
-            id="resultIcon">
-
-            ✓
-
-        </div>
-
-
-        <h1 id="resultTitle">
-            Congratulations!
-        </h1>
-
-
-        <div
-            class="score-big"
-            id="resultScore">
-
-            86%
-
-        </div>
-
-
-        <p id="resultMessage">
-        </p>
-
-
-        <div
-            id="certificateResultActions"
-            style="margin-top:25px">
-
-        </div>
-
-
-    </div>
-
-</section>
-
-
-<!-- =====================================================
-CERTIFICATE
-===================================================== -->
-
-<section
-    id="certificatePage"
-    class="hidden">
-
-
-    <div class="hero no-print">
-
-        <div class="eyebrow">
-            OPENBOX CREDENTIAL
-        </div>
-
-
-        <h1>
-
-            Your
-            <span>Certificate</span>
-
-        </h1>
-
-
-        <p>
-
-            Congratulations on completing the
-            Python Programming Fundamentals
-            assessment.
-
-        </p>
-
-    </div>
-
-
-    <div class="certificate-area">
-
-
-        <div class="certificate">
-
-
-            <div class="cert-header">
-                OPENBOX ACADEMY
-            </div>
-
-
-            <div class="cert-title">
-                CERTIFICATE OF COMPLETION
-            </div>
-
-
-            <div class="cert-subtitle">
-                This certificate is proudly presented to
-            </div>
-
-
-            <div
-                class="cert-name"
-                id="certificateName">
-
-                STUDENT NAME
-
-            </div>
-
-
-            <div class="cert-body">
-
-                This is to certify that
-
-                <strong id="certificateNameBody">
-                    STUDENT NAME
-                </strong>
-
-                has successfully completed the
-
-                <strong>
-                    Python Programming Fundamentals Course
-                </strong>,
-
-                demonstrating proficiency in
-                Python programming fundamentals,
-                problem-solving and core coding
-                concepts.
-
-            </div>
-
-
-            <div class="cert-meta">
-
-
-                <div>
-
-                    Date:
-
-                    <strong id="certificateDate">
-                        --
-                    </strong>
-
-                </div>
-
-
-                <div>
-
-                    Score:
-
-                    <strong id="certificateScore">
-                        --
-                    </strong>
-
-                </div>
-
-
-                <div>
-
-                    Director
-
-                    <strong>
-                        Openbox Academy
-                    </strong>
-
-                </div>
-
-
-            </div>
-
-
-            <div
-                class="cert-id"
-                id="certificateId">
-
-                CertID: OB-PY-2026-0000
-
-            </div>
-
-
-            <div class="cert-footer">
-
-                This certificate is issued by Openbox
-                Academy and confirms the student's
-                successful completion of the course
-                assessment.
-
-                Curriculum resources were adapted from
-                MIT OpenCourseWare 6.100L under the
-                Creative Commons Attribution-
-                NonCommercial-ShareAlike (CC BY-NC-SA 4.0)
-                license.
-
-                Openbox Academy is not affiliated with
-                or endorsed by MIT.
-
-            </div>
-
-
-        </div>
-
-
-    </div>
-
-
-    <div class="certificate-actions no-print">
-
-
-        <button
-            class="btn btn-green"
-            onclick="downloadCertificate()">
-
-            Download Certificate PDF
-
-        </button>
-
-
-        <button
-            class="btn btn-primary"
-            onclick="shareLinkedIn()">
-
-            Share on LinkedIn
-
-        </button>
-
-
-        <button
-            class="btn btn-secondary"
-            onclick="copyLinkedInCaption()">
-
-            Copy LinkedIn Caption
-
-        </button>
-
-
-    </div>
-
-
-    <div
-        class="card no-print"
-        style="
-            margin-top:25px;
-            text-align:center
-        ">
-
-
-        <h2>
-            Keep learning
-        </h2>
-
-
-        <p>
-
-            Continue learning Python with
-            Openbox Academy's free resources.
-
-        </p>
-
-
-        <a
-            href="https://openboxgp.vercel.app/python.html"
-            target="_blank"
-            rel="noopener"
-            class="btn btn-primary"
-            style="
-                display:inline-flex;
-                width:auto
-            ">
-
-            Continue Free Python Learning →
-
-        </a>
-
-
-    </div>
-
-</section>
-
-
-</main>
-
-
-<footer>
-
-    Openbox Academy · Python Programming Fundamentals
-
-    <br>
-
-    Curriculum adapted from MIT OpenCourseWare 6.100L
-    under CC BY-NC-SA 4.0.
-
-    <br>
-
-    Openbox Academy is not affiliated with or endorsed by MIT.
-
-</footer>
-
-
-<!-- =====================================================
-LOADER
-===================================================== -->
-
-<div id="loader">
-
+<!-- =========================
+     LOADING
+========================= -->
+
+<div id="loadingOverlay" class="loading-overlay hidden">
 
     <div class="loader-box">
 
         <div class="spinner"></div>
 
-        <div>
+        <p id="loadingText">
             Please wait...
+        </p>
+
+    </div>
+
+</div>
+
+
+<!-- =========================
+     NAVBAR
+========================= -->
+
+<nav class="navbar">
+
+    <div class="nav-inner">
+
+        <div class="logo">
+            OPENBOX <span>ACADEMY</span>
+        </div>
+
+        <div class="nav-right">
+
+            <span
+                id="navStudentName"
+                class="student-name">
+            </span>
+
+            <button
+                id="logoutBtn"
+                class="btn btn-light hidden"
+                onclick="logout()">
+
+                Logout
+
+            </button>
+
         </div>
 
     </div>
 
+</nav>
 
-</div>
+
+<!-- =========================
+     AUTH PAGE
+========================= -->
+
+<section id="authPage" class="auth-page">
+
+    <div class="auth-card">
+
+        <div class="auth-brand">
+
+            <div class="academy">
+                Openbox Academy
+            </div>
+
+            <h1 id="authTitle">
+                Welcome back
+            </h1>
+
+            <p id="authSubtitle">
+                Continue your Python learning journey.
+            </p>
+
+        </div>
+
+
+        <div
+            id="authAlert"
+            class="hidden">
+        </div>
+
+
+        <!-- LOGIN -->
+
+        <form
+            id="loginForm"
+            onsubmit="handleLogin(event)">
+
+            <div class="form-group">
+
+                <label>
+                    Email Address
+                </label>
+
+                <input
+                    id="loginEmail"
+                    type="email"
+                    placeholder="you@example.com"
+                    required>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Mobile Number
+                </label>
+
+                <input
+                    id="loginMobile"
+                    type="tel"
+                    maxlength="10"
+                    placeholder="10 digit mobile number"
+                    required>
+
+            </div>
+
+
+            <button
+                class="btn btn-primary auth-submit"
+                type="submit">
+
+                Login to Academy
+
+            </button>
+
+        </form>
+
+
+        <!-- REGISTER -->
+
+        <form
+            id="registerForm"
+            class="hidden"
+            onsubmit="handleRegister(event)">
+
+            <div class="form-group">
+
+                <label>
+                    Full Name
+                </label>
+
+                <input
+                    id="registerName"
+                    type="text"
+                    placeholder="Your full name"
+                    required>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Email Address
+                </label>
+
+                <input
+                    id="registerEmail"
+                    type="email"
+                    placeholder="you@example.com"
+                    required>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Mobile Number
+                </label>
+
+                <input
+                    id="registerMobile"
+                    type="tel"
+                    maxlength="10"
+                    placeholder="10 digit mobile number"
+                    required>
+
+            </div>
+
+
+            <button
+                class="btn btn-primary auth-submit"
+                type="submit">
+
+                Create Student Account
+
+            </button>
+
+        </form>
+
+
+        <div class="auth-switch">
+
+            <span id="authSwitchText">
+                Don't have an account?
+            </span>
+
+            <button
+                id="authSwitchBtn"
+                onclick="toggleAuth()">
+
+                Create account
+
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     DASHBOARD
+========================= -->
+
+<section
+    id="dashboardPage"
+    class="dashboard hidden">
+
+    <div class="container">
+
+        <div class="hero">
+
+            <small>
+                Python Programming Fundamentals
+            </small>
+
+            <h1>
+                Welcome,
+                <span id="dashboardName">
+                    Student
+                </span>.
+            </h1>
+
+            <p>
+                Build your Python fundamentals,
+                complete the assessment and earn
+                your Openbox Academy certificate.
+            </p>
+
+            <div class="hero-actions">
+
+                <button
+                    id="startAssessmentBtn"
+                    class="btn btn-blue"
+                    onclick="startAssessment()">
+
+                    Start Assessment
+
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- STATS -->
+
+        <div class="stats">
+
+            <div class="stat-card">
+
+                <div class="stat-label">
+                    Student ID
+                </div>
+
+                <div
+                    id="studentId"
+                    class="stat-value">
+                    —
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-label">
+                    Status
+                </div>
+
+                <div
+                    id="studentStatus"
+                    class="stat-value">
+                    —
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-label">
+                    Score
+                </div>
+
+                <div
+                    id="studentScore"
+                    class="stat-value">
+                    —
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-label">
+                    Certificate
+                </div>
+
+                <div
+                    id="certificateStatus"
+                    class="stat-value">
+                    —
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="dashboard-grid">
+
+            <!-- COURSE -->
+
+            <div class="card">
+
+                <h2>
+                    Your Learning Module
+                </h2>
+
+                <p class="card-description">
+
+                    Python Programming Fundamentals
+                    is designed to take you from
+                    programming basics to practical
+                    Python problem solving.
+
+                </p>
+
+
+                <div class="course-list">
+
+                    <div class="course-item">
+
+                        <div>
+
+                            <div class="course-title">
+                                Python Programming Fundamentals
+                            </div>
+
+                            <div class="course-meta">
+                                Core programming concepts
+                                and Python fundamentals
+                            </div>
+
+                        </div>
+
+                        <div>
+                            <span class="btn btn-light">
+                                Course
+                            </span>
+                        </div>
+
+                    </div>
+
+
+                    <div class="course-item">
+
+                        <div>
+
+                            <div class="course-title">
+                                Final Assessment
+                            </div>
+
+                            <div class="course-meta">
+                                50 questions · 60 minutes ·
+                                70% passing score
+                            </div>
+
+                        </div>
+
+                        <button
+                            class="btn btn-primary"
+                            onclick="startAssessment()">
+
+                            Open
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- PROGRESS -->
+
+            <div class="card">
+
+                <h2>
+                    Progress
+                </h2>
+
+                <p class="card-description">
+                    Your assessment progress.
+                </p>
+
+
+                <div class="progress-container">
+
+                    <div class="progress-header">
+
+                        <span>
+                            Completion
+                        </span>
+
+                        <span id="progressText">
+                            0%
+                        </span>
+
+                    </div>
+
+                    <div class="progress-bar">
+
+                        <div
+                            id="progressFill"
+                            class="progress-fill">
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div style="margin-top:25px">
+
+                    <p class="card-description">
+                        Passing requirement
+                    </p>
+
+                    <strong style="font-size:24px">
+                        70%
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     QUIZ
+========================= -->
+
+<section
+    id="quizPage"
+    class="quiz-page hidden">
+
+    <div class="container">
+
+        <div class="quiz-top">
+
+            <div class="quiz-title">
+
+                <h1>
+                    Final Assessment
+                </h1>
+
+                <p>
+                    Python Programming Fundamentals
+                </p>
+
+            </div>
+
+            <div
+                id="timer"
+                class="timer">
+
+                60:00
+
+            </div>
+
+        </div>
+
+
+        <!-- QUESTION NAVIGATION -->
+
+        <div
+            id="questionNav"
+            class="question-nav">
+        </div>
+
+
+        <!-- QUESTION -->
+
+        <div class="question-card">
+
+            <div
+                id="questionCount"
+                class="question-count">
+
+                Question 1
+
+            </div>
+
+            <div
+                id="questionText"
+                class="question-text">
+
+                Loading question...
+
+            </div>
+
+
+            <div
+                id="options"
+                class="options">
+            </div>
+
+
+            <div class="quiz-actions">
+
+                <button
+                    id="previousBtn"
+                    class="btn btn-light"
+                    onclick="previousQuestion()">
+
+                    ← Previous
+
+                </button>
+
+
+                <button
+                    id="nextBtn"
+                    class="btn btn-primary"
+                    onclick="nextQuestion()">
+
+                    Next →
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     RESULT
+========================= -->
+
+<section
+    id="resultPage"
+    class="result-page hidden">
+
+    <div class="container">
+
+        <div class="result-card">
+
+            <div
+                id="resultIcon"
+                class="result-icon">
+
+                ✓
+
+            </div>
+
+
+            <h1 id="resultTitle">
+                Assessment Complete
+            </h1>
+
+
+            <div
+                id="resultScore"
+                class="result-score">
+
+                0%
+
+            </div>
+
+
+            <p id="resultMessage">
+                Your result has been recorded.
+            </p>
+
+
+            <div
+                id="certificateBox"
+                class="certificate-box hidden">
+
+                <div>
+                    Certificate ID
+                </div>
+
+                <div
+                    id="certificateId"
+                    class="certificate-id">
+                </div>
+
+            </div>
+
+
+            <div
+                style="
+                    margin-top:25px;
+                    display:flex;
+                    justify-content:center;
+                    gap:10px;
+                    flex-wrap:wrap;
+                ">
+
+                <button
+                    class="btn btn-primary"
+                    onclick="showDashboard()">
+
+                    Back to Dashboard
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
 
 
 <script>
 
 /* =========================================================
-CONFIGURATION
+   OPENBOX ACADEMY FRONTEND
 ========================================================= */
-
-const API_URL =
-"https://script.google.com/macros/s/AKfycbwRxJpa3BEdrocBB5KTOt5ZDknyOGrc4eQpW5C-6ufNVGGXMhbdnrbx5T510Qn-L_9y/exec";
-
-
-const COURSE_URL =
-"https://openboxgp.vercel.app/python.html";
-
-
-const TOTAL_QUESTIONS = 50;
-
-
-const PASS_PERCENTAGE = 70;
-
-
-const EXAM_DURATION =
-60 * 60;
 
 
 /* =========================================================
-STATE
+   API CONFIGURATION
+========================================================= */
+
+const API_URL =
+"https://script.google.com/macros/s/AKfycbwbmp19FOeDmWIK2S7n4U7EPVB34W17WrHaSYHa74hHXL06WOYF_9EL2dC6tWt4xbqc/exec";
+
+
+const CONFIG = {
+
+    PASS_PERCENTAGE: 70,
+
+    TOTAL_QUESTIONS: 50,
+
+    DURATION_MINUTES: 60
+
+};
+
+
+/* =========================================================
+   STATE
 ========================================================= */
 
 let currentUser = null;
 
 let questions = [];
 
-let answers = {};
-
 let currentQuestion = 0;
 
-let timerSeconds =
-    EXAM_DURATION;
+let answers = {};
 
 let timerInterval = null;
 
-let quizStarted = false;
-
-let tabWarnings = 0;
-
-let quizLocked = false;
+let remainingSeconds =
+    CONFIG.DURATION_MINUTES * 60;
 
 
 /* =========================================================
-API REQUEST
+   DOM HELPERS
 ========================================================= */
 
-async function apiRequest(data){
+function $(id) {
+
+    return document.getElementById(id);
+
+}
+
+
+/* =========================================================
+   LOADING
+========================================================= */
+
+function showLoading(message = "Please wait...") {
+
+    $("loadingText").textContent = message;
+
+    $("loadingOverlay")
+        .classList
+        .remove("hidden");
+
+}
+
+
+function hideLoading() {
+
+    $("loadingOverlay")
+        .classList
+        .add("hidden");
+
+}
+
+
+/* =========================================================
+   ALERT
+========================================================= */
+
+function showAlert(
+    message,
+    type = "error"
+) {
+
+    const box =
+        $("authAlert");
+
+    box.className =
+        `alert alert-${type}`;
+
+    box.textContent =
+        message;
+
+}
+
+
+function hideAlert() {
+
+    $("authAlert")
+        .classList
+        .add("hidden");
+
+}
+
+
+/* =========================================================
+   API REQUEST
+========================================================= */
+
+async function api(action, data = {}) {
+
+    const payload = {
+
+        action,
+
+        ...data
+
+    };
+
 
     const response =
         await fetch(
             API_URL,
             {
 
-                method:"POST",
+                method: "POST",
 
-                headers:{
+                headers: {
                     "Content-Type":
                         "text/plain;charset=utf-8"
                 },
 
                 body:
-                    JSON.stringify(data)
+                    JSON.stringify(payload)
 
             }
         );
 
 
-    const result =
-        await response.json();
+    if (!response.ok) {
+
+        throw new Error(
+            "API request failed."
+        );
+
+    }
 
 
-    return result;
+    return await response.json();
 
 }
 
 
 /* =========================================================
-AUTH TABS
+   AUTH TOGGLE
 ========================================================= */
 
-function showAuth(type){
+function toggleAuth() {
 
-    clearMessage();
+    const login =
+        $("loginForm");
 
-
-    const loginForm =
-        document.getElementById(
-            "loginForm"
-        );
+    const register =
+        $("registerForm");
 
 
-    const registerForm =
-        document.getElementById(
-            "registerForm"
-        );
+    hideAlert();
 
 
-    const loginTab =
-        document.getElementById(
-            "loginTab"
-        );
+    if (
+        login.classList
+            .contains("hidden")
+    ) {
 
-
-    const registerTab =
-        document.getElementById(
-            "registerTab"
-        );
-
-
-    if(type === "login"){
-
-        loginForm
-            .classList
+        login.classList
             .remove("hidden");
 
-
-        registerForm
-            .classList
+        register.classList
             .add("hidden");
 
 
-        loginTab
-            .classList
-            .add("active");
+        $("authTitle")
+            .textContent =
+            "Welcome back";
 
 
-        registerTab
-            .classList
-            .remove("active");
+        $("authSubtitle")
+            .textContent =
+            "Continue your Python learning journey.";
 
-    }else{
 
-        loginForm
-            .classList
+        $("authSwitchText")
+            .textContent =
+            "Don't have an account?";
+
+
+        $("authSwitchBtn")
+            .textContent =
+            "Create account";
+
+    }
+
+    else {
+
+        login.classList
             .add("hidden");
 
-
-        registerForm
-            .classList
+        register.classList
             .remove("hidden");
 
 
-        loginTab
-            .classList
-            .remove("active");
+        $("authTitle")
+            .textContent =
+            "Create your account";
 
 
-        registerTab
-            .classList
-            .add("active");
+        $("authSubtitle")
+            .textContent =
+            "Start learning with Openbox Academy.";
+
+
+        $("authSwitchText")
+            .textContent =
+            "Already have an account?";
+
+
+        $("authSwitchBtn")
+            .textContent =
+            "Login";
 
     }
 
@@ -2635,43 +1676,37 @@ function showAuth(type){
 
 
 /* =========================================================
-REGISTER
+   REGISTER
 ========================================================= */
 
-async function registerUser(){
+async function handleRegister(event) {
+
+    event.preventDefault();
+
+    hideAlert();
+
 
     const name =
-        document
-            .getElementById(
-                "registerName"
-            )
+        $("registerName")
             .value
             .trim();
-
 
     const email =
-        document
-            .getElementById(
-                "registerEmail"
-            )
+        $("registerEmail")
             .value
-            .trim();
-
+            .trim()
+            .toLowerCase();
 
     const mobile =
-        document
-            .getElementById(
-                "registerMobile"
-            )
+        $("registerMobile")
             .value
-            .trim();
+            .replace(/\D/g, "");
 
 
-    if(!name || !email || !mobile){
+    if (!name) {
 
-        showMessage(
-            "Please complete all fields.",
-            "error"
+        showAlert(
+            "Please enter your full name."
         );
 
         return;
@@ -2679,34 +1714,56 @@ async function registerUser(){
     }
 
 
-    try{
+    if (
+        !/^[^\s@]+@[^\s@]+\.[^\s@]+$/
+            .test(email)
+    ) {
 
-        showLoader(true);
+        showAlert(
+            "Please enter a valid email address."
+        );
 
+        return;
 
-        const response =
-            await apiRequest({
-
-                action:"register",
-
-                name:name,
-
-                email:email,
-
-                mobile:mobile
-
-            });
+    }
 
 
-        showLoader(false);
+    if (
+        !/^\d{10}$/.test(mobile)
+    ) {
+
+        showAlert(
+            "Mobile number must contain 10 digits."
+        );
+
+        return;
+
+    }
 
 
-        if(!response.success){
+    showLoading(
+        "Creating your student account..."
+    );
 
-            showMessage(
-                response.message ||
-                "Registration failed.",
-                "error"
+
+    try {
+
+        const result =
+            await api(
+                "register",
+                {
+                    name,
+                    email,
+                    mobile
+                }
+            );
+
+
+        if (!result.success) {
+
+            showAlert(
+                result.message ||
+                "Registration failed."
             );
 
             return;
@@ -2715,32 +1772,29 @@ async function registerUser(){
 
 
         currentUser =
-            response.user;
+            result.user;
 
 
-        localStorage.setItem(
-            "openboxPythonUser",
-            JSON.stringify(
-                currentUser
-            )
-        );
+        saveUser();
 
-
-        updateHeader();
 
         showDashboard();
 
+    }
 
-    }catch(error){
-
-        showLoader(false);
+    catch (error) {
 
         console.error(error);
 
-        showMessage(
-            "Unable to connect to the server.",
-            "error"
+        showAlert(
+            "Unable to connect to Openbox Academy. Please try again."
         );
+
+    }
+
+    finally {
+
+        hideLoading();
 
     }
 
@@ -2748,34 +1802,32 @@ async function registerUser(){
 
 
 /* =========================================================
-LOGIN
+   LOGIN
 ========================================================= */
 
-async function loginUser(){
+async function handleLogin(event) {
+
+    event.preventDefault();
+
+    hideAlert();
+
 
     const email =
-        document
-            .getElementById(
-                "loginEmail"
-            )
+        $("loginEmail")
             .value
-            .trim();
-
+            .trim()
+            .toLowerCase();
 
     const mobile =
-        document
-            .getElementById(
-                "loginMobile"
-            )
+        $("loginMobile")
             .value
-            .trim();
+            .replace(/\D/g, "");
 
 
-    if(!email || !mobile){
+    if (!email || !mobile) {
 
-        showMessage(
-            "Please enter email and mobile number.",
-            "error"
+        showAlert(
+            "Email and mobile number are required."
         );
 
         return;
@@ -2783,32 +1835,28 @@ async function loginUser(){
     }
 
 
-    try{
-
-        showLoader(true);
-
-
-        const response =
-            await apiRequest({
-
-                action:"login",
-
-                email:email,
-
-                mobile:mobile
-
-            });
+    showLoading(
+        "Signing you in..."
+    );
 
 
-        showLoader(false);
+    try {
+
+        const result =
+            await api(
+                "login",
+                {
+                    email,
+                    mobile
+                }
+            );
 
 
-        if(!response.success){
+        if (!result.success) {
 
-            showMessage(
-                response.message ||
-                "Login failed.",
-                "error"
+            showAlert(
+                result.message ||
+                "Login failed."
             );
 
             return;
@@ -2817,32 +1865,29 @@ async function loginUser(){
 
 
         currentUser =
-            response.user;
+            result.user;
 
 
-        localStorage.setItem(
-            "openboxPythonUser",
-            JSON.stringify(
-                currentUser
-            )
-        );
+        saveUser();
 
-
-        updateHeader();
 
         showDashboard();
 
+    }
 
-    }catch(error){
-
-        showLoader(false);
+    catch (error) {
 
         console.error(error);
 
-        showMessage(
-            "Unable to connect to the server.",
-            "error"
+        showAlert(
+            "Unable to connect to the server."
         );
+
+    }
+
+    finally {
+
+        hideLoading();
 
     }
 
@@ -2850,162 +1895,274 @@ async function loginUser(){
 
 
 /* =========================================================
-DASHBOARD
+   LOCAL SESSION
 ========================================================= */
 
-function showDashboard(){
+function saveUser() {
 
-    hideAllPages();
+    if (!currentUser) {
+        return;
+    }
+
+    localStorage.setItem(
+        "openbox_student",
+        JSON.stringify(currentUser)
+    );
+
+}
 
 
-    document
-        .getElementById(
-            "dashboardPage"
-        )
+function loadSavedUser() {
+
+    try {
+
+        const saved =
+            localStorage.getItem(
+                "openbox_student"
+            );
+
+
+        if (!saved) {
+            return false;
+        }
+
+
+        currentUser =
+            JSON.parse(saved);
+
+
+        return !!currentUser;
+
+    }
+
+    catch (error) {
+
+        localStorage.removeItem(
+            "openbox_student"
+        );
+
+        return false;
+
+    }
+
+}
+
+
+/* =========================================================
+   LOGOUT
+========================================================= */
+
+function logout() {
+
+    clearInterval(timerInterval);
+
+    currentUser = null;
+
+    questions = [];
+
+    answers = {};
+
+    localStorage.removeItem(
+        "openbox_student"
+    );
+
+    showAuth();
+
+}
+
+
+/* =========================================================
+   SHOW AUTH
+========================================================= */
+
+function showAuth() {
+
+    $("authPage")
+        .classList
+        .remove("hidden");
+
+    $("dashboardPage")
+        .classList
+        .add("hidden");
+
+    $("quizPage")
+        .classList
+        .add("hidden");
+
+    $("resultPage")
+        .classList
+        .add("hidden");
+
+    $("logoutBtn")
+        .classList
+        .add("hidden");
+
+    $("navStudentName")
+        .textContent = "";
+
+}
+
+
+/* =========================================================
+   SHOW DASHBOARD
+========================================================= */
+
+function showDashboard() {
+
+    if (!currentUser) {
+
+        showAuth();
+
+        return;
+
+    }
+
+
+    $("authPage")
+        .classList
+        .add("hidden");
+
+    $("quizPage")
+        .classList
+        .add("hidden");
+
+    $("resultPage")
+        .classList
+        .add("hidden");
+
+    $("dashboardPage")
         .classList
         .remove("hidden");
 
 
-    if(!currentUser){
-
-        return;
-
-    }
+    $("logoutBtn")
+        .classList
+        .remove("hidden");
 
 
-    document
-        .getElementById(
-            "dashboardName"
-        )
+    $("navStudentName")
         .textContent =
-            currentUser.name;
-
-
-    document
-        .getElementById(
-            "studentName"
-        )
-        .textContent =
-            currentUser.name;
-
-
-    document
-        .getElementById(
-            "studentEmail"
-        )
-        .textContent =
-            currentUser.email;
+        currentUser.name || "";
 
 
     updateDashboard();
 
-
-    window.scrollTo({
-        top:0,
-        behavior:"smooth"
-    });
-
 }
 
 
 /* =========================================================
-UPDATE DASHBOARD
+   UPDATE DASHBOARD
 ========================================================= */
 
-function updateDashboard(){
+function updateDashboard() {
 
-    const status =
-        currentUser.status ||
-        "Not Started";
+    const user =
+        currentUser;
 
 
-    document
-        .getElementById(
-            "statusText"
-        )
+    $("dashboardName")
         .textContent =
-            status;
+        user.name || "Student";
 
 
-    const progress =
-        document
-            .getElementById(
-                "dashboardProgress"
-            );
+    $("studentId")
+        .textContent =
+        user.studentId || "—";
 
 
-    const actions =
-        document
-            .getElementById(
-                "dashboardActions"
-            );
+    $("studentStatus")
+        .textContent =
+        user.status || "Not Started";
 
 
-    if(status === "Passed"){
+    if (
+        user.score !== "" &&
+        user.score !== null &&
+        user.score !== undefined
+    ) {
 
-        progress.style.width =
-            "100%";
+        $("studentScore")
+            .textContent =
+            Number(user.score) + "%";
 
+    }
 
-        actions.innerHTML = `
+    else {
 
-            <button
-                class="btn btn-green"
-                onclick="showResult({
-                    score:${Number(currentUser.score)},
-                    passed:true
-                })">
+        $("studentScore")
+            .textContent =
+            "—";
 
-                View Assessment Result
-
-            </button>
-
-            <button
-                class="btn btn-primary"
-                style="margin-left:8px"
-                onclick="showCertificate()">
-
-                View Certificate
-
-            </button>
-
-        `;
-
-    }else if(status === "Failed"){
-
-        progress.style.width =
-            "100%";
+    }
 
 
-        actions.innerHTML = `
+    if (user.certificateId) {
 
-            <button
-                class="btn btn-secondary"
-                disabled>
+        $("certificateStatus")
+            .textContent =
+            "Issued";
 
-                Assessment Completed
+    }
 
-            </button>
+    else {
 
-        `;
+        $("certificateStatus")
+            .textContent =
+            "Not Yet";
 
-    }else{
-
-        progress.style.width =
-            "0%";
+    }
 
 
-        actions.innerHTML = `
+    let progress = 0;
 
-            <button
-                class="btn btn-primary"
-                onclick="startQuiz()">
 
-                Start Final Assessment
+    if (user.status === "Passed") {
 
-            </button>
+        progress = 100;
 
-        `;
+    }
+
+    else if (
+        user.status === "Failed"
+    ) {
+
+        progress = 100;
+
+    }
+
+
+    $("progressFill")
+        .style.width =
+        progress + "%";
+
+
+    $("progressText")
+        .textContent =
+        progress + "%";
+
+
+    const startButton =
+        $("startAssessmentBtn");
+
+
+    if (
+        user.status === "Passed" ||
+        user.status === "Failed"
+    ) {
+
+        startButton.disabled = true;
+
+        startButton.textContent =
+            "Assessment Submitted";
+
+    }
+
+    else {
+
+        startButton.disabled = false;
+
+        startButton.textContent =
+            "Start Assessment";
 
     }
 
@@ -3013,27 +2170,27 @@ function updateDashboard(){
 
 
 /* =========================================================
-START QUIZ
+   START ASSESSMENT
 ========================================================= */
 
-async function startQuiz(){
+async function startAssessment() {
 
-    if(
-        !currentUser
-    ){
+    if (!currentUser) {
+
+        showAuth();
 
         return;
 
     }
 
 
-    if(
+    if (
         currentUser.status === "Passed" ||
         currentUser.status === "Failed"
-    ){
+    ) {
 
         alert(
-            "You have already completed the assessment."
+            "Your assessment has already been submitted."
         );
 
         return;
@@ -3041,26 +2198,23 @@ async function startQuiz(){
     }
 
 
-    try{
-
-        showLoader(true);
-
-
-        const response =
-            await apiRequest({
-
-                action:"getQuestions"
-
-            });
+    showLoading(
+        "Loading assessment..."
+    );
 
 
-        showLoader(false);
+    try {
+
+        const result =
+            await api(
+                "getQuestions"
+            );
 
 
-        if(!response.success){
+        if (!result.success) {
 
             alert(
-                response.message ||
+                result.message ||
                 "Unable to load questions."
             );
 
@@ -3070,10 +2224,12 @@ async function startQuiz(){
 
 
         questions =
-            response.questions || [];
+            Array.isArray(result.questions)
+                ? result.questions
+                : [];
 
 
-        if(!questions.length){
+        if (!questions.length) {
 
             alert(
                 "No assessment questions are available yet."
@@ -3084,47 +2240,39 @@ async function startQuiz(){
         }
 
 
-        answers = {};
-
         currentQuestion = 0;
 
-        timerSeconds =
-            EXAM_DURATION;
-
-        tabWarnings = 0;
-
-        quizLocked = false;
-
-        quizStarted = true;
+        answers = {};
 
 
-        hideAllPages();
+        remainingSeconds =
+            CONFIG.DURATION_MINUTES * 60;
 
 
-        document
-            .getElementById(
-                "quizPage"
-            )
+        $("dashboardPage")
+            .classList
+            .add("hidden");
+
+
+        $("resultPage")
+            .classList
+            .add("hidden");
+
+
+        $("quizPage")
             .classList
             .remove("hidden");
 
+
+        renderQuestionNavigation();
 
         renderQuestion();
 
         startTimer();
 
-        enterFullscreen();
+    }
 
-
-        window.scrollTo({
-            top:0,
-            behavior:"smooth"
-        });
-
-
-    }catch(error){
-
-        showLoader(false);
+    catch (error) {
 
         console.error(error);
 
@@ -3134,732 +2282,357 @@ async function startQuiz(){
 
     }
 
+    finally {
+
+        hideLoading();
+
+    }
+
 }
 
 
 /* =========================================================
-RENDER QUESTION
+   QUESTION NAVIGATION
 ========================================================= */
 
-function renderQuestion(){
+function renderQuestionNavigation() {
 
-    const q =
-        questions[currentQuestion];
+    const nav =
+        $("questionNav");
 
 
-    if(!q){
+    nav.innerHTML = "";
 
+
+    questions.forEach(
+        (question, index) => {
+
+            const button =
+                document.createElement("button");
+
+
+            button.className =
+                "q-number";
+
+
+            button.textContent =
+                index + 1;
+
+
+            button.onclick =
+                () => {
+
+                    currentQuestion =
+                        index;
+
+                    renderQuestion();
+
+                };
+
+
+            nav.appendChild(
+                button
+            );
+
+        }
+    );
+
+
+    updateQuestionNavigation();
+
+}
+
+
+function updateQuestionNavigation() {
+
+    const buttons =
+        document.querySelectorAll(
+            ".q-number"
+        );
+
+
+    buttons.forEach(
+        (button, index) => {
+
+            button.classList
+                .remove("active");
+
+            button.classList
+                .remove("answered");
+
+
+            if (
+                index === currentQuestion
+            ) {
+
+                button.classList
+                    .add("active");
+
+            }
+
+
+            if (
+                answers[index] !== undefined
+            ) {
+
+                button.classList
+                    .add("answered");
+
+            }
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   RENDER QUESTION
+========================================================= */
+
+function renderQuestion() {
+
+    if (!questions.length) {
         return;
-
     }
 
 
-    const content =
-        document
-            .getElementById(
-                "quizContent"
-            );
+    const question =
+        questions[currentQuestion];
 
 
-    const counter =
-        document
-            .getElementById(
-                "questionCounter"
-            );
+    $("questionCount")
+        .textContent =
+        `Question ${currentQuestion + 1} of ${questions.length}`;
 
 
-    const progress =
-        document
-            .getElementById(
-                "quizProgress"
-            );
+    $("questionText")
+        .textContent =
+        question.question || "";
 
 
-    counter.textContent =
-        `Question ${
-            currentQuestion + 1
-        } of ${
-            questions.length
-        }`;
+    const options =
+        $("options");
 
 
-    progress.style.width =
-        (
-            (
-                currentQuestion + 1
-            ) /
-            questions.length
-        ) * 100 + "%";
+    options.innerHTML = "";
 
 
-    let html = `
-
-        <div class="question-number">
-            Question ${currentQuestion + 1}
-        </div>
-
-        <div class="question-title">
-            ${escapeHtml(q.question)}
-        </div>
-
-    `;
+    const optionValues =
+        Array.isArray(question.options)
+            ? question.options
+            : [];
 
 
-    if(
-        String(q.type).toUpperCase()
-        === "CODE"
-    ){
-
-        html += `
-
-            <textarea
-                id="codeAnswer"
-                class="code-answer"
-                placeholder="Write your Python code here..."
-                oninput="saveCurrentAnswer()"
-            >${
-                escapeHtml(
-                    answers[currentQuestion] || ""
-                )
-            }</textarea>
-
-        `;
-
-    }else{
-
-        html += `
-            <div class="options">
-        `;
+    const letters =
+        ["A", "B", "C", "D"];
 
 
-        (q.options || [])
-            .forEach(
-                (option,index)=>{
+    optionValues.forEach(
+        (value, index) => {
 
-                    if(
-                        !option &&
-                        index > 0
-                    ){
+            if (
+                value === null ||
+                value === undefined ||
+                value === ""
+            ) {
 
-                        return;
+                return;
 
-                    }
-
-
-                    const selected =
-                        answers[currentQuestion]
-                        === index
-                            ? "selected"
-                            : "";
+            }
 
 
-                    html += `
+            const label =
+                document.createElement("label");
 
-                        <label
-                            class="option ${selected}">
 
-                            <input
-                                type="radio"
-                                name="question"
-                                value="${index}"
-                                ${
-                                    answers[currentQuestion]
-                                    === index
-                                    ? "checked"
-                                    : ""
-                                }
-                                onchange="saveMCQ(${index})">
+            label.className =
+                "option";
 
-                            <span>
-                                ${escapeHtml(option)}
-                            </span>
 
-                        </label>
+            if (
+                answers[currentQuestion] ===
+                index
+            ) {
 
-                    `;
+                label.classList
+                    .add("selected");
+
+            }
+
+
+            const input =
+                document.createElement("input");
+
+
+            input.type =
+                "radio";
+
+
+            input.name =
+                "question";
+
+
+            input.value =
+                index;
+
+
+            input.checked =
+                answers[currentQuestion] ===
+                index;
+
+
+            input.addEventListener(
+                "change",
+                () => {
+
+                    answers[currentQuestion] =
+                        index;
+
+
+                    renderQuestion();
 
                 }
             );
 
 
-        html += `
-            </div>
-        `;
+            const letter =
+                document.createElement("span");
+
+
+            letter.className =
+                "option-letter";
+
+
+            letter.textContent =
+                letters[index];
+
+
+            const text =
+                document.createElement("span");
+
+
+            text.textContent =
+                value;
+
+
+            label.appendChild(input);
+
+            label.appendChild(letter);
+
+            label.appendChild(text);
+
+            options.appendChild(label);
+
+        }
+    );
+
+
+    $("previousBtn")
+        .disabled =
+        currentQuestion === 0;
+
+
+    if (
+        currentQuestion ===
+        questions.length - 1
+    ) {
+
+        $("nextBtn")
+            .textContent =
+            "Submit Assessment";
+
+    }
+
+    else {
+
+        $("nextBtn")
+            .textContent =
+            "Next →";
 
     }
 
 
-    content.innerHTML =
-        html;
-
-
-    document
-        .getElementById(
-            "prevBtn"
-        )
-        .style.visibility =
-            currentQuestion === 0
-                ? "hidden"
-                : "visible";
-
-
-    document
-        .getElementById(
-            "nextBtn"
-        )
-        .textContent =
-            currentQuestion ===
-            questions.length - 1
-                ? "Submit Assessment"
-                : "Next →";
+    updateQuestionNavigation();
 
 }
 
 
 /* =========================================================
-SAVE MCQ
+   PREVIOUS
 ========================================================= */
 
-function saveMCQ(index){
+function previousQuestion() {
 
-    answers[currentQuestion] =
-        index;
-
-
-    document
-        .querySelectorAll(
-            ".option"
-        )
-        .forEach(
-            (el,i)=>{
-
-                el.classList.toggle(
-                    "selected",
-                    i === index
-                );
-
-            }
-        );
-
-}
-
-
-/* =========================================================
-SAVE CURRENT ANSWER
-========================================================= */
-
-function saveCurrentAnswer(){
-
-    const q =
-        questions[currentQuestion];
-
-
-    if(
-        q &&
-        String(q.type).toUpperCase()
-        === "CODE"
-    ){
-
-        const textarea =
-            document
-                .getElementById(
-                    "codeAnswer"
-                );
-
-
-        answers[currentQuestion] =
-            textarea
-                ? textarea.value
-                : "";
-
+    if (currentQuestion <= 0) {
+        return;
     }
 
+
+    currentQuestion--;
+
+    renderQuestion();
+
 }
 
 
 /* =========================================================
-NEXT
+   NEXT
 ========================================================= */
 
-function nextQuestion(){
+function nextQuestion() {
 
-    saveCurrentAnswer();
-
-
-    if(
+    if (
         currentQuestion <
         questions.length - 1
-    ){
+    ) {
 
         currentQuestion++;
 
         renderQuestion();
-
-
-        window.scrollTo({
-            top:0,
-            behavior:"smooth"
-        });
-
-    }else{
-
-        submitQuiz();
-
-    }
-
-}
-
-
-/* =========================================================
-PREVIOUS
-========================================================= */
-
-function previousQuestion(){
-
-    saveCurrentAnswer();
-
-
-    if(
-        currentQuestion > 0
-    ){
-
-        currentQuestion--;
-
-        renderQuestion();
-
-
-        window.scrollTo({
-            top:0,
-            behavior:"smooth"
-        });
-
-    }
-
-}
-
-
-/* =========================================================
-SUBMIT QUIZ
-========================================================= */
-
-async function submitQuiz(){
-
-    saveCurrentAnswer();
-
-
-    const unanswered =
-        questions.filter(
-            (_,index)=>
-                answers[index] === undefined ||
-                answers[index] === ""
-        ).length;
-
-
-    if(unanswered > 0){
-
-        const confirmSubmit =
-            confirm(
-                `You have ${unanswered} unanswered question(s). Submit anyway?`
-            );
-
-
-        if(!confirmSubmit){
-
-            return;
-
-        }
-
-    }
-
-
-    try{
-
-        showLoader(true);
-
-
-        /*
-         * IMPORTANT:
-         *
-         * We send answers.
-         *
-         * We do NOT calculate
-         * the final score here.
-         */
-
-
-        const response =
-            await apiRequest({
-
-                action:"submitQuiz",
-
-                email:
-                    currentUser.email,
-
-                mobile:
-                    currentUser.mobile,
-
-                answers:
-                    answers
-
-            });
-
-
-        showLoader(false);
-
-
-        if(!response.success){
-
-            alert(
-                response.message ||
-                "Unable to submit assessment."
-            );
-
-            return;
-
-        }
-
-
-        currentUser =
-            response.user;
-
-
-        localStorage.setItem(
-            "openboxPythonUser",
-            JSON.stringify(
-                currentUser
-            )
-        );
-
-
-        stopTimer();
-
-        quizStarted = false;
-
-
-        document
-            .exitFullscreen?.();
-
-
-        showResult({
-
-            score:
-                Number(
-                    currentUser.score
-                ),
-
-            passed:
-                currentUser.status ===
-                "Passed",
-
-            user:
-                currentUser
-
-        });
-
-
-    }catch(error){
-
-        showLoader(false);
-
-        console.error(error);
-
-        alert(
-            "Unable to submit the assessment. Please check your internet connection and try again."
-        );
-
-    }
-
-}
-
-
-/* =========================================================
-RESULT
-========================================================= */
-
-function showResult(data){
-
-    hideAllPages();
-
-
-    document
-        .getElementById(
-            "resultPage"
-        )
-        .classList
-        .remove("hidden");
-
-
-    const resultCard =
-        document
-            .getElementById(
-                "resultCard"
-            );
-
-
-    const icon =
-        document
-            .getElementById(
-                "resultIcon"
-            );
-
-
-    const title =
-        document
-            .getElementById(
-                "resultTitle"
-            );
-
-
-    const score =
-        document
-            .getElementById(
-                "resultScore"
-            );
-
-
-    const message =
-        document
-            .getElementById(
-                "resultMessage"
-            );
-
-
-    const actions =
-        document
-            .getElementById(
-                "certificateResultActions"
-            );
-
-
-    score.textContent =
-        data.score + "%";
-
-
-    resultCard
-        .classList
-        .remove("fail");
-
-
-    if(data.passed){
-
-        icon.textContent =
-            "✓";
-
-
-        title.textContent =
-            "Congratulations!";
-
-
-        message.textContent =
-            "You successfully passed the Openbox Academy Python Programming Fundamentals assessment.";
-
-
-        actions.innerHTML = `
-
-            <button
-                class="btn btn-green"
-                onclick="showCertificate()">
-
-                View & Download Certificate
-
-            </button>
-
-        `;
-
-    }else{
-
-        resultCard
-            .classList
-            .add("fail");
-
-
-        icon.textContent =
-            "×";
-
-
-        title.textContent =
-            "Assessment Complete";
-
-
-        message.textContent =
-            `You scored ${data.score}%. The passing requirement is ${PASS_PERCENTAGE}%.`;
-
-
-        actions.innerHTML = `
-
-            <button
-                class="btn btn-secondary"
-                onclick="showDashboard()">
-
-                Return to Dashboard
-
-            </button>
-
-        `;
-
-    }
-
-
-    window.scrollTo({
-        top:0,
-        behavior:"smooth"
-    });
-
-}
-
-
-/* =========================================================
-CERTIFICATE
-========================================================= */
-
-function showCertificate(){
-
-    if(
-        !currentUser ||
-        currentUser.status !== "Passed"
-    ){
-
-        alert(
-            "Certificate is available only after passing the assessment."
-        );
 
         return;
 
     }
 
 
-    hideAllPages();
-
-
-    document
-        .getElementById(
-            "certificatePage"
-        )
-        .classList
-        .remove("hidden");
-
-
-    document
-        .getElementById(
-            "certificateName"
-        )
-        .textContent =
-            currentUser.name;
-
-
-    document
-        .getElementById(
-            "certificateNameBody"
-        )
-        .textContent =
-            currentUser.name;
-
-
-    document
-        .getElementById(
-            "certificateScore"
-        )
-        .textContent =
-            currentUser.score + "%";
-
-
-    document
-        .getElementById(
-            "certificateId"
-        )
-        .textContent =
-            "CertID: " +
-            (
-                currentUser.certificateId ||
-                "OB-PY-2026-0000"
-            );
-
-
-    document
-        .getElementById(
-            "certificateDate"
-        )
-        .textContent =
-            currentUser.certificateIssuedAt ||
-            new Date()
-                .toLocaleDateString(
-                    "en-IN"
-                );
-
-
-    window.scrollTo({
-        top:0,
-        behavior:"smooth"
-    });
+    confirmSubmit();
 
 }
 
 
 /* =========================================================
-DOWNLOAD CERTIFICATE
+   CONFIRM SUBMISSION
 ========================================================= */
 
-function downloadCertificate(){
+function confirmSubmit() {
 
-    window.print();
+    const answered =
+        Object.keys(answers).length;
 
-}
+
+    const unanswered =
+        questions.length -
+        answered;
 
 
-/* =========================================================
-LINKEDIN CAPTION
-========================================================= */
+    let message =
+        "Are you sure you want to submit the assessment?";
 
-function getLinkedInCaption(){
 
-    return `I'm excited to share that I've successfully completed the Python Programming Fundamentals Course from Openbox Academy.
+    if (unanswered > 0) {
 
-I completed the final assessment and earned my certificate with a score of ${currentUser.score}%.
+        message +=
+            `\n\nYou have ${unanswered} unanswered question(s).`;
 
-The curriculum was adapted from MIT OpenCourseWare 6.100L and helped me strengthen my Python programming fundamentals, problem-solving and core coding concepts.
-
-Certificate ID: ${
-        currentUser.certificateId ||
-        "OB-PY-2026-0000"
     }
 
-Learn Python with Openbox Academy:
-${COURSE_URL}
 
-#Python #Programming #Learning #OpenboxAcademy #PythonProgramming #Coding`;
+    if (
+        confirm(message)
+    ) {
 
-}
-
-
-/* =========================================================
-COPY LINKEDIN
-========================================================= */
-
-async function copyLinkedInCaption(){
-
-    const caption =
-        getLinkedInCaption();
-
-
-    try{
-
-        await navigator
-            .clipboard
-            .writeText(
-                caption
-            );
-
-
-        alert(
-            "LinkedIn caption copied!"
-        );
-
-    }catch(error){
-
-        prompt(
-            "Copy this caption:",
-            caption
-        );
+        submitAssessment();
 
     }
 
@@ -3867,55 +2640,14 @@ async function copyLinkedInCaption(){
 
 
 /* =========================================================
-LINKEDIN SHARE
+   TIMER
 ========================================================= */
 
-function shareLinkedIn(){
+function startTimer() {
 
-    const linkedInUrl =
-        "https://www.linkedin.com/sharing/share-offsite/?url=" +
-        encodeURIComponent(
-            COURSE_URL
-        );
-
-
-    navigator
-        .clipboard
-        ?.writeText(
-            getLinkedInCaption()
-        )
-        .catch(
-            ()=>{}
-        );
-
-
-    window.open(
-        linkedInUrl,
-        "_blank"
+    clearInterval(
+        timerInterval
     );
-
-
-    setTimeout(
-        ()=>{
-
-            alert(
-                "Your LinkedIn caption has been copied. Paste it into your LinkedIn post and add your certificate."
-            );
-
-        },
-        500
-    );
-
-}
-
-
-/* =========================================================
-TIMER
-========================================================= */
-
-function startTimer(){
-
-    stopTimer();
 
 
     updateTimer();
@@ -3923,26 +2655,29 @@ function startTimer(){
 
     timerInterval =
         setInterval(
-            ()=>{
+            () => {
 
-                timerSeconds--;
+                remainingSeconds--;
+
 
                 updateTimer();
 
 
-                if(
-                    timerSeconds <= 0
-                ){
+                if (
+                    remainingSeconds <= 0
+                ) {
 
-                    stopTimer();
-
-
-                    alert(
-                        "Time is up. Your assessment will be submitted."
+                    clearInterval(
+                        timerInterval
                     );
 
 
-                    submitQuiz();
+                    alert(
+                        "Time is over. Your assessment will be submitted."
+                    );
+
+
+                    submitAssessment();
 
                 }
 
@@ -3953,46 +2688,38 @@ function startTimer(){
 }
 
 
-function stopTimer(){
-
-    if(timerInterval){
-
-        clearInterval(
-            timerInterval
-        );
-
-
-        timerInterval =
-            null;
-
-    }
-
-}
-
-
-function updateTimer(){
+function updateTimer() {
 
     const minutes =
         Math.floor(
-            timerSeconds / 60
+            remainingSeconds / 60
         );
 
 
     const seconds =
-        timerSeconds % 60;
+        remainingSeconds % 60;
 
 
-    const timer =
-        document
-            .getElementById(
-                "timer"
-            );
+    $("timer")
+        .textContent =
+        `${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`;
 
 
-    if(timer){
+    if (
+        remainingSeconds <= 300
+    ) {
 
-        timer.textContent =
-            `${String(minutes).padStart(2,"0")}:${String(seconds).padStart(2,"0")}`;
+        $("timer")
+            .classList
+            .add("warning");
+
+    }
+
+    else {
+
+        $("timer")
+            .classList
+            .remove("warning");
 
     }
 
@@ -4000,192 +2727,251 @@ function updateTimer(){
 
 
 /* =========================================================
-FULLSCREEN
+   CALCULATE SCORE
+=========================================================
+
+IMPORTANT:
+
+Your current Apps Script does NOT send the correct answer
+to the frontend.
+
+Therefore this function first looks for:
+
+question.correctAnswer
+question.answer
+question.correct
+
+If your backend eventually provides one of those fields,
+automatic scoring will work.
+
+Supported formats:
+
+0 / 1 / 2 / 3
+A / B / C / D
+actual option text
+
 ========================================================= */
 
-function enterFullscreen(){
+function calculateScore() {
 
-    const element =
-        document.documentElement;
+    let correct = 0;
 
 
-    if(
-        element.requestFullscreen
-    ){
+    questions.forEach(
+        (question, index) => {
 
-        element
-            .requestFullscreen()
-            .catch(
-                ()=>{}
-            );
+            const selected =
+                answers[index];
 
-    }
+
+            if (
+                selected === undefined
+            ) {
+
+                return;
+
+            }
+
+
+            let correctAnswer =
+                question.correctAnswer;
+
+
+            if (
+                correctAnswer === undefined
+            ) {
+
+                correctAnswer =
+                    question.answer;
+
+            }
+
+
+            if (
+                correctAnswer === undefined
+            ) {
+
+                correctAnswer =
+                    question.correct;
+
+            }
+
+
+            if (
+                correctAnswer === undefined ||
+                correctAnswer === null ||
+                correctAnswer === ""
+            ) {
+
+                return;
+
+            }
+
+
+            if (
+                typeof correctAnswer ===
+                "number"
+            ) {
+
+                if (
+                    selected ===
+                    correctAnswer
+                ) {
+
+                    correct++;
+
+                }
+
+                return;
+
+            }
+
+
+            const answer =
+                String(correctAnswer)
+                    .trim()
+                    .toUpperCase();
+
+
+            const letters =
+                ["A", "B", "C", "D"];
+
+
+            if (
+                letters[selected] ===
+                answer
+            ) {
+
+                correct++;
+
+                return;
+
+            }
+
+
+            const selectedText =
+                String(
+                    question.options[selected]
+                )
+                .trim()
+                .toUpperCase();
+
+
+            if (
+                selectedText === answer
+            ) {
+
+                correct++;
+
+            }
+
+        }
+    );
+
+
+    return correct;
 
 }
 
 
 /* =========================================================
-ANTI-CHEATING
+   SUBMIT ASSESSMENT
 ========================================================= */
 
-document.addEventListener(
-    "contextmenu",
-    function(e){
+async function submitAssessment() {
 
-        if(quizStarted){
-
-            e.preventDefault();
-
-        }
-
-    }
-);
+    clearInterval(
+        timerInterval
+    );
 
 
-document.addEventListener(
-    "copy",
-    function(e){
-
-        if(quizStarted){
-
-            e.preventDefault();
-
-        }
-
-    }
-);
+    const correct =
+        calculateScore();
 
 
-document.addEventListener(
-    "cut",
-    function(e){
+    /*
+     * At present your API expects:
+     *
+     * data.score
+     *
+     * The frontend cannot securely determine the
+     * score because getQuestions() intentionally
+     * excludes the correct answer.
+     *
+     * This check prevents silently submitting an
+     * incorrect score.
+     */
 
-        if(quizStarted){
+    const hasAnswerKey =
+        questions.some(
+            q =>
+                q.correctAnswer !== undefined ||
+                q.answer !== undefined ||
+                q.correct !== undefined
+        );
 
-            e.preventDefault();
 
-        }
+    if (!hasAnswerKey) {
 
-    }
-);
+        alert(
+            "Assessment questions loaded successfully, but the current API does not provide the answer key for scoring. Please add server-side grading to the Apps Script before enabling final submission."
+        );
 
 
-document.addEventListener(
-    "paste",
-    function(e){
-
-        if(quizStarted){
-
-            e.preventDefault();
-
-        }
+        return;
 
     }
-);
 
 
-document.addEventListener(
-    "keydown",
-    function(e){
-
-        if(!quizStarted){
-
-            return;
-
-        }
+    const percentage =
+        Math.round(
+            (
+                correct /
+                questions.length
+            ) * 100
+        );
 
 
-        if(
-            e.ctrlKey &&
-            [
-                "c",
-                "v",
-                "x",
-                "p",
-                "s",
-                "u"
-            ].includes(
-                e.key.toLowerCase()
-            )
-        ){
-
-            e.preventDefault();
-
-        }
+    showLoading(
+        "Submitting your assessment..."
+    );
 
 
-        if(
-            e.key === "F12"
-        ){
+    try {
 
-            e.preventDefault();
+        const result =
+            await api(
+                "submitQuiz",
+                {
 
-        }
+                    email:
+                        currentUser.email,
 
+                    mobile:
+                        currentUser.mobile,
 
-        if(
-            e.ctrlKey &&
-            e.shiftKey &&
-            [
-                "i",
-                "j",
-                "c"
-            ].includes(
-                e.key.toLowerCase()
-            )
-        ){
+                    score:
+                        correct
 
-            e.preventDefault();
-
-        }
-
-    }
-);
+                }
+            );
 
 
-/* =========================================================
-TAB DETECTION
-========================================================= */
+        if (!result.success) {
 
-document.addEventListener(
-    "visibilitychange",
-    function(){
+            if (
+                result.alreadySubmitted &&
+                result.user
+            ) {
 
-        if(
-            document.hidden &&
-            quizStarted &&
-            !quizLocked
-        ){
+                currentUser =
+                    result.user;
 
-            tabWarnings++;
+                saveUser();
 
-
-            if(
-                tabWarnings >= 3
-            ){
-
-                quizLocked =
-                    true;
-
-
-                stopTimer();
-
-
-                alert(
-                    "Assessment locked because the page was left repeatedly."
+                showResult(
+                    currentUser
                 );
-
-
-                quizStarted =
-                    false;
-
-
-                document
-                    .exitFullscreen?.();
-
-
-                showDashboard();
-
 
                 return;
 
@@ -4193,229 +2979,152 @@ document.addEventListener(
 
 
             alert(
-                `Assessment warning ${tabWarnings}/3. Do not leave the assessment page.`
+                result.message ||
+                "Assessment submission failed."
             );
-
-        }
-
-    }
-);
-
-
-/* =========================================================
-LOGOUT
-========================================================= */
-
-function logout(){
-
-    if(quizStarted){
-
-        if(
-            !confirm(
-                "You are currently taking the assessment. Exit?"
-            )
-        ){
 
             return;
 
         }
 
 
-        stopTimer();
-
-        quizStarted =
-            false;
+        currentUser =
+            result.user;
 
 
-        document
-            .exitFullscreen?.();
+        saveUser();
+
+
+        showResult(
+            currentUser
+        );
 
     }
 
+    catch (error) {
 
-    currentUser =
-        null;
+        console.error(error);
+
+        alert(
+            "Unable to submit the assessment. Please try again."
+        );
+
+    }
+
+    finally {
+
+        hideLoading();
+
+    }
+
+}
 
 
-    localStorage.removeItem(
-        "openboxPythonUser"
+/* =========================================================
+   SHOW RESULT
+========================================================= */
+
+function showResult(user) {
+
+    clearInterval(
+        timerInterval
     );
 
 
-    hideAllPages();
+    $("quizPage")
+        .classList
+        .add("hidden");
 
 
-    document
-        .getElementById(
-            "authPage"
-        )
+    $("dashboardPage")
+        .classList
+        .add("hidden");
+
+
+    $("resultPage")
         .classList
         .remove("hidden");
 
 
-    updateHeader();
-
-}
-
-
-/* =========================================================
-PAGE HELPERS
-========================================================= */
-
-function hideAllPages(){
-
-    [
-        "authPage",
-        "dashboardPage",
-        "quizPage",
-        "resultPage",
-        "certificatePage"
-    ]
-    .forEach(
-        id=>{
-
-            document
-                .getElementById(id)
-                .classList
-                .add("hidden");
-
-        }
-    );
-
-}
+    const passed =
+        user.status === "Passed";
 
 
-function showLoader(show){
-
-    document
-        .getElementById(
-            "loader"
-        )
-        .classList
-        .toggle(
-            "active",
-            show
-        );
-
-}
+    const score =
+        Number(user.score || 0);
 
 
-function showMessage(
-    text,
-    type
-){
-
-    const box =
-        document
-            .getElementById(
-                "authMessage"
-            );
+    const icon =
+        $("resultIcon");
 
 
-    box.textContent =
-        text;
+    icon.className =
+        "result-icon";
 
 
-    box.className =
-        "message " + type;
-
-}
-
-
-function clearMessage(){
-
-    const box =
-        document
-            .getElementById(
-                "authMessage"
-            );
-
-
-    box.textContent =
-        "";
-
-
-    box.className =
-        "message";
-
-}
-
-
-/* =========================================================
-ESCAPE HTML
-========================================================= */
-
-function escapeHtml(value){
-
-    return String(value)
-
-        .replace(
-            /&/g,
-            "&amp;"
-        )
-
-        .replace(
-            /</g,
-            "&lt;"
-        )
-
-        .replace(
-            />/g,
-            "&gt;"
-        )
-
-        .replace(
-            /"/g,
-            "&quot;"
-        )
-
-        .replace(
-            /'/g,
-            "&#039;"
-        );
-
-}
-
-
-/* =========================================================
-HEADER
-========================================================= */
-
-function updateHeader(){
-
-    const pill =
-        document.getElementById(
-            "userPill"
+    icon.classList
+        .add(
+            passed
+                ? "pass"
+                : "fail"
         );
 
 
-    const logoutButton =
-        document.getElementById(
-            "logoutBtn"
-        );
+    icon.textContent =
+        passed
+            ? "✓"
+            : "×";
 
 
-    if(currentUser){
+    $("resultTitle")
+        .textContent =
+        passed
+            ? "Congratulations!"
+            : "Assessment Not Passed";
 
-        pill.textContent =
-            currentUser.name ||
-            "Learner";
+
+    $("resultScore")
+        .textContent =
+        score + "%";
 
 
-        pill.classList
+    if (passed) {
+
+        $("resultMessage")
+            .textContent =
+            "You have successfully completed Python Programming Fundamentals and met the 70% passing requirement.";
+
+    }
+
+    else {
+
+        $("resultMessage")
+            .textContent =
+            "You did not meet the 70% passing requirement for this assessment.";
+
+    }
+
+
+    if (
+        passed &&
+        user.certificateId
+    ) {
+
+        $("certificateBox")
+            .classList
             .remove("hidden");
 
 
-        logoutButton.classList
-            .remove("hidden");
+        $("certificateId")
+            .textContent =
+            user.certificateId;
 
-    }else{
+    }
 
-        pill.classList
-            .add("hidden");
+    else {
 
-
-        logoutButton.classList
+        $("certificateBox")
+            .classList
             .add("hidden");
 
     }
@@ -4424,39 +3133,31 @@ function updateHeader(){
 
 
 /* =========================================================
-AUTO LOGIN
+   INITIALIZE
 ========================================================= */
 
-window.addEventListener(
+document.addEventListener(
     "DOMContentLoaded",
-    function(){
+    () => {
 
-        const saved =
-            localStorage.getItem(
-                "openboxPythonUser"
-            );
+        const loggedIn =
+            loadSavedUser();
 
 
-        if(saved){
+        if (loggedIn) {
 
-            try{
+            /*
+             * Refresh user data from Apps Script
+             * so the dashboard has latest status.
+             */
 
-                currentUser =
-                    JSON.parse(saved);
+            refreshUser();
 
+        }
 
-                updateHeader();
+        else {
 
-                refreshUser();
-
-
-            }catch(error){
-
-                localStorage.removeItem(
-                    "openboxPythonUser"
-                );
-
-            }
+            showAuth();
 
         }
 
@@ -4465,70 +3166,83 @@ window.addEventListener(
 
 
 /* =========================================================
-REFRESH USER
+   REFRESH USER
 ========================================================= */
 
-async function refreshUser(){
+async function refreshUser() {
 
-    if(!currentUser){
+    if (!currentUser) {
+
+        showAuth();
 
         return;
 
     }
 
 
-    try{
-
-        const response =
-            await apiRequest({
-
-                action:"getUser",
-
-                email:
-                    currentUser.email,
-
-                mobile:
-                    currentUser.mobile
-
-            });
+    showLoading(
+        "Loading your profile..."
+    );
 
 
-        if(response.success){
+    try {
 
-            currentUser =
-                response.user;
+        const result =
+            await api(
+                "getUser",
+                {
 
+                    email:
+                        currentUser.email,
 
-            localStorage.setItem(
-                "openboxPythonUser",
-                JSON.stringify(
-                    currentUser
-                )
+                    mobile:
+                        currentUser.mobile
+
+                }
             );
 
 
-            updateHeader();
+        if (
+            result.success &&
+            result.user
+        ) {
+
+            currentUser =
+                result.user;
+
+            saveUser();
 
             showDashboard();
 
-        }else{
+        }
+
+        else {
 
             logout();
 
         }
 
+    }
 
-    }catch(error){
+    catch (error) {
 
         /*
-         * If API is temporarily
-         * unavailable, continue
-         * with cached user.
+         * If the API is temporarily unavailable,
+         * use the locally saved session.
          */
 
-        updateHeader();
+        console.warn(
+            "Profile refresh failed:",
+            error
+        );
 
         showDashboard();
+
+    }
+
+    finally {
+
+        hideLoading();
 
     }
 
@@ -4536,8 +3250,5 @@ async function refreshUser(){
 
 </script>
 
-
 </body>
-
 </html>
-```
