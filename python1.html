@@ -31,9 +31,6 @@
     padding:0;
 }
 
-html{
-    scroll-behavior:smooth;
-}
 
 body{
 
@@ -42,90 +39,44 @@ body{
         -apple-system,
         BlinkMacSystemFont,
         "Segoe UI",
-        Roboto,
-        Arial,
         sans-serif;
 
     background:#f5f7fb;
-    color:#172033;
 
-    line-height:1.6;
+    color:#111827;
+
+    min-height:100vh;
 
 }
 
 
-/* =========================================================
-   GLOBAL
-========================================================= */
+button,
+input,
+textarea{
+
+    font:inherit;
+
+}
+
+
+button{
+
+    cursor:pointer;
+
+}
+
+
+a{
+
+    color:inherit;
+    text-decoration:none;
+
+}
+
 
 .hidden{
+
     display:none !important;
-}
-
-.container{
-
-    width:min(1100px,92%);
-    margin:auto;
-
-}
-
-.page{
-
-    min-height:calc(100vh - 80px);
-    padding:55px 0 80px;
-
-}
-
-.hero{
-
-    max-width:850px;
-    margin:0 auto 35px;
-    text-align:center;
-
-}
-
-.eyebrow{
-
-    display:inline-block;
-
-    font-size:12px;
-    font-weight:800;
-
-    letter-spacing:2px;
-
-    color:#635bff;
-
-    margin-bottom:14px;
-
-}
-
-.hero h1{
-
-    font-size:clamp(38px,6vw,68px);
-
-    line-height:1.05;
-
-    letter-spacing:-2px;
-
-    margin-bottom:22px;
-
-}
-
-.hero h1 span{
-
-    color:#635bff;
-
-}
-
-.hero p{
-
-    max-width:720px;
-
-    margin:auto;
-
-    color:#667085;
-
-    font-size:17px;
 
 }
 
@@ -136,136 +87,224 @@ body{
 
 header{
 
-    height:80px;
+    width:100%;
 
-    background:rgba(255,255,255,.92);
-
-    border-bottom:1px solid #e8ebf1;
+    padding:20px 6%;
 
     display:flex;
+
+    justify-content:space-between;
+
     align-items:center;
 
+    background:#ffffff;
+
+    border-bottom:1px solid #e5e7eb;
+
     position:sticky;
+
     top:0;
 
     z-index:100;
 
-    backdrop-filter:blur(12px);
-
 }
 
-.header-inner{
-
-    width:min(1100px,92%);
-    margin:auto;
-
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-
-}
 
 .logo{
 
     display:flex;
+
     align-items:center;
+
     gap:10px;
 
-    font-size:20px;
+    font-size:21px;
+
     font-weight:800;
 
 }
 
+
 .logo span{
 
-    color:#635bff;
+    color:#6b7280;
+
+    font-weight:500;
 
 }
+
 
 .logo-mark{
 
-    width:38px;
-    height:38px;
+    width:40px;
+
+    height:40px;
 
     display:flex;
+
     align-items:center;
+
     justify-content:center;
+
+    background:#111827;
+
+    color:white;
 
     border-radius:11px;
 
-    background:#635bff;
-    color:white;
+    font-size:14px;
 
-    font-size:13px;
-    font-weight:900;
+    font-weight:800;
 
 }
+
 
 .header-right{
 
     display:flex;
+
     align-items:center;
+
     gap:12px;
 
 }
 
+
 .user-pill{
 
-    padding:8px 13px;
+    background:#f1f5f9;
 
-    background:#f0efff;
-
-    color:#5149dc;
+    padding:8px 14px;
 
     border-radius:999px;
 
     font-size:13px;
+
     font-weight:700;
 
 }
+
 
 .logout{
 
     border:0;
 
-    background:#f4f5f7;
+    background:#111827;
 
-    color:#344054;
+    color:white;
 
-    padding:9px 14px;
+    padding:9px 15px;
 
     border-radius:9px;
 
-    cursor:pointer;
+    font-size:13px;
 
-    font-weight:600;
+    font-weight:700;
 
 }
 
 
 /* =========================================================
-   CARD
+   MAIN
+========================================================= */
+
+main{
+
+    width:min(1050px,92%);
+
+    margin:0 auto;
+
+    padding:60px 0 100px;
+
+}
+
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.hero{
+
+    margin-bottom:30px;
+
+}
+
+
+.eyebrow{
+
+    font-size:12px;
+
+    letter-spacing:2px;
+
+    font-weight:800;
+
+    color:#6b7280;
+
+    margin-bottom:14px;
+
+}
+
+
+.hero h1{
+
+    font-size:
+        clamp(38px,6vw,68px);
+
+    line-height:1.02;
+
+    letter-spacing:-3px;
+
+    margin-bottom:20px;
+
+}
+
+
+.hero h1 span{
+
+    color:#6b7280;
+
+}
+
+
+.hero p{
+
+    max-width:650px;
+
+    color:#6b7280;
+
+    font-size:17px;
+
+    line-height:1.7;
+
+}
+
+
+/* =========================================================
+   CARDS
 ========================================================= */
 
 .card{
 
-    background:white;
+    background:#ffffff;
 
-    border:1px solid #e8ebf1;
+    border:1px solid #e5e7eb;
 
-    border-radius:20px;
+    border-radius:22px;
 
-    padding:30px;
+    padding:28px;
+
+    margin-bottom:20px;
 
     box-shadow:
-        0 12px 35px rgba(16,24,40,.05);
+        0 10px 30px
+        rgba(15,23,42,.04);
 
 }
 
+
 .form-card{
 
-    max-width:520px;
-    margin:auto;
+    max-width:560px;
 
 }
 
@@ -276,60 +315,83 @@ header{
 
 .tabs{
 
-    display:grid;
-
-    grid-template-columns:1fr 1fr;
+    display:flex;
 
     gap:5px;
 
-    background:#f5f6f8;
-
     padding:5px;
+
+    background:#f1f5f9;
 
     border-radius:12px;
 
-    margin-bottom:28px;
+    margin-bottom:25px;
 
 }
+
 
 .tab{
 
+    flex:1;
+
     border:0;
+
+    padding:12px;
+
+    border-radius:9px;
 
     background:transparent;
 
-    padding:11px;
-
-    border-radius:8px;
-
-    cursor:pointer;
+    color:#64748b;
 
     font-weight:700;
 
-    color:#667085;
-
 }
+
 
 .tab.active{
 
     background:white;
 
-    color:#172033;
+    color:#111827;
 
-    box-shadow:0 2px 8px rgba(0,0,0,.06);
+    box-shadow:
+        0 2px 8px
+        rgba(0,0,0,.06);
 
 }
 
 
 /* =========================================================
-   FORMS
+   FORM
 ========================================================= */
+
+.card h2{
+
+    font-size:25px;
+
+    margin-bottom:8px;
+
+}
+
+
+.card > p{
+
+    color:#6b7280;
+
+    line-height:1.6;
+
+    margin-bottom:22px;
+
+}
+
 
 .field{
 
-    margin-top:18px;
+    margin-bottom:18px;
 
 }
+
 
 .field label{
 
@@ -343,29 +405,33 @@ header{
 
 }
 
-.field input{
+
+.field input,
+.field textarea{
 
     width:100%;
 
+    border:1px solid #dbe1e8;
+
+    border-radius:11px;
+
     padding:13px 14px;
-
-    border:1px solid #d9dde5;
-
-    border-radius:10px;
-
-    font-size:15px;
 
     outline:none;
 
-    transition:.2s;
+    background:#fff;
 
 }
 
-.field input:focus{
 
-    border-color:#635bff;
+.field input:focus,
+.field textarea:focus{
 
-    box-shadow:0 0 0 3px rgba(99,91,255,.1);
+    border-color:#111827;
+
+    box-shadow:
+        0 0 0 3px
+        rgba(17,24,39,.08);
 
 }
 
@@ -380,59 +446,59 @@ header{
 
     border-radius:11px;
 
-    padding:13px 19px;
-
-    cursor:pointer;
-
-    font-size:14px;
+    padding:13px 18px;
 
     font-weight:800;
 
-    transition:.2s;
+    display:inline-flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:8px;
 
 }
 
-.btn:hover{
-
-    transform:translateY(-1px);
-
-}
 
 .btn-primary{
 
-    background:#635bff;
+    background:#111827;
 
     color:white;
 
 }
+
 
 .btn-secondary{
 
-    background:#eef0f4;
+    background:#e5e7eb;
 
-    color:#344054;
+    color:#111827;
 
 }
 
+
 .btn-green{
 
-    background:#16a36a;
+    background:#15803d;
 
     color:white;
 
 }
 
-.form-card .btn{
 
-    width:100%;
+.btn:disabled{
 
-    margin-top:25px;
+    opacity:.5;
+
+    cursor:not-allowed;
 
 }
 
 
 /* =========================================================
-   MESSAGES
+   MESSAGE
 ========================================================= */
 
 .message{
@@ -443,114 +509,117 @@ header{
 
     border-radius:10px;
 
-    font-size:13px;
-
     margin-bottom:18px;
-
-}
-
-.message.success{
-
-    display:block;
-
-    background:#eafaf2;
-
-    color:#087443;
-
-}
-
-.message.error{
-
-    display:block;
-
-    background:#fff0f0;
-
-    color:#b42318;
-
-}
-
-
-/* =========================================================
-   DASHBOARD
-========================================================= */
-
-.profile{
-
-    margin-bottom:20px;
-
-}
-
-.profile-label{
-
-    font-size:11px;
-
-    font-weight:800;
-
-    letter-spacing:1.5px;
-
-    color:#635bff;
-
-}
-
-.profile-name{
-
-    font-size:30px;
-
-    font-weight:800;
-
-    margin-top:5px;
-
-}
-
-.profile-email{
-
-    color:#667085;
 
     font-size:14px;
 
 }
 
+
+.message.success{
+
+    display:block;
+
+    background:#dcfce7;
+
+    color:#166534;
+
+}
+
+
+.message.error{
+
+    display:block;
+
+    background:#fee2e2;
+
+    color:#991b1b;
+
+}
+
+
+/* =========================================================
+   PROFILE
+========================================================= */
+
+.profile-label{
+
+    font-size:11px;
+
+    letter-spacing:1.5px;
+
+    color:#6b7280;
+
+    font-weight:800;
+
+    margin-bottom:8px;
+
+}
+
+
+.profile-name{
+
+    font-size:32px;
+
+    font-weight:850;
+
+    margin-bottom:5px;
+
+}
+
+
+.profile-email{
+
+    color:#6b7280;
+
+}
+
+
+/* =========================================================
+   DASHBOARD GRID
+========================================================= */
+
 .dashboard-grid{
 
     display:grid;
 
-    grid-template-columns:repeat(3,1fr);
+    grid-template-columns:
+        repeat(3,1fr);
 
-    gap:18px;
+    gap:15px;
 
     margin-bottom:20px;
 
 }
 
+
 .stat{
 
     background:white;
 
-    border:1px solid #e8ebf1;
+    border:1px solid #e5e7eb;
 
-    border-radius:17px;
+    border-radius:18px;
 
-    padding:23px;
+    padding:22px;
 
 }
+
 
 .stat small{
 
     display:block;
 
-    color:#667085;
+    color:#6b7280;
 
-    font-size:13px;
+    margin-bottom:8px;
 
 }
 
+
 .stat strong{
 
-    display:block;
-
-    font-size:27px;
-
-    margin-top:5px;
+    font-size:28px;
 
 }
 
@@ -561,9 +630,10 @@ header{
 
 .progress-wrap{
 
-    margin:20px 0;
+    margin-top:20px;
 
 }
+
 
 .progress-top{
 
@@ -571,19 +641,20 @@ header{
 
     justify-content:space-between;
 
-    font-size:13px;
+    margin-bottom:10px;
 
-    margin-bottom:8px;
+    font-size:14px;
 
 }
+
 
 .progress{
 
     width:100%;
 
-    height:9px;
+    height:10px;
 
-    background:#edf0f4;
+    background:#e5e7eb;
 
     border-radius:999px;
 
@@ -591,15 +662,14 @@ header{
 
 }
 
+
 .progress-bar{
 
     height:100%;
 
     width:0%;
 
-    background:#635bff;
-
-    border-radius:999px;
+    background:#111827;
 
     transition:.3s;
 
@@ -614,59 +684,50 @@ header{
 
     display:grid;
 
-    grid-template-columns:repeat(2,1fr);
+    grid-template-columns:
+        repeat(2,1fr);
 
-    gap:16px;
-
-    margin-top:22px;
+    gap:15px;
 
 }
+
 
 .resource{
 
-    border:1px solid #e7eaf0;
+    padding:20px;
+
+    border:1px solid #e5e7eb;
 
     border-radius:15px;
 
-    padding:20px;
-
-    transition:.2s;
+    background:#fafafa;
 
 }
 
-.resource:hover{
-
-    transform:translateY(-2px);
-
-    box-shadow:0 8px 25px rgba(0,0,0,.05);
-
-}
 
 .resource h3{
 
-    font-size:16px;
-
-    margin-bottom:6px;
+    margin-bottom:7px;
 
 }
+
 
 .resource p{
 
-    color:#667085;
+    color:#6b7280;
 
-    font-size:13px;
+    line-height:1.5;
 
-    margin-bottom:12px;
+    font-size:14px;
+
+    margin-bottom:15px;
 
 }
 
+
 .resource a{
 
-    color:#635bff;
-
-    text-decoration:none;
-
-    font-size:13px;
+    font-size:14px;
 
     font-weight:800;
 
@@ -679,91 +740,95 @@ header{
 
 .quiz-shell{
 
-    max-width:850px;
+    background:white;
 
-    margin:auto;
+    border:1px solid #e5e7eb;
+
+    border-radius:22px;
+
+    overflow:hidden;
 
 }
+
 
 .quiz-top{
 
-    background:white;
-
-    border:1px solid #e8ebf1;
-
     padding:22px;
 
-    border-radius:17px;
-
-    margin-bottom:18px;
+    border-bottom:1px solid #e5e7eb;
 
 }
+
 
 .quiz-info{
 
     display:flex;
 
-    align-items:center;
-
     justify-content:space-between;
 
-    margin-bottom:15px;
+    align-items:center;
+
+    margin-bottom:16px;
 
 }
 
+
 .timer{
 
-    background:#fff0f0;
+    background:#111827;
 
-    color:#c51b1b;
+    color:white;
 
-    padding:7px 12px;
+    padding:8px 13px;
 
-    border-radius:8px;
+    border-radius:9px;
 
-    font-weight:900;
+    font-weight:800;
 
     font-variant-numeric:tabular-nums;
 
 }
 
-.question-card{
 
-    background:white;
-
-    border:1px solid #e8ebf1;
-
-    border-radius:20px;
+#quizContent{
 
     padding:30px;
 
 }
 
+
 .question-number{
 
-    color:#635bff;
+    color:#6b7280;
 
-    font-size:12px;
+    font-size:13px;
 
     font-weight:800;
-
-    letter-spacing:1px;
-
-    text-transform:uppercase;
 
     margin-bottom:10px;
 
 }
 
+
 .question-title{
 
-    font-size:23px;
+    font-size:25px;
 
-    font-weight:800;
+    line-height:1.4;
 
-    margin-bottom:22px;
+    margin-bottom:25px;
 
 }
+
+
+.options{
+
+    display:grid;
+
+    gap:12px;
+
+}
+
 
 .option{
 
@@ -773,35 +838,34 @@ header{
 
     align-items:flex-start;
 
-    border:1px solid #e1e4ea;
+    padding:16px;
 
-    padding:15px;
+    border:1px solid #dbe1e8;
 
-    border-radius:12px;
-
-    margin-bottom:10px;
+    border-radius:13px;
 
     cursor:pointer;
 
-    transition:.15s;
+    transition:.2s;
 
 }
+
 
 .option:hover{
 
-    border-color:#aaa4ff;
-
-    background:#fafaff;
+    border-color:#111827;
 
 }
+
 
 .option.selected{
 
-    border-color:#635bff;
+    border-color:#111827;
 
-    background:#f4f3ff;
+    background:#f8fafc;
 
 }
+
 
 .option input{
 
@@ -809,70 +873,48 @@ header{
 
 }
 
-.code-label{
 
-    font-size:13px;
-
-    font-weight:800;
-
-    margin-bottom:8px;
-
-}
-
-.code-editor{
+.code-answer{
 
     width:100%;
 
-    min-height:260px;
+    min-height:220px;
 
     resize:vertical;
 
-    padding:16px;
+    padding:18px;
 
-    border:1px solid #d9dde5;
-
-    border-radius:12px;
-
-    background:#10131a;
-
-    color:#e6e9ef;
-
-    font-family:
-        Consolas,
-        Monaco,
-        monospace;
-
-    font-size:14px;
-
-    line-height:1.6;
-
-    outline:none;
-
-}
-
-.code-editor:focus{
-
-    border-color:#635bff;
-
-}
-
-.warning{
-
-    background:#fff8e8;
-
-    border:1px solid #f4df9d;
-
-    color:#725b12;
+    border:1px solid #dbe1e8;
 
     border-radius:13px;
 
-    padding:16px;
+    font-family:
+        "Courier New",
+        monospace;
 
-    font-size:12px;
-
-    margin-top:18px;
+    line-height:1.5;
 
 }
+
+
+.warning{
+
+    margin:0 30px 20px;
+
+    padding:15px;
+
+    background:#fff7ed;
+
+    color:#9a3412;
+
+    border-radius:12px;
+
+    font-size:13px;
+
+    line-height:1.6;
+
+}
+
 
 .quiz-nav{
 
@@ -880,7 +922,7 @@ header{
 
     justify-content:space-between;
 
-    margin-top:18px;
+    padding:20px 30px 30px;
 
 }
 
@@ -891,21 +933,24 @@ header{
 
 .result{
 
-    max-width:650px;
-
-    margin:auto;
-
     text-align:center;
+
+    padding:55px 30px;
 
 }
 
+
 .result-icon{
 
-    width:75px;
+    width:70px;
 
-    height:75px;
+    height:70px;
 
-    margin:auto;
+    border-radius:50%;
+
+    background:#dcfce7;
+
+    color:#15803d;
 
     display:flex;
 
@@ -913,49 +958,33 @@ header{
 
     justify-content:center;
 
-    border-radius:50%;
+    margin:0 auto 20px;
 
-    background:#eafaf2;
-
-    color:#12a56a;
-
-    font-size:38px;
+    font-size:32px;
 
     font-weight:900;
 
 }
+
 
 .result.fail .result-icon{
 
-    background:#fff0f0;
+    background:#fee2e2;
 
-    color:#d92d20;
-
-}
-
-.result h1{
-
-    margin-top:20px;
+    color:#b91c1c;
 
 }
+
 
 .score-big{
 
-    font-size:75px;
-
-    line-height:1;
+    font-size:80px;
 
     font-weight:900;
 
-    color:#635bff;
+    letter-spacing:-4px;
 
-    margin:22px 0;
-
-}
-
-#certificateResultActions{
-
-    margin-top:25px;
+    margin:20px 0;
 
 }
 
@@ -966,115 +995,126 @@ header{
 
 .certificate-area{
 
-    max-width:950px;
-
-    margin:auto;
+    padding:10px;
 
 }
+
 
 .certificate{
 
-    background:white;
+    background:#fff;
 
-    border:12px solid #172033;
+    border:12px solid #111827;
 
-    outline:2px solid #635bff;
+    outline:2px solid #c9a227;
 
-    outline-offset:-22px;
+    outline-offset:-25px;
 
-    padding:90px 80px;
-
-    min-height:650px;
+    padding:90px 70px;
 
     text-align:center;
 
-    position:relative;
+    min-height:700px;
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
 
 }
 
+
 .cert-header{
 
-    font-size:15px;
+    font-size:18px;
 
     letter-spacing:5px;
 
     font-weight:900;
 
-    color:#635bff;
+    margin-bottom:35px;
 
 }
+
 
 .cert-title{
 
     font-family:Georgia,serif;
 
-    font-size:37px;
+    font-size:38px;
 
-    font-weight:700;
+    font-weight:800;
 
-    margin-top:25px;
+    margin-bottom:20px;
 
 }
+
 
 .cert-subtitle{
 
-    color:#667085;
+    color:#6b7280;
 
-    margin-top:25px;
+    margin-bottom:25px;
 
 }
+
 
 .cert-name{
 
     font-family:Georgia,serif;
 
-    font-size:48px;
+    font-size:44px;
 
-    font-weight:700;
+    font-weight:800;
 
-    margin:25px 0;
+    margin-bottom:30px;
 
 }
+
 
 .cert-body{
 
-    max-width:680px;
+    max-width:700px;
 
-    margin:auto;
+    margin:0 auto;
 
-    color:#475467;
+    line-height:1.8;
 
-    font-size:15px;
+    color:#374151;
 
 }
+
 
 .cert-meta{
 
-    display:grid;
+    display:flex;
 
-    grid-template-columns:repeat(3,1fr);
+    justify-content:center;
 
-    gap:20px;
+    gap:60px;
 
-    margin-top:45px;
+    margin-top:40px;
 
-    font-size:13px;
+    font-size:14px;
+
+}
+
+
+.cert-meta div{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:5px;
 
 }
 
-.cert-meta strong{
-
-    display:block;
-
-    margin-top:4px;
-
-}
 
 .cert-id{
 
     margin-top:35px;
-
-    font-size:12px;
 
     font-weight:800;
 
@@ -1082,19 +1122,19 @@ header{
 
 }
 
+
 .cert-footer{
 
-    max-width:700px;
-
-    margin:35px auto 0;
+    margin-top:35px;
 
     font-size:10px;
 
     line-height:1.5;
 
-    color:#667085;
+    color:#6b7280;
 
 }
+
 
 .certificate-actions{
 
@@ -1102,11 +1142,11 @@ header{
 
     justify-content:center;
 
-    flex-wrap:wrap;
-
     gap:12px;
 
-    margin:25px auto;
+    flex-wrap:wrap;
+
+    margin-top:25px;
 
 }
 
@@ -1121,7 +1161,8 @@ header{
 
     inset:0;
 
-    background:rgba(255,255,255,.8);
+    background:
+        rgba(255,255,255,.85);
 
     backdrop-filter:blur(5px);
 
@@ -1135,43 +1176,52 @@ header{
 
 }
 
+
 #loader.active{
 
     display:flex;
 
 }
 
+
 .loader-box{
 
     background:white;
 
-    padding:28px 35px;
+    padding:25px 30px;
 
     border-radius:15px;
 
-    box-shadow:0 15px 50px rgba(0,0,0,.12);
+    box-shadow:
+        0 20px 50px
+        rgba(0,0,0,.15);
 
     text-align:center;
 
+    font-weight:700;
+
 }
+
 
 .spinner{
 
-    width:32px;
+    width:35px;
 
-    height:32px;
+    height:35px;
 
-    border:3px solid #e4e6eb;
+    border:4px solid #e5e7eb;
 
-    border-top-color:#635bff;
+    border-top-color:#111827;
 
     border-radius:50%;
 
-    animation:spin .8s linear infinite;
+    animation:
+        spin .8s linear infinite;
 
     margin:0 auto 12px;
 
 }
+
 
 @keyframes spin{
 
@@ -1188,102 +1238,15 @@ header{
 
 footer{
 
-    padding:30px 20px;
-
     text-align:center;
 
-    color:#667085;
+    color:#6b7280;
 
     font-size:12px;
 
-    border-top:1px solid #e8ebf1;
+    line-height:1.7;
 
-    background:white;
-
-}
-
-
-/* =========================================================
-   MOBILE
-========================================================= */
-
-@media(max-width:700px){
-
-    .page{
-
-        padding-top:35px;
-
-    }
-
-    header{
-
-        height:70px;
-
-    }
-
-    .logo{
-
-        font-size:17px;
-
-    }
-
-    .user-pill{
-
-        display:none;
-
-    }
-
-    .dashboard-grid{
-
-        grid-template-columns:1fr;
-
-    }
-
-    .resource-grid{
-
-        grid-template-columns:1fr;
-
-    }
-
-    .card{
-
-        padding:22px;
-
-    }
-
-    .question-card{
-
-        padding:22px;
-
-    }
-
-    .certificate{
-
-        padding:60px 25px;
-
-        min-height:auto;
-
-    }
-
-    .cert-title{
-
-        font-size:27px;
-
-    }
-
-    .cert-name{
-
-        font-size:34px;
-
-    }
-
-    .cert-meta{
-
-        grid-template-columns:1fr;
-
-        gap:12px;
-
-    }
+    padding:30px 20px;
 
 }
 
@@ -1300,6 +1263,7 @@ footer{
 
     }
 
+
     header,
     footer,
     .no-print{
@@ -1308,25 +1272,142 @@ footer{
 
     }
 
-    .page{
+
+    main{
+
+        width:100%;
 
         padding:0;
 
     }
 
+
     .certificate-area{
 
-        max-width:none;
+        padding:0;
 
     }
 
+
     .certificate{
 
-        box-shadow:none;
-
-        border:12px solid #172033;
-
         min-height:100vh;
+
+        border:10px solid #111827;
+
+    }
+
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media(max-width:700px){
+
+    header{
+
+        padding:15px 4%;
+
+    }
+
+
+    .user-pill{
+
+        display:none;
+
+    }
+
+
+    main{
+
+        width:92%;
+
+        padding-top:40px;
+
+    }
+
+
+    .dashboard-grid{
+
+        grid-template-columns:1fr;
+
+    }
+
+
+    .resource-grid{
+
+        grid-template-columns:1fr;
+
+    }
+
+
+    .hero h1{
+
+        letter-spacing:-2px;
+
+    }
+
+
+    .card{
+
+        padding:20px;
+
+    }
+
+
+    #quizContent{
+
+        padding:20px;
+
+    }
+
+
+    .warning{
+
+        margin:
+            0 20px 20px;
+
+    }
+
+
+    .quiz-nav{
+
+        padding:
+            15px 20px 25px;
+
+    }
+
+
+    .certificate{
+
+        padding:70px 25px;
+
+        outline-offset:-15px;
+
+    }
+
+
+    .cert-title{
+
+        font-size:27px;
+
+    }
+
+
+    .cert-name{
+
+        font-size:32px;
+
+    }
+
+
+    .cert-meta{
+
+        flex-direction:column;
+
+        gap:15px;
 
     }
 
@@ -1340,60 +1421,51 @@ footer{
 <body>
 
 
-<!-- ======================================================
-HEADER
-======================================================= -->
-
 <header>
 
-    <div class="header-inner">
+    <div class="logo">
 
-        <div class="logo">
+        <div class="logo-mark">
+            OB
+        </div>
 
-            <div class="logo-mark">
-                OB
-            </div>
+        Openbox
+        <span>Academy</span>
 
-            Openbox
-            <span>Academy</span>
+    </div>
 
+
+    <div class="header-right">
+
+        <div
+            id="userPill"
+            class="user-pill hidden">
         </div>
 
 
-        <div class="header-right">
+        <button
+            id="logoutBtn"
+            class="logout hidden"
+            onclick="logout()">
 
-            <div
-                id="userPill"
-                class="user-pill hidden">
-            </div>
+            Logout
 
-
-            <button
-                id="logoutBtn"
-                class="logout hidden"
-                onclick="logout()">
-
-                Logout
-
-            </button>
-
-        </div>
+        </button>
 
     </div>
 
 </header>
 
 
-<main class="container">
+<main>
 
 
-<!-- ======================================================
+<!-- =====================================================
 AUTH PAGE
-======================================================= -->
+===================================================== -->
 
 <section
-    id="authPage"
-    class="page">
+    id="authPage">
 
 
     <div class="hero">
@@ -1401,6 +1473,7 @@ AUTH PAGE
         <div class="eyebrow">
             OPENBOX ACADEMY
         </div>
+
 
         <h1>
 
@@ -1410,6 +1483,7 @@ AUTH PAGE
             <span>Fundamentals</span>
 
         </h1>
+
 
         <p>
 
@@ -1427,6 +1501,7 @@ AUTH PAGE
 
 
         <div class="tabs">
+
 
             <button
                 class="tab active"
@@ -1447,6 +1522,7 @@ AUTH PAGE
 
             </button>
 
+
         </div>
 
 
@@ -1460,15 +1536,15 @@ AUTH PAGE
 
         <div id="loginForm">
 
+
             <h2>
                 Welcome back
             </h2>
 
-            <p style="color:#667085;font-size:14px;margin-top:5px">
 
+            <p>
                 Enter the email and mobile number
                 used during registration.
-
             </p>
 
 
@@ -1477,6 +1553,7 @@ AUTH PAGE
                 <label>
                     Email Address
                 </label>
+
 
                 <input
                     id="loginEmail"
@@ -1492,6 +1569,7 @@ AUTH PAGE
                 <label>
                     Mobile Number
                 </label>
+
 
                 <input
                     id="loginMobile"
@@ -1512,6 +1590,7 @@ AUTH PAGE
 
             </button>
 
+
         </div>
 
 
@@ -1521,16 +1600,16 @@ AUTH PAGE
             id="registerForm"
             class="hidden">
 
+
             <h2>
                 Create your account
             </h2>
 
-            <p style="color:#667085;font-size:14px;margin-top:5px">
 
+            <p>
                 New learners can register here.
                 Your details will be recorded in
                 the Openbox course database.
-
             </p>
 
 
@@ -1539,6 +1618,7 @@ AUTH PAGE
                 <label>
                     Full Name
                 </label>
+
 
                 <input
                     id="registerName"
@@ -1554,6 +1634,7 @@ AUTH PAGE
                     Email Address
                 </label>
 
+
                 <input
                     id="registerEmail"
                     type="email"
@@ -1567,6 +1648,7 @@ AUTH PAGE
                 <label>
                     Mobile Number
                 </label>
+
 
                 <input
                     id="registerMobile"
@@ -1586,6 +1668,7 @@ AUTH PAGE
 
             </button>
 
+
         </div>
 
     </div>
@@ -1593,14 +1676,13 @@ AUTH PAGE
 </section>
 
 
-
-<!-- ======================================================
-DASHBOARD PAGE
-======================================================= -->
+<!-- =====================================================
+DASHBOARD
+===================================================== -->
 
 <section
     id="dashboardPage"
-    class="page hidden">
+    class="hidden">
 
 
     <div class="hero">
@@ -1608,6 +1690,7 @@ DASHBOARD PAGE
         <div class="eyebrow">
             YOUR LEARNING DASHBOARD
         </div>
+
 
         <h1>
 
@@ -1617,6 +1700,7 @@ DASHBOARD PAGE
             </span>.
 
         </h1>
+
 
         <p>
 
@@ -1630,9 +1714,11 @@ DASHBOARD PAGE
 
     <div class="card profile">
 
+
         <div class="profile-label">
             OPENBOX LEARNER
         </div>
+
 
         <div
             class="profile-name"
@@ -1642,10 +1728,12 @@ DASHBOARD PAGE
 
         </div>
 
+
         <div
             class="profile-email"
             id="studentEmail">
         </div>
+
 
     </div>
 
@@ -1691,22 +1779,27 @@ DASHBOARD PAGE
 
         </div>
 
+
     </div>
 
 
     <div class="card">
 
+
         <h2>
             Course Progress
         </h2>
 
+
         <div class="progress-wrap">
+
 
             <div class="progress-top">
 
                 <span>
                     Assessment status
                 </span>
+
 
                 <strong id="statusText">
                     Not Started
@@ -1727,17 +1820,12 @@ DASHBOARD PAGE
         </div>
 
 
-        <div id="dashboardActions">
-
-            <button
-                class="btn btn-primary"
-                onclick="startQuiz()">
-
-                Start Final Assessment
-
-            </button>
+        <div
+            id="dashboardActions"
+            style="margin-top:22px">
 
         </div>
+
 
     </div>
 
@@ -1751,11 +1839,10 @@ DASHBOARD PAGE
             Course Resources
         </h2>
 
-        <p style="color:#667085;margin-top:5px">
 
+        <p>
             Study the Openbox learning resources
             before attempting the final assessment.
-
         </p>
 
 
@@ -1768,10 +1855,12 @@ DASHBOARD PAGE
                     Lecture Videos
                 </h3>
 
+
                 <p>
                     Watch the complete MIT OCW
                     lecture video collection.
                 </p>
+
 
                 <a
                     href="https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/video_galleries/lecture-videos/"
@@ -1791,9 +1880,11 @@ DASHBOARD PAGE
                     Lecture Notes
                 </h3>
 
+
                 <p>
                     Access the official lecture notes.
                 </p>
+
 
                 <a
                     href="https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/lists/lecture-notes/"
@@ -1813,9 +1904,11 @@ DASHBOARD PAGE
                     Lecture Code
                 </h3>
 
+
                 <p>
                     Review the official course code.
                 </p>
+
 
                 <a
                     href="https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/lists/lecture-code/"
@@ -1835,9 +1928,11 @@ DASHBOARD PAGE
                     Finger Exercises
                 </h3>
 
+
                 <p>
                     Practice short Python exercises.
                 </p>
+
 
                 <a
                     href="https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/pages/finger-exercises/"
@@ -1857,9 +1952,11 @@ DASHBOARD PAGE
                     Problem Sets
                 </h3>
 
+
                 <p>
                     Continue your programming practice.
                 </p>
+
 
                 <a
                     href="https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/lists/problem-sets/"
@@ -1879,9 +1976,11 @@ DASHBOARD PAGE
                     Recitations
                 </h3>
 
+
                 <p>
                     Review additional course material.
                 </p>
+
 
                 <a
                     href="https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/lists/recitations/"
@@ -1902,14 +2001,13 @@ DASHBOARD PAGE
 </section>
 
 
-
-<!-- ======================================================
-QUIZ PAGE
-======================================================= -->
+<!-- =====================================================
+QUIZ
+===================================================== -->
 
 <section
     id="quizPage"
-    class="page hidden">
+    class="hidden">
 
 
     <div class="hero">
@@ -1918,12 +2016,14 @@ QUIZ PAGE
             OPENBOX ASSESSMENT
         </div>
 
+
         <h1>
 
             Python
             <span>Final Assessment</span>
 
         </h1>
+
 
         <p>
             50 questions · 60 minutes · 70% passing score
@@ -1937,11 +2037,13 @@ QUIZ PAGE
 
         <div class="quiz-top">
 
+
             <div class="quiz-info">
 
                 <strong id="questionCounter">
                     Question 1 of 50
                 </strong>
+
 
                 <span
                     id="timer"
@@ -1963,11 +2065,11 @@ QUIZ PAGE
 
             </div>
 
+
         </div>
 
 
-        <div
-            id="quizContent">
+        <div id="quizContent">
         </div>
 
 
@@ -1991,6 +2093,7 @@ QUIZ PAGE
 
         <div class="quiz-nav">
 
+
             <button
                 class="btn btn-secondary"
                 id="prevBtn"
@@ -2010,21 +2113,22 @@ QUIZ PAGE
 
             </button>
 
+
         </div>
+
 
     </div>
 
 </section>
 
 
-
-<!-- ======================================================
-RESULT PAGE
-======================================================= -->
+<!-- =====================================================
+RESULT
+===================================================== -->
 
 <section
     id="resultPage"
-    class="page hidden">
+    class="hidden">
 
 
     <div class="hero">
@@ -2033,12 +2137,14 @@ RESULT PAGE
             ASSESSMENT RESULT
         </div>
 
+
         <h1>
 
             Assessment
             <span>Complete</span>
 
         </h1>
+
 
         <p>
             Your Openbox Academy assessment result
@@ -2080,22 +2186,25 @@ RESULT PAGE
         </p>
 
 
-        <div id="certificateResultActions">
+        <div
+            id="certificateResultActions"
+            style="margin-top:25px">
+
         </div>
+
 
     </div>
 
 </section>
 
 
-
-<!-- ======================================================
-CERTIFICATE PAGE
-======================================================= -->
+<!-- =====================================================
+CERTIFICATE
+===================================================== -->
 
 <section
     id="certificatePage"
-    class="page hidden">
+    class="hidden">
 
 
     <div class="hero no-print">
@@ -2104,12 +2213,14 @@ CERTIFICATE PAGE
             OPENBOX CREDENTIAL
         </div>
 
+
         <h1>
 
             Your
             <span>Certificate</span>
 
         </h1>
+
 
         <p>
 
@@ -2240,7 +2351,9 @@ CERTIFICATE PAGE
 
             </div>
 
+
         </div>
+
 
     </div>
 
@@ -2274,18 +2387,24 @@ CERTIFICATE PAGE
 
         </button>
 
+
     </div>
 
 
     <div
         class="card no-print"
-        style="margin-top:25px;text-align:center">
+        style="
+            margin-top:25px;
+            text-align:center
+        ">
+
 
         <h2>
             Keep learning
         </h2>
 
-        <p style="color:#667085;margin:8px 0 18px">
+
+        <p>
 
             Continue learning Python with
             Openbox Academy's free resources.
@@ -2298,11 +2417,15 @@ CERTIFICATE PAGE
             target="_blank"
             rel="noopener"
             class="btn btn-primary"
-            style="display:inline-flex;width:auto">
+            style="
+                display:inline-flex;
+                width:auto
+            ">
 
             Continue Free Python Learning →
 
         </a>
+
 
     </div>
 
@@ -2311,11 +2434,6 @@ CERTIFICATE PAGE
 
 </main>
 
-
-
-<!-- ======================================================
-FOOTER
-======================================================= -->
 
 <footer>
 
@@ -2333,12 +2451,12 @@ FOOTER
 </footer>
 
 
-
-<!-- ======================================================
+<!-- =====================================================
 LOADER
-======================================================= -->
+===================================================== -->
 
 <div id="loader">
+
 
     <div class="loader-box">
 
@@ -2350,18 +2468,18 @@ LOADER
 
     </div>
 
-</div>
 
+</div>
 
 
 <script>
 
 /* =========================================================
-   CONFIGURATION
+CONFIGURATION
 ========================================================= */
 
 const API_URL =
-"https://script.google.com/macros/s/AKfycbxZiRap1Zc7ctZbbxIiu9KyHOzNdyrO9QFhUGUZzztGVIOMkVS0svFqhzJg5eixqdSD/exec";
+"https://script.google.com/macros/s/AKfycbwRxJpa3BEdrocBB5KTOt5ZDknyOGrc4eQpW5C-6ufNVGGXMhbdnrbx5T510Qn-L_9y/exec";
 
 
 const COURSE_URL =
@@ -2370,716 +2488,43 @@ const COURSE_URL =
 
 const TOTAL_QUESTIONS = 50;
 
+
 const PASS_PERCENTAGE = 70;
 
-const EXAM_TIME = 60 * 60;
+
+const EXAM_DURATION =
+60 * 60;
 
 
 /* =========================================================
-   STATE
+STATE
 ========================================================= */
 
 let currentUser = null;
 
 let questions = [];
 
-let answers = [];
+let answers = {};
 
 let currentQuestion = 0;
 
-let timerSeconds = EXAM_TIME;
+let timerSeconds =
+    EXAM_DURATION;
 
 let timerInterval = null;
 
 let quizStarted = false;
 
-let quizLocked = false;
-
 let tabWarnings = 0;
 
-
-/* =========================================================
-   QUESTION BANK
-=========================================================
-
-   The application expects exactly 50 questions.
-
-   Replace these questions with your actual
-   Openbox Python assessment questions.
-
-   type:
-      "mcq"
-      "code"
-
-   MCQ:
-      {
-          type:"mcq",
-          question:"...",
-          options:["A","B","C","D"],
-          answer:0
-      }
-
-   CODE:
-      {
-          type:"code",
-          question:"...",
-          expected:"..."
-      }
-
-========================================================= */
-
-questions = [
-
-    {
-        type:"mcq",
-        question:"Which keyword is used to define a function in Python?",
-        options:[
-            "function",
-            "def",
-            "func",
-            "define"
-        ],
-        answer:1
-    },
-
-    {
-        type:"mcq",
-        question:"Which data type stores True or False values?",
-        options:[
-            "int",
-            "str",
-            "bool",
-            "float"
-        ],
-        answer:2
-    },
-
-    {
-        type:"mcq",
-        question:"Which symbol is used for comments in Python?",
-        options:[
-            "//",
-            "/*",
-            "#",
-            "--"
-        ],
-        answer:2
-    },
-
-    {
-        type:"mcq",
-        question:"Which collection is ordered and mutable?",
-        options:[
-            "tuple",
-            "list",
-            "set",
-            "frozenset"
-        ],
-        answer:1
-    },
-
-    {
-        type:"mcq",
-        question:"What is the output type of input()?",
-        options:[
-            "int",
-            "float",
-            "string",
-            "boolean"
-        ],
-        answer:2
-    },
-
-    {
-        type:"mcq",
-        question:"Which operator is used for exponentiation?",
-        options:[
-            "^",
-            "**",
-            "//",
-            "%%"
-        ],
-        answer:1
-    },
-
-    {
-        type:"mcq",
-        question:"Which keyword exits a loop immediately?",
-        options:[
-            "stop",
-            "exit",
-            "break",
-            "return"
-        ],
-        answer:2
-    },
-
-    {
-        type:"mcq",
-        question:"Which keyword skips to the next loop iteration?",
-        options:[
-            "skip",
-            "continue",
-            "next",
-            "pass"
-        ],
-        answer:1
-    },
-
-    {
-        type:"mcq",
-        question:"Which function returns the number of items in a collection?",
-        options:[
-            "count()",
-            "size()",
-            "length()",
-            "len()"
-        ],
-        answer:3
-    },
-
-    {
-        type:"mcq",
-        question:"Which of these creates a tuple?",
-        options:[
-            "[1,2,3]",
-            "{1,2,3}",
-            "(1,2,3)",
-            "<1,2,3>"
-        ],
-        answer:2
-    },
-
-    {
-        type:"mcq",
-        question:"Which data structure stores unique values?",
-        options:[
-            "list",
-            "tuple",
-            "set",
-            "string"
-        ],
-        answer:2
-    },
-
-    {
-        type:"mcq",
-        question:"What does // perform in Python?",
-        options:[
-            "Exponentiation",
-            "Floor division",
-            "Modulo",
-            "Normal division"
-        ],
-        answer:1
-    },
-
-    {
-        type:"mcq",
-        question:"Which keyword handles exceptions?",
-        options:[
-            "catch",
-            "except",
-            "error",
-            "handle"
-        ],
-        answer:1
-    },
-
-    {
-        type:"mcq",
-        question:"Which statement is used to import a module?",
-        options:[
-            "include",
-            "require",
-            "import",
-            "using"
-        ],
-        answer:2
-    },
-
-    {
-        type:"mcq",
-        question:"Which function converts a string to an integer?",
-        options:[
-            "str()",
-            "integer()",
-            "int()",
-            "number()"
-        ],
-        answer:2
-    },
-
-    {
-        type:"mcq",
-        question:"Which keyword creates a class?",
-        options:[
-            "object",
-            "class",
-            "struct",
-            "type"
-        ],
-        answer:1
-    },
-
-    {
-        type:"mcq",
-        question:"What does append() do to a list?",
-        options:[
-            "Deletes an item",
-            "Adds an item to the end",
-            "Sorts the list",
-            "Copies the list"
-        ],
-        answer:1
-    },
-
-    {
-        type:"mcq",
-        question:"Which method removes and returns the last list item by default?",
-        options:[
-            "remove()",
-            "delete()",
-            "pop()",
-            "clear()"
-        ],
-        answer:2
-    },
-
-    {
-        type:"mcq",
-        question:"Which value represents the absence of a value?",
-        options:[
-            "empty",
-            "null",
-            "None",
-            "void"
-        ],
-        answer:2
-    },
-
-    {
-        type:"mcq",
-        question:"Which loop is commonly used when the number of iterations is known?",
-        options:[
-            "for",
-            "until",
-            "repeat",
-            "loop"
-        ],
-        answer:0
-    },
-
-    {
-        type:"mcq",
-        question:"Which function generates a sequence of numbers?",
-        options:[
-            "numbers()",
-            "range()",
-            "sequence()",
-            "generate()"
-        ],
-        answer:1
-    },
-
-    {
-        type:"mcq",
-        question:"Which keyword is used for inheritance syntax?",
-        options:[
-            "extends",
-            "inherits",
-            "class Child(Parent)",
-            "inherit"
-        ],
-        answer:2
-    },
-
-    {
-        type:"mcq",
-        question:"What does == compare?",
-        options:[
-            "Object identity",
-            "Values",
-            "Memory",
-            "Types only"
-        ],
-        answer:1
-    },
-
-    {
-        type:"mcq",
-        question:"Which operator checks object identity?",
-        options:[
-            "==",
-            "=",
-            "is",
-            "equals"
-        ],
-        answer:2
-    },
-
-    {
-        type:"mcq",
-        question:"Which built-in function returns the largest value?",
-        options:[
-            "large()",
-            "maximum()",
-            "max()",
-            "highest()"
-        ],
-        answer:2
-    },
-
-    {
-        type:"mcq",
-        question:"Which built-in function returns the smallest value?",
-        options:[
-            "min()",
-            "small()",
-            "minimum()",
-            "lowest()"
-        ],
-        answer:0
-    },
-
-    {
-        type:"mcq",
-        question:"Which method converts a string to lowercase?",
-        options:[
-            "lower()",
-            "tolower()",
-            "downcase()",
-            "small()"
-        ],
-        answer:0
-    },
-
-    {
-        type:"mcq",
-        question:"Which method splits a string into a list?",
-        options:[
-            "divide()",
-            "split()",
-            "break()",
-            "separate()"
-        ],
-        answer:1
-    },
-
-    {
-        type:"mcq",
-        question:"Which method joins strings together?",
-        options:[
-            "combine()",
-            "join()",
-            "merge()",
-            "concat()"
-        ],
-        answer:1
-    },
-
-    {
-        type:"mcq",
-        question:"Which keyword returns a value from a function?",
-        options:[
-            "send",
-            "yield",
-            "return",
-            "output"
-        ],
-        answer:2
-    },
-
-    {
-        type:"mcq",
-        question:"Which statement does nothing and is commonly used as a placeholder?",
-        options:[
-            "skip",
-            "pass",
-            "nothing",
-            "empty"
-        ],
-        answer:1
-    },
-
-    {
-        type:"mcq",
-        question:"Which Python type stores key-value pairs?",
-        options:[
-            "list",
-            "tuple",
-            "dictionary",
-            "set"
-        ],
-        answer:2
-    },
-
-    {
-        type:"mcq",
-        question:"Which method returns dictionary keys?",
-        options:[
-            "keys()",
-            "getkeys()",
-            "keylist()",
-            "items()"
-        ],
-        answer:0
-    },
-
-    {
-        type:"mcq",
-        question:"Which method returns dictionary key-value pairs?",
-        options:[
-            "pairs()",
-            "values()",
-            "items()",
-            "entries()"
-        ],
-        answer:2
-    },
-
-    {
-        type:"mcq",
-        question:"What does len('Python') return?",
-        options:[
-            "5",
-            "6",
-            "7",
-            "8"
-        ],
-        answer:1
-    },
-
-    {
-        type:"mcq",
-        question:"Which data type represents decimal numbers?",
-        options:[
-            "int",
-            "str",
-            "float",
-            "bool"
-        ],
-        answer:2
-    },
-
-    {
-        type:"mcq",
-        question:"Which operator gives the remainder?",
-        options:[
-            "/",
-            "//",
-            "%",
-            "**"
-        ],
-        answer:2
-    },
-
-    {
-        type:"mcq",
-        question:"Which function displays output?",
-        options:[
-            "display()",
-            "show()",
-            "print()",
-            "output()"
-        ],
-        answer:2
-    },
-
-    {
-        type:"mcq",
-        question:"Which keyword is used to create a conditional branch?",
-        options:[
-            "if",
-            "when",
-            "condition",
-            "check"
-        ],
-        answer:0
-    },
-
-    {
-        type:"mcq",
-        question:"Which keyword provides an alternative condition?",
-        options:[
-            "otherwise",
-            "elseif",
-            "elif",
-            "else-if"
-        ],
-        answer:2
-    },
-
-    {
-        type:"mcq",
-        question:"Which keyword handles the final alternative branch?",
-        options:[
-            "otherwise",
-            "else",
-            "default",
-            "final"
-        ],
-        answer:1
-    },
-
-    {
-        type:"mcq",
-        question:"Which loop continues while a condition is true?",
-        options:[
-            "for",
-            "while",
-            "repeat",
-            "until"
-        ],
-        answer:1
-    },
-
-    {
-        type:"mcq",
-        question:"What is a lambda?",
-        options:[
-            "A class",
-            "An anonymous function",
-            "A module",
-            "A loop"
-        ],
-        answer:1
-    },
-
-    {
-        type:"mcq",
-        question:"Which keyword defines an anonymous function expression?",
-        options:[
-            "anonymous",
-            "lambda",
-            "function",
-            "def"
-        ],
-        answer:1
-    },
-
-    {
-        type:"mcq",
-        question:"What does slicing a list allow you to do?",
-        options:[
-            "Delete the entire list",
-            "Extract a portion of the list",
-            "Convert it to a tuple",
-            "Sort it"
-        ],
-        answer:1
-    },
-
-    {
-        type:"mcq",
-        question:"Which index represents the first item in a Python list?",
-        options:[
-            "0",
-            "1",
-            "-1",
-            "first"
-        ],
-        answer:0
-    },
-
-    {
-        type:"mcq",
-        question:"Which index represents the last item using negative indexing?",
-        options:[
-            "0",
-            "1",
-            "-1",
-            "-2"
-        ],
-        answer:2
-    },
-
-    {
-        type:"mcq",
-        question:"Which module provides mathematical functions?",
-        options:[
-            "math",
-            "numbers",
-            "calculate",
-            "mathematics"
-        ],
-        answer:0
-    },
-
-    {
-        type:"mcq",
-        question:"What is recursion?",
-        options:[
-            "A loop only",
-            "A function calling itself",
-            "A class inheriting itself",
-            "A type conversion"
-        ],
-        answer:1
-    },
-
-    {
-        type:"mcq",
-        question:"Which concept allows the same interface to behave differently?",
-        options:[
-            "Inheritance",
-            "Polymorphism",
-            "Compilation",
-            "Iteration"
-        ],
-        answer:1
-    },
-
-    {
-        type:"mcq",
-        question:"Which concept bundles data and methods together?",
-        options:[
-            "Encapsulation",
-            "Iteration",
-            "Compilation",
-            "Recursion"
-        ],
-        answer:0
-    },
-
-    {
-        type:"mcq",
-        question:"Which statement is used to create an exception intentionally?",
-        options:[
-            "throw",
-            "raise",
-            "except",
-            "error"
-        ],
-        answer:1
-    }
-
-];
-
-
-/*
- * Safety check.
- *
- * The final system expects exactly 50 questions.
- */
-
-if(questions.length !== TOTAL_QUESTIONS){
-
-    console.warn(
-        "Question bank contains " +
-        questions.length +
-        " questions. Expected " +
-        TOTAL_QUESTIONS + "."
-    );
-
-}
+let quizLocked = false;
 
 
 /* =========================================================
-   API REQUEST
+API REQUEST
 ========================================================= */
 
-async function apiRequest(payload){
+async function apiRequest(data){
 
     const response =
         await fetch(
@@ -3094,38 +2539,23 @@ async function apiRequest(payload){
                 },
 
                 body:
-                    JSON.stringify(payload)
+                    JSON.stringify(data)
 
             }
         );
 
 
-    const text =
-        await response.text();
+    const result =
+        await response.json();
 
 
-    try{
-
-        return JSON.parse(text);
-
-    }catch(error){
-
-        console.error(
-            "Invalid API response:",
-            text
-        );
-
-        throw new Error(
-            "Server returned an invalid response."
-        );
-
-    }
+    return result;
 
 }
 
 
 /* =========================================================
-   AUTH TABS
+AUTH TABS
 ========================================================= */
 
 function showAuth(type){
@@ -3133,20 +2563,23 @@ function showAuth(type){
     clearMessage();
 
 
-    const login =
+    const loginForm =
         document.getElementById(
             "loginForm"
         );
 
-    const register =
+
+    const registerForm =
         document.getElementById(
             "registerForm"
         );
+
 
     const loginTab =
         document.getElementById(
             "loginTab"
         );
+
 
     const registerTab =
         document.getElementById(
@@ -3156,23 +2589,45 @@ function showAuth(type){
 
     if(type === "login"){
 
-        login.classList.remove("hidden");
+        loginForm
+            .classList
+            .remove("hidden");
 
-        register.classList.add("hidden");
 
-        loginTab.classList.add("active");
+        registerForm
+            .classList
+            .add("hidden");
 
-        registerTab.classList.remove("active");
+
+        loginTab
+            .classList
+            .add("active");
+
+
+        registerTab
+            .classList
+            .remove("active");
 
     }else{
 
-        login.classList.add("hidden");
+        loginForm
+            .classList
+            .add("hidden");
 
-        register.classList.remove("hidden");
 
-        loginTab.classList.remove("active");
+        registerForm
+            .classList
+            .remove("hidden");
 
-        registerTab.classList.add("active");
+
+        loginTab
+            .classList
+            .remove("active");
+
+
+        registerTab
+            .classList
+            .add("active");
 
     }
 
@@ -3180,61 +2635,42 @@ function showAuth(type){
 
 
 /* =========================================================
-   REGISTER
+REGISTER
 ========================================================= */
 
 async function registerUser(){
 
     const name =
         document
-            .getElementById("registerName")
+            .getElementById(
+                "registerName"
+            )
             .value
             .trim();
 
 
     const email =
         document
-            .getElementById("registerEmail")
-            .value
-            .trim()
-            .toLowerCase();
-
-
-    const mobile =
-        document
-            .getElementById("registerMobile")
+            .getElementById(
+                "registerEmail"
+            )
             .value
             .trim();
 
 
-    if(!name){
+    const mobile =
+        document
+            .getElementById(
+                "registerMobile"
+            )
+            .value
+            .trim();
+
+
+    if(!name || !email || !mobile){
 
         showMessage(
-            "Please enter your full name.",
-            "error"
-        );
-
-        return;
-
-    }
-
-
-    if(!validateEmail(email)){
-
-        showMessage(
-            "Please enter a valid email address.",
-            "error"
-        );
-
-        return;
-
-    }
-
-
-    if(!validateMobile(mobile)){
-
-        showMessage(
-            "Please enter a valid 10-digit mobile number.",
+            "Please complete all fields.",
             "error"
         );
 
@@ -3282,7 +2718,12 @@ async function registerUser(){
             response.user;
 
 
-        saveUser();
+        localStorage.setItem(
+            "openboxPythonUser",
+            JSON.stringify(
+                currentUser
+            )
+        );
 
 
         updateHeader();
@@ -3297,7 +2738,6 @@ async function registerUser(){
         console.error(error);
 
         showMessage(
-            error.message ||
             "Unable to connect to the server.",
             "error"
         );
@@ -3308,42 +2748,33 @@ async function registerUser(){
 
 
 /* =========================================================
-   LOGIN
+LOGIN
 ========================================================= */
 
 async function loginUser(){
 
     const email =
         document
-            .getElementById("loginEmail")
-            .value
-            .trim()
-            .toLowerCase();
-
-
-    const mobile =
-        document
-            .getElementById("loginMobile")
+            .getElementById(
+                "loginEmail"
+            )
             .value
             .trim();
 
 
-    if(!validateEmail(email)){
+    const mobile =
+        document
+            .getElementById(
+                "loginMobile"
+            )
+            .value
+            .trim();
+
+
+    if(!email || !mobile){
 
         showMessage(
-            "Please enter a valid email address.",
-            "error"
-        );
-
-        return;
-
-    }
-
-
-    if(!validateMobile(mobile)){
-
-        showMessage(
-            "Please enter a valid 10-digit mobile number.",
+            "Please enter email and mobile number.",
             "error"
         );
 
@@ -3389,7 +2820,13 @@ async function loginUser(){
             response.user;
 
 
-        saveUser();
+        localStorage.setItem(
+            "openboxPythonUser",
+            JSON.stringify(
+                currentUser
+            )
+        );
+
 
         updateHeader();
 
@@ -3403,7 +2840,6 @@ async function loginUser(){
         console.error(error);
 
         showMessage(
-            error.message ||
             "Unable to connect to the server.",
             "error"
         );
@@ -3414,91 +2850,54 @@ async function loginUser(){
 
 
 /* =========================================================
-   VALIDATION
-========================================================= */
-
-function validateEmail(email){
-
-    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-        .test(email);
-
-}
-
-
-function validateMobile(mobile){
-
-    return /^[0-9]{10}$/
-        .test(mobile);
-
-}
-
-
-/* =========================================================
-   SAVE USER
-========================================================= */
-
-function saveUser(){
-
-    if(!currentUser){
-
-        return;
-
-    }
-
-
-    localStorage.setItem(
-        "openboxPythonUser",
-        JSON.stringify(currentUser)
-    );
-
-}
-
-
-/* =========================================================
-   DASHBOARD
+DASHBOARD
 ========================================================= */
 
 function showDashboard(){
-
-    if(!currentUser){
-
-        return;
-
-    }
-
 
     hideAllPages();
 
 
     document
-        .getElementById("dashboardPage")
-        .classList.remove("hidden");
+        .getElementById(
+            "dashboardPage"
+        )
+        .classList
+        .remove("hidden");
 
 
-    const name =
-        currentUser.name ||
-        "Learner";
+    if(!currentUser){
 
+        return;
 
-    document
-        .getElementById("dashboardName")
-        .textContent =
-        name.split(" ")[0];
-
-
-    document
-        .getElementById("studentName")
-        .textContent =
-        name;
+    }
 
 
     document
-        .getElementById("studentEmail")
+        .getElementById(
+            "dashboardName"
+        )
         .textContent =
-        currentUser.email || "";
+            currentUser.name;
 
 
-    updateDashboardStatus();
+    document
+        .getElementById(
+            "studentName"
+        )
+        .textContent =
+            currentUser.name;
+
+
+    document
+        .getElementById(
+            "studentEmail"
+        )
+        .textContent =
+            currentUser.email;
+
+
+    updateDashboard();
 
 
     window.scrollTo({
@@ -3510,36 +2909,36 @@ function showDashboard(){
 
 
 /* =========================================================
-   DASHBOARD STATUS
+UPDATE DASHBOARD
 ========================================================= */
 
-function updateDashboardStatus(){
+function updateDashboard(){
 
     const status =
         currentUser.status ||
         "Not Started";
 
 
-    const statusText =
-        document.getElementById(
+    document
+        .getElementById(
             "statusText"
-        );
+        )
+        .textContent =
+            status;
 
 
     const progress =
-        document.getElementById(
-            "dashboardProgress"
-        );
+        document
+            .getElementById(
+                "dashboardProgress"
+            );
 
 
     const actions =
-        document.getElementById(
-            "dashboardActions"
-        );
-
-
-    statusText.textContent =
-        status;
+        document
+            .getElementById(
+                "dashboardActions"
+            );
 
 
     if(status === "Passed"){
@@ -3552,6 +2951,18 @@ function updateDashboardStatus(){
 
             <button
                 class="btn btn-green"
+                onclick="showResult({
+                    score:${Number(currentUser.score)},
+                    passed:true
+                })">
+
+                View Assessment Result
+
+            </button>
+
+            <button
+                class="btn btn-primary"
+                style="margin-left:8px"
                 onclick="showCertificate()">
 
                 View Certificate
@@ -3560,9 +2971,7 @@ function updateDashboardStatus(){
 
         `;
 
-    }
-
-    else if(status === "Failed"){
+    }else if(status === "Failed"){
 
         progress.style.width =
             "100%";
@@ -3580,31 +2989,7 @@ function updateDashboardStatus(){
 
         `;
 
-    }
-
-    else if(
-        status === "In Progress"
-    ){
-
-        progress.style.width =
-            "50%";
-
-
-        actions.innerHTML = `
-
-            <button
-                class="btn btn-primary"
-                onclick="startQuiz()">
-
-                Continue Assessment
-
-            </button>
-
-        `;
-
-    }
-
-    else{
+    }else{
 
         progress.style.width =
             "0%";
@@ -3628,16 +3013,14 @@ function updateDashboardStatus(){
 
 
 /* =========================================================
-   START QUIZ
+START QUIZ
 ========================================================= */
 
-function startQuiz(){
+async function startQuiz(){
 
-    if(!currentUser){
-
-        alert(
-            "Please login first."
-        );
+    if(
+        !currentUser
+    ){
 
         return;
 
@@ -3650,7 +3033,7 @@ function startQuiz(){
     ){
 
         alert(
-            "Your assessment has already been submitted."
+            "You have already completed the assessment."
         );
 
         return;
@@ -3658,47 +3041,104 @@ function startQuiz(){
     }
 
 
-    currentQuestion = 0;
+    try{
 
-    answers = new Array(
-        questions.length
-    );
+        showLoader(true);
 
 
-    timerSeconds = EXAM_TIME;
+        const response =
+            await apiRequest({
 
-    quizLocked = false;
+                action:"getQuestions"
 
-    tabWarnings = 0;
-
-    quizStarted = true;
-
-
-    hideAllPages();
+            });
 
 
-    document
-        .getElementById("quizPage")
-        .classList.remove("hidden");
+        showLoader(false);
 
 
-    renderQuestion();
+        if(!response.success){
 
-    startTimer();
+            alert(
+                response.message ||
+                "Unable to load questions."
+            );
 
-    enterFullscreen();
+            return;
+
+        }
 
 
-    window.scrollTo({
-        top:0,
-        behavior:"smooth"
-    });
+        questions =
+            response.questions || [];
+
+
+        if(!questions.length){
+
+            alert(
+                "No assessment questions are available yet."
+            );
+
+            return;
+
+        }
+
+
+        answers = {};
+
+        currentQuestion = 0;
+
+        timerSeconds =
+            EXAM_DURATION;
+
+        tabWarnings = 0;
+
+        quizLocked = false;
+
+        quizStarted = true;
+
+
+        hideAllPages();
+
+
+        document
+            .getElementById(
+                "quizPage"
+            )
+            .classList
+            .remove("hidden");
+
+
+        renderQuestion();
+
+        startTimer();
+
+        enterFullscreen();
+
+
+        window.scrollTo({
+            top:0,
+            behavior:"smooth"
+        });
+
+
+    }catch(error){
+
+        showLoader(false);
+
+        console.error(error);
+
+        alert(
+            "Unable to load the assessment."
+        );
+
+    }
 
 }
 
 
 /* =========================================================
-   RENDER QUESTION
+RENDER QUESTION
 ========================================================= */
 
 function renderQuestion(){
@@ -3715,27 +3155,32 @@ function renderQuestion(){
 
 
     const content =
-        document.getElementById(
-            "quizContent"
-        );
+        document
+            .getElementById(
+                "quizContent"
+            );
 
 
     const counter =
-        document.getElementById(
-            "questionCounter"
-        );
+        document
+            .getElementById(
+                "questionCounter"
+            );
 
 
     const progress =
-        document.getElementById(
-            "quizProgress"
-        );
+        document
+            .getElementById(
+                "quizProgress"
+            );
 
 
     counter.textContent =
         `Question ${
             currentQuestion + 1
-        } of ${questions.length}`;
+        } of ${
+            questions.length
+        }`;
 
 
     progress.style.width =
@@ -3743,99 +3188,105 @@ function renderQuestion(){
             (
                 currentQuestion + 1
             ) /
-            questions.length *
-            100
-        ) + "%";
+            questions.length
+        ) * 100 + "%";
 
 
     let html = `
 
-        <div class="question-card">
+        <div class="question-number">
+            Question ${currentQuestion + 1}
+        </div>
 
-            <div class="question-number">
-
-                Question ${
-                    currentQuestion + 1
-                }
-
-            </div>
-
-            <div class="question-title">
-
-                ${escapeHtml(q.question)}
-
-            </div>
+        <div class="question-title">
+            ${escapeHtml(q.question)}
+        </div>
 
     `;
 
 
-    if(q.type === "code"){
+    if(
+        String(q.type).toUpperCase()
+        === "CODE"
+    ){
 
         html += `
 
-            <div class="code-label">
-
-                Write your Python code below:
-
-            </div>
-
             <textarea
                 id="codeAnswer"
-                class="code-editor"
-                placeholder="Write your Python solution here..."
-                spellcheck="false"
-                autocomplete="off">${escapeHtml(
+                class="code-answer"
+                placeholder="Write your Python code here..."
+                oninput="saveCurrentAnswer()"
+            >${
+                escapeHtml(
                     answers[currentQuestion] || ""
-                )}</textarea>
+                )
+            }</textarea>
 
         `;
 
     }else{
 
-        q.options.forEach(
-            (option,index)=>{
-
-                const selected =
-                    answers[currentQuestion] === index
-                        ? "selected"
-                        : "";
+        html += `
+            <div class="options">
+        `;
 
 
-                html += `
+        (q.options || [])
+            .forEach(
+                (option,index)=>{
 
-                    <label
-                        class="option ${selected}">
+                    if(
+                        !option &&
+                        index > 0
+                    ){
 
-                        <input
-                            type="radio"
-                            name="question"
-                            value="${index}"
-                            ${
-                                answers[currentQuestion] === index
+                        return;
+
+                    }
+
+
+                    const selected =
+                        answers[currentQuestion]
+                        === index
+                            ? "selected"
+                            : "";
+
+
+                    html += `
+
+                        <label
+                            class="option ${selected}">
+
+                            <input
+                                type="radio"
+                                name="question"
+                                value="${index}"
+                                ${
+                                    answers[currentQuestion]
+                                    === index
                                     ? "checked"
                                     : ""
-                            }
-                            onchange="saveMCQ(${index})">
+                                }
+                                onchange="saveMCQ(${index})">
 
-                        <span>
-                            ${escapeHtml(option)}
-                        </span>
+                            <span>
+                                ${escapeHtml(option)}
+                            </span>
 
-                    </label>
+                        </label>
 
-                `;
+                    `;
 
-            }
-        );
+                }
+            );
+
+
+        html += `
+            </div>
+        `;
 
     }
-
-
-    html += `
-
-        </div>
-
-    `;
 
 
     content.innerHTML =
@@ -3843,26 +3294,30 @@ function renderQuestion(){
 
 
     document
-        .getElementById("prevBtn")
+        .getElementById(
+            "prevBtn"
+        )
         .style.visibility =
-        currentQuestion === 0
-            ? "hidden"
-            : "visible";
+            currentQuestion === 0
+                ? "hidden"
+                : "visible";
 
 
     document
-        .getElementById("nextBtn")
+        .getElementById(
+            "nextBtn"
+        )
         .textContent =
-        currentQuestion ===
-        questions.length - 1
-            ? "Submit Assessment"
-            : "Next →";
+            currentQuestion ===
+            questions.length - 1
+                ? "Submit Assessment"
+                : "Next →";
 
 }
 
 
 /* =========================================================
-   SAVE MCQ
+SAVE MCQ
 ========================================================= */
 
 function saveMCQ(index){
@@ -3872,7 +3327,9 @@ function saveMCQ(index){
 
 
     document
-        .querySelectorAll(".option")
+        .querySelectorAll(
+            ".option"
+        )
         .forEach(
             (el,i)=>{
 
@@ -3888,7 +3345,7 @@ function saveMCQ(index){
 
 
 /* =========================================================
-   SAVE CODE
+SAVE CURRENT ANSWER
 ========================================================= */
 
 function saveCurrentAnswer(){
@@ -3899,13 +3356,15 @@ function saveCurrentAnswer(){
 
     if(
         q &&
-        q.type === "code"
+        String(q.type).toUpperCase()
+        === "CODE"
     ){
 
         const textarea =
-            document.getElementById(
-                "codeAnswer"
-            );
+            document
+                .getElementById(
+                    "codeAnswer"
+                );
 
 
         answers[currentQuestion] =
@@ -3919,7 +3378,7 @@ function saveCurrentAnswer(){
 
 
 /* =========================================================
-   NEXT
+NEXT
 ========================================================= */
 
 function nextQuestion(){
@@ -3936,6 +3395,7 @@ function nextQuestion(){
 
         renderQuestion();
 
+
         window.scrollTo({
             top:0,
             behavior:"smooth"
@@ -3951,7 +3411,7 @@ function nextQuestion(){
 
 
 /* =========================================================
-   PREVIOUS
+PREVIOUS
 ========================================================= */
 
 function previousQuestion(){
@@ -3959,11 +3419,14 @@ function previousQuestion(){
     saveCurrentAnswer();
 
 
-    if(currentQuestion > 0){
+    if(
+        currentQuestion > 0
+    ){
 
         currentQuestion--;
 
         renderQuestion();
+
 
         window.scrollTo({
             top:0,
@@ -3976,149 +3439,7 @@ function previousQuestion(){
 
 
 /* =========================================================
-   SCORE
-========================================================= */
-
-function calculateScore(){
-
-    let correct = 0;
-
-
-    questions.forEach(
-        (q,index)=>{
-
-            const answer =
-                answers[index];
-
-
-            if(q.type === "code"){
-
-                if(
-                    evaluateCode(
-                        answer || "",
-                        q.expected
-                    )
-                ){
-
-                    correct++;
-
-                }
-
-            }else{
-
-                if(
-                    answer === q.answer
-                ){
-
-                    correct++;
-
-                }
-
-            }
-
-        }
-    );
-
-
-    return {
-
-        correct:correct,
-
-        percentage:
-            Math.round(
-                (
-                    correct /
-                    questions.length
-                ) * 100
-            )
-
-    };
-
-}
-
-
-/* =========================================================
-   CODE NORMALIZER
-========================================================= */
-
-function normalizeCode(code){
-
-    return String(code)
-
-        .toLowerCase()
-
-        .replace(
-            /#.*$/gm,
-            ""
-        )
-
-        .replace(
-            /\s+/g,
-            ""
-        )
-
-        .replace(
-            /["']/g,
-            ""
-        )
-
-        .replace(
-            /\r/g,
-            ""
-        )
-
-        .replace(
-            /\n/g,
-            "");
-
-}
-
-
-/* =========================================================
-   CODE EVALUATOR
-========================================================= */
-
-function evaluateCode(
-    answer,
-    expected
-){
-
-    const code =
-        normalizeCode(answer);
-
-
-    if(!code){
-
-        return false;
-
-    }
-
-
-    /*
-     * Add your exact coding
-     * question evaluators here.
-     *
-     * This fallback currently
-     * checks whether an expected
-     * pattern exists.
-     */
-
-    if(expected){
-
-        return code.includes(
-            normalizeCode(expected)
-        );
-
-    }
-
-
-    return false;
-
-}
-
-
-/* =========================================================
-   SUBMIT QUIZ
+SUBMIT QUIZ
 ========================================================= */
 
 async function submitQuiz(){
@@ -4151,10 +3472,6 @@ async function submitQuiz(){
     }
 
 
-    const result =
-        calculateScore();
-
-
     try{
 
         showLoader(true);
@@ -4163,26 +3480,26 @@ async function submitQuiz(){
         /*
          * IMPORTANT:
          *
-         * Send the number of correct
-         * answers, not the percentage.
+         * We send answers.
          *
-         * The Apps Script backend should
-         * calculate the official percentage.
+         * We do NOT calculate
+         * the final score here.
          */
+
 
         const response =
             await apiRequest({
 
                 action:"submitQuiz",
 
-                mobile:
-                    currentUser.mobile,
-
                 email:
                     currentUser.email,
 
-                score:
-                    result.correct
+                mobile:
+                    currentUser.mobile,
+
+                answers:
+                    answers
 
             });
 
@@ -4192,24 +3509,10 @@ async function submitQuiz(){
 
         if(!response.success){
 
-            if(response.alreadySubmitted){
-
-                currentUser =
-                    response.user;
-
-
-                saveUser();
-
-                showDashboard();
-
-            }else{
-
-                alert(
-                    response.message ||
-                    "Unable to submit assessment."
-                );
-
-            }
+            alert(
+                response.message ||
+                "Unable to submit assessment."
+            );
 
             return;
 
@@ -4220,24 +3523,12 @@ async function submitQuiz(){
             response.user;
 
 
-        /*
-         * Fallback for development
-         * if backend does not yet return
-         * a percentage.
-         */
-
-        if(
-            currentUser.score === undefined ||
-            currentUser.score === ""
-        ){
-
-            currentUser.score =
-                result.percentage;
-
-        }
-
-
-        saveUser();
+        localStorage.setItem(
+            "openboxPythonUser",
+            JSON.stringify(
+                currentUser
+            )
+        );
 
 
         stopTimer();
@@ -4257,7 +3548,8 @@ async function submitQuiz(){
                 ),
 
             passed:
-                currentUser.status === "Passed",
+                currentUser.status ===
+                "Passed",
 
             user:
                 currentUser
@@ -4281,7 +3573,7 @@ async function submitQuiz(){
 
 
 /* =========================================================
-   RESULT
+RESULT
 ========================================================= */
 
 function showResult(data){
@@ -4290,55 +3582,65 @@ function showResult(data){
 
 
     document
-        .getElementById("resultPage")
-        .classList.remove("hidden");
+        .getElementById(
+            "resultPage"
+        )
+        .classList
+        .remove("hidden");
 
 
     const resultCard =
-        document.getElementById(
-            "resultCard"
-        );
+        document
+            .getElementById(
+                "resultCard"
+            );
 
 
     const icon =
-        document.getElementById(
-            "resultIcon"
-        );
+        document
+            .getElementById(
+                "resultIcon"
+            );
 
 
     const title =
-        document.getElementById(
-            "resultTitle"
-        );
+        document
+            .getElementById(
+                "resultTitle"
+            );
 
 
     const score =
-        document.getElementById(
-            "resultScore"
-        );
+        document
+            .getElementById(
+                "resultScore"
+            );
 
 
     const message =
-        document.getElementById(
-            "resultMessage"
-        );
+        document
+            .getElementById(
+                "resultMessage"
+            );
 
 
     const actions =
-        document.getElementById(
-            "certificateResultActions"
-        );
+        document
+            .getElementById(
+                "certificateResultActions"
+            );
 
 
     score.textContent =
         data.score + "%";
 
 
+    resultCard
+        .classList
+        .remove("fail");
+
+
     if(data.passed){
-
-        resultCard
-            .classList.remove("fail");
-
 
         icon.textContent =
             "✓";
@@ -4367,7 +3669,8 @@ function showResult(data){
     }else{
 
         resultCard
-            .classList.add("fail");
+            .classList
+            .add("fail");
 
 
         icon.textContent =
@@ -4406,7 +3709,7 @@ function showResult(data){
 
 
 /* =========================================================
-   CERTIFICATE
+CERTIFICATE
 ========================================================= */
 
 function showCertificate(){
@@ -4429,49 +3732,59 @@ function showCertificate(){
 
 
     document
-        .getElementById("certificatePage")
-        .classList.remove("hidden");
+        .getElementById(
+            "certificatePage"
+        )
+        .classList
+        .remove("hidden");
 
 
     document
-        .getElementById("certificateName")
+        .getElementById(
+            "certificateName"
+        )
         .textContent =
-        currentUser.name;
+            currentUser.name;
 
 
     document
-        .getElementById("certificateNameBody")
+        .getElementById(
+            "certificateNameBody"
+        )
         .textContent =
-        currentUser.name;
+            currentUser.name;
 
 
     document
-        .getElementById("certificateScore")
+        .getElementById(
+            "certificateScore"
+        )
         .textContent =
-        currentUser.score + "%";
+            currentUser.score + "%";
 
 
     document
-        .getElementById("certificateId")
+        .getElementById(
+            "certificateId"
+        )
         .textContent =
-        "CertID: " +
-        (
-            currentUser.certificateId ||
-            "OB-PY-2026-0000"
-        );
-
-
-    const date =
-        currentUser.certificateIssuedAt ||
-        new Date().toLocaleDateString(
-            "en-IN"
-        );
+            "CertID: " +
+            (
+                currentUser.certificateId ||
+                "OB-PY-2026-0000"
+            );
 
 
     document
-        .getElementById("certificateDate")
+        .getElementById(
+            "certificateDate"
+        )
         .textContent =
-        date;
+            currentUser.certificateIssuedAt ||
+            new Date()
+                .toLocaleDateString(
+                    "en-IN"
+                );
 
 
     window.scrollTo({
@@ -4483,7 +3796,7 @@ function showCertificate(){
 
 
 /* =========================================================
-   DOWNLOAD CERTIFICATE
+DOWNLOAD CERTIFICATE
 ========================================================= */
 
 function downloadCertificate(){
@@ -4494,7 +3807,7 @@ function downloadCertificate(){
 
 
 /* =========================================================
-   LINKEDIN CAPTION
+LINKEDIN CAPTION
 ========================================================= */
 
 function getLinkedInCaption(){
@@ -4505,7 +3818,10 @@ I completed the final assessment and earned my certificate with a score of ${cur
 
 The curriculum was adapted from MIT OpenCourseWare 6.100L and helped me strengthen my Python programming fundamentals, problem-solving and core coding concepts.
 
-Certificate ID: ${currentUser.certificateId || "OB-PY-2026-0000"}
+Certificate ID: ${
+        currentUser.certificateId ||
+        "OB-PY-2026-0000"
+    }
 
 Learn Python with Openbox Academy:
 ${COURSE_URL}
@@ -4516,7 +3832,7 @@ ${COURSE_URL}
 
 
 /* =========================================================
-   COPY LINKEDIN
+COPY LINKEDIN
 ========================================================= */
 
 async function copyLinkedInCaption(){
@@ -4529,7 +3845,9 @@ async function copyLinkedInCaption(){
 
         await navigator
             .clipboard
-            .writeText(caption);
+            .writeText(
+                caption
+            );
 
 
         alert(
@@ -4549,7 +3867,7 @@ async function copyLinkedInCaption(){
 
 
 /* =========================================================
-   LINKEDIN SHARE
+LINKEDIN SHARE
 ========================================================= */
 
 function shareLinkedIn(){
@@ -4566,13 +3884,14 @@ function shareLinkedIn(){
         ?.writeText(
             getLinkedInCaption()
         )
-        .catch(()=>{});
+        .catch(
+            ()=>{}
+        );
 
 
     window.open(
         linkedInUrl,
-        "_blank",
-        "noopener,noreferrer"
+        "_blank"
     );
 
 
@@ -4591,7 +3910,7 @@ function shareLinkedIn(){
 
 
 /* =========================================================
-   TIMER
+TIMER
 ========================================================= */
 
 function startTimer(){
@@ -4607,7 +3926,6 @@ function startTimer(){
             ()=>{
 
                 timerSeconds--;
-
 
                 updateTimer();
 
@@ -4643,7 +3961,9 @@ function stopTimer(){
             timerInterval
         );
 
-        timerInterval = null;
+
+        timerInterval =
+            null;
 
     }
 
@@ -4663,9 +3983,10 @@ function updateTimer(){
 
 
     const timer =
-        document.getElementById(
-            "timer"
-        );
+        document
+            .getElementById(
+                "timer"
+            );
 
 
     if(timer){
@@ -4679,7 +4000,7 @@ function updateTimer(){
 
 
 /* =========================================================
-   FULLSCREEN
+FULLSCREEN
 ========================================================= */
 
 function enterFullscreen(){
@@ -4694,7 +4015,9 @@ function enterFullscreen(){
 
         element
             .requestFullscreen()
-            .catch(()=>{});
+            .catch(
+                ()=>{}
+            );
 
     }
 
@@ -4702,7 +4025,7 @@ function enterFullscreen(){
 
 
 /* =========================================================
-   ANTI-CHEATING
+ANTI-CHEATING
 ========================================================= */
 
 document.addEventListener(
@@ -4753,11 +4076,6 @@ document.addEventListener(
 
         if(quizStarted){
 
-            /*
-             * Paste is disabled during
-             * the assessment.
-             */
-
             e.preventDefault();
 
         }
@@ -4796,7 +4114,9 @@ document.addEventListener(
         }
 
 
-        if(e.key === "F12"){
+        if(
+            e.key === "F12"
+        ){
 
             e.preventDefault();
 
@@ -4824,7 +4144,7 @@ document.addEventListener(
 
 
 /* =========================================================
-   TAB SWITCH DETECTION
+TAB DETECTION
 ========================================================= */
 
 document.addEventListener(
@@ -4840,9 +4160,13 @@ document.addEventListener(
             tabWarnings++;
 
 
-            if(tabWarnings >= 3){
+            if(
+                tabWarnings >= 3
+            ){
 
-                quizLocked = true;
+                quizLocked =
+                    true;
+
 
                 stopTimer();
 
@@ -4852,7 +4176,8 @@ document.addEventListener(
                 );
 
 
-                quizStarted = false;
+                quizStarted =
+                    false;
 
 
                 document
@@ -4878,7 +4203,7 @@ document.addEventListener(
 
 
 /* =========================================================
-   LOGOUT
+LOGOUT
 ========================================================= */
 
 function logout(){
@@ -4898,7 +4223,8 @@ function logout(){
 
         stopTimer();
 
-        quizStarted = false;
+        quizStarted =
+            false;
 
 
         document
@@ -4907,7 +4233,8 @@ function logout(){
     }
 
 
-    currentUser = null;
+    currentUser =
+        null;
 
 
     localStorage.removeItem(
@@ -4919,27 +4246,20 @@ function logout(){
 
 
     document
-        .getElementById("authPage")
-        .classList.remove("hidden");
+        .getElementById(
+            "authPage"
+        )
+        .classList
+        .remove("hidden");
 
 
-    document
-        .getElementById("userPill")
-        .classList.add("hidden");
-
-
-    document
-        .getElementById("logoutBtn")
-        .classList.add("hidden");
-
-
-    showAuth("login");
+    updateHeader();
 
 }
 
 
 /* =========================================================
-   PAGE HELPERS
+PAGE HELPERS
 ========================================================= */
 
 function hideAllPages(){
@@ -4950,12 +4270,14 @@ function hideAllPages(){
         "quizPage",
         "resultPage",
         "certificatePage"
-    ].forEach(
+    ]
+    .forEach(
         id=>{
 
             document
                 .getElementById(id)
-                .classList.add("hidden");
+                .classList
+                .add("hidden");
 
         }
     );
@@ -4966,8 +4288,11 @@ function hideAllPages(){
 function showLoader(show){
 
     document
-        .getElementById("loader")
-        .classList.toggle(
+        .getElementById(
+            "loader"
+        )
+        .classList
+        .toggle(
             "active",
             show
         );
@@ -4981,9 +4306,10 @@ function showMessage(
 ){
 
     const box =
-        document.getElementById(
-            "authMessage"
-        );
+        document
+            .getElementById(
+                "authMessage"
+            );
 
 
     box.textContent =
@@ -4999,9 +4325,10 @@ function showMessage(
 function clearMessage(){
 
     const box =
-        document.getElementById(
-            "authMessage"
-        );
+        document
+            .getElementById(
+                "authMessage"
+            );
 
 
     box.textContent =
@@ -5013,6 +4340,10 @@ function clearMessage(){
 
 }
 
+
+/* =========================================================
+ESCAPE HTML
+========================================================= */
 
 function escapeHtml(value){
 
@@ -5047,7 +4378,7 @@ function escapeHtml(value){
 
 
 /* =========================================================
-   HEADER
+HEADER
 ========================================================= */
 
 function updateHeader(){
@@ -5071,25 +4402,21 @@ function updateHeader(){
             "Learner";
 
 
-        pill.classList.remove(
-            "hidden"
-        );
+        pill.classList
+            .remove("hidden");
 
 
-        logoutButton.classList.remove(
-            "hidden"
-        );
+        logoutButton.classList
+            .remove("hidden");
 
     }else{
 
-        pill.classList.add(
-            "hidden"
-        );
+        pill.classList
+            .add("hidden");
 
 
-        logoutButton.classList.add(
-            "hidden"
-        );
+        logoutButton.classList
+            .add("hidden");
 
     }
 
@@ -5097,7 +4424,7 @@ function updateHeader(){
 
 
 /* =========================================================
-   AUTO LOGIN
+AUTO LOGIN
 ========================================================= */
 
 window.addEventListener(
@@ -5120,7 +4447,6 @@ window.addEventListener(
 
                 updateHeader();
 
-
                 refreshUser();
 
 
@@ -5139,7 +4465,7 @@ window.addEventListener(
 
 
 /* =========================================================
-   REFRESH USER
+REFRESH USER
 ========================================================= */
 
 async function refreshUser(){
@@ -5158,11 +4484,11 @@ async function refreshUser(){
 
                 action:"getUser",
 
-                mobile:
-                    currentUser.mobile,
-
                 email:
-                    currentUser.email
+                    currentUser.email,
+
+                mobile:
+                    currentUser.mobile
 
             });
 
@@ -5173,11 +4499,15 @@ async function refreshUser(){
                 response.user;
 
 
-            saveUser();
+            localStorage.setItem(
+                "openboxPythonUser",
+                JSON.stringify(
+                    currentUser
+                )
+            );
 
 
             updateHeader();
-
 
             showDashboard();
 
@@ -5187,18 +4517,16 @@ async function refreshUser(){
 
         }
 
+
     }catch(error){
 
         /*
-         * If temporarily offline,
-         * continue with cached user.
+         * If API is temporarily
+         * unavailable, continue
+         * with cached user.
          */
 
-        console.warn(
-            "Could not refresh user:",
-            error
-        );
-
+        updateHeader();
 
         showDashboard();
 
@@ -5207,6 +4535,7 @@ async function refreshUser(){
 }
 
 </script>
+
 
 </body>
 
