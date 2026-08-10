@@ -1,75 +1,34 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Openbox Academy · Python Programming Fundamentals</title>
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0">
 
 <meta
     name="description"
-    content="Openbox Academy Python Programming Fundamentals course and assessment."
->
+    content="Openbox Academy Python Programming Fundamentals course and assessment.">
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<title>
+    Openbox Academy · Python Programming Fundamentals
+</title>
 
-<link
-    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap"
-    rel="stylesheet"
->
 
 <style>
 
 /* =========================================================
-   OPENBOX ACADEMY
-   DESIGN SYSTEM
+   RESET
 ========================================================= */
-
-:root{
-
-    --ob-bg:#f6f8fc;
-    --ob-surface:#ffffff;
-    --ob-surface-2:#f8fafc;
-
-    --ob-navy:#0b1220;
-    --ob-navy-2:#111827;
-
-    --ob-blue:#2563eb;
-    --ob-blue-dark:#1d4ed8;
-    --ob-blue-light:#eff6ff;
-
-    --ob-cyan:#38bdf8;
-
-    --ob-green:#16a34a;
-    --ob-green-light:#ecfdf5;
-
-    --ob-red:#dc2626;
-    --ob-red-light:#fef2f2;
-
-    --ob-yellow:#d97706;
-    --ob-yellow-light:#fffbeb;
-
-    --ob-text:#0f172a;
-    --ob-muted:#64748b;
-    --ob-muted-2:#94a3b8;
-
-    --ob-border:#e2e8f0;
-
-    --ob-shadow:
-        0 20px 50px rgba(15,23,42,.08);
-
-    --ob-shadow-sm:
-        0 8px 24px rgba(15,23,42,.06);
-
-    --ob-radius:20px;
-    --ob-radius-sm:12px;
-
-}
 
 *{
     box-sizing:border-box;
+    margin:0;
+    padding:0;
 }
 
 html{
@@ -78,59 +37,96 @@ html{
 
 body{
 
-    margin:0;
+    font-family:
+        Inter,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        Roboto,
+        Arial,
+        sans-serif;
 
-    font-family:"DM Sans",sans-serif;
+    background:#f5f7fb;
+    color:#172033;
 
-    color:var(--ob-text);
+    line-height:1.6;
 
-    background:
-        linear-gradient(
-            rgba(37,99,235,.035) 1px,
-            transparent 1px
-        ),
-        linear-gradient(
-            90deg,
-            rgba(37,99,235,.035) 1px,
-            transparent 1px
-        ),
-        var(--ob-bg);
-
-    background-size:40px 40px;
-
-    min-height:100vh;
 }
 
-button,
-input,
-textarea{
-    font-family:inherit;
-}
 
-button{
-    cursor:pointer;
-}
-
-a{
-    color:inherit;
-}
-
-h1,
-h2,
-h3,
-h4,
-.logo,
-.brand-name,
-.eyebrow,
-.btn,
-.tab,
-.stat strong,
-.status-value{
-    font-family:"Space Grotesk",sans-serif;
-}
+/* =========================================================
+   GLOBAL
+========================================================= */
 
 .hidden{
     display:none !important;
+}
+
+.container{
+
+    width:min(1100px,92%);
+    margin:auto;
+
+}
+
+.page{
+
+    min-height:calc(100vh - 80px);
+    padding:55px 0 80px;
+
+}
+
+.hero{
+
+    max-width:850px;
+    margin:0 auto 35px;
+    text-align:center;
+
+}
+
+.eyebrow{
+
+    display:inline-block;
+
+    font-size:12px;
+    font-weight:800;
+
+    letter-spacing:2px;
+
+    color:#635bff;
+
+    margin-bottom:14px;
+
+}
+
+.hero h1{
+
+    font-size:clamp(38px,6vw,68px);
+
+    line-height:1.05;
+
+    letter-spacing:-2px;
+
+    margin-bottom:22px;
+
+}
+
+.hero h1 span{
+
+    color:#635bff;
+
+}
+
+.hero p{
+
+    max-width:720px;
+
+    margin:auto;
+
+    color:#667085;
+
+    font-size:17px;
+
 }
 
 
@@ -138,98 +134,78 @@ h4,
    HEADER
 ========================================================= */
 
-.site-header{
+header{
 
-    width:min(1180px,calc(100% - 36px));
+    height:80px;
 
-    margin:0 auto;
+    background:rgba(255,255,255,.92);
 
-    height:78px;
+    border-bottom:1px solid #e8ebf1;
 
     display:flex;
-
     align-items:center;
 
-    justify-content:space-between;
+    position:sticky;
+    top:0;
 
-    border-bottom:1px solid var(--ob-border);
+    z-index:100;
+
+    backdrop-filter:blur(12px);
+
+}
+
+.header-inner{
+
+    width:min(1100px,92%);
+    margin:auto;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
 
 }
 
 .logo{
 
     display:flex;
-
     align-items:center;
+    gap:10px;
 
-    gap:11px;
+    font-size:20px;
+    font-weight:800;
 
-    font-size:21px;
+}
 
-    font-weight:700;
+.logo span{
 
-    letter-spacing:-.7px;
-
-    color:var(--ob-navy);
+    color:#635bff;
 
 }
 
 .logo-mark{
 
-    width:34px;
-    height:34px;
-
-    border-radius:10px;
+    width:38px;
+    height:38px;
 
     display:flex;
-
     align-items:center;
-
     justify-content:center;
 
-    background:var(--ob-navy);
+    border-radius:11px;
 
-    color:#fff;
+    background:#635bff;
+    color:white;
 
     font-size:13px;
+    font-weight:900;
 
-    font-weight:700;
-
-    position:relative;
-
-    overflow:hidden;
-
-}
-
-.logo-mark::after{
-
-    content:"";
-
-    position:absolute;
-
-    width:12px;
-    height:12px;
-
-    border-radius:50%;
-
-    background:var(--ob-blue);
-
-    right:-4px;
-    bottom:-4px;
-
-}
-
-.logo span{
-    color:var(--ob-blue);
 }
 
 .header-right{
 
     display:flex;
-
     align-items:center;
-
-    gap:10px;
+    gap:12px;
 
 }
 
@@ -237,190 +213,66 @@ h4,
 
     padding:8px 13px;
 
-    border:1px solid var(--ob-border);
+    background:#f0efff;
 
-    background:#fff;
+    color:#5149dc;
 
     border-radius:999px;
 
-    color:var(--ob-muted);
-
-    font-size:12px;
-
-    font-weight:600;
+    font-size:13px;
+    font-weight:700;
 
 }
 
 .logout{
 
-    border:1px solid var(--ob-border);
+    border:0;
 
-    background:#fff;
+    background:#f4f5f7;
 
-    color:var(--ob-muted);
-
-    border-radius:10px;
+    color:#344054;
 
     padding:9px 14px;
 
+    border-radius:9px;
+
+    cursor:pointer;
+
     font-weight:600;
 
-    font-size:12px;
-
-}
-
-.logout:hover{
-
-    border-color:#fecaca;
-
-    background:#fff7f7;
-
-    color:var(--ob-red);
-
 }
 
 
 /* =========================================================
-   MAIN
-========================================================= */
-
-.main{
-
-    width:min(1000px,calc(100% - 32px));
-
-    margin:0 auto;
-
-    padding:55px 0 70px;
-
-}
-
-
-/* =========================================================
-   HERO
-========================================================= */
-
-.hero{
-
-    margin-bottom:28px;
-
-}
-
-.eyebrow{
-
-    display:inline-flex;
-
-    align-items:center;
-
-    gap:8px;
-
-    font-size:11px;
-
-    font-weight:700;
-
-    letter-spacing:1.5px;
-
-    color:var(--ob-blue);
-
-    margin-bottom:13px;
-
-}
-
-.eyebrow::before{
-
-    content:"";
-
-    width:22px;
-    height:3px;
-
-    border-radius:99px;
-
-    background:var(--ob-blue);
-
-}
-
-.hero h1{
-
-    margin:0;
-
-    font-size:clamp(38px,6vw,62px);
-
-    line-height:1.02;
-
-    letter-spacing:-2.8px;
-
-    color:var(--ob-navy);
-
-}
-
-.hero h1 span{
-
-    color:var(--ob-blue);
-
-}
-
-.hero p{
-
-    max-width:680px;
-
-    margin:18px 0 0;
-
-    color:var(--ob-muted);
-
-    font-size:15px;
-
-    line-height:1.75;
-
-}
-
-
-/* =========================================================
-   CARDS
+   CARD
 ========================================================= */
 
 .card{
 
-    background:var(--ob-surface);
+    background:white;
 
-    border:1px solid var(--ob-border);
+    border:1px solid #e8ebf1;
 
-    border-radius:var(--ob-radius);
+    border-radius:20px;
 
-    padding:28px;
+    padding:30px;
 
-    box-shadow:var(--ob-shadow-sm);
-
-}
-
-.card h2{
-
-    margin:0 0 8px;
-
-    font-size:23px;
-
-    letter-spacing:-.7px;
-
-    color:var(--ob-navy);
+    box-shadow:
+        0 12px 35px rgba(16,24,40,.05);
 
 }
 
-.card > p{
+.form-card{
 
-    color:var(--ob-muted);
-
-    line-height:1.7;
+    max-width:520px;
+    margin:auto;
 
 }
 
 
 /* =========================================================
-   AUTH
+   TABS
 ========================================================= */
-
-.form-card{
-
-    max-width:560px;
-
-}
 
 .tabs{
 
@@ -430,11 +282,11 @@ h4,
 
     gap:5px;
 
-    background:#f1f5f9;
+    background:#f5f6f8;
 
     padding:5px;
 
-    border-radius:13px;
+    border-radius:12px;
 
     margin-bottom:28px;
 
@@ -446,33 +298,36 @@ h4,
 
     background:transparent;
 
-    color:var(--ob-muted);
+    padding:11px;
 
-    padding:12px;
+    border-radius:8px;
 
-    border-radius:9px;
-
-    font-size:13px;
+    cursor:pointer;
 
     font-weight:700;
 
-    transition:.2s;
+    color:#667085;
 
 }
 
 .tab.active{
 
-    background:#fff;
+    background:white;
 
-    color:var(--ob-blue);
+    color:#172033;
 
-    box-shadow:0 3px 10px rgba(15,23,42,.08);
+    box-shadow:0 2px 8px rgba(0,0,0,.06);
 
 }
 
+
+/* =========================================================
+   FORMS
+========================================================= */
+
 .field{
 
-    margin-bottom:18px;
+    margin-top:18px;
 
 }
 
@@ -480,105 +335,37 @@ h4,
 
     display:block;
 
-    margin-bottom:7px;
-
-    font-size:12px;
+    font-size:13px;
 
     font-weight:700;
 
-    color:var(--ob-navy);
+    margin-bottom:7px;
 
 }
 
-.field input,
-.field textarea{
+.field input{
 
     width:100%;
 
-    height:50px;
+    padding:13px 14px;
 
-    border:1px solid var(--ob-border);
+    border:1px solid #d9dde5;
 
-    border-radius:11px;
+    border-radius:10px;
 
-    background:#fff;
-
-    color:var(--ob-text);
-
-    padding:0 14px;
+    font-size:15px;
 
     outline:none;
-
-    font-size:14px;
 
     transition:.2s;
 
 }
 
-.field textarea{
+.field input:focus{
 
-    height:180px;
+    border-color:#635bff;
 
-    padding:14px;
-
-    resize:vertical;
-
-    font-family:monospace;
-
-}
-
-.field input::placeholder{
-
-    color:var(--ob-muted-2);
-
-}
-
-.field input:focus,
-.field textarea:focus{
-
-    border-color:var(--ob-blue);
-
-    box-shadow:0 0 0 4px rgba(37,99,235,.09);
-
-}
-
-.message{
-
-    display:none;
-
-    padding:12px 14px;
-
-    border-radius:11px;
-
-    margin-bottom:18px;
-
-    font-size:13px;
-
-    line-height:1.5;
-
-}
-
-.message.success{
-
-    display:block;
-
-    color:#166534;
-
-    background:var(--ob-green-light);
-
-    border:1px solid #bbf7d0;
-
-}
-
-.message.error{
-
-    display:block;
-
-    color:#991b1b;
-
-    background:var(--ob-red-light);
-
-    border:1px solid #fecaca;
+    box-shadow:0 0 0 3px rgba(99,91,255,.1);
 
 }
 
@@ -589,111 +376,96 @@ h4,
 
 .btn{
 
-    min-height:48px;
-
     border:0;
 
     border-radius:11px;
 
-    padding:12px 18px;
+    padding:13px 19px;
 
-    font-size:13px;
+    cursor:pointer;
 
-    font-weight:700;
+    font-size:14px;
 
-    display:inline-flex;
+    font-weight:800;
 
-    align-items:center;
+    transition:.2s;
 
-    justify-content:center;
+}
 
-    gap:8px;
+.btn:hover{
 
-    transition:.18s;
+    transform:translateY(-1px);
 
 }
 
 .btn-primary{
 
-    width:100%;
+    background:#635bff;
 
-    background:var(--ob-blue);
-
-    color:#fff;
-
-    box-shadow:
-        0 8px 20px rgba(37,99,235,.20);
-
-}
-
-.btn-primary:hover{
-
-    background:var(--ob-blue-dark);
-
-    transform:translateY(-1px);
+    color:white;
 
 }
 
 .btn-secondary{
 
-    background:#fff;
+    background:#eef0f4;
 
-    color:var(--ob-text);
-
-    border:1px solid var(--ob-border);
-
-}
-
-.btn-secondary:hover{
-
-    background:#f8fafc;
+    color:#344054;
 
 }
 
 .btn-green{
 
+    background:#16a36a;
+
+    color:white;
+
+}
+
+.form-card .btn{
+
     width:100%;
 
-    background:var(--ob-green);
-
-    color:#fff;
-
-}
-
-.btn-green:hover{
-
-    background:#15803d;
-
-    transform:translateY(-1px);
-
-}
-
-.btn:disabled{
-
-    opacity:.55;
-
-    cursor:not-allowed;
-
-    transform:none;
+    margin-top:25px;
 
 }
 
 
 /* =========================================================
-   FOOTER
+   MESSAGES
 ========================================================= */
 
-.footer{
+.message{
 
-    text-align:center;
+    display:none;
 
-    margin-top:28px;
+    padding:12px 14px;
 
-    color:var(--ob-muted-2);
+    border-radius:10px;
 
-    font-size:11px;
+    font-size:13px;
 
-    line-height:1.7;
+    margin-bottom:18px;
+
+}
+
+.message.success{
+
+    display:block;
+
+    background:#eafaf2;
+
+    color:#087443;
+
+}
+
+.message.error{
+
+    display:block;
+
+    background:#fff0f0;
+
+    color:#b42318;
 
 }
 
@@ -702,13 +474,49 @@ h4,
    DASHBOARD
 ========================================================= */
 
+.profile{
+
+    margin-bottom:20px;
+
+}
+
+.profile-label{
+
+    font-size:11px;
+
+    font-weight:800;
+
+    letter-spacing:1.5px;
+
+    color:#635bff;
+
+}
+
+.profile-name{
+
+    font-size:30px;
+
+    font-weight:800;
+
+    margin-top:5px;
+
+}
+
+.profile-email{
+
+    color:#667085;
+
+    font-size:14px;
+
+}
+
 .dashboard-grid{
 
     display:grid;
 
     grid-template-columns:repeat(3,1fr);
 
-    gap:14px;
+    gap:18px;
 
     margin-bottom:20px;
 
@@ -716,15 +524,13 @@ h4,
 
 .stat{
 
-    background:#fff;
+    background:white;
 
-    border:1px solid var(--ob-border);
+    border:1px solid #e8ebf1;
 
-    border-radius:16px;
+    border-radius:17px;
 
-    padding:20px;
-
-    box-shadow:var(--ob-shadow-sm);
+    padding:23px;
 
 }
 
@@ -732,25 +538,30 @@ h4,
 
     display:block;
 
-    color:var(--ob-muted);
+    color:#667085;
 
-    font-size:11px;
-
-    margin-bottom:8px;
+    font-size:13px;
 
 }
 
 .stat strong{
 
-    font-size:25px;
+    display:block;
 
-    color:var(--ob-navy);
+    font-size:27px;
+
+    margin-top:5px;
 
 }
 
+
+/* =========================================================
+   PROGRESS
+========================================================= */
+
 .progress-wrap{
 
-    margin:25px 0;
+    margin:20px 0;
 
 }
 
@@ -760,27 +571,23 @@ h4,
 
     justify-content:space-between;
 
-    gap:15px;
+    font-size:13px;
 
-    margin-bottom:9px;
-
-    color:var(--ob-muted);
-
-    font-size:12px;
+    margin-bottom:8px;
 
 }
 
 .progress{
 
-    height:9px;
-
     width:100%;
 
-    overflow:hidden;
+    height:9px;
 
-    background:#e2e8f0;
+    background:#edf0f4;
 
     border-radius:999px;
+
+    overflow:hidden;
 
 }
 
@@ -790,15 +597,11 @@ h4,
 
     width:0%;
 
-    background:linear-gradient(
-        90deg,
-        var(--ob-blue),
-        var(--ob-cyan)
-    );
+    background:#635bff;
 
     border-radius:999px;
 
-    transition:width .3s ease;
+    transition:.3s;
 
 }
 
@@ -813,19 +616,19 @@ h4,
 
     grid-template-columns:repeat(2,1fr);
 
-    gap:14px;
+    gap:16px;
+
+    margin-top:22px;
 
 }
 
 .resource{
 
-    border:1px solid var(--ob-border);
+    border:1px solid #e7eaf0;
 
     border-radius:15px;
 
-    padding:19px;
-
-    background:#fff;
+    padding:20px;
 
     transition:.2s;
 
@@ -833,100 +636,39 @@ h4,
 
 .resource:hover{
 
-    border-color:#bfdbfe;
-
     transform:translateY(-2px);
 
-    box-shadow:var(--ob-shadow-sm);
+    box-shadow:0 8px 25px rgba(0,0,0,.05);
 
 }
 
 .resource h3{
 
-    margin:0 0 7px;
-
     font-size:16px;
 
-    color:var(--ob-navy);
+    margin-bottom:6px;
 
 }
 
 .resource p{
 
-    margin:0 0 13px;
+    color:#667085;
 
-    color:var(--ob-muted);
+    font-size:13px;
 
-    font-size:12px;
-
-    line-height:1.6;
+    margin-bottom:12px;
 
 }
 
 .resource a{
 
-    color:var(--ob-blue);
+    color:#635bff;
 
     text-decoration:none;
 
-    font-size:12px;
-
-    font-weight:700;
-
-}
-
-.resource a:hover{
-
-    text-decoration:underline;
-
-}
-
-
-/* =========================================================
-   PROFILE
-========================================================= */
-
-.profile{
-
-    margin-bottom:20px;
-
-}
-
-.profile-label{
-
-    font-size:10px;
-
-    letter-spacing:1.4px;
-
-    font-weight:700;
-
-    color:var(--ob-blue);
-
-    margin-bottom:9px;
-
-}
-
-.profile-name{
-
-    font-family:"Space Grotesk",sans-serif;
-
-    font-size:31px;
-
-    font-weight:700;
-
-    letter-spacing:-1px;
-
-    color:var(--ob-navy);
-
-}
-
-.profile-email{
-
-    margin-top:5px;
-
     font-size:13px;
 
-    color:var(--ob-muted);
+    font-weight:800;
 
 }
 
@@ -945,7 +687,15 @@ h4,
 
 .quiz-top{
 
-    margin-bottom:24px;
+    background:white;
+
+    border:1px solid #e8ebf1;
+
+    padding:22px;
+
+    border-radius:17px;
+
+    margin-bottom:18px;
 
 }
 
@@ -957,63 +707,49 @@ h4,
 
     justify-content:space-between;
 
-    gap:15px;
-
-    margin-bottom:12px;
-
-}
-
-.quiz-info strong{
-
-    font-family:"Space Grotesk",sans-serif;
-
-    font-size:14px;
-
-    color:var(--ob-navy);
+    margin-bottom:15px;
 
 }
 
 .timer{
 
-    background:var(--ob-navy);
+    background:#fff0f0;
 
-    color:#fff;
+    color:#c51b1b;
 
-    border-radius:9px;
+    padding:7px 12px;
 
-    padding:8px 12px;
+    border-radius:8px;
 
-    font-family:"Space Grotesk",sans-serif;
+    font-weight:900;
 
-    font-size:13px;
-
-    font-weight:700;
+    font-variant-numeric:tabular-nums;
 
 }
 
 .question-card{
 
-    background:#fff;
+    background:white;
 
-    border:1px solid var(--ob-border);
+    border:1px solid #e8ebf1;
 
-    border-radius:18px;
+    border-radius:20px;
 
-    padding:28px;
-
-    box-shadow:var(--ob-shadow-sm);
+    padding:30px;
 
 }
 
 .question-number{
 
-    color:var(--ob-blue);
+    color:#635bff;
 
-    font-size:11px;
+    font-size:12px;
 
-    font-weight:700;
+    font-weight:800;
 
     letter-spacing:1px;
+
+    text-transform:uppercase;
 
     margin-bottom:10px;
 
@@ -1021,13 +757,9 @@ h4,
 
 .question-title{
 
-    font-family:"Space Grotesk",sans-serif;
+    font-size:23px;
 
-    font-size:21px;
-
-    line-height:1.45;
-
-    color:var(--ob-navy);
+    font-weight:800;
 
     margin-bottom:22px;
 
@@ -1037,15 +769,15 @@ h4,
 
     display:flex;
 
-    align-items:flex-start;
-
     gap:12px;
 
-    border:1px solid var(--ob-border);
+    align-items:flex-start;
+
+    border:1px solid #e1e4ea;
+
+    padding:15px;
 
     border-radius:12px;
-
-    padding:14px;
 
     margin-bottom:10px;
 
@@ -1057,102 +789,88 @@ h4,
 
 .option:hover{
 
-    border-color:#bfdbfe;
+    border-color:#aaa4ff;
 
-    background:#f8fbff;
+    background:#fafaff;
 
 }
 
 .option.selected{
 
-    border-color:var(--ob-blue);
+    border-color:#635bff;
 
-    background:var(--ob-blue-light);
+    background:#f4f3ff;
 
 }
 
 .option input{
 
-    margin-top:3px;
-
-    accent-color:var(--ob-blue);
-
-}
-
-.option span{
-
-    font-size:13px;
-
-    line-height:1.55;
+    margin-top:4px;
 
 }
 
 .code-label{
 
-    display:block;
+    font-size:13px;
+
+    font-weight:800;
 
     margin-bottom:8px;
 
-    font-size:11px;
-
-    font-weight:700;
-
-    color:var(--ob-muted);
-
 }
 
-.code-area{
+.code-editor{
 
     width:100%;
 
-    min-height:220px;
-
-    padding:15px;
-
-    border:1px solid var(--ob-border);
-
-    border-radius:12px;
+    min-height:260px;
 
     resize:vertical;
 
-    outline:none;
+    padding:16px;
+
+    border:1px solid #d9dde5;
+
+    border-radius:12px;
+
+    background:#10131a;
+
+    color:#e6e9ef;
 
     font-family:
-        "SFMono-Regular",
         Consolas,
+        Monaco,
         monospace;
 
-    font-size:13px;
+    font-size:14px;
 
     line-height:1.6;
 
+    outline:none;
+
 }
 
-.code-area:focus{
+.code-editor:focus{
 
-    border-color:var(--ob-blue);
-
-    box-shadow:0 0 0 4px rgba(37,99,235,.08);
+    border-color:#635bff;
 
 }
 
 .warning{
 
+    background:#fff8e8;
+
+    border:1px solid #f4df9d;
+
+    color:#725b12;
+
+    border-radius:13px;
+
+    padding:16px;
+
+    font-size:12px;
+
     margin-top:18px;
-
-    padding:13px 15px;
-
-    border-radius:11px;
-
-    background:var(--ob-yellow-light);
-
-    border:1px solid #fde68a;
-
-    color:#92400e;
-
-    font-size:11px;
-
-    line-height:1.6;
 
 }
 
@@ -1162,15 +880,7 @@ h4,
 
     justify-content:space-between;
 
-    gap:12px;
-
-    margin-top:20px;
-
-}
-
-.quiz-nav .btn{
-
-    min-width:130px;
+    margin-top:18px;
 
 }
 
@@ -1181,25 +891,21 @@ h4,
 
 .result{
 
-    max-width:620px;
+    max-width:650px;
 
     margin:auto;
 
     text-align:center;
 
-    padding:45px 30px;
-
 }
 
 .result-icon{
 
-    width:68px;
+    width:75px;
 
-    height:68px;
+    height:75px;
 
-    margin:0 auto 18px;
-
-    border-radius:50%;
+    margin:auto;
 
     display:flex;
 
@@ -1207,55 +913,49 @@ h4,
 
     justify-content:center;
 
-    background:var(--ob-green-light);
+    border-radius:50%;
 
-    color:var(--ob-green);
+    background:#eafaf2;
 
-    font-size:34px;
+    color:#12a56a;
 
-    font-weight:700;
+    font-size:38px;
+
+    font-weight:900;
 
 }
 
 .result.fail .result-icon{
 
-    background:var(--ob-red-light);
+    background:#fff0f0;
 
-    color:var(--ob-red);
+    color:#d92d20;
 
 }
 
 .result h1{
 
-    margin:0 0 10px;
-
-    font-size:32px;
-
-    color:var(--ob-navy);
+    margin-top:20px;
 
 }
 
 .score-big{
 
-    font-family:"Space Grotesk",sans-serif;
-
-    font-size:64px;
+    font-size:75px;
 
     line-height:1;
 
-    font-weight:700;
+    font-weight:900;
 
-    color:var(--ob-blue);
+    color:#635bff;
 
-    margin:20px 0;
+    margin:22px 0;
 
 }
 
-.result p{
+#certificateResultActions{
 
-    color:var(--ob-muted);
-
-    line-height:1.7;
+    margin-top:25px;
 
 }
 
@@ -1266,103 +966,85 @@ h4,
 
 .certificate-area{
 
-    padding:10px 0;
+    max-width:950px;
+
+    margin:auto;
 
 }
 
 .certificate{
 
-    max-width:850px;
+    background:white;
 
-    margin:auto;
+    border:12px solid #172033;
 
-    background:#fff;
-
-    border:12px solid var(--ob-navy);
-
-    outline:1px solid #93c5fd;
+    outline:2px solid #635bff;
 
     outline-offset:-22px;
 
-    padding:65px 65px 50px;
+    padding:90px 80px;
+
+    min-height:650px;
 
     text-align:center;
 
     position:relative;
 
-    box-shadow:var(--ob-shadow);
-
 }
 
 .cert-header{
 
-    font-family:"Space Grotesk",sans-serif;
+    font-size:15px;
 
-    font-size:17px;
+    letter-spacing:5px;
 
-    letter-spacing:3px;
+    font-weight:900;
 
-    font-weight:700;
-
-    color:var(--ob-blue);
+    color:#635bff;
 
 }
 
 .cert-title{
 
-    font-family:"Space Grotesk",sans-serif;
+    font-family:Georgia,serif;
 
-    font-size:29px;
+    font-size:37px;
 
     font-weight:700;
 
-    color:var(--ob-navy);
-
-    margin-top:28px;
+    margin-top:25px;
 
 }
 
 .cert-subtitle{
 
-    margin-top:30px;
+    color:#667085;
 
-    color:var(--ob-muted);
-
-    font-size:13px;
+    margin-top:25px;
 
 }
 
 .cert-name{
 
-    margin:17px 0;
+    font-family:Georgia,serif;
 
-    font-family:"Space Grotesk",sans-serif;
-
-    font-size:40px;
+    font-size:48px;
 
     font-weight:700;
 
-    color:var(--ob-blue);
+    margin:25px 0;
 
 }
 
 .cert-body{
 
-    max-width:640px;
+    max-width:680px;
 
     margin:auto;
 
-    color:var(--ob-muted);
+    color:#475467;
 
-    font-size:13px;
-
-    line-height:1.8;
-
-}
-
-.cert-body strong{
-
-    color:var(--ob-navy);
+    font-size:15px;
 
 }
 
@@ -1376,13 +1058,7 @@ h4,
 
     margin-top:45px;
 
-    padding-top:20px;
-
-    border-top:1px solid var(--ob-border);
-
-    font-size:11px;
-
-    color:var(--ob-muted);
+    font-size:13px;
 
 }
 
@@ -1392,49 +1068,45 @@ h4,
 
     margin-top:4px;
 
-    color:var(--ob-navy);
-
 }
 
 .cert-id{
 
-    margin-top:30px;
+    margin-top:35px;
 
-    font-family:monospace;
+    font-size:12px;
 
-    font-size:10px;
+    font-weight:800;
 
-    color:var(--ob-muted-2);
+    letter-spacing:1px;
 
 }
 
 .cert-footer{
 
-    margin-top:28px;
+    max-width:700px;
 
-    padding-top:15px;
+    margin:35px auto 0;
 
-    border-top:1px solid var(--ob-border);
+    font-size:10px;
 
-    font-size:9px;
+    line-height:1.5;
 
-    line-height:1.6;
-
-    color:var(--ob-muted-2);
+    color:#667085;
 
 }
 
 .certificate-actions{
 
-    max-width:850px;
+    display:flex;
 
-    margin:25px auto 0;
+    justify-content:center;
 
-    display:grid;
-
-    grid-template-columns:repeat(3,1fr);
+    flex-wrap:wrap;
 
     gap:12px;
+
+    margin:25px auto;
 
 }
 
@@ -1443,17 +1115,15 @@ h4,
    LOADER
 ========================================================= */
 
-.loader{
+#loader{
 
     position:fixed;
 
     inset:0;
 
-    z-index:9999;
+    background:rgba(255,255,255,.8);
 
-    background:rgba(11,18,32,.75);
-
-    backdrop-filter:blur(6px);
+    backdrop-filter:blur(5px);
 
     display:none;
 
@@ -1461,9 +1131,11 @@ h4,
 
     justify-content:center;
 
+    z-index:9999;
+
 }
 
-.loader.active{
+#loader.active{
 
     display:flex;
 
@@ -1471,21 +1143,15 @@ h4,
 
 .loader-box{
 
-    min-width:180px;
+    background:white;
 
-    padding:25px;
+    padding:28px 35px;
 
-    background:#fff;
+    border-radius:15px;
 
-    border-radius:16px;
+    box-shadow:0 15px 50px rgba(0,0,0,.12);
 
     text-align:center;
-
-    box-shadow:var(--ob-shadow);
-
-    font-size:13px;
-
-    color:var(--ob-muted);
 
 }
 
@@ -1495,15 +1161,15 @@ h4,
 
     height:32px;
 
-    border:3px solid #dbeafe;
+    border:3px solid #e4e6eb;
 
-    border-top-color:var(--ob-blue);
+    border-top-color:#635bff;
 
     border-radius:50%;
 
     animation:spin .8s linear infinite;
 
-    margin:0 auto 14px;
+    margin:0 auto 12px;
 
 }
 
@@ -1517,44 +1183,53 @@ h4,
 
 
 /* =========================================================
+   FOOTER
+========================================================= */
+
+footer{
+
+    padding:30px 20px;
+
+    text-align:center;
+
+    color:#667085;
+
+    font-size:12px;
+
+    border-top:1px solid #e8ebf1;
+
+    background:white;
+
+}
+
+
+/* =========================================================
    MOBILE
 ========================================================= */
 
 @media(max-width:700px){
 
-    .site-header{
-
-        width:calc(100% - 24px);
-
-        height:68px;
-
-    }
-
-    .user-pill{
-
-        display:none !important;
-
-    }
-
-    .main{
-
-        width:calc(100% - 24px);
+    .page{
 
         padding-top:35px;
 
     }
 
-    .hero h1{
+    header{
 
-        font-size:39px;
-
-        letter-spacing:-1.8px;
+        height:70px;
 
     }
 
-    .card{
+    .logo{
 
-        padding:21px;
+        font-size:17px;
+
+    }
+
+    .user-pill{
+
+        display:none;
 
     }
 
@@ -1570,37 +1245,35 @@ h4,
 
     }
 
-    .quiz-nav{
+    .card{
 
-        flex-direction:column-reverse;
+        padding:22px;
 
     }
 
-    .quiz-nav .btn{
+    .question-card{
 
-        width:100%;
+        padding:22px;
 
     }
 
     .certificate{
 
-        border-width:7px;
+        padding:60px 25px;
 
-        outline-offset:-13px;
-
-        padding:45px 25px 35px;
+        min-height:auto;
 
     }
 
     .cert-title{
 
-        font-size:22px;
+        font-size:27px;
 
     }
 
     .cert-name{
 
-        font-size:28px;
+        font-size:34px;
 
     }
 
@@ -1608,44 +1281,7 @@ h4,
 
         grid-template-columns:1fr;
 
-    }
-
-    .certificate-actions{
-
-        grid-template-columns:1fr;
-
-    }
-
-}
-
-@media print{
-
-    body{
-
-        background:#fff;
-
-    }
-
-    .no-print,
-    .site-header{
-
-        display:none !important;
-
-    }
-
-    .main{
-
-        width:100%;
-
-        padding:0;
-
-    }
-
-    .certificate{
-
-        box-shadow:none;
-
-        max-width:none;
+        gap:12px;
 
     }
 
@@ -1653,26 +1289,46 @@ h4,
 
 
 /* =========================================================
-   FOOTER
+   PRINT
 ========================================================= */
 
-.site-footer{
+@media print{
 
-    width:min(1000px,calc(100% - 32px));
+    body{
 
-    margin:0 auto;
+        background:white;
 
-    padding:25px 0 35px;
+    }
 
-    border-top:1px solid var(--ob-border);
+    header,
+    footer,
+    .no-print{
 
-    text-align:center;
+        display:none !important;
 
-    font-size:10px;
+    }
 
-    line-height:1.8;
+    .page{
 
-    color:var(--ob-muted-2);
+        padding:0;
+
+    }
+
+    .certificate-area{
+
+        max-width:none;
+
+    }
+
+    .certificate{
+
+        box-shadow:none;
+
+        border:12px solid #172033;
+
+        min-height:100vh;
+
+    }
 
 }
 
@@ -1684,54 +1340,60 @@ h4,
 <body>
 
 
-<!-- =====================================================
+<!-- ======================================================
 HEADER
-===================================================== -->
+======================================================= -->
 
-<header class="site-header">
+<header>
 
-    <div class="logo">
+    <div class="header-inner">
 
-        <div class="logo-mark">
-            OB
+        <div class="logo">
+
+            <div class="logo-mark">
+                OB
+            </div>
+
+            Openbox
+            <span>Academy</span>
+
         </div>
 
-        Openbox
-        <span>Academy</span>
 
-    </div>
+        <div class="header-right">
+
+            <div
+                id="userPill"
+                class="user-pill hidden">
+            </div>
 
 
-    <div class="header-right">
+            <button
+                id="logoutBtn"
+                class="logout hidden"
+                onclick="logout()">
 
-        <div
-            id="userPill"
-            class="user-pill hidden">
+                Logout
+
+            </button>
+
         </div>
-
-        <button
-            id="logoutBtn"
-            class="logout hidden"
-            onclick="logout()">
-
-            Logout
-
-        </button>
 
     </div>
 
 </header>
 
 
+<main class="container">
 
-<main class="main">
 
-
-<!-- =====================================================
+<!-- ======================================================
 AUTH PAGE
-===================================================== -->
+======================================================= -->
 
-<section id="authPage">
+<section
+    id="authPage"
+    class="page">
 
 
     <div class="hero">
@@ -1741,9 +1403,12 @@ AUTH PAGE
         </div>
 
         <h1>
+
             Python Programming
             <br>
+
             <span>Fundamentals</span>
+
         </h1>
 
         <p>
@@ -1799,9 +1464,11 @@ AUTH PAGE
                 Welcome back
             </h2>
 
-            <p>
+            <p style="color:#667085;font-size:14px;margin-top:5px">
+
                 Enter the email and mobile number
                 used during registration.
+
             </p>
 
 
@@ -1858,7 +1525,7 @@ AUTH PAGE
                 Create your account
             </h2>
 
-            <p>
+            <p style="color:#667085;font-size:14px;margin-top:5px">
 
                 New learners can register here.
                 Your details will be recorded in
@@ -1927,13 +1594,13 @@ AUTH PAGE
 
 
 
-<!-- =====================================================
-DASHBOARD
-===================================================== -->
+<!-- ======================================================
+DASHBOARD PAGE
+======================================================= -->
 
 <section
     id="dashboardPage"
-    class="hidden">
+    class="page hidden">
 
 
     <div class="hero">
@@ -1970,7 +1637,9 @@ DASHBOARD
         <div
             class="profile-name"
             id="studentName">
+
             Learner
+
         </div>
 
         <div
@@ -2039,8 +1708,7 @@ DASHBOARD
                     Assessment status
                 </span>
 
-                <strong
-                    id="statusText">
+                <strong id="statusText">
                     Not Started
                 </strong>
 
@@ -2078,13 +1746,16 @@ DASHBOARD
         class="card"
         style="margin-top:20px">
 
+
         <h2>
             Course Resources
         </h2>
 
-        <p>
+        <p style="color:#667085;margin-top:5px">
+
             Study the Openbox learning resources
             before attempting the final assessment.
+
         </p>
 
 
@@ -2232,13 +1903,13 @@ DASHBOARD
 
 
 
-<!-- =====================================================
+<!-- ======================================================
 QUIZ PAGE
-===================================================== -->
+======================================================= -->
 
 <section
     id="quizPage"
-    class="hidden">
+    class="page hidden">
 
 
     <div class="hero">
@@ -2248,8 +1919,10 @@ QUIZ PAGE
         </div>
 
         <h1>
+
             Python
             <span>Final Assessment</span>
+
         </h1>
 
         <p>
@@ -2345,13 +2018,13 @@ QUIZ PAGE
 
 
 
-<!-- =====================================================
+<!-- ======================================================
 RESULT PAGE
-===================================================== -->
+======================================================= -->
 
 <section
     id="resultPage"
-    class="hidden">
+    class="page hidden">
 
 
     <div class="hero">
@@ -2361,8 +2034,10 @@ RESULT PAGE
         </div>
 
         <h1>
+
             Assessment
             <span>Complete</span>
+
         </h1>
 
         <p>
@@ -2376,6 +2051,7 @@ RESULT PAGE
     <div
         class="card result"
         id="resultCard">
+
 
         <div
             class="result-icon"
@@ -2413,13 +2089,13 @@ RESULT PAGE
 
 
 
-<!-- =====================================================
+<!-- ======================================================
 CERTIFICATE PAGE
-===================================================== -->
+======================================================= -->
 
 <section
     id="certificatePage"
-    class="hidden">
+    class="page hidden">
 
 
     <div class="hero no-print">
@@ -2429,8 +2105,10 @@ CERTIFICATE PAGE
         </div>
 
         <h1>
+
             Your
             <span>Certificate</span>
+
         </h1>
 
         <p>
@@ -2607,7 +2285,7 @@ CERTIFICATE PAGE
             Keep learning
         </h2>
 
-        <p>
+        <p style="color:#667085;margin:8px 0 18px">
 
             Continue learning Python with
             Openbox Academy's free resources.
@@ -2635,11 +2313,11 @@ CERTIFICATE PAGE
 
 
 
-<!-- =====================================================
+<!-- ======================================================
 FOOTER
-===================================================== -->
+======================================================= -->
 
-<footer class="site-footer">
+<footer>
 
     Openbox Academy · Python Programming Fundamentals
 
@@ -2656,13 +2334,11 @@ FOOTER
 
 
 
-<!-- =====================================================
+<!-- ======================================================
 LOADER
-===================================================== -->
+======================================================= -->
 
-<div
-    id="loader"
-    class="loader">
+<div id="loader">
 
     <div class="loader-box">
 
@@ -2685,18 +2361,18 @@ LOADER
 ========================================================= */
 
 const API_URL =
-"https://script.google.com/macros/s/AKfycbzQpwJxbRpiTpMqbdHIWWtVAmmmxoNQJD-iW84RCXNwGnmID-oi489BAJbANkmP-gHk/exec";
+"https://script.google.com/macros/s/AKfycbxZiRap1Zc7ctZbbxIiu9KyHOzNdyrO9QFhUGUZzztGVIOMkVS0svFqhzJg5eixqdSD/exec";
 
 
 const COURSE_URL =
-"https://openboxgp.vercel.app/python1.html";
+"https://openboxgp.vercel.app/python.html";
 
 
 const TOTAL_QUESTIONS = 50;
 
 const PASS_PERCENTAGE = 70;
 
-const QUIZ_DURATION = 60 * 60;
+const EXAM_TIME = 60 * 60;
 
 
 /* =========================================================
@@ -2711,7 +2387,7 @@ let answers = [];
 
 let currentQuestion = 0;
 
-let timerSeconds = QUIZ_DURATION;
+let timerSeconds = EXAM_TIME;
 
 let timerInterval = null;
 
@@ -2724,420 +2400,679 @@ let tabWarnings = 0;
 
 /* =========================================================
    QUESTION BANK
+=========================================================
+
+   The application expects exactly 50 questions.
+
+   Replace these questions with your actual
+   Openbox Python assessment questions.
+
+   type:
+      "mcq"
+      "code"
+
+   MCQ:
+      {
+          type:"mcq",
+          question:"...",
+          options:["A","B","C","D"],
+          answer:0
+      }
+
+   CODE:
+      {
+          type:"code",
+          question:"...",
+          expected:"..."
+      }
+
 ========================================================= */
 
 questions = [
 
-{
-q:"Which keyword is used to define a function in Python?",
-options:["function","def","func","define"],
-answer:1
-},
+    {
+        type:"mcq",
+        question:"Which keyword is used to define a function in Python?",
+        options:[
+            "function",
+            "def",
+            "func",
+            "define"
+        ],
+        answer:1
+    },
 
-{
-q:"Which of the following is used to print text in Python?",
-options:["echo()","console()","print()","write()"],
-answer:2
-},
+    {
+        type:"mcq",
+        question:"Which data type stores True or False values?",
+        options:[
+            "int",
+            "str",
+            "bool",
+            "float"
+        ],
+        answer:2
+    },
 
-{
-q:"Which symbol is used for comments in Python?",
-options:["//","#","<!--","/*"],
-answer:1
-},
+    {
+        type:"mcq",
+        question:"Which symbol is used for comments in Python?",
+        options:[
+            "//",
+            "/*",
+            "#",
+            "--"
+        ],
+        answer:2
+    },
 
-{
-q:"What is the result of 10 // 3?",
-options:["3","3.33","1","4"],
-answer:0
-},
+    {
+        type:"mcq",
+        question:"Which collection is ordered and mutable?",
+        options:[
+            "tuple",
+            "list",
+            "set",
+            "frozenset"
+        ],
+        answer:1
+    },
 
-{
-q:"Which data type stores True or False?",
-options:["int","str","bool","float"],
-answer:2
-},
+    {
+        type:"mcq",
+        question:"What is the output type of input()?",
+        options:[
+            "int",
+            "float",
+            "string",
+            "boolean"
+        ],
+        answer:2
+    },
 
-{
-q:"Which collection is ordered and mutable?",
-options:["tuple","list","set","frozenset"],
-answer:1
-},
+    {
+        type:"mcq",
+        question:"Which operator is used for exponentiation?",
+        options:[
+            "^",
+            "**",
+            "//",
+            "%%"
+        ],
+        answer:1
+    },
 
-{
-q:"Which collection is immutable?",
-options:["list","dictionary","tuple","set"],
-answer:2
-},
+    {
+        type:"mcq",
+        question:"Which keyword exits a loop immediately?",
+        options:[
+            "stop",
+            "exit",
+            "break",
+            "return"
+        ],
+        answer:2
+    },
 
-{
-q:"What does len() return?",
-options:[
-"Memory size",
-"Number of elements",
-"Data type",
-"Last index"
-],
-answer:1
-},
+    {
+        type:"mcq",
+        question:"Which keyword skips to the next loop iteration?",
+        options:[
+            "skip",
+            "continue",
+            "next",
+            "pass"
+        ],
+        answer:1
+    },
 
-{
-q:"Which operator is used for exponentiation?",
-options:["^","**","//","%%"],
-answer:1
-},
+    {
+        type:"mcq",
+        question:"Which function returns the number of items in a collection?",
+        options:[
+            "count()",
+            "size()",
+            "length()",
+            "len()"
+        ],
+        answer:3
+    },
 
-{
-q:"Which keyword is used for a conditional statement?",
-options:["when","if","check","condition"],
-answer:1
-},
+    {
+        type:"mcq",
+        question:"Which of these creates a tuple?",
+        options:[
+            "[1,2,3]",
+            "{1,2,3}",
+            "(1,2,3)",
+            "<1,2,3>"
+        ],
+        answer:2
+    },
 
-{
-q:"Which keyword handles another condition after if?",
-options:["otherwise","elif","elseif","then"],
-answer:1
-},
+    {
+        type:"mcq",
+        question:"Which data structure stores unique values?",
+        options:[
+            "list",
+            "tuple",
+            "set",
+            "string"
+        ],
+        answer:2
+    },
 
-{
-q:"Which keyword handles the final alternative?",
-options:["default","otherwise","else","finally"],
-answer:2
-},
+    {
+        type:"mcq",
+        question:"What does // perform in Python?",
+        options:[
+            "Exponentiation",
+            "Floor division",
+            "Modulo",
+            "Normal division"
+        ],
+        answer:1
+    },
 
-{
-q:"Which loop is commonly used when iterating over a sequence?",
-options:["repeat","for","loop","iterate"],
-answer:1
-},
+    {
+        type:"mcq",
+        question:"Which keyword handles exceptions?",
+        options:[
+            "catch",
+            "except",
+            "error",
+            "handle"
+        ],
+        answer:1
+    },
 
-{
-q:"Which keyword creates a while loop?",
-options:["during","while","until","repeat"],
-answer:1
-},
+    {
+        type:"mcq",
+        question:"Which statement is used to import a module?",
+        options:[
+            "include",
+            "require",
+            "import",
+            "using"
+        ],
+        answer:2
+    },
 
-{
-q:"What does range(5) produce?",
-options:[
-"1,2,3,4,5",
-"0,1,2,3,4",
-"0,1,2,3,4,5",
-"5"
-],
-answer:1
-},
+    {
+        type:"mcq",
+        question:"Which function converts a string to an integer?",
+        options:[
+            "str()",
+            "integer()",
+            "int()",
+            "number()"
+        ],
+        answer:2
+    },
 
-{
-q:"Which method adds an item to a list?",
-options:["add()","insertEnd()","append()","push()"],
-answer:2
-},
+    {
+        type:"mcq",
+        question:"Which keyword creates a class?",
+        options:[
+            "object",
+            "class",
+            "struct",
+            "type"
+        ],
+        answer:1
+    },
 
-{
-q:"Which method removes an item from a list by value?",
-options:["delete()","remove()","erase()","popvalue()"],
-answer:1
-},
+    {
+        type:"mcq",
+        question:"What does append() do to a list?",
+        options:[
+            "Deletes an item",
+            "Adds an item to the end",
+            "Sorts the list",
+            "Copies the list"
+        ],
+        answer:1
+    },
 
-{
-q:"Which method removes and returns the last list item?",
-options:["remove()","delete()","pop()","last()"],
-answer:2
-},
+    {
+        type:"mcq",
+        question:"Which method removes and returns the last list item by default?",
+        options:[
+            "remove()",
+            "delete()",
+            "pop()",
+            "clear()"
+        ],
+        answer:2
+    },
 
-{
-q:"Which keyword exits a loop?",
-options:["exit","stop","break","end"],
-answer:2
-},
+    {
+        type:"mcq",
+        question:"Which value represents the absence of a value?",
+        options:[
+            "empty",
+            "null",
+            "None",
+            "void"
+        ],
+        answer:2
+    },
 
-{
-q:"Which keyword skips the current loop iteration?",
-options:["skip","continue","pass","next"],
-answer:1
-},
+    {
+        type:"mcq",
+        question:"Which loop is commonly used when the number of iterations is known?",
+        options:[
+            "for",
+            "until",
+            "repeat",
+            "loop"
+        ],
+        answer:0
+    },
 
-{
-q:"Which keyword does nothing and acts as a placeholder?",
-options:["empty","continue","pass","null"],
-answer:2
-},
+    {
+        type:"mcq",
+        question:"Which function generates a sequence of numbers?",
+        options:[
+            "numbers()",
+            "range()",
+            "sequence()",
+            "generate()"
+        ],
+        answer:1
+    },
 
-{
-q:"Which data structure stores key-value pairs?",
-options:["list","tuple","dictionary","set"],
-answer:2
-},
+    {
+        type:"mcq",
+        question:"Which keyword is used for inheritance syntax?",
+        options:[
+            "extends",
+            "inherits",
+            "class Child(Parent)",
+            "inherit"
+        ],
+        answer:2
+    },
 
-{
-q:"How do you access a dictionary value?",
-options:[
-"dict.key",
-"dict[key]",
-"dict->key",
-"dict(key)"
-],
-answer:1
-},
+    {
+        type:"mcq",
+        question:"What does == compare?",
+        options:[
+            "Object identity",
+            "Values",
+            "Memory",
+            "Types only"
+        ],
+        answer:1
+    },
 
-{
-q:"Which method returns dictionary keys?",
-options:["keys()","getKeys()","keylist()","items()"],
-answer:0
-},
+    {
+        type:"mcq",
+        question:"Which operator checks object identity?",
+        options:[
+            "==",
+            "=",
+            "is",
+            "equals"
+        ],
+        answer:2
+    },
 
-{
-q:"Which method returns dictionary key-value pairs?",
-options:["pairs()","items()","values()","entries()"],
-answer:1
-},
+    {
+        type:"mcq",
+        question:"Which built-in function returns the largest value?",
+        options:[
+            "large()",
+            "maximum()",
+            "max()",
+            "highest()"
+        ],
+        answer:2
+    },
 
-{
-q:"What does input() return by default?",
-options:["integer","float","string","boolean"],
-answer:2
-},
+    {
+        type:"mcq",
+        question:"Which built-in function returns the smallest value?",
+        options:[
+            "min()",
+            "small()",
+            "minimum()",
+            "lowest()"
+        ],
+        answer:0
+    },
 
-{
-q:"Which function converts a value to an integer?",
-options:["integer()","int()","toInt()","number()"],
-answer:1
-},
+    {
+        type:"mcq",
+        question:"Which method converts a string to lowercase?",
+        options:[
+            "lower()",
+            "tolower()",
+            "downcase()",
+            "small()"
+        ],
+        answer:0
+    },
 
-{
-q:"Which function converts a value to a floating-point number?",
-options:["float()","decimal()","double()","real()"],
-answer:0
-},
+    {
+        type:"mcq",
+        question:"Which method splits a string into a list?",
+        options:[
+            "divide()",
+            "split()",
+            "break()",
+            "separate()"
+        ],
+        answer:1
+    },
 
-{
-q:"Which function converts a value to a string?",
-options:["str()","string()","text()","toString()"],
-answer:0
-},
+    {
+        type:"mcq",
+        question:"Which method joins strings together?",
+        options:[
+            "combine()",
+            "join()",
+            "merge()",
+            "concat()"
+        ],
+        answer:1
+    },
 
-{
-q:"What is indentation used for in Python?",
-options:[
-"Only formatting",
-"Defining code blocks",
-"Creating comments",
-"Declaring variables"
-],
-answer:1
-},
+    {
+        type:"mcq",
+        question:"Which keyword returns a value from a function?",
+        options:[
+            "send",
+            "yield",
+            "return",
+            "output"
+        ],
+        answer:2
+    },
 
-{
-q:"Which block handles exceptions?",
-options:["try/except","check/catch","error/handle","safe/catch"],
-answer:0
-},
+    {
+        type:"mcq",
+        question:"Which statement does nothing and is commonly used as a placeholder?",
+        options:[
+            "skip",
+            "pass",
+            "nothing",
+            "empty"
+        ],
+        answer:1
+    },
 
-{
-q:"Which keyword raises an exception?",
-options:["throw","raise","error","exception"],
-answer:1
-},
+    {
+        type:"mcq",
+        question:"Which Python type stores key-value pairs?",
+        options:[
+            "list",
+            "tuple",
+            "dictionary",
+            "set"
+        ],
+        answer:2
+    },
 
-{
-q:"Which keyword is used to import a module?",
-options:["include","using","import","require"],
-answer:2
-},
+    {
+        type:"mcq",
+        question:"Which method returns dictionary keys?",
+        options:[
+            "keys()",
+            "getkeys()",
+            "keylist()",
+            "items()"
+        ],
+        answer:0
+    },
 
-{
-q:"Which statement imports only a specific item from a module?",
-options:[
-"from module import item",
-"include module item",
-"import module.item",
-"use module item"
-],
-answer:0
-},
+    {
+        type:"mcq",
+        question:"Which method returns dictionary key-value pairs?",
+        options:[
+            "pairs()",
+            "values()",
+            "items()",
+            "entries()"
+        ],
+        answer:2
+    },
 
-{
-q:"What does == compare?",
-options:[
-"Identity only",
-"Values",
-"Memory addresses only",
-"Variable names"
-],
-answer:1
-},
+    {
+        type:"mcq",
+        question:"What does len('Python') return?",
+        options:[
+            "5",
+            "6",
+            "7",
+            "8"
+        ],
+        answer:1
+    },
 
-{
-q:"What does = generally perform?",
-options:[
-"Comparison",
-"Assignment",
-"Equality testing",
-"Identity testing"
-],
-answer:1
-},
+    {
+        type:"mcq",
+        question:"Which data type represents decimal numbers?",
+        options:[
+            "int",
+            "str",
+            "float",
+            "bool"
+        ],
+        answer:2
+    },
 
-{
-q:"Which operator checks object identity?",
-options:["==","is","equals","==="],
-answer:1
-},
+    {
+        type:"mcq",
+        question:"Which operator gives the remainder?",
+        options:[
+            "/",
+            "//",
+            "%",
+            "**"
+        ],
+        answer:2
+    },
 
-{
-q:"Which operator checks membership?",
-options:["in","contains","has","inside"],
-answer:0
-},
+    {
+        type:"mcq",
+        question:"Which function displays output?",
+        options:[
+            "display()",
+            "show()",
+            "print()",
+            "output()"
+        ],
+        answer:2
+    },
 
-{
-q:"What does not in check?",
-options:[
-"Non-membership",
-"Equality",
-"Identity",
-"Type"
-],
-answer:0
-},
+    {
+        type:"mcq",
+        question:"Which keyword is used to create a conditional branch?",
+        options:[
+            "if",
+            "when",
+            "condition",
+            "check"
+        ],
+        answer:0
+    },
 
-{
-q:"Which function returns the largest value?",
-options:["top()","maximum()","max()","large()"],
-answer:2
-},
+    {
+        type:"mcq",
+        question:"Which keyword provides an alternative condition?",
+        options:[
+            "otherwise",
+            "elseif",
+            "elif",
+            "else-if"
+        ],
+        answer:2
+    },
 
-{
-q:"Which function returns the smallest value?",
-options:["min()","small()","minimum()","low()"],
-answer:0
-},
+    {
+        type:"mcq",
+        question:"Which keyword handles the final alternative branch?",
+        options:[
+            "otherwise",
+            "else",
+            "default",
+            "final"
+        ],
+        answer:1
+    },
 
-{
-q:"Which function returns the sum of numeric items?",
-options:["total()","sum()","add()","plus()"],
-answer:1
-},
+    {
+        type:"mcq",
+        question:"Which loop continues while a condition is true?",
+        options:[
+            "for",
+            "while",
+            "repeat",
+            "until"
+        ],
+        answer:1
+    },
 
-{
-q:"Which function returns the absolute value?",
-options:["absolute()","abs()","positive()","mod()"],
-answer:1
-},
+    {
+        type:"mcq",
+        question:"What is a lambda?",
+        options:[
+            "A class",
+            "An anonymous function",
+            "A module",
+            "A loop"
+        ],
+        answer:1
+    },
 
-{
-q:"Which method converts a string to lowercase?",
-options:["lower()","small()","down()","lowercase()"],
-answer:0
-},
+    {
+        type:"mcq",
+        question:"Which keyword defines an anonymous function expression?",
+        options:[
+            "anonymous",
+            "lambda",
+            "function",
+            "def"
+        ],
+        answer:1
+    },
 
-{
-q:"Which method converts a string to uppercase?",
-options:["upper()","capital()","uppercase()","up()"],
-answer:0
-},
+    {
+        type:"mcq",
+        question:"What does slicing a list allow you to do?",
+        options:[
+            "Delete the entire list",
+            "Extract a portion of the list",
+            "Convert it to a tuple",
+            "Sort it"
+        ],
+        answer:1
+    },
 
-{
-q:"Which method removes whitespace from both ends of a string?",
-options:["trim()","strip()","clean()","removeSpace()"],
-answer:1
-},
+    {
+        type:"mcq",
+        question:"Which index represents the first item in a Python list?",
+        options:[
+            "0",
+            "1",
+            "-1",
+            "first"
+        ],
+        answer:0
+    },
 
-{
-q:"Which symbol is used to create a list comprehension?",
-options:[
-"[]","{}","()","<>"
-],
-answer:0
-},
+    {
+        type:"mcq",
+        question:"Which index represents the last item using negative indexing?",
+        options:[
+            "0",
+            "1",
+            "-1",
+            "-2"
+        ],
+        answer:2
+    },
 
-{
-q:"Which keyword creates a class?",
-options:["object","class","struct","type"],
-answer:1
-},
+    {
+        type:"mcq",
+        question:"Which module provides mathematical functions?",
+        options:[
+            "math",
+            "numbers",
+            "calculate",
+            "mathematics"
+        ],
+        answer:0
+    },
 
-{
-q:"Which method is commonly used as a class constructor?",
-options:["__start__","__create__","__init__","constructor"],
-answer:2
-},
+    {
+        type:"mcq",
+        question:"What is recursion?",
+        options:[
+            "A loop only",
+            "A function calling itself",
+            "A class inheriting itself",
+            "A type conversion"
+        ],
+        answer:1
+    },
 
-{
-q:"What is self used for in a class?",
-options:[
-"Referencing the current instance",
-"Creating a loop",
-"Importing modules",
-"Declaring constants"
-],
-answer:0
-},
+    {
+        type:"mcq",
+        question:"Which concept allows the same interface to behave differently?",
+        options:[
+            "Inheritance",
+            "Polymorphism",
+            "Compilation",
+            "Iteration"
+        ],
+        answer:1
+    },
 
-/* 10 CODING QUESTIONS */
+    {
+        type:"mcq",
+        question:"Which concept bundles data and methods together?",
+        options:[
+            "Encapsulation",
+            "Iteration",
+            "Compilation",
+            "Recursion"
+        ],
+        answer:0
+    },
 
-{
-q:"Write Python code to calculate total = (a + b) * c and print the result.",
-code:true,
-expected:"total=(a+b)*c"
-},
-
-{
-q:"Write a Python program that prints whether a number is positive, negative, or zero.",
-code:true,
-expected:"ifnumber>0"
-},
-
-{
-q:"Write a for loop that prints 'Hello World' n times using range(n).",
-code:true,
-expected:"foriinrange(n)"
-},
-
-{
-q:"Write a while loop that prints values while i**3 < n and increments i.",
-code:true,
-expected:"whilei**3<n"
-},
-
-{
-q:"Create a list containing the squares of even numbers from an existing list l.",
-code:true,
-expected:"lnew=[e**2foreinlif"
-},
-
-{
-q:"Define a function div_by(n,d) that returns True when n is divisible by d.",
-code:true,
-expected:"defdiv_by(n,d):returnn%d==0"
-},
-
-{
-q:"Iterate through a dictionary and count how many keys have the same value.",
-code:true,
-expected:"ford,vind.items"
-},
-
-{
-q:"Define a recursive function recur_power(base, exp) to calculate a power.",
-code:true,
-expected:"defrecur_power(base,exp)"
-},
-
-{
-q:"Define a recursive function total_recur(l) that returns the total of a list.",
-code:true,
-expected:"deftotal_recur(l)"
-},
-
-{
-q:"Create a Container class with __init__ that initializes self.mylist as an empty list.",
-code:true,
-expected:"classcontainer"
-}
+    {
+        type:"mcq",
+        question:"Which statement is used to create an exception intentionally?",
+        options:[
+            "throw",
+            "raise",
+            "except",
+            "error"
+        ],
+        answer:1
+    }
 
 ];
+
+
+/*
+ * Safety check.
+ *
+ * The final system expects exactly 50 questions.
+ */
+
+if(questions.length !== TOTAL_QUESTIONS){
+
+    console.warn(
+        "Question bank contains " +
+        questions.length +
+        " questions. Expected " +
+        TOTAL_QUESTIONS + "."
+    );
+
+}
 
 
 /* =========================================================
@@ -3146,15 +3081,45 @@ expected:"classcontainer"
 
 async function apiRequest(payload){
 
-    const response = await fetch(API_URL,{
+    const response =
+        await fetch(
+            API_URL,
+            {
 
-        method:"POST",
+                method:"POST",
 
-        body:JSON.stringify(payload)
+                headers:{
+                    "Content-Type":
+                        "text/plain;charset=utf-8"
+                },
 
-    });
+                body:
+                    JSON.stringify(payload)
 
-    return await response.json();
+            }
+        );
+
+
+    const text =
+        await response.text();
+
+
+    try{
+
+        return JSON.parse(text);
+
+    }catch(error){
+
+        console.error(
+            "Invalid API response:",
+            text
+        );
+
+        throw new Error(
+            "Server returned an invalid response."
+        );
+
+    }
 
 }
 
@@ -3167,41 +3132,47 @@ function showAuth(type){
 
     clearMessage();
 
+
+    const login =
+        document.getElementById(
+            "loginForm"
+        );
+
+    const register =
+        document.getElementById(
+            "registerForm"
+        );
+
+    const loginTab =
+        document.getElementById(
+            "loginTab"
+        );
+
+    const registerTab =
+        document.getElementById(
+            "registerTab"
+        );
+
+
     if(type === "login"){
 
-        document
-            .getElementById("loginForm")
-            .classList.remove("hidden");
+        login.classList.remove("hidden");
 
-        document
-            .getElementById("registerForm")
-            .classList.add("hidden");
+        register.classList.add("hidden");
 
-        document
-            .getElementById("loginTab")
-            .classList.add("active");
+        loginTab.classList.add("active");
 
-        document
-            .getElementById("registerTab")
-            .classList.remove("active");
+        registerTab.classList.remove("active");
 
     }else{
 
-        document
-            .getElementById("loginForm")
-            .classList.add("hidden");
+        login.classList.add("hidden");
 
-        document
-            .getElementById("registerForm")
-            .classList.remove("hidden");
+        register.classList.remove("hidden");
 
-        document
-            .getElementById("loginTab")
-            .classList.remove("active");
+        loginTab.classList.remove("active");
 
-        document
-            .getElementById("registerTab")
-            .classList.add("active");
+        registerTab.classList.add("active");
 
     }
 
@@ -3217,22 +3188,29 @@ async function registerUser(){
     const name =
         document
             .getElementById("registerName")
-            .value.trim();
+            .value
+            .trim();
+
 
     const email =
         document
             .getElementById("registerEmail")
-            .value.trim();
+            .value
+            .trim()
+            .toLowerCase();
+
 
     const mobile =
         document
             .getElementById("registerMobile")
-            .value.trim();
+            .value
+            .trim();
 
-    if(!name || !email || !mobile){
+
+    if(!name){
 
         showMessage(
-            "Please fill all fields.",
+            "Please enter your full name.",
             "error"
         );
 
@@ -3240,10 +3218,11 @@ async function registerUser(){
 
     }
 
-    if(!/^[0-9]{10}$/.test(mobile)){
+
+    if(!validateEmail(email)){
 
         showMessage(
-            "Enter a valid 10-digit mobile number.",
+            "Please enter a valid email address.",
             "error"
         );
 
@@ -3251,17 +3230,25 @@ async function registerUser(){
 
     }
 
-    const button =
-        document.getElementById("registerBtn");
 
-    button.disabled = true;
+    if(!validateMobile(mobile)){
 
-    button.textContent =
-        "Creating account...";
+        showMessage(
+            "Please enter a valid 10-digit mobile number.",
+            "error"
+        );
+
+        return;
+
+    }
+
 
     try{
 
-        const data =
+        showLoader(true);
+
+
+        const response =
             await apiRequest({
 
                 action:"register",
@@ -3275,65 +3262,47 @@ async function registerUser(){
             });
 
 
-        if(data.success){
+        showLoader(false);
+
+
+        if(!response.success){
 
             showMessage(
-                "Account created successfully. You can now login.",
-                "success"
-            );
-
-            document
-                .getElementById("registerName")
-                .value = "";
-
-            document
-                .getElementById("registerEmail")
-                .value = "";
-
-            document
-                .getElementById("registerMobile")
-                .value = "";
-
-
-            setTimeout(()=>{
-
-                showAuth("login");
-
-                document
-                    .getElementById("loginEmail")
-                    .value = email;
-
-                document
-                    .getElementById("loginMobile")
-                    .value = mobile;
-
-            },1200);
-
-        }else{
-
-            showMessage(
-                data.message ||
+                response.message ||
                 "Registration failed.",
                 "error"
             );
 
+            return;
+
         }
 
+
+        currentUser =
+            response.user;
+
+
+        saveUser();
+
+
+        updateHeader();
+
+        showDashboard();
+
+
     }catch(error){
+
+        showLoader(false);
 
         console.error(error);
 
         showMessage(
+            error.message ||
             "Unable to connect to the server.",
             "error"
         );
 
     }
-
-    button.disabled = false;
-
-    button.textContent =
-        "Create Account";
 
 }
 
@@ -3347,17 +3316,22 @@ async function loginUser(){
     const email =
         document
             .getElementById("loginEmail")
-            .value.trim();
+            .value
+            .trim()
+            .toLowerCase();
+
 
     const mobile =
         document
             .getElementById("loginMobile")
-            .value.trim();
+            .value
+            .trim();
 
-    if(!email || !mobile){
+
+    if(!validateEmail(email)){
 
         showMessage(
-            "Enter your email and mobile number.",
+            "Please enter a valid email address.",
             "error"
         );
 
@@ -3365,29 +3339,25 @@ async function loginUser(){
 
     }
 
-    if(!/^[0-9]{10}$/.test(mobile)){
+
+    if(!validateMobile(mobile)){
 
         showMessage(
-            "Enter a valid 10-digit mobile number.",
+            "Please enter a valid 10-digit mobile number.",
             "error"
         );
 
         return;
 
     }
-
-    const button =
-        document.getElementById("loginBtn");
-
-    button.disabled = true;
-
-    button.textContent =
-        "Logging in...";
 
 
     try{
 
-        const data =
+        showLoader(true);
+
+
+        const response =
             await apiRequest({
 
                 action:"login",
@@ -3399,43 +3369,87 @@ async function loginUser(){
             });
 
 
-        if(data.success){
+        showLoader(false);
 
-            currentUser =
-                data.user || data.data;
 
-            localStorage.setItem(
-                "openboxPythonUser",
-                JSON.stringify(currentUser)
-            );
-
-            showDashboard();
-
-        }else{
+        if(!response.success){
 
             showMessage(
-                data.message ||
+                response.message ||
                 "Login failed.",
                 "error"
             );
 
+            return;
+
         }
 
+
+        currentUser =
+            response.user;
+
+
+        saveUser();
+
+        updateHeader();
+
+        showDashboard();
+
+
     }catch(error){
+
+        showLoader(false);
 
         console.error(error);
 
         showMessage(
+            error.message ||
             "Unable to connect to the server.",
             "error"
         );
 
     }
 
-    button.disabled = false;
+}
 
-    button.textContent =
-        "Login to Course";
+
+/* =========================================================
+   VALIDATION
+========================================================= */
+
+function validateEmail(email){
+
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+        .test(email);
+
+}
+
+
+function validateMobile(mobile){
+
+    return /^[0-9]{10}$/
+        .test(mobile);
+
+}
+
+
+/* =========================================================
+   SAVE USER
+========================================================= */
+
+function saveUser(){
+
+    if(!currentUser){
+
+        return;
+
+    }
+
+
+    localStorage.setItem(
+        "openboxPythonUser",
+        JSON.stringify(currentUser)
+    );
 
 }
 
@@ -3447,10 +3461,14 @@ async function loginUser(){
 function showDashboard(){
 
     if(!currentUser){
+
         return;
+
     }
 
+
     hideAllPages();
+
 
     document
         .getElementById("dashboardPage")
@@ -3460,6 +3478,7 @@ function showDashboard(){
     const name =
         currentUser.name ||
         "Learner";
+
 
     document
         .getElementById("dashboardName")
@@ -3479,39 +3498,55 @@ function showDashboard(){
         currentUser.email || "";
 
 
+    updateDashboardStatus();
+
+
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
+    });
+
+}
+
+
+/* =========================================================
+   DASHBOARD STATUS
+========================================================= */
+
+function updateDashboardStatus(){
+
     const status =
         currentUser.status ||
         "Not Started";
 
 
-    document
-        .getElementById("statusText")
-        .textContent =
-        status;
+    const statusText =
+        document.getElementById(
+            "statusText"
+        );
 
 
     const progress =
-        status === "Passed" ||
-        status === "Failed"
-            ? 100
-            : 0;
-
-
-    document
-        .getElementById("dashboardProgress")
-        .style.width =
-        progress + "%";
-
-
-    updateHeader();
+        document.getElementById(
+            "dashboardProgress"
+        );
 
 
     const actions =
-        document
-            .getElementById("dashboardActions");
+        document.getElementById(
+            "dashboardActions"
+        );
+
+
+    statusText.textContent =
+        status;
 
 
     if(status === "Passed"){
+
+        progress.style.width =
+            "100%";
+
 
         actions.innerHTML = `
 
@@ -3525,7 +3560,13 @@ function showDashboard(){
 
         `;
 
-    }else if(status === "Failed"){
+    }
+
+    else if(status === "Failed"){
+
+        progress.style.width =
+            "100%";
+
 
         actions.innerHTML = `
 
@@ -3539,7 +3580,35 @@ function showDashboard(){
 
         `;
 
-    }else{
+    }
+
+    else if(
+        status === "In Progress"
+    ){
+
+        progress.style.width =
+            "50%";
+
+
+        actions.innerHTML = `
+
+            <button
+                class="btn btn-primary"
+                onclick="startQuiz()">
+
+                Continue Assessment
+
+            </button>
+
+        `;
+
+    }
+
+    else{
+
+        progress.style.width =
+            "0%";
+
 
         actions.innerHTML = `
 
@@ -3564,16 +3633,24 @@ function showDashboard(){
 
 function startQuiz(){
 
+    if(!currentUser){
+
+        alert(
+            "Please login first."
+        );
+
+        return;
+
+    }
+
+
     if(
-        currentUser &&
-        (
-            currentUser.status === "Passed" ||
-            currentUser.status === "Failed"
-        )
+        currentUser.status === "Passed" ||
+        currentUser.status === "Failed"
     ){
 
         alert(
-            "You have already completed the assessment."
+            "Your assessment has already been submitted."
         );
 
         return;
@@ -3583,19 +3660,22 @@ function startQuiz(){
 
     currentQuestion = 0;
 
-    answers = [];
+    answers = new Array(
+        questions.length
+    );
 
-    timerSeconds =
-        QUIZ_DURATION;
 
-    quizStarted = true;
+    timerSeconds = EXAM_TIME;
 
     quizLocked = false;
 
     tabWarnings = 0;
 
+    quizStarted = true;
+
 
     hideAllPages();
+
 
     document
         .getElementById("quizPage")
@@ -3607,6 +3687,7 @@ function startQuiz(){
     startTimer();
 
     enterFullscreen();
+
 
     window.scrollTo({
         top:0,
@@ -3625,24 +3706,45 @@ function renderQuestion(){
     const q =
         questions[currentQuestion];
 
+
+    if(!q){
+
+        return;
+
+    }
+
+
     const content =
         document.getElementById(
             "quizContent"
         );
 
 
-    document
-        .getElementById("questionCounter")
-        .textContent =
-        `Question ${currentQuestion + 1} of ${TOTAL_QUESTIONS}`;
+    const counter =
+        document.getElementById(
+            "questionCounter"
+        );
 
 
-    document
-        .getElementById("quizProgress")
-        .style.width =
+    const progress =
+        document.getElementById(
+            "quizProgress"
+        );
+
+
+    counter.textContent =
+        `Question ${
+            currentQuestion + 1
+        } of ${questions.length}`;
+
+
+    progress.style.width =
         (
-            ((currentQuestion + 1) /
-            TOTAL_QUESTIONS) * 100
+            (
+                currentQuestion + 1
+            ) /
+            questions.length *
+            100
         ) + "%";
 
 
@@ -3651,28 +3753,38 @@ function renderQuestion(){
         <div class="question-card">
 
             <div class="question-number">
-                QUESTION ${currentQuestion + 1}
+
+                Question ${
+                    currentQuestion + 1
+                }
+
             </div>
 
             <div class="question-title">
-                ${escapeHtml(q.q)}
+
+                ${escapeHtml(q.question)}
+
             </div>
 
     `;
 
 
-    if(q.code){
+    if(q.type === "code"){
 
         html += `
 
-            <label class="code-label">
-                Write your Python solution:
-            </label>
+            <div class="code-label">
+
+                Write your Python code below:
+
+            </div>
 
             <textarea
                 id="codeAnswer"
-                class="code-area"
-                placeholder="# Write your Python code here...">${escapeHtml(
+                class="code-editor"
+                placeholder="Write your Python solution here..."
+                spellcheck="false"
+                autocomplete="off">${escapeHtml(
                     answers[currentQuestion] || ""
                 )}</textarea>
 
@@ -3688,6 +3800,7 @@ function renderQuestion(){
                         ? "selected"
                         : "";
 
+
                 html += `
 
                     <label
@@ -3699,8 +3812,8 @@ function renderQuestion(){
                             value="${index}"
                             ${
                                 answers[currentQuestion] === index
-                                ? "checked"
-                                : ""
+                                    ? "checked"
+                                    : ""
                             }
                             onchange="saveMCQ(${index})">
 
@@ -3719,7 +3832,9 @@ function renderQuestion(){
 
 
     html += `
+
         </div>
+
     `;
 
 
@@ -3738,7 +3853,8 @@ function renderQuestion(){
     document
         .getElementById("nextBtn")
         .textContent =
-        currentQuestion === TOTAL_QUESTIONS - 1
+        currentQuestion ===
+        questions.length - 1
             ? "Submit Assessment"
             : "Next →";
 
@@ -3757,14 +3873,16 @@ function saveMCQ(index){
 
     document
         .querySelectorAll(".option")
-        .forEach((el,i)=>{
+        .forEach(
+            (el,i)=>{
 
-            el.classList.toggle(
-                "selected",
-                i === index
-            );
+                el.classList.toggle(
+                    "selected",
+                    i === index
+                );
 
-        });
+            }
+        );
 
 }
 
@@ -3778,12 +3896,17 @@ function saveCurrentAnswer(){
     const q =
         questions[currentQuestion];
 
-    if(q && q.code){
+
+    if(
+        q &&
+        q.type === "code"
+    ){
 
         const textarea =
             document.getElementById(
                 "codeAnswer"
             );
+
 
         answers[currentQuestion] =
             textarea
@@ -3806,7 +3929,7 @@ function nextQuestion(){
 
     if(
         currentQuestion <
-        TOTAL_QUESTIONS - 1
+        questions.length - 1
     ){
 
         currentQuestion++;
@@ -3868,7 +3991,7 @@ function calculateScore(){
                 answers[index];
 
 
-            if(q.code){
+            if(q.type === "code"){
 
                 if(
                     evaluateCode(
@@ -3905,7 +4028,7 @@ function calculateScore(){
             Math.round(
                 (
                     correct /
-                    TOTAL_QUESTIONS
+                    questions.length
                 ) * 100
             )
 
@@ -3920,7 +4043,7 @@ function calculateScore(){
 
 function normalizeCode(code){
 
-    return code
+    return String(code)
 
         .toLowerCase()
 
@@ -3971,162 +4094,19 @@ function evaluateCode(
     }
 
 
-    if(expected === "total=(a+b)*c"){
+    /*
+     * Add your exact coding
+     * question evaluators here.
+     *
+     * This fallback currently
+     * checks whether an expected
+     * pattern exists.
+     */
 
-        return (
-            code.includes(
-                "total=(a+b)*c"
-            ) &&
-            code.includes(
-                "print(total)"
-            )
-        );
+    if(expected){
 
-    }
-
-
-    if(expected === "ifnumber>0"){
-
-        return (
-            code.includes(
-                "ifnumber>0"
-            ) &&
-            code.includes(
-                "elifnumber<0"
-            ) &&
-            code.includes("else")
-        );
-
-    }
-
-
-    if(expected === "foriinrange(n)"){
-
-        return (
-            code.includes(
-                "foriinrange(n)"
-            ) &&
-            code.includes(
-                "print(helloworld)"
-            )
-        );
-
-    }
-
-
-    if(expected === "whilei**3<n"){
-
-        return (
-            code.includes(
-                "whilei**3<n"
-            ) &&
-            code.includes(
-                "i+=1"
-            )
-        );
-
-    }
-
-
-    if(expected === "lnew=[e**2foreinlif"){
-
-        return (
-            code.includes(
-                "e**2"
-            ) &&
-            code.includes(
-                "for"
-            ) &&
-            code.includes(
-                "inl"
-            ) &&
-            code.includes(
-                "e%2==0"
-            )
-        );
-
-    }
-
-
-    if(expected === "defdiv_by(n,d):returnn%d==0"){
-
-        return (
-            code.includes(
-                "defdiv_by(n,d):"
-            ) &&
-            code.includes(
-                "returnn%d==0"
-            )
-        );
-
-    }
-
-
-    if(expected === "ford,vind.items"){
-
-        return (
-            code.includes(
-                "ford,vind.items"
-            ) &&
-            code.includes(
-                "ifk==v"
-            ) &&
-            code.includes(
-                "count+=1"
-            )
-        );
-
-    }
-
-
-    if(expected === "defrecur_power(base,exp)"){
-
-        return (
-            code.includes(
-                "defrecur_power(base,exp):"
-            ) &&
-            code.includes(
-                "return1"
-            ) &&
-            code.includes(
-                "base*recur_power"
-            )
-        );
-
-    }
-
-
-    if(expected === "deftotal_recur(l)"){
-
-        return (
-            code.includes(
-                "deftotal_recur(l):"
-            ) &&
-            (
-                code.includes(
-                    "l[0]+total_recur(l[1:])"
-                ) ||
-                code.includes(
-                    "total_recur(l[1:])+l[0]"
-                )
-            )
-        );
-
-    }
-
-
-    if(expected === "classcontainer"){
-
-        return (
-            code.includes(
-                "classcontainer"
-            ) &&
-            code.includes(
-                "def__init__(self):"
-            ) &&
-            code.includes(
-                "self.mylist=[]"
-            )
+        return code.includes(
+            normalizeCode(expected)
         );
 
     }
@@ -4180,6 +4160,16 @@ async function submitQuiz(){
         showLoader(true);
 
 
+        /*
+         * IMPORTANT:
+         *
+         * Send the number of correct
+         * answers, not the percentage.
+         *
+         * The Apps Script backend should
+         * calculate the official percentage.
+         */
+
         const response =
             await apiRequest({
 
@@ -4207,6 +4197,9 @@ async function submitQuiz(){
                 currentUser =
                     response.user;
 
+
+                saveUser();
+
                 showDashboard();
 
             }else{
@@ -4228,8 +4221,9 @@ async function submitQuiz(){
 
 
         /*
-         * Fallback score if backend
-         * does not return it.
+         * Fallback for development
+         * if backend does not yet return
+         * a percentage.
          */
 
         if(
@@ -4243,10 +4237,7 @@ async function submitQuiz(){
         }
 
 
-        localStorage.setItem(
-            "openboxPythonUser",
-            JSON.stringify(currentUser)
-        );
+        saveUser();
 
 
         stopTimer();
@@ -4404,6 +4395,12 @@ function showResult(data){
         `;
 
     }
+
+
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
+    });
 
 }
 
@@ -4579,13 +4576,16 @@ function shareLinkedIn(){
     );
 
 
-    setTimeout(()=>{
+    setTimeout(
+        ()=>{
 
-        alert(
-            "Your LinkedIn caption has been copied. Paste it into your LinkedIn post and add your certificate."
-        );
+            alert(
+                "Your LinkedIn caption has been copied. Paste it into your LinkedIn post and add your certificate."
+            );
 
-    },500);
+        },
+        500
+    );
 
 }
 
@@ -4598,6 +4598,7 @@ function startTimer(){
 
     stopTimer();
 
+
     updateTimer();
 
 
@@ -4607,16 +4608,21 @@ function startTimer(){
 
                 timerSeconds--;
 
+
                 updateTimer();
 
 
-                if(timerSeconds <= 0){
+                if(
+                    timerSeconds <= 0
+                ){
 
                     stopTimer();
+
 
                     alert(
                         "Time is up. Your assessment will be submitted."
                     );
+
 
                     submitQuiz();
 
@@ -4682,7 +4688,9 @@ function enterFullscreen(){
         document.documentElement;
 
 
-    if(element.requestFullscreen){
+    if(
+        element.requestFullscreen
+    ){
 
         element
             .requestFullscreen()
@@ -4746,8 +4754,8 @@ document.addEventListener(
         if(quizStarted){
 
             /*
-             * Allow typing into the
-             * code field but block paste.
+             * Paste is disabled during
+             * the assessment.
              */
 
             e.preventDefault();
@@ -4838,6 +4846,7 @@ document.addEventListener(
 
                 stopTimer();
 
+
                 alert(
                     "Assessment locked because the page was left repeatedly."
                 );
@@ -4851,6 +4860,7 @@ document.addEventListener(
 
 
                 showDashboard();
+
 
                 return;
 
@@ -4890,6 +4900,7 @@ function logout(){
 
         quizStarted = false;
 
+
         document
             .exitFullscreen?.();
 
@@ -4921,6 +4932,9 @@ function logout(){
         .getElementById("logoutBtn")
         .classList.add("hidden");
 
+
+    showAuth("login");
+
 }
 
 
@@ -4936,13 +4950,15 @@ function hideAllPages(){
         "quizPage",
         "resultPage",
         "certificatePage"
-    ].forEach(id=>{
+    ].forEach(
+        id=>{
 
-        document
-            .getElementById(id)
-            .classList.add("hidden");
+            document
+                .getElementById(id)
+                .classList.add("hidden");
 
-    });
+        }
+    );
 
 }
 
@@ -4988,7 +5004,9 @@ function clearMessage(){
         );
 
 
-    box.textContent = "";
+    box.textContent =
+        "";
+
 
     box.className =
         "message";
@@ -5102,6 +5120,7 @@ window.addEventListener(
 
                 updateHeader();
 
+
                 refreshUser();
 
 
@@ -5154,12 +5173,10 @@ async function refreshUser(){
                 response.user;
 
 
-            localStorage.setItem(
-                "openboxPythonUser",
-                JSON.stringify(
-                    currentUser
-                )
-            );
+            saveUser();
+
+
+            updateHeader();
 
 
             showDashboard();
@@ -5177,6 +5194,12 @@ async function refreshUser(){
          * continue with cached user.
          */
 
+        console.warn(
+            "Could not refresh user:",
+            error
+        );
+
+
         showDashboard();
 
     }
@@ -5186,4 +5209,6 @@ async function refreshUser(){
 </script>
 
 </body>
+
 </html>
+```
