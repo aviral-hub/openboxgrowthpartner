@@ -2,2047 +2,3851 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-  <title>6.100L — Python Learning Hub</title>
-
-  <style>
-    :root {
-      --bg: #f7f8fa;
-      --card: #ffffff;
-      --text: #111827;
-      --muted: #6b7280;
-      --border: #e5e7eb;
-      --primary: #111827;
-      --primary-hover: #000000;
-      --green: #16a34a;
-      --green-bg: #ecfdf5;
-      --blue: #2563eb;
-      --blue-bg: #eff6ff;
-      --orange: #ea580c;
-      --orange-bg: #fff7ed;
-      --locked: #9ca3af;
-      --shadow: 0 8px 30px rgba(0,0,0,0.06);
-    }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    body {
-      font-family:
-        Inter,
-        -apple-system,
-        BlinkMacSystemFont,
-        "Segoe UI",
-        Roboto,
-        Helvetica,
-        Arial,
-        sans-serif;
-
-      background: var(--bg);
-      color: var(--text);
-      line-height: 1.5;
-    }
-
-    a {
-      text-decoration: none;
-      color: inherit;
-    }
-
-    button {
-      font: inherit;
-    }
-
-    /* =========================
-       NAVBAR
-    ========================= */
-
-    .navbar {
-      height: 70px;
-      background: #fff;
-      border-bottom: 1px solid var(--border);
-
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-
-      padding: 0 6%;
-      position: sticky;
-      top: 0;
-      z-index: 100;
-    }
-
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      font-weight: 800;
-      font-size: 18px;
-    }
-
-    .brand-mark {
-      width: 38px;
-      height: 38px;
-
-      border-radius: 10px;
-      background: #111827;
-      color: white;
-
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      font-size: 14px;
-      font-weight: 800;
-    }
-
-    .nav-links {
-      display: flex;
-      align-items: center;
-      gap: 24px;
-    }
-
-    .nav-links a {
-      color: #4b5563;
-      font-size: 14px;
-      font-weight: 600;
-    }
-
-    .nav-links a:hover {
-      color: #111827;
-    }
-
-    .final-test-btn {
-      background: var(--primary);
-      color: white !important;
-
-      padding: 10px 16px;
-      border-radius: 8px;
-
-      transition: 0.2s;
-    }
-
-    .final-test-btn:hover {
-      background: var(--primary-hover);
-      transform: translateY(-1px);
-    }
-
-    /* =========================
-       HERO
-    ========================= */
-
-    .hero {
-      max-width: 1200px;
-      margin: 0 auto;
-
-      padding: 70px 24px 45px;
-    }
-
-    .eyebrow {
-      display: inline-flex;
-      align-items: center;
-
-      padding: 6px 10px;
-
-      border-radius: 999px;
-
-      background: #eef2ff;
-      color: #4338ca;
-
-      font-size: 12px;
-      font-weight: 800;
-
-      margin-bottom: 18px;
-    }
-
-    .hero h1 {
-      font-size: clamp(36px, 5vw, 64px);
-      line-height: 1.05;
-
-      letter-spacing: -2px;
-
-      max-width: 850px;
-      margin-bottom: 20px;
-    }
-
-    .hero p {
-      max-width: 750px;
-
-      color: var(--muted);
-
-      font-size: 18px;
-      line-height: 1.7;
-    }
-
-    .hero-actions {
-      display: flex;
-      gap: 12px;
-
-      margin-top: 28px;
-
-      flex-wrap: wrap;
-    }
-
-    .btn {
-      border: 0;
-
-      padding: 12px 18px;
-
-      border-radius: 9px;
-
-      font-weight: 700;
-      cursor: pointer;
-
-      transition: 0.2s;
-    }
-
-    .btn-primary {
-      background: var(--primary);
-      color: white;
-    }
-
-    .btn-primary:hover {
-      transform: translateY(-1px);
-      background: #000;
-    }
-
-    .btn-secondary {
-      background: white;
-      border: 1px solid var(--border);
-      color: var(--text);
-    }
-
-    .btn-secondary:hover {
-      background: #f9fafb;
-    }
-
-    /* =========================
-       PROGRESS
-    ========================= */
-
-    .progress-container {
-      max-width: 1200px;
-      margin: 0 auto;
-
-      padding: 0 24px 30px;
-    }
-
-    .progress-card {
-      background: white;
-
-      border: 1px solid var(--border);
-      border-radius: 16px;
-
-      padding: 22px;
-
-      box-shadow: var(--shadow);
-    }
-
-    .progress-top {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-
-      gap: 20px;
-
-      margin-bottom: 14px;
-    }
-
-    .progress-title {
-      font-weight: 800;
-      font-size: 15px;
-    }
-
-    .progress-percent {
-      font-weight: 800;
-      font-size: 14px;
-    }
-
-    .progress-bar {
-      width: 100%;
-      height: 10px;
-
-      background: #eef0f3;
-
-      border-radius: 999px;
-
-      overflow: hidden;
-    }
-
-    .progress-fill {
-      width: 0%;
-
-      height: 100%;
-
-      background: #111827;
-
-      border-radius: inherit;
-
-      transition: width 0.3s ease;
-    }
-
-    .progress-meta {
-      display: flex;
-      justify-content: space-between;
-
-      color: var(--muted);
-
-      font-size: 13px;
-
-      margin-top: 10px;
-    }
-
-    /* =========================
-       MAIN
-    ========================= */
-
-    .main {
-      max-width: 1200px;
-      margin: 0 auto;
-
-      padding: 0 24px 80px;
-    }
-
-    .section-heading {
-      display: flex;
-      align-items: end;
-      justify-content: space-between;
-
-      gap: 20px;
-
-      margin: 35px 0 20px;
-    }
-
-    .section-heading h2 {
-      font-size: 28px;
-      letter-spacing: -0.7px;
-    }
-
-    .section-heading p {
-      color: var(--muted);
-      font-size: 14px;
-    }
-
-    /* =========================
-       RESOURCE HUB
-    ========================= */
-
-    .resource-grid {
-      display: grid;
-
-      grid-template-columns:
-        repeat(3, 1fr);
-
-      gap: 16px;
-    }
-
-    .resource-card {
-      background: white;
-
-      border: 1px solid var(--border);
-
-      border-radius: 14px;
-
-      padding: 22px;
-
-      transition: 0.2s;
-
-      box-shadow: 0 4px 15px rgba(0,0,0,0.03);
-    }
-
-    .resource-card:hover {
-      transform: translateY(-2px);
-      box-shadow: var(--shadow);
-    }
-
-    .resource-icon {
-      width: 42px;
-      height: 42px;
-
-      border-radius: 10px;
-
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      margin-bottom: 15px;
-
-      font-size: 20px;
-    }
-
-    .resource-card:nth-child(1) .resource-icon {
-      background: #eef2ff;
-    }
-
-    .resource-card:nth-child(2) .resource-icon {
-      background: #ecfdf5;
-    }
-
-    .resource-card:nth-child(3) .resource-icon {
-      background: #fff7ed;
-    }
-
-    .resource-card h3 {
-      margin-bottom: 7px;
-      font-size: 17px;
-    }
-
-    .resource-card p {
-      color: var(--muted);
-      font-size: 13px;
-      margin-bottom: 16px;
-    }
-
-    .resource-link {
-      color: var(--blue);
-
-      font-weight: 700;
-
-      font-size: 13px;
-    }
-
-    /* =========================
-       COURSE STRUCTURE
-    ========================= */
-
-    .course-flow {
-      display: flex;
-      align-items: center;
-
-      gap: 8px;
-
-      margin-bottom: 30px;
-
-      overflow-x: auto;
-
-      padding-bottom: 8px;
-    }
-
-    .flow-step {
-      min-width: 150px;
-
-      padding: 13px 16px;
-
-      background: white;
-
-      border: 1px solid var(--border);
-
-      border-radius: 10px;
-
-      text-align: center;
-
-      font-size: 13px;
-      font-weight: 700;
-
-      white-space: nowrap;
-    }
-
-    .flow-arrow {
-      color: #9ca3af;
-      font-weight: 800;
-    }
-
-    /* =========================
-       LECTURES
-    ========================= */
-
-    .lecture-list {
-      display: flex;
-      flex-direction: column;
-
-      gap: 12px;
-    }
-
-    .lecture-card {
-      background: white;
-
-      border: 1px solid var(--border);
-
-      border-radius: 14px;
-
-      padding: 18px 20px;
-
-      display: grid;
-
-      grid-template-columns: 62px 1fr auto;
-
-      align-items: center;
-
-      gap: 18px;
-
-      transition: 0.2s;
-    }
-
-    .lecture-card:hover {
-      box-shadow: 0 5px 20px rgba(0,0,0,0.05);
-    }
-
-    .lecture-card.locked {
-      opacity: 0.62;
-      background: #fafafa;
-    }
-
-    .lecture-number {
-      width: 48px;
-      height: 48px;
-
-      border-radius: 12px;
-
-      background: #f3f4f6;
-
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      font-weight: 900;
-
-      font-size: 14px;
-    }
-
-    .lecture-card.completed .lecture-number {
-      background: var(--green-bg);
-      color: var(--green);
-    }
-
-    .lecture-info h3 {
-      font-size: 16px;
-      margin-bottom: 4px;
-    }
-
-    .lecture-info p {
-      color: var(--muted);
-      font-size: 13px;
-    }
-
-    .lecture-actions {
-      display: flex;
-
-      align-items: center;
-
-      justify-content: flex-end;
-
-      gap: 8px;
-
-      flex-wrap: wrap;
-    }
-
-    .small-btn {
-      border: 1px solid var(--border);
-
-      background: white;
-
-      padding: 8px 11px;
-
-      border-radius: 7px;
-
-      font-size: 12px;
-
-      font-weight: 700;
-
-      cursor: pointer;
-    }
-
-    .small-btn:hover {
-      background: #f9fafb;
-    }
-
-    .small-btn.disabled {
-      cursor: not-allowed;
-
-      background: #f3f4f6;
-
-      color: #9ca3af;
-    }
-
-    .complete-btn {
-      background: #111827;
-      color: white;
-
-      border-color: #111827;
-    }
-
-    .lecture-card.completed .complete-btn {
-      background: var(--green);
-      border-color: var(--green);
-    }
-
-    /* =========================
-       POST LECTURE
-    ========================= */
-
-    .locked-section {
-      margin-top: 50px;
-
-      background: white;
-
-      border: 1px solid var(--border);
-
-      border-radius: 18px;
-
-      padding: 30px;
-
-      position: relative;
-
-      overflow: hidden;
-    }
-
-    .locked-section::before {
-      content: "";
-
-      position: absolute;
-
-      top: 0;
-      left: 0;
-      right: 0;
-
-      height: 4px;
-
-      background: #111827;
-    }
-
-    .locked-section h2 {
-      font-size: 24px;
-
-      margin-bottom: 8px;
-    }
-
-    .locked-section > p {
-      color: var(--muted);
-
-      max-width: 700px;
-
-      font-size: 14px;
-
-      margin-bottom: 24px;
-    }
-
-    .requirements {
-      display: grid;
-
-      grid-template-columns:
-        repeat(3, 1fr);
-
-      gap: 14px;
-
-      margin-bottom: 20px;
-    }
-
-    .requirement {
-      padding: 16px;
-
-      border-radius: 10px;
-
-      border: 1px solid var(--border);
-
-      background: #fafafa;
-    }
-
-    .requirement strong {
-      display: block;
-
-      margin-bottom: 5px;
-    }
-
-    .requirement span {
-      color: var(--muted);
-
-      font-size: 12px;
-    }
-
-    .section-locked-message {
-      display: inline-flex;
-
-      align-items: center;
-
-      gap: 8px;
-
-      color: var(--muted);
-
-      font-size: 13px;
-
-      margin-top: 5px;
-    }
-
-    /* =========================
-       FINAL TEST
-    ========================= */
-
-    .final-test-card {
-      margin-top: 40px;
-
-      padding: 30px;
-
-      border-radius: 18px;
-
-      background: #111827;
-
-      color: white;
-
-      display: flex;
-
-      justify-content: space-between;
-
-      align-items: center;
-
-      gap: 25px;
-    }
-
-    .final-test-card h2 {
-      margin-bottom: 8px;
-      font-size: 24px;
-    }
-
-    .final-test-card p {
-      color: #cbd5e1;
-      font-size: 14px;
-
-      max-width: 650px;
-    }
-
-    .final-test-card .btn {
-      background: white;
-      color: #111827;
-
-      white-space: nowrap;
-    }
-
-    .final-test-card .btn.disabled {
-      opacity: 0.45;
-
-      cursor: not-allowed;
-    }
-
-    /* =========================
-       FOOTER
-    ========================= */
-
-    footer {
-      border-top: 1px solid var(--border);
-
-      background: white;
-
-      padding: 35px 24px;
-
-      text-align: center;
-
-      color: var(--muted);
-
-      font-size: 13px;
-    }
-
-    footer strong {
-      color: #111827;
-    }
-
-    footer a {
-      color: var(--blue);
-      font-weight: 700;
-    }
-
-    /* =========================
-       RESPONSIVE
-    ========================= */
-
-    @media (max-width: 900px) {
-
-      .resource-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .requirements {
-        grid-template-columns: 1fr;
-      }
-
-      .lecture-card {
-        grid-template-columns: 52px 1fr;
-      }
-
-      .lecture-actions {
-        grid-column: 1 / -1;
-
-        justify-content: flex-start;
-      }
-
-      .final-test-card {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-
-      .nav-links a:not(.final-test-btn) {
-        display: none;
-      }
-    }
-
-    @media (max-width: 600px) {
-
-      .navbar {
-        padding: 0 20px;
-      }
-
-      .hero {
-        padding-top: 45px;
-      }
-
-      .hero h1 {
-        font-size: 38px;
-      }
-
-      .hero p {
-        font-size: 16px;
-      }
-
-      .lecture-card {
-        padding: 15px;
-      }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="theme-color" content="#0b0b0f">
+<title>Python Programming Fundamentals | Openbox Academy</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --bg:#07070a;
+  --card:#111116;
+  --card2:#17171e;
+  --border:#282831;
+  --text:#f5f5f7;
+  --muted:#9b9ba7;
+  --accent:#ffffff;
+  --success:#35d07f;
+  --danger:#ff5d6c;
+  --warning:#ffca58;
+  --blue:#6ea8ff;
+  --shadow:0 20px 60px rgba(0,0,0,.35);
+}
+
+*{
+  box-sizing:border-box;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  margin:0;
+  background:
+    radial-gradient(circle at 20% 0%,rgba(255,255,255,.07),transparent 30%),
+    radial-gradient(circle at 90% 20%,rgba(110,168,255,.06),transparent 25%),
+    var(--bg);
+  color:var(--text);
+  font-family:Inter,Arial,sans-serif;
+}
+
+button,
+input{
+  font:inherit;
+}
+
+button{
+  cursor:pointer;
+}
+
+a{
+  color:inherit;
+  text-decoration:none;
+}
+
+/* ================= HEADER ================= */
+
+.header{
+  position:sticky;
+  top:0;
+  z-index:100;
+  backdrop-filter:blur(18px);
+  background:rgba(7,7,10,.82);
+  border-bottom:1px solid var(--border);
+}
+
+.header-inner{
+  max-width:1200px;
+  margin:auto;
+  padding:15px 20px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:20px;
+}
+
+.logo{
+  font-size:20px;
+  font-weight:800;
+}
+
+.logo span{
+  color:#aaa;
+}
+
+.header-right{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+
+.progress-mini{
+  width:150px;
+  height:7px;
+  border-radius:20px;
+  background:#25252c;
+  overflow:hidden;
+}
+
+.progress-mini-fill{
+  height:100%;
+  width:0%;
+  background:#fff;
+  transition:.3s;
+}
+
+.user-pill{
+  padding:8px 12px;
+  border:1px solid var(--border);
+  border-radius:100px;
+  font-size:13px;
+  color:#ddd;
+}
+
+/* ================= LAYOUT ================= */
+
+.container{
+  max-width:1200px;
+  margin:auto;
+  padding:30px 20px 80px;
+}
+
+.view{
+  display:none;
+}
+
+.view.active{
+  display:block;
+}
+
+/* ================= LOGIN ================= */
+
+.auth-wrap{
+  min-height:calc(100vh - 80px);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+
+.auth-card{
+  width:min(460px,100%);
+  background:rgba(17,17,22,.9);
+  border:1px solid var(--border);
+  border-radius:24px;
+  padding:35px;
+  box-shadow:var(--shadow);
+}
+
+.auth-card h1{
+  margin:0 0 10px;
+  font-size:32px;
+}
+
+.auth-card p{
+  color:var(--muted);
+  line-height:1.6;
+}
+
+.brand-mark{
+  display:inline-flex;
+  padding:7px 12px;
+  border:1px solid var(--border);
+  border-radius:100px;
+  margin-bottom:20px;
+  font-size:12px;
+  font-weight:700;
+}
+
+.field{
+  margin:18px 0;
+}
+
+.field label{
+  display:block;
+  font-size:13px;
+  color:#bbb;
+  margin-bottom:8px;
+}
+
+.field input{
+  width:100%;
+  padding:14px 15px;
+  border-radius:12px;
+  border:1px solid var(--border);
+  background:#0c0c10;
+  color:#fff;
+  outline:none;
+}
+
+.field input:focus{
+  border-color:#777;
+}
+
+.primary{
+  width:100%;
+  border:0;
+  border-radius:12px;
+  padding:14px 18px;
+  background:#fff;
+  color:#000;
+  font-weight:800;
+}
+
+.secondary{
+  border:1px solid var(--border);
+  border-radius:12px;
+  padding:12px 17px;
+  background:#15151a;
+  color:#fff;
+  font-weight:600;
+}
+
+.danger-btn{
+  border:1px solid rgba(255,93,108,.3);
+  border-radius:12px;
+  padding:12px 17px;
+  background:rgba(255,93,108,.08);
+  color:#ff8792;
+}
+
+.auth-note{
+  margin-top:18px;
+  font-size:12px;
+  color:#777;
+}
+
+/* ================= DASHBOARD ================= */
+
+.hero{
+  padding:55px 0 35px;
+}
+
+.eyebrow{
+  color:#aaa;
+  font-size:13px;
+  font-weight:700;
+  text-transform:uppercase;
+  letter-spacing:.12em;
+}
+
+.hero h1{
+  max-width:800px;
+  font-size:clamp(38px,6vw,70px);
+  line-height:1;
+  margin:15px 0;
+}
+
+.hero p{
+  max-width:720px;
+  color:var(--muted);
+  line-height:1.7;
+}
+
+.hero-actions{
+  display:flex;
+  gap:12px;
+  flex-wrap:wrap;
+  margin-top:25px;
+}
+
+.stat-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:15px;
+  margin:25px 0 45px;
+}
+
+.stat{
+  padding:22px;
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:18px;
+}
+
+.stat-number{
+  font-size:28px;
+  font-weight:800;
+}
+
+.stat-label{
+  color:var(--muted);
+  font-size:13px;
+  margin-top:5px;
+}
+
+/* ================= RESOURCE HUB ================= */
+
+.section-title{
+  margin:50px 0 20px;
+}
+
+.section-title h2{
+  margin:0 0 8px;
+  font-size:28px;
+}
+
+.section-title p{
+  margin:0;
+  color:var(--muted);
+}
+
+.resource-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:15px;
+}
+
+.resource{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:18px;
+  padding:20px;
+  transition:.2s;
+}
+
+.resource:hover{
+  transform:translateY(-2px);
+  border-color:#4b4b55;
+}
+
+.resource h3{
+  margin:0 0 9px;
+}
+
+.resource p{
+  color:var(--muted);
+  font-size:13px;
+  line-height:1.6;
+}
+
+.resource-actions{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+}
+
+.resource-actions a{
+  padding:9px 11px;
+  border:1px solid var(--border);
+  border-radius:9px;
+  font-size:12px;
+}
+
+/* ================= LECTURES ================= */
+
+.lecture-list{
+  display:grid;
+  gap:10px;
+}
+
+.lecture{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:16px;
+  padding:16px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:15px;
+}
+
+.lecture.locked{
+  opacity:.48;
+}
+
+.lecture-left{
+  display:flex;
+  align-items:center;
+  gap:15px;
+}
+
+.lecture-number{
+  width:42px;
+  height:42px;
+  display:grid;
+  place-items:center;
+  border-radius:12px;
+  background:#1b1b22;
+  font-weight:800;
+}
+
+.lecture h3{
+  margin:0 0 5px;
+  font-size:15px;
+}
+
+.lecture small{
+  color:var(--muted);
+}
+
+.lecture-actions{
+  display:flex;
+  gap:7px;
+  flex-wrap:wrap;
+  justify-content:flex-end;
+}
+
+.lecture-actions a,
+.lecture-actions button{
+  border:1px solid var(--border);
+  background:#17171d;
+  color:#fff;
+  padding:9px 11px;
+  border-radius:9px;
+  font-size:12px;
+}
+
+.done{
+  color:var(--success)!important;
+  border-color:rgba(53,208,127,.25)!important;
+}
+
+/* ================= TEST ================= */
+
+.test-wrap{
+  max-width:900px;
+  margin:auto;
+}
+
+.test-top{
+  position:sticky;
+  top:73px;
+  z-index:50;
+  background:rgba(7,7,10,.95);
+  backdrop-filter:blur(15px);
+  border-bottom:1px solid var(--border);
+  padding:14px 0;
+}
+
+.test-top-inner{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:15px;
+  max-width:900px;
+  margin:auto;
+}
+
+.timer{
+  color:var(--warning);
+  font-weight:800;
+  font-variant-numeric:tabular-nums;
+}
+
+.question-card{
+  margin-top:30px;
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:22px;
+  padding:30px;
+}
+
+.question-meta{
+  display:flex;
+  justify-content:space-between;
+  color:#888;
+  font-size:13px;
+  margin-bottom:25px;
+}
+
+.question-text{
+  font-size:21px;
+  line-height:1.5;
+  font-weight:700;
+  white-space:pre-wrap;
+}
+
+.options{
+  display:grid;
+  gap:12px;
+  margin-top:25px;
+}
+
+.option{
+  display:flex;
+  align-items:flex-start;
+  gap:12px;
+  padding:16px;
+  border:1px solid var(--border);
+  border-radius:13px;
+  background:#0e0e12;
+  transition:.15s;
+}
+
+.option:hover{
+  border-color:#555;
+}
+
+.option input{
+  margin-top:4px;
+}
+
+.code-answer{
+  width:100%;
+  min-height:230px;
+  margin-top:20px;
+  padding:17px;
+  resize:vertical;
+  background:#08080b;
+  border:1px solid var(--border);
+  border-radius:13px;
+  color:#eee;
+  font-family:Consolas,monospace;
+  font-size:14px;
+  line-height:1.6;
+}
+
+.test-navigation{
+  display:flex;
+  justify-content:space-between;
+  gap:12px;
+  margin-top:20px;
+}
+
+.warning-box{
+  background:rgba(255,202,88,.07);
+  border:1px solid rgba(255,202,88,.2);
+  color:#e8cf92;
+  padding:13px;
+  border-radius:12px;
+  font-size:13px;
+  line-height:1.5;
+}
+
+/* ================= RESULT ================= */
+
+.result-card{
+  max-width:700px;
+  margin:70px auto;
+  text-align:center;
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:25px;
+  padding:45px 30px;
+}
+
+.result-icon{
+  font-size:55px;
+}
+
+.score{
+  font-size:70px;
+  font-weight:900;
+  margin:10px 0;
+}
+
+.pass{
+  color:var(--success);
+}
+
+.fail{
+  color:var(--danger);
+}
+
+.result-actions{
+  display:flex;
+  justify-content:center;
+  gap:10px;
+  flex-wrap:wrap;
+  margin-top:25px;
+}
+
+/* ================= CERTIFICATE ================= */
+
+.certificate-page{
+  padding:35px 0 70px;
+}
+
+.certificate{
+  max-width:1000px;
+  min-height:700px;
+  margin:20px auto;
+  background:#f8f5ec;
+  color:#161616;
+  position:relative;
+  padding:55px;
+  box-shadow:0 25px 80px rgba(0,0,0,.45);
+  border:12px solid #ddd2b7;
+  outline:2px solid #927c4c;
+  outline-offset:-25px;
+}
+
+.certificate:before,
+.certificate:after{
+  content:"";
+  position:absolute;
+  width:80px;
+  height:80px;
+  border:2px solid #927c4c;
+}
+
+.certificate:before{
+  left:35px;
+  top:35px;
+  border-right:0;
+  border-bottom:0;
+}
+
+.certificate:after{
+  right:35px;
+  bottom:35px;
+  border-left:0;
+  border-top:0;
+}
+
+.cert-inner{
+  text-align:center;
+  position:relative;
+  z-index:2;
+}
+
+.cert-brand{
+  font-size:22px;
+  font-weight:800;
+  letter-spacing:.08em;
+  margin-top:15px;
+}
+
+.cert-title{
+  font-family:"Playfair Display",serif;
+  font-size:55px;
+  margin:70px 0 20px;
+  letter-spacing:.02em;
+}
+
+.cert-sub{
+  font-size:14px;
+  letter-spacing:.15em;
+  text-transform:uppercase;
+  color:#6f6b61;
+}
+
+.cert-name{
+  font-family:"Playfair Display",serif;
+  font-size:42px;
+  margin:35px 0 15px;
+  border-bottom:1px solid #9b9079;
+  display:inline-block;
+  padding:0 40px 8px;
+}
+
+.cert-body{
+  max-width:720px;
+  margin:25px auto;
+  font-size:15px;
+  line-height:1.8;
+}
+
+.cert-course{
+  font-weight:800;
+}
+
+.cert-meta{
+  display:flex;
+  justify-content:center;
+  gap:60px;
+  margin:45px 0;
+  font-size:13px;
+}
+
+.cert-footer{
+  font-size:10px;
+  color:#6f6b61;
+  max-width:780px;
+  margin:20px auto 0;
+  line-height:1.5;
+}
+
+.cert-sign{
+  margin-top:20px;
+  font-weight:700;
+}
+
+.cert-id{
+  position:absolute;
+  right:45px;
+  top:45px;
+  font-size:10px;
+  color:#665e4c;
+}
+
+/* ================= SHARE ================= */
+
+.share-card{
+  max-width:800px;
+  margin:30px auto;
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:20px;
+  padding:25px;
+}
+
+.caption-box{
+  width:100%;
+  min-height:300px;
+  padding:18px;
+  background:#0b0b0f;
+  color:#eee;
+  border:1px solid var(--border);
+  border-radius:14px;
+  resize:vertical;
+  line-height:1.6;
+}
+
+.cta{
+  text-align:center;
+  padding:40px 20px;
+  margin-top:30px;
+  border:1px solid var(--border);
+  border-radius:20px;
+  background:linear-gradient(135deg,#111118,#17171e);
+}
+
+.cta h2{
+  margin-top:0;
+}
+
+/* ================= TOAST ================= */
+
+.toast{
+  position:fixed;
+  right:20px;
+  bottom:20px;
+  z-index:500;
+  padding:13px 17px;
+  border-radius:12px;
+  background:#fff;
+  color:#000;
+  font-size:13px;
+  font-weight:700;
+  transform:translateY(120px);
+  transition:.25s;
+}
+
+.toast.show{
+  transform:translateY(0);
+}
+
+/* ================= MOBILE ================= */
+
+@media(max-width:800px){
+
+  .stat-grid,
+  .resource-grid{
+    grid-template-columns:1fr;
+  }
+
+  .header-right .progress-mini{
+    display:none;
+  }
+
+  .lecture{
+    align-items:flex-start;
+  }
+
+  .lecture-actions{
+    flex-direction:column;
+  }
+
+  .lecture-actions a,
+  .lecture-actions button{
+    width:100%;
+  }
+
+  .certificate{
+    min-height:auto;
+    padding:40px 25px;
+  }
+
+  .cert-title{
+    font-size:38px;
+    margin-top:70px;
+  }
+
+  .cert-name{
+    font-size:30px;
+    padding:0 15px 8px;
+  }
+
+  .cert-meta{
+    flex-direction:column;
+    gap:15px;
+  }
+
+  .question-card{
+    padding:20px;
+  }
+}
+
+/* ================= PRINT ================= */
+
+@media print{
+
+  body{
+    background:#fff!important;
+  }
+
+  body *{
+    visibility:hidden!important;
+  }
+
+  #certificateArea,
+  #certificateArea *{
+    visibility:visible!important;
+  }
+
+  #certificateArea{
+    position:absolute;
+    left:0;
+    top:0;
+    width:100%;
+  }
+
+  .certificate{
+    box-shadow:none!important;
+    margin:0!important;
+    width:100%!important;
+    max-width:none!important;
+  }
+}
+</style>
 </head>
 
 <body>
 
-  <!-- =========================
-       NAVBAR
-  ========================== -->
+<header class="header" id="mainHeader" style="display:none;">
+  <div class="header-inner">
 
-  <nav class="navbar">
+    <div class="logo">
+      Openbox <span>Academy</span>
+    </div>
 
-    <a href="#" class="brand">
+    <div class="header-right">
+      <div class="progress-mini">
+        <div class="progress-mini-fill" id="headerProgress"></div>
+      </div>
+
+      <div class="user-pill" id="userPill">
+        Student
+      </div>
+
+      <button class="secondary" onclick="logout()">
+        Logout
+      </button>
+    </div>
+
+  </div>
+</header>
+
+
+<!-- ========================================================= -->
+<!-- LOGIN / REGISTRATION -->
+<!-- ========================================================= -->
+
+<section id="loginView" class="view active">
+
+  <div class="auth-wrap">
+
+    <div class="auth-card">
+
       <div class="brand-mark">
-        6.1L
+        OPENBOX ACADEMY
       </div>
 
-      <span>
-        Python Learning Hub
-      </span>
-    </a>
-
-    <div class="nav-links">
-
-      <a href="#resources">
-        Resources
-      </a>
-
-      <a href="#lectures">
-        Lectures
-      </a>
-
-      <a href="#problem-sets">
-        Problem Sets
-      </a>
-
-      <a
-        href="final-test.html"
-        class="final-test-btn"
-        id="navFinalTest"
-      >
-        Final Test
-      </a>
-
-    </div>
-
-  </nav>
-
-
-  <!-- =========================
-       HERO
-  ========================== -->
-
-  <header class="hero">
-
-    <span class="eyebrow">
-      6.100L • FALL 2022
-    </span>
-
-    <h1>
-      Introduction to Computer Science
-      and Programming Using Python
-    </h1>
-
-    <p>
-      A completion-based learning path built around the
-      MIT OpenCourseWare 6.100L course. Complete all
-      26 lectures, work through the problem sets, and
-      unlock the final assessment.
-    </p>
-
-    <div class="hero-actions">
-
-      <a
-        href="#lectures"
-        class="btn btn-primary"
-      >
-        Start Learning
-      </a>
-
-      <a
-        href="https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/video_galleries/lecture-videos/"
-        target="_blank"
-        rel="noopener noreferrer"
-        class="btn btn-secondary"
-      >
-        View MIT Lecture Videos
-      </a>
-
-    </div>
-
-  </header>
-
-
-  <!-- =========================
-       PROGRESS
-  ========================== -->
-
-  <section class="progress-container">
-
-    <div class="progress-card">
-
-      <div class="progress-top">
-
-        <span class="progress-title">
-          Course Progress
-        </span>
-
-        <span
-          class="progress-percent"
-          id="progressPercent"
-        >
-          0%
-        </span>
-
-      </div>
-
-      <div class="progress-bar">
-
-        <div
-          class="progress-fill"
-          id="progressFill"
-        ></div>
-
-      </div>
-
-      <div class="progress-meta">
-
-        <span id="progressText">
-          0 of 26 lectures completed
-        </span>
-
-        <span id="courseStatus">
-          Lecture 1 unlocked
-        </span>
-
-      </div>
-
-    </div>
-
-  </section>
-
-
-  <!-- =========================
-       MAIN
-  ========================== -->
-
-  <main class="main">
-
-
-    <!-- =========================
-         RESOURCE HUB
-    ========================== -->
-
-    <section id="resources">
-
-      <div class="section-heading">
-
-        <div>
-
-          <h2>
-            Course Resources Hub
-          </h2>
-
-          <p>
-            Official MIT OpenCourseWare learning resources.
-          </p>
-
-        </div>
-
-      </div>
-
-
-      <div class="resource-grid">
-
-
-        <div class="resource-card">
-
-          <div class="resource-icon">
-            ▶
-          </div>
-
-          <h3>
-            Lecture Videos
-          </h3>
-
-          <p>
-            Watch the complete collection of all
-            26 MIT 6.100L lectures.
-          </p>
-
-          <a
-            class="resource-link"
-            target="_blank"
-            rel="noopener noreferrer"
-            href="https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/video_galleries/lecture-videos/"
-          >
-            Open MIT Lecture Videos →
-          </a>
-
-        </div>
-
-
-        <div class="resource-card">
-
-          <div class="resource-icon">
-            PDF
-          </div>
-
-          <h3>
-            Lecture Notes
-          </h3>
-
-          <p>
-            Access the official lecture notes and
-            downloadable PDFs.
-          </p>
-
-          <a
-            class="resource-link"
-            target="_blank"
-            rel="noopener noreferrer"
-            href="https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/lists/lecture-notes/"
-          >
-            Open Lecture Notes →
-          </a>
-
-        </div>
-
-
-        <div class="resource-card">
-
-          <div class="resource-icon">
-            PS
-          </div>
-
-          <h3>
-            Problem Sets
-          </h3>
-
-          <p>
-            Practice using MIT's official problem
-            sets after completing the lectures.
-          </p>
-
-          <a
-            class="resource-link"
-            target="_blank"
-            rel="noopener noreferrer"
-            href="https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/lists/problem-sets/"
-          >
-            Open MIT Problem Sets →
-          </a>
-
-        </div>
-
-      </div>
-
-    </section>
-
-
-    <!-- =========================
-         COURSE FLOW
-    ========================== -->
-
-    <section>
-
-      <div class="section-heading">
-
-        <div>
-
-          <h2>
-            Learning Path
-          </h2>
-
-          <p>
-            Complete each stage to unlock the next.
-          </p>
-
-        </div>
-
-      </div>
-
-
-      <div class="course-flow">
-
-        <div class="flow-step">
-          01–26 Lectures
-        </div>
-
-        <div class="flow-arrow">
-          →
-        </div>
-
-        <div class="flow-step">
-          Problem Sets
-        </div>
-
-        <div class="flow-arrow">
-          →
-        </div>
-
-        <div class="flow-step">
-          Final Test
-        </div>
-
-        <div class="flow-arrow">
-          →
-        </div>
-
-        <div class="flow-step">
-          Certificate
-        </div>
-
-      </div>
-
-    </section>
-
-
-    <!-- =========================
-         LECTURES
-    ========================== -->
-
-    <section id="lectures">
-
-      <div class="section-heading">
-
-        <div>
-
-          <h2>
-            26 Lectures
-          </h2>
-
-          <p>
-            Complete lectures sequentially to unlock the course.
-          </p>
-
-        </div>
-
-      </div>
-
-
-      <div
-        class="lecture-list"
-        id="lectureList"
-      ></div>
-
-    </section>
-
-
-    <!-- =========================
-         PROBLEM SETS
-    ========================== -->
-
-    <section
-      id="problem-sets"
-      class="locked-section"
-    >
-
-      <h2>
-        Problem Sets
-      </h2>
+      <h1>Learn Python.<br>Prove your skills.</h1>
 
       <p>
-        Problem sets become available after all 26
-        lectures have been completed.
+        Access the Python Programming Fundamentals course,
+        complete the learning modules and take the final assessment.
       </p>
 
-
-      <div class="requirements">
-
-        <div class="requirement">
-
-          <strong>
-            26 Lectures
-          </strong>
-
-          <span>
-            Required before this section unlocks.
-          </span>
-
-        </div>
-
-
-        <div class="requirement">
-
-          <strong>
-            MIT Practice
-          </strong>
-
-          <span>
-            Work through the official MIT problem sets.
-          </span>
-
-        </div>
-
-
-        <div class="requirement">
-
-          <strong>
-            Final Assessment
-          </strong>
-
-          <span>
-            Complete the final test after this stage.
-          </span>
-
-        </div>
-
+      <div class="field">
+        <label>Full Name</label>
+        <input
+          id="nameInput"
+          type="text"
+          placeholder="Enter your full name"
+          autocomplete="name"
+        >
       </div>
 
-
-      <div
-        id="problemSetStatus"
-        class="section-locked-message"
-      >
-        🔒 Complete all 26 lectures to unlock.
+      <div class="field">
+        <label>Mobile Number</label>
+        <input
+          id="mobileInput"
+          type="tel"
+          maxlength="15"
+          placeholder="Enter mobile number"
+          autocomplete="tel"
+        >
       </div>
 
+      <div class="field">
+        <label>Email Address</label>
+        <input
+          id="emailInput"
+          type="email"
+          placeholder="Enter your email"
+          autocomplete="email"
+        >
+      </div>
 
-      <div
-        id="problemSetButtons"
-        style="
-          display:none;
-          margin-top:20px;
-          gap:10px;
-          flex-wrap:wrap;
-        "
-      >
+      <button class="primary" id="accessBtn" onclick="registerOrLogin()">
+        Access Course
+      </button>
+
+      <div class="auth-note">
+        Your mobile number is used as your course access credential.
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- ========================================================= -->
+<!-- DASHBOARD -->
+<!-- ========================================================= -->
+
+<section id="dashboardView" class="view">
+
+  <main class="container">
+
+    <div class="hero">
+
+      <div class="eyebrow">
+        Openbox Academy · Python Programming
+      </div>
+
+      <h1>
+        Python Programming
+        Fundamentals
+      </h1>
+
+      <p>
+        A structured learning pathway based on MIT OpenCourseWare
+        6.100L. Learn programming fundamentals, algorithms,
+        functions, recursion, OOP and complexity before completing
+        the final assessment.
+      </p>
+
+      <div class="hero-actions">
+
+        <button class="primary" style="width:auto" onclick="scrollToLectures()">
+          Continue Learning
+        </button>
 
         <a
-          href="https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/lists/problem-sets/"
+          class="secondary"
+          href="https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/video_galleries/lecture-videos/"
           target="_blank"
-          rel="noopener noreferrer"
-          class="btn btn-primary"
         >
-          Open MIT Problem Sets
-        </a>
-
-        <a
-          href="final-test.html"
-          class="btn btn-secondary"
-        >
-          Continue to Final Test
+          Watch MIT Lectures
         </a>
 
       </div>
 
-    </section>
+    </div>
 
 
-    <!-- =========================
-         FINAL TEST
-    ========================== -->
+    <div class="stat-grid">
 
-    <section class="final-test-card">
+      <div class="stat">
+        <div class="stat-number" id="completedCount">0/26</div>
+        <div class="stat-label">Lectures completed</div>
+      </div>
 
-      <div>
+      <div class="stat">
+        <div class="stat-number">50</div>
+        <div class="stat-label">Final assessment questions</div>
+      </div>
 
-        <h2>
-          Final Test
-        </h2>
+      <div class="stat">
+        <div class="stat-number">70%</div>
+        <div class="stat-label">Recommended pass threshold</div>
+      </div>
 
+    </div>
+
+
+    <!-- RESOURCE HUB -->
+
+    <div class="section-title">
+      <h2>Course Resource Hub</h2>
+      <p>Official MIT OpenCourseWare resources used alongside this learning pathway.</p>
+    </div>
+
+    <div class="resource-grid">
+
+      <div class="resource">
+        <h3>Lecture Videos</h3>
         <p>
-          Once you complete all 26 lectures and unlock
-          the problem-set stage, you can proceed to the
-          separate final assessment page. Passing the
-          assessment can trigger your certificate workflow.
+          Watch the complete MIT 6.100L lecture video collection.
         </p>
-
+        <div class="resource-actions">
+          <a
+            href="https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/video_galleries/lecture-videos/"
+            target="_blank"
+          >
+            Open Videos
+          </a>
+        </div>
       </div>
 
+      <div class="resource">
+        <h3>Lecture Notes</h3>
+        <p>
+          Official MIT lecture notes and supporting materials.
+        </p>
+        <div class="resource-actions">
+          <a
+            href="https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/lists/lecture-notes/"
+            target="_blank"
+          >
+            Open Notes
+          </a>
+        </div>
+      </div>
 
-      <a
-        href="final-test.html"
-        id="finalTestButton"
-        class="btn disabled"
+      <div class="resource">
+        <h3>Lecture Code</h3>
+        <p>
+          Official code resources corresponding to the lectures.
+        </p>
+        <div class="resource-actions">
+          <a
+            href="https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/lists/lecture-code/"
+            target="_blank"
+          >
+            Open Code
+          </a>
+        </div>
+      </div>
+
+      <div class="resource">
+        <h3>Finger Exercises</h3>
+        <p>
+          Additional programming practice from the course.
+        </p>
+        <div class="resource-actions">
+          <a
+            href="https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/pages/finger-exercises/"
+            target="_blank"
+          >
+            Practice
+          </a>
+        </div>
+      </div>
+
+      <div class="resource">
+        <h3>Problem Sets</h3>
+        <p>
+          Complete the problem-set resources before taking the final assessment.
+        </p>
+        <div class="resource-actions">
+          <a
+            href="https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/lists/problem-sets/"
+            target="_blank"
+          >
+            Open Problem Sets
+          </a>
+        </div>
+      </div>
+
+      <div class="resource">
+        <h3>Recitations</h3>
+        <p>
+          Additional recitation materials for revision.
+        </p>
+        <div class="resource-actions">
+          <a
+            href="https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/lists/recitations/"
+            target="_blank"
+          >
+            Open Recitations
+          </a>
+        </div>
+      </div>
+
+    </div>
+
+
+    <!-- LECTURES -->
+
+    <div id="lecturesSection">
+
+      <div class="section-title">
+        <h2>26 Lecture Progress Tracker</h2>
+        <p>
+          Complete each lecture in sequence. Resources open in a new tab.
+        </p>
+      </div>
+
+      <div class="lecture-list" id="lectureList"></div>
+
+    </div>
+
+
+    <!-- FINAL TEST CTA -->
+
+    <div class="cta" id="testCTA">
+
+      <h2>Final Assessment</h2>
+
+      <p>
+        Complete all 26 lectures before attempting the final
+        50-question assessment.
+      </p>
+
+      <button
+        class="primary"
+        id="startTestBtn"
+        style="width:auto"
+        onclick="startAssessment()"
       >
-        🔒 Final Test Locked
-      </a>
+        Start Final Assessment
+      </button>
 
-    </section>
+    </div>
 
   </main>
 
+</section>
 
-  <!-- =========================
-       FOOTER
-  ========================== -->
 
-  <footer>
+<!-- ========================================================= -->
+<!-- TEST VIEW -->
+<!-- ========================================================= -->
 
-    <p>
+<section id="testView" class="view">
 
-      <strong>
-        6.100L Learning Hub
-      </strong>
+  <div class="test-top">
 
-      &nbsp;•&nbsp;
+    <div class="test-top-inner container" style="padding-top:0;padding-bottom:0;">
 
-      Learning resources based on
-      MIT OpenCourseWare's
-      <a
-        href="https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/"
-        target="_blank"
-        rel="noopener noreferrer"
+      <div>
+        <strong>Final Assessment</strong>
+        <div style="font-size:11px;color:#777;">
+          Do not leave the assessment window
+        </div>
+      </div>
+
+      <div class="timer" id="timer">
+        60:00
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <main class="container">
+
+    <div class="test-wrap">
+
+      <div class="warning-box">
+        Assessment mode is active. Copying, pasting, right-clicking,
+        leaving the assessment window and repeatedly exiting fullscreen
+        may trigger an automatic submission.
+      </div>
+
+      <div class="question-card">
+
+        <div class="question-meta">
+
+          <span id="questionNumber">
+            Question 1 of 50
+          </span>
+
+          <span id="questionType">
+            MCQ
+          </span>
+
+        </div>
+
+        <div class="question-text" id="questionText"></div>
+
+        <div id="answerArea"></div>
+
+      </div>
+
+      <div class="test-navigation">
+
+        <button
+          class="secondary"
+          id="prevBtn"
+          onclick="previousQuestion()"
+        >
+          Previous
+        </button>
+
+        <button
+          class="primary"
+          style="width:auto"
+          id="nextBtn"
+          onclick="nextQuestion()"
+        >
+          Next
+        </button>
+
+      </div>
+
+    </div>
+
+  </main>
+
+</section>
+
+
+<!-- ========================================================= -->
+<!-- RESULT -->
+<!-- ========================================================= -->
+
+<section id="resultView" class="view">
+
+  <main class="container">
+
+    <div class="result-card">
+
+      <div class="result-icon" id="resultIcon">
+        🎓
+      </div>
+
+      <div id="resultStatus"></div>
+
+      <div class="score" id="resultScore">
+        0%
+      </div>
+
+      <p id="resultText" style="color:#aaa;line-height:1.7;"></p>
+
+      <div class="result-actions">
+
+        <button
+          class="primary"
+          id="certificateBtn"
+          style="width:auto;display:none;"
+          onclick="showCertificate()"
+        >
+          View Certificate
+        </button>
+
+        <button
+          class="secondary"
+          onclick="showDashboard()"
+        >
+          Back to Course
+        </button>
+
+      </div>
+
+    </div>
+
+  </main>
+
+</section>
+
+
+<!-- ========================================================= -->
+<!-- CERTIFICATE -->
+<!-- ========================================================= -->
+
+<section id="certificateView" class="view">
+
+  <main class="container certificate-page">
+
+    <div id="certificateArea">
+
+      <div class="certificate">
+
+        <div class="cert-id" id="certIdText">
+          Certificate ID: OB-2026-0000
+        </div>
+
+        <div class="cert-inner">
+
+          <div class="cert-brand">
+            OPENBOX ACADEMY
+          </div>
+
+          <div class="cert-sub">
+            Certificate of Achievement
+          </div>
+
+          <div class="cert-title">
+            CERTIFICATE OF COMPLETION
+          </div>
+
+          <div>
+            This certificate is proudly presented to
+          </div>
+
+          <div class="cert-name" id="certStudentName">
+            Student Name
+          </div>
+
+          <div class="cert-body">
+
+            This is to certify that
+            <strong id="certStudentNameBody">
+              Student Name
+            </strong>
+            has successfully completed the
+            <span class="cert-course">
+              Python Programming Fundamentals Course
+            </span>
+            demonstrating proficiency in core software development
+            principles and coding exercises.
+
+          </div>
+
+          <div class="cert-meta">
+
+            <div>
+              <strong>Assessment Score</strong><br>
+              <span id="certScore">86%</span>
+            </div>
+
+            <div>
+              <strong>Issue Date</strong><br>
+              <span id="certDate">11/08/2026</span>
+            </div>
+
+            <div>
+              <strong>Certificate ID</strong><br>
+              <span id="certIdMeta">OB-2026-0000</span>
+            </div>
+
+          </div>
+
+          <div class="cert-sign">
+            Director<br>
+            Openbox Academy
+          </div>
+
+          <div class="cert-footer">
+
+            <em>
+              This certificate is issued by Openbox and confirms the
+              student's successful completion of the course assessment.
+              Course curriculum was adapted from MIT OpenCourseWare
+              (6.100L) under the Creative Commons
+              Attribution-NonCommercial-ShareAlike (CC BY-NC-SA 4.0)
+              license. This certificate is not endorsed or affiliated
+              with MIT.
+            </em>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div class="result-actions">
+
+      <button
+        class="primary"
+        style="width:auto;"
+        onclick="downloadCertificate()"
       >
-        6.100L course
-      </a>.
+        Download Certificate PDF
+      </button>
 
-    </p>
+      <button
+        class="secondary"
+        onclick="showShare()"
+      >
+        Share Achievement
+      </button>
 
-    <p style="margin-top:8px;">
+    </div>
 
-      This learning hub is an independent interface
-      for organizing publicly available course resources.
+  </main>
 
-    </p>
-
-  </footer>
+</section>
 
 
-  <!-- =========================
-       JAVASCRIPT
-  ========================== -->
+<!-- ========================================================= -->
+<!-- SHARE -->
+<!-- ========================================================= -->
 
-  <script>
+<section id="shareView" class="view">
 
-    /*
-     * ============================================
-     * COURSE DATA
-     * ============================================
-     */
+  <main class="container">
 
-    const lectures = [
+    <div class="hero" style="padding-bottom:20px;">
 
-      {
-        number: 1,
-        title: "Introduction",
-        pdf: "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/mit6_100l_f22_lec01.pdf",
-        code: "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/mit6_100l_f22_lec01_code.py"
+      <div class="eyebrow">
+        Achievement Unlocked
+      </div>
+
+      <h1 style="font-size:50px;">
+        Share your achievement.
+      </h1>
+
+      <p>
+        Copy the personalized caption below and share your
+        certificate on LinkedIn.
+      </p>
+
+    </div>
+
+
+    <div class="share-card">
+
+      <h2>LinkedIn Caption</h2>
+
+      <p style="color:#999;">
+        Your name, certificate ID and score are automatically included.
+      </p>
+
+      <textarea
+        class="caption-box"
+        id="linkedinCaption"
+        readonly
+      ></textarea>
+
+      <div class="result-actions" style="justify-content:flex-start;">
+
+        <button
+          class="primary"
+          style="width:auto;"
+          onclick="copyCaption()"
+        >
+          Copy Caption
+        </button>
+
+        <button
+          class="secondary"
+          onclick="shareLinkedIn()"
+        >
+          Share on LinkedIn
+        </button>
+
+      </div>
+
+    </div>
+
+
+    <div class="cta">
+
+      <h2>Want to learn Python for free?</h2>
+
+      <p style="color:#aaa;line-height:1.7;">
+        Start the free Python Programming Fundamentals learning
+        pathway with Openbox Academy.
+      </p>
+
+      <a
+        href="https://openboxgp.vercel.app/python.html"
+        class="primary"
+        style="display:inline-block;width:auto;margin-top:10px;"
+        target="_blank"
+      >
+        Start Free Python Learning
+      </a>
+
+    </div>
+
+
+    <div class="result-actions">
+
+      <button
+        class="secondary"
+        onclick="showCertificate()"
+      >
+        Back to Certificate
+      </button>
+
+    </div>
+
+  </main>
+
+</section>
+
+
+<div class="toast" id="toast"></div>
+
+
+<script>
+/* ============================================================
+   CONFIGURATION
+============================================================ */
+
+const API_URL =
+"https://script.google.com/macros/s/AKfycbw1vRidNJMGfv6uLTq1B9dR6uRbz4V9fgDf2UZpVRaeVLO31owMsRImL3vTz_Q57nkH/exec";
+
+const PASS_PERCENTAGE = 70;
+
+const TEST_TIME_SECONDS = 60 * 60;
+
+const MAX_VIOLATIONS = 3;
+
+
+/* ============================================================
+   STUDENT STATE
+============================================================ */
+
+let student = null;
+
+let completedLectures = [];
+
+let currentQuestion = 0;
+
+let answers = {};
+
+let testStarted = false;
+
+let testSubmitted = false;
+
+let remainingSeconds = TEST_TIME_SECONDS;
+
+let timerInterval = null;
+
+let violations = 0;
+
+let certificateData = null;
+
+
+/* ============================================================
+   LECTURES
+============================================================ */
+
+const lectures = [
+
+["01","Introduction",
+"https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/mit6_100l_f22_lec01.pdf",
+"https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/mit6_100l_f22_lec01_code.py"],
+
+["02","Strings, Input/Output, Branching",
+"https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/mit6_100l_f22_lec02.pdf",
+"https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/mit6_100l_f22_lec02_code.py"],
+
+["03","Iteration",
+"https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/mit6_100l_f22_lec03.pdf",
+"https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/mit6_100l_f22_lec03_code.py"],
+
+["04","Loops, Guess/Check, Binary",
+"https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/mit6_100l_f22_lec04.pdf",
+"https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/mit6_100l_f22_lec04_code.py"],
+
+["05","Floats & Approximation",
+"https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/mit6_100l_f22_lec05.pdf",
+"https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/mit6_100l_f22_lec05_code.py"],
+
+["06","Bisection Search",
+"https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/mit6_100l_f22_lec06.pdf",
+"https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/mit6_100l_f22_lec06_code.py"],
+
+["07","Decomposition, Abstraction",
+"https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/mit6_100l_f22_lec07.pdf",
+"https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/mit6_100l_f22_lec07_code.py"],
+
+["08","Functions as Objects",
+"https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/mit6_100l_f22_lec08.pdf",
+"https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/mit6_100l_f22_lec08_code.py"],
+
+["09","Lambda, Tuples, Lists",
+"https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/mit6_100l_f22_lec09.pdf",
+"https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/mit6_100l_f22_lec09_code.py"],
+
+["10","Lists, Mutability",
+"https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/mit6_100l_f22_lec10.pdf",
+"https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/mit6_100l_f22_lec10_code.py"],
+
+["11","Aliasing, Cloning",
+"https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/mit6_100l_f22_lec11.pdf",
+"https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/mit6_100l_f22_lec11_code.py"],
+
+["12","List Comprehension, Debugging",
+"https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/mit6_100l_f22_lec12.pdf",
+"https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/mit6_100l_f22_lec12_code.zip"],
+
+["13","Exceptions, Assertions",
+"https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/mit6_100l_f22_lec13.pdf",
+"https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/mit6_100l_f22_lec13_code.py"],
+
+["14","Dictionaries",
+"https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/mit6_100l_f22_lec14.pdf",
+"https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/mit6_100l_f22_lec14_code.py"],
+
+["15","Recursion",
+"https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/mit6_100l_f22_lec15.pdf",
+"https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/mit6_100l_f22_lec15_code.py"],
+
+["16","Recursion (Non-Numeric)",
+"https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/mit6_100l_f22_lec16.pdf",
+"https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/mit6_100l_f22_lec16_code.py"],
+
+["17","Python Classes",
+"https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/mit6_100l_f22_lec17.pdf",
+"https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/mit6_100l_f22_lec17_code.py"],
+
+["18","Class Methods",
+"https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/mit6_100l_f22_lec18.pdf",
+"https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/mit6_100l_f22_lec18_code.py"],
+
+["19","Inheritance",
+"https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/mit6_100l_f22_lec19.pdf",
+"https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/mit6_100l_f22_lec19_code.py"],
+
+["20","OOP Example",
+"https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/mit6_100l_f22_lec20.pdf",
+"https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/mit6_100l_f22_lec20_code.zip"],
+
+["21","Timing Programs",
+"https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/mit6_100l_f22_lec21.pdf",
+"https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/mit6_100l_f22_lec21_code.py"],
+
+["22","Big Oh and Theta",
+"https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/mit6_100l_f22_lec22.pdf",
+"https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/mit6_100l_f22_lec22_code.py"],
+
+["23","Complexity Classes",
+"https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/mit6_100l_f22_lec23.pdf",
+"https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/mit6_100l_f22_lec23_code.py"],
+
+["24","Sorting Algorithms",
+"https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/mit6_100l_f22_lec24.pdf",
+"https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/mit6_100l_f22_lec24_code.py"],
+
+["25","Plotting",
+"https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/mit6_100l_f22_lec25.pdf",
+"https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/mit6_100l_f22_lec25_code.zip"],
+
+["26","Wrap-Up",
+"https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/mit6_100l_f22_lec26.pdf",
+"https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/mit6_100l_f22_lec26_code.py"]
+
+];
+
+
+/* ============================================================
+   QUIZ
+============================================================ */
+
+const quiz = [
+
+{
+q:"What is imperative knowledge?",
+options:[
+"Statements of fact.",
+"A recipe or \"how-to\" process.",
+"A list of computer components.",
+"The final result of a calculation."
+],
+answer:1,
+type:"mcq"
+},
+
+{
+q:"Which operator is used to repeat a string in Python?",
+options:["+","-","*","^"],
+answer:2,
+type:"mcq"
+},
+
+{
+q:"What is the default return type of the input() function?",
+options:["int","float","bool","str"],
+answer:3,
+type:"mcq"
+},
+
+{
+q:"Which logical operator returns True only if both operands are True?",
+options:["not","or","and","xor"],
+answer:2,
+type:"mcq"
+},
+
+{
+q:"How are blocks of code defined in Python?",
+options:[
+"Using curly braces {}.",
+"Using parentheses ().",
+"Using indentation.",
+"Using keywords like begin and end."
+],
+answer:2,
+type:"mcq"
+},
+
+{
+q:"What does the break statement do?",
+options:[
+"Skips the rest of the current iteration.",
+"Immediately exits the innermost loop it is in.",
+"Stops the entire program.",
+"Restarts the loop."
+],
+answer:1,
+type:"mcq"
+},
+
+{
+q:"What is another name for the guess-and-check algorithm?",
+options:[
+"Bisection search.",
+"Exhaustive enumeration.",
+"Recursive decomposition.",
+"Linear regression."
+],
+answer:1,
+type:"mcq"
+},
+
+{
+q:"What is a Boolean flag used for in programming?",
+options:[
+"To store numerical values.",
+"As a signal that a specific event has occurred.",
+"To count loop iterations.",
+"To define function parameters."
+],
+answer:1,
+type:"mcq"
+},
+
+{
+q:"Why might 0.1 + 0.1 + 0.1 == 0.3 evaluate to False?",
+options:[
+"Precision issues with binary floating-point representation.",
+"Python cannot add three numbers at once.",
+"== is only for integers.",
+"The result is actually an integer."
+],
+answer:0,
+type:"mcq"
+},
+
+{
+q:"What is a requirement for using bisection search on a list?",
+options:[
+"The list must contain strings.",
+"The list must be small.",
+"The list must be sorted.",
+"The list must be empty."
+],
+answer:2,
+type:"mcq"
+},
+
+{
+q:"The concept of hiding details to reduce complexity is called:",
+options:[
+"Decomposition.",
+"Abstraction.",
+"Recursion.",
+"Iteration."
+],
+answer:1,
+type:"mcq"
+},
+
+{
+q:"What is a docstring?",
+options:[
+"A type of computer error.",
+"A contract between the coder and user documenting specifications.",
+"A string that cannot be modified.",
+"A way to print text to the console."
+],
+answer:1,
+type:"mcq"
+},
+
+{
+q:"What happens if a function reaches the end of its body without hitting a return statement?",
+options:[
+"It throws a ValueError.",
+"It returns None.",
+"It returns 0.",
+"It restarts the function."
+],
+answer:1,
+type:"mcq"
+},
+
+{
+q:"When defining a function, the names used for inputs are called:",
+options:[
+"Arguments.",
+"Actual parameters.",
+"Formal parameters.",
+"Constants."
+],
+answer:2,
+type:"mcq"
+},
+
+{
+q:"What is scope in Python?",
+options:[
+"The speed of the program.",
+"The memory limit of a variable.",
+"The environment where variable names are mapped to objects.",
+"The physical size of the code file."
+],
+answer:2,
+type:"mcq"
+},
+
+{
+q:"Functions are considered objects in Python because:",
+options:[
+"They have data attributes.",
+"They can be assigned to other names or passed as parameters.",
+"They are only used in OOP.",
+"They cannot be modified."
+],
+answer:1,
+type:"mcq"
+},
+
+{
+q:"A function without a name is called a:",
+options:[
+"Recursive function.",
+"Wrapper function.",
+"Lambda function.",
+"Default function."
+],
+answer:2,
+type:"mcq"
+},
+
+{
+q:"Which of the following is true about tuples?",
+options:[
+"They are mutable.",
+"They use square brackets [].",
+"They are immutable ordered sequences of objects.",
+"They cannot contain other tuples."
+],
+answer:2,
+type:"mcq"
+},
+
+{
+q:"What is cloning a list?",
+options:[
+"Assigning a list to a new variable name.",
+"Creating a new list that contains the same elements as the original.",
+"Deleting all elements in a list.",
+"Converting a list to a tuple."
+],
+answer:1,
+type:"mcq"
+},
+
+{
+q:"What is the complexity of looking up a value in a Python dictionary?",
+options:[
+"Θ(n)",
+"Θ(1)",
+"Θ(log n)",
+"Θ(n²)"
+],
+answer:1,
+type:"mcq"
+},
+
+{
+q:"In recursion, what is the purpose of the base case?",
+options:[
+"To call the function again.",
+"To solve the most complex part of the problem.",
+"To stop the recursion and prevent infinite calls.",
+"To initialize the variables."
+],
+answer:2,
+type:"mcq"
+},
+
+{
+q:"What occurs during infinite recursion?",
+options:[
+"The program runs faster.",
+"The base case is never reached.",
+"The function returns None.",
+"The memory is cleared."
+],
+answer:1,
+type:"mcq"
+},
+
+{
+q:"How does memoization improve recursive Fibonacci efficiency?",
+options:[
+"It removes the base case.",
+"It uses a dictionary to store and look up previously calculated values.",
+"It converts recursion into a for loop.",
+"It increases the number of function calls."
+],
+answer:1,
+type:"mcq"
+},
+
+{
+q:"When writing a recursive function, all return statements should:",
+options:[
+"Return different types.",
+"Return the same type of object.",
+"Return only integers.",
+"Return a list."
+],
+answer:1,
+type:"mcq"
+},
+
+{
+q:"What does Asymptotic Complexity describe?",
+options:[
+"The exact number of milliseconds a program runs.",
+"How the running time grows as the input size n becomes very large.",
+"The number of lines of code.",
+"The amount of disk space used."
+],
+answer:1,
+type:"mcq"
+},
+
+{
+q:"Which complexity class is denoted by Θ(log n)?",
+options:[
+"Linear.",
+"Exponential.",
+"Logarithmic.",
+"Constant."
+],
+answer:2,
+type:"mcq"
+},
+
+{
+q:"A simple loop that depends on the input size n has what complexity?",
+options:[
+"Θ(1)",
+"Θ(n)",
+"Θ(n²)",
+"Θ(2^n)"
+],
+answer:1,
+type:"mcq"
+},
+
+{
+q:"Bisection search has what algorithmic complexity?",
+options:[
+"Θ(n)",
+"Θ(n log n)",
+"Θ(log n)",
+"Θ(n²)"
+],
+answer:2,
+type:"mcq"
+},
+
+{
+q:"What complexity usually results from nested loops over the same input n?",
+options:[
+"Linear.",
+"Quadratic (Polynomial).",
+"Constant.",
+"Logarithmic."
+],
+answer:1,
+type:"mcq"
+},
+
+{
+q:"Which complexity class grows the fastest as n increases?",
+options:[
+"Θ(n log n)",
+"Θ(n^c)",
+"Θ(c^n) (Exponential)",
+"Θ(n)"
+],
+answer:2,
+type:"mcq"
+},
+
+{
+q:"What is Defensive Programming?",
+options:[
+"Writing code as fast as possible.",
+"Anticipating and handling unexpected conditions through specifications and assertions.",
+"Removing all comments.",
+"Using only while loops."
+],
+answer:1,
+type:"mcq"
+},
+
+{
+q:"Which error occurs when you try to access L in a list of length 5?",
+options:[
+"TypeError",
+"NameError",
+"IndexError",
+"SyntaxError"
+],
+answer:2,
+type:"mcq"
+},
+
+{
+q:"What is Glass Box Testing?",
+options:[
+"Testing without looking at the code.",
+"Using the code structure to design test cases.",
+"Testing only the final output.",
+"Randomly entering inputs."
+],
+answer:1,
+type:"mcq"
+},
+
+{
+q:"In Object-Oriented Programming, what is an instance?",
+options:[
+"The name of the class.",
+"A specific object created from a class template.",
+"A global variable.",
+"A type of error."
+],
+answer:1,
+type:"mcq"
+},
+
+{
+q:"The __init__ method in a class is used for:",
+options:[
+"Deleting objects.",
+"Initializing data attributes of a new instance.",
+"Printing objects.",
+"Comparing two objects."
+],
+answer:1,
+type:"mcq"
+},
+
+{
+q:"In class methods, what does the self parameter represent?",
+options:[
+"A keyword to stop the method.",
+"The specific instance of the class being operated on.",
+"A link to the global scope.",
+"The parent class."
+],
+answer:1,
+type:"mcq"
+},
+
+{
+q:"What is inheritance in OOP?",
+options:[
+"Copying a list.",
+"A mechanism where a subclass takes on attributes and methods from a parent class.",
+"Deleting variables to save memory.",
+"Hiding private methods."
+],
+answer:1,
+type:"mcq"
+},
+
+{
+q:"Which operation on a list is Θ(n)?",
+options:[
+"L.append(e)",
+"L[i] (Indexing)",
+"e in L (Membership check)",
+"len(L)"
+],
+answer:2,
+type:"mcq"
+},
+
+{
+q:"What is partial execution in the context of returning functions?",
+options:[
+"A program that crashes halfway.",
+"Executing some code, grabbing a function back, and finishing it later.",
+"A loop that stops early.",
+"Using only half of the memory."
+],
+answer:1,
+type:"mcq"
+},
+
+{
+q:"The assert statement is primarily used to:",
+options:[
+"Print messages to the user.",
+"Stop execution if an expected condition is not met.",
+"Define new variables.",
+"Speed up the program."
+],
+answer:1,
+type:"mcq"
+},
+
+/* ================= CODING ================= */
+
+{
+q:"Variable Math: Assume a, b, and c are defined. Create total as the sum of a and b, multiplied by c, then print it.",
+answer:"total = (a + b) * c\nprint(total)",
+type:"code"
+},
+
+{
+q:"Branching: Given a variable number, print 'positive' if > 0, 'negative' if < 0, and 'zero' if equal to 0.",
+answer:"if number > 0:\n    print('positive')\nelif number < 0:\n    print('negative')\nelse:\n    print('zero')",
+type:"code"
+},
+
+{
+q:"For Loop: Write a loop that prints \"hello world\" exactly N times.",
+answer:"for i in range(N):\n    print('hello world')",
+type:"code"
+},
+
+{
+q:"While Loop: Find the cube root of N using a while loop. Assume N is a perfect cube.",
+answer:"i = 1\nwhile i**3 < N:\n    i += 1\nprint(i)",
+type:"code"
+},
+
+{
+q:"List Comprehension: Create a list Lnew containing the squares of all even numbers in L.",
+answer:"Lnew = [e**2 for e in L if e % 2 == 0]",
+type:"code"
+},
+
+{
+q:"Function Definition: Define div_by(n, d) that returns True if d divides n evenly.",
+answer:"def div_by(n, d):\n    return n % d == 0",
+type:"code"
+},
+
+{
+q:"Dictionary Iteration: Count how many items in dictionary d have a key equal to its value.",
+answer:"count = 0\nfor k, v in d.items():\n    if k == v:\n        count += 1",
+type:"code"
+},
+
+{
+q:"Recursion (Numbers): Write recur_power(base, exp) to calculate base^exp.",
+answer:"def recur_power(base, exp):\n    if exp <= 0:\n        return 1\n    return base * recur_power(base, exp - 1)",
+type:"code"
+},
+
+{
+q:"Recursion (Lists): Write total_recur(L) to sum the elements in list L.",
+answer:"def total_recur(L):\n    if len(L) == 0:\n        return 0\n    return L[0] + total_recur(L[1:])",
+type:"code"
+},
+
+{
+q:"OOP: Define a Container class whose __init__ method creates an empty list self.myList.",
+answer:"class Container(object):\n    def __init__(self):\n        self.myList = []",
+type:"code"
+}
+
+];
+
+
+/* ============================================================
+   SHUFFLE
+============================================================ */
+
+function shuffle(array){
+
+  const arr = [...array];
+
+  for(let i=arr.length-1;i>0;i--){
+
+    const j=Math.floor(Math.random()*(i+1));
+
+    [arr[i],arr[j]]=[arr[j],arr[i]];
+
+  }
+
+  return arr;
+}
+
+
+/* ============================================================
+   API
+============================================================ */
+
+async function api(action,data={}){
+
+  try{
+
+    const body={
+      action,
+      ...data
+    };
+
+    const response=await fetch(API_URL,{
+      method:"POST",
+      headers:{
+        "Content-Type":"text/plain;charset=utf-8"
       },
+      body:JSON.stringify(body)
+    });
 
-      {
-        number: 2,
-        title: "Strings, Input/Output, Branching",
-        pdf: "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/mit6_100l_f22_lec02.pdf",
-        code: "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/mit6_100l_f22_lec02_code.py"
-      },
+    const text=await response.text();
 
-      {
-        number: 3,
-        title: "Iteration",
-        pdf: "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/mit6_100l_f22_lec03.pdf",
-        code: "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/mit6_100l_f22_lec03_code.py"
-      },
+    try{
+      return JSON.parse(text);
+    }catch(e){
+      return {
+        success:true,
+        raw:text
+      };
+    }
 
-      {
-        number: 4,
-        title: "Loops, Guess/Check, Binary",
-        pdf: "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/mit6_100l_f22_lec04.pdf",
-        code: "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/mit6_100l_f22_lec04_code.py"
-      },
+  }catch(error){
 
-      {
-        number: 5,
-        title: "Floats & Approximation",
-        pdf: "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/mit6_100l_f22_lec05.pdf",
-        code: "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/mit6_100l_f22_lec05_code.py"
-      },
+    console.error(error);
 
-      {
-        number: 6,
-        title: "Bisection Search",
-        pdf: "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/mit6_100l_f22_lec06.pdf",
-        code: "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/mit6_100l_f22_lec06_code.py"
-      },
+    return {
+      success:false,
+      message:"Unable to connect to the course server."
+    };
 
-      {
-        number: 7,
-        title: "Decomposition, Abstraction",
-        pdf: "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/mit6_100l_f22_lec07.pdf",
-        code: "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/mit6_100l_f22_lec07_code.py"
-      },
+  }
 
-      {
-        number: 8,
-        title: "Functions as Objects",
-        pdf: "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/mit6_100l_f22_lec08.pdf",
-        code: "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/mit6_100l_f22_lec08_code.py"
-      },
-
-      {
-        number: 9,
-        title: "Lambda, Tuples, Lists",
-        pdf: "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/mit6_100l_f22_lec09.pdf",
-        code: "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/mit6_100l_f22_lec09_code.py"
-      },
-
-      {
-        number: 10,
-        title: "Lists, Mutability",
-        pdf: "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/mit6_100l_f22_lec10.pdf",
-        code: "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/mit6_100l_f22_lec10_code.py"
-      },
-
-      {
-        number: 11,
-        title: "Aliasing, Cloning",
-        pdf: "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/mit6_100l_f22_lec11.pdf",
-        code: "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/mit6_100l_f22_lec11_code.py"
-      },
-
-      {
-        number: 12,
-        title: "List Comprehension, Debugging",
-        pdf: "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/mit6_100l_f22_lec12.pdf",
-        code: "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/mit6_100l_f22_lec12_code.zip"
-      },
-
-      {
-        number: 13,
-        title: "Exceptions, Assertions",
-        pdf: "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/mit6_100l_f22_lec13.pdf",
-        code: "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/mit6_100l_f22_lec13_code.py"
-      },
-
-      {
-        number: 14,
-        title: "Dictionaries",
-        pdf: "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/mit6_100l_f22_lec14.pdf",
-        code: "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/mit6_100l_f22_lec14_code.py"
-      },
-
-      {
-        number: 15,
-        title: "Recursion",
-        pdf: "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/mit6_100l_f22_lec15.pdf",
-        code: "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/mit6_100l_f22_lec15_code.py"
-      },
-
-      {
-        number: 16,
-        title: "Recursion (Non-Numeric)",
-        pdf: "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/mit6_100l_f22_lec16.pdf",
-        code: "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/mit6_100l_f22_lec16_code.py"
-      },
-
-      {
-        number: 17,
-        title: "Python Classes",
-        pdf: "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/mit6_100l_f22_lec17.pdf",
-        code: "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/mit6_100l_f22_lec17_code.py"
-      },
-
-      {
-        number: 18,
-        title: "Class Methods",
-        pdf: "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/mit6_100l_f22_lec18.pdf",
-        code: "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/mit6_100l_f22_lec18_code.py"
-      },
-
-      {
-        number: 19,
-        title: "Inheritance",
-        pdf: "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/mit6_100l_f22_lec19.pdf",
-        code: "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/mit6_100l_f22_lec19_code.py"
-      },
-
-      {
-        number: 20,
-        title: "OOP Example",
-        pdf: "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/mit6_100l_f22_lec20.pdf",
-        code: "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/mit6_100l_f22_lec20_code.zip"
-      },
-
-      {
-        number: 21,
-        title: "Timing Programs",
-        pdf: "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/mit6_100l_f22_lec21.pdf",
-        code: "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/mit6_100l_f22_lec21_code.py"
-      },
-
-      {
-        number: 22,
-        title: "Big Oh and Theta",
-        pdf: "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/mit6_100l_f22_lec22.pdf",
-        code: "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/mit6_100l_f22_lec22_code.py"
-      },
-
-      {
-        number: 23,
-        title: "Complexity Classes",
-        pdf: "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/mit6_100l_f22_lec23.pdf",
-        code: "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/mit6_100l_f22_lec23_code.py"
-      },
-
-      {
-        number: 24,
-        title: "Sorting Algorithms",
-        pdf: "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/mit6_100l_f22_lec24.pdf",
-        code: "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/mit6_100l_f22_lec24_code.py"
-      },
-
-      {
-        number: 25,
-        title: "Plotting",
-        pdf: "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/mit6_100l_f22_lec25.pdf",
-        code: "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/mit6_100l_f22_lec25_code.zip"
-      },
-
-      {
-        number: 26,
-        title: "Wrap-Up",
-        pdf: "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/mit6_100l_f22_lec26.pdf",
-        code: "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/mit6_100l_f22_lec26_code.py"
-      }
-
-    ];
+}
 
 
-    /*
-     * ============================================
-     * LOCAL STORAGE
-     * ============================================
-     */
+/* ============================================================
+   REGISTER / LOGIN
+============================================================ */
 
-    const STORAGE_KEY =
-      "mit_6100l_completed_lectures";
+async function registerOrLogin(){
+
+  const name=document.getElementById("nameInput").value.trim();
+
+  const mobile=document.getElementById("mobileInput").value.trim();
+
+  const email=document.getElementById("emailInput").value.trim();
+
+  if(!name){
+    toast("Please enter your name.");
+    return;
+  }
+
+  if(!/^[0-9]{10,15}$/.test(mobile)){
+    toast("Enter a valid mobile number.");
+    return;
+  }
+
+  if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){
+    toast("Enter a valid email address.");
+    return;
+  }
+
+  const button=document.getElementById("accessBtn");
+
+  button.disabled=true;
+
+  button.textContent="Connecting...";
 
 
-    let completedLectures =
+  /*
+    Your Apps Script should support:
+
+    action: "register"
+
+    name
+    mobile
+    email
+
+    and return:
+
+    {
+      success:true,
+      student:{...}
+    }
+
+    or:
+
+    {
+      success:false,
+      message:"..."
+    }
+  */
+
+  const result=await api("register",{
+    name,
+    mobile,
+    email
+  });
+
+  button.disabled=false;
+
+  button.textContent="Access Course";
+
+
+  if(result && result.success){
+
+    student=result.student || {
+      name,
+      mobile,
+      email
+    };
+
+    localStorage.setItem(
+      "openbox_python_student",
+      JSON.stringify(student)
+    );
+
+    completedLectures=
       JSON.parse(
-        localStorage.getItem(STORAGE_KEY)
-      ) || [];
+        localStorage.getItem(
+          "openbox_python_progress_"+mobile
+        ) || "[]"
+      );
+
+    setupStudent();
+
+    showDashboard();
+
+    toast("Course access granted.");
+
+  }else{
+
+    toast(
+      result?.message ||
+      "Could not create/access your account."
+    );
+
+  }
+
+}
 
 
-    /*
-     * ============================================
-     * HELPERS
-     * ============================================
-     */
+/* ============================================================
+   INIT
+============================================================ */
 
-    function isCompleted(number) {
+function init(){
 
-      return completedLectures.includes(number);
+  const saved=
+    localStorage.getItem(
+      "openbox_python_student"
+    );
+
+  if(saved){
+
+    try{
+
+      student=JSON.parse(saved);
+
+      completedLectures=
+        JSON.parse(
+          localStorage.getItem(
+            "openbox_python_progress_"+student.mobile
+          ) || "[]"
+        );
+
+      setupStudent();
+
+      showDashboard();
+
+    }catch(e){
+
+      localStorage.removeItem(
+        "openbox_python_student"
+      );
 
     }
 
+  }
 
-    function isUnlocked(number) {
+  renderLectures();
 
-      if (number === 1) {
-        return true;
-      }
+}
 
-      return isCompleted(number - 1);
 
-    }
+function setupStudent(){
 
+  document.getElementById("mainHeader").style.display="block";
+
+  document.getElementById("userPill").textContent=
+    student.name;
+
+}
+
+
+/* ============================================================
+   VIEW CONTROL
+============================================================ */
+
+function showView(id){
+
+  document
+    .querySelectorAll(".view")
+    .forEach(v=>v.classList.remove("active"));
+
+  document
+    .getElementById(id)
+    .classList.add("active");
+
+  window.scrollTo({
+    top:0,
+    behavior:"smooth"
+  });
+
+}
+
+
+function showDashboard(){
+
+  showView("dashboardView");
+
+  renderLectures();
+
+  updateProgress();
+
+}
+
+
+function showCertificate(){
+
+  if(!certificateData){
+
+    toast("Certificate is not available.");
+
+    return;
+
+  }
+
+  document.getElementById("certStudentName").textContent=
+    student.name;
+
+  document.getElementById("certStudentNameBody").textContent=
+    student.name;
+
+  document.getElementById("certScore").textContent=
+    certificateData.score+"%";
+
+  document.getElementById("certDate").textContent=
+    certificateData.date;
+
+  document.getElementById("certIdText").textContent=
+    "Certificate ID: "+certificateData.id;
+
+  document.getElementById("certIdMeta").textContent=
+    certificateData.id;
+
+  showView("certificateView");
+
+}
+
+
+function showShare(){
+
+  generateCaption();
+
+  showView("shareView");
+
+}
+
+
+/* ============================================================
+   LECTURE RENDER
+============================================================ */
+
+function renderLectures(){
+
+  const container=
+    document.getElementById("lectureList");
+
+  if(!container)return;
+
+  container.innerHTML="";
+
+
+  lectures.forEach((lecture,index)=>{
+
+    const number=lecture[0];
+
+    const title=lecture[1];
+
+    const pdf=lecture[2];
+
+    const code=lecture[3];
+
+    const completed=
+      completedLectures.includes(index);
 
     /*
-     * ============================================
-     * RENDER LECTURES
-     * ============================================
-     */
+      Sequential locking:
+      Lecture 1 is unlocked.
+      Lecture 2 unlocks after Lecture 1.
+    */
 
-    function renderLectures() {
+    const unlocked=
+      index===0 ||
+      completedLectures.includes(index-1);
 
-      const container =
-        document.getElementById("lectureList");
+    const div=document.createElement("div");
 
-      container.innerHTML = "";
-
-
-      lectures.forEach((lecture) => {
-
-        const completed =
-          isCompleted(lecture.number);
-
-        const unlocked =
-          isUnlocked(lecture.number);
+    div.className=
+      "lecture "+(!unlocked?"locked":"");
 
 
-        const card =
-          document.createElement("div");
+    div.innerHTML=`
 
+      <div class="lecture-left">
 
-        card.className =
-          "lecture-card" +
-          (completed ? " completed" : "") +
-          (!unlocked ? " locked" : "");
+        <div class="lecture-number">
+          ${completed?"✓":number}
+        </div>
 
+        <div>
+          <h3>${escapeHTML(title)}</h3>
 
-        const number =
-          String(lecture.number).padStart(2, "0");
-
-
-        card.innerHTML = `
-
-          <div class="lecture-number">
-
-            ${
-              completed
-                ? "✓"
-                : number
+          <small>
+            ${completed
+              ?"Completed"
+              :unlocked
+                ?"Available"
+                :"Locked"
             }
+          </small>
+        </div>
 
-          </div>
+      </div>
 
+      <div class="lecture-actions">
 
-          <div class="lecture-info">
+        <a
+          href="${pdf}"
+          target="_blank"
+          ${!unlocked?"style='pointer-events:none'":""}
+        >
+          PDF
+        </a>
 
-            <h3>
-              Lecture ${number} — ${lecture.title}
-            </h3>
+        <a
+          href="${code}"
+          target="_blank"
+          ${!unlocked?"style='pointer-events:none'":""}
+        >
+          Code
+        </a>
 
-            <p>
+        <button
+          class="${completed?"done":""}"
+          onclick="completeLecture(${index})"
+          ${!unlocked?"disabled":""}
+        >
+          ${completed?"Completed":"Mark Done"}
+        </button>
 
-              ${
-                completed
-                  ? "Completed"
-                  : unlocked
-                    ? "Available to study"
-                    : "Locked — complete the previous lecture"
+      </div>
 
-              }
+    `;
 
-            </p>
+    container.appendChild(div);
 
-          </div>
-
-
-          <div class="lecture-actions">
-
-            <a
-              href="${unlocked ? lecture.pdf : "#"}"
-              ${
-                unlocked
-                  ? 'target="_blank" rel="noopener noreferrer"'
-                  : ""
-              }
-
-              class="small-btn ${
-                !unlocked
-                  ? "disabled"
-                  : ""
-              }"
-
-              ${
-                !unlocked
-                  ? 'onclick="return false;"'
-                  : ""
-              }
-            >
-
-              PDF
-
-            </a>
+  });
 
 
-            <a
-              href="${unlocked ? lecture.code : "#"}"
-              ${
-                unlocked
-                  ? 'target="_blank" rel="noopener noreferrer"'
-                  : ""
-              }
+  updateProgress();
 
-              class="small-btn ${
-                !unlocked
-                  ? "disabled"
-                  : ""
-              }"
-
-              ${
-                !unlocked
-                  ? 'onclick="return false;"'
-                  : ""
-              }
-            >
-
-              Code
-
-            </a>
+}
 
 
-            <a
-              href="${
-                unlocked
-                  ? "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/video_galleries/lecture-videos/"
-                  : "#"
-              }"
+/* ============================================================
+   COMPLETE LECTURE
+============================================================ */
 
-              ${
-                unlocked
-                  ? 'target="_blank" rel="noopener noreferrer"'
-                  : ""
-              }
+async function completeLecture(index){
 
-              class="small-btn ${
-                !unlocked
-                  ? "disabled"
-                  : ""
-              }"
+  if(
+    index!==0 &&
+    !completedLectures.includes(index-1)
+  ){
 
-              ${
-                !unlocked
-                  ? 'onclick="return false;"'
-                  : ""
-              }
-            >
+    toast("Complete the previous lecture first.");
 
-              Video
+    return;
 
-            </a>
+  }
 
+  if(!completedLectures.includes(index)){
 
-            <button
-              class="small-btn complete-btn"
+    completedLectures.push(index);
 
-              ${
-                !unlocked
-                  ? "disabled"
-                  : ""
-              }
+    completedLectures.sort((a,b)=>a-b);
 
-              onclick="
-                toggleLecture(${lecture.number})
-              "
-            >
-
-              ${
-                completed
-                  ? "Completed ✓"
-                  : "Mark Complete"
-              }
-
-            </button>
-
-          </div>
-
-        `;
-
-
-        container.appendChild(card);
-
-      });
-
-    }
-
+    localStorage.setItem(
+      "openbox_python_progress_"+student.mobile,
+      JSON.stringify(completedLectures)
+    );
 
     /*
-     * ============================================
-     * TOGGLE LECTURE
-     * ============================================
-     */
-
-    function toggleLecture(number) {
-
-      if (!isUnlocked(number)) {
-
-        alert(
-          "Complete the previous lecture first."
-        );
-
-        return;
-
-      }
-
-
-      if (isCompleted(number)) {
-
-        /*
-         * Do not allow removing completion from an
-         * earlier lecture if later lectures depend
-         * on it.
-         */
-
-        const hasLaterCompletion =
-          completedLectures.some(
-            item => item > number
-          );
-
-
-        if (hasLaterCompletion) {
-
-          alert(
-            "You cannot undo this lecture while later lectures are completed."
-          );
-
-          return;
-
-        }
-
-
-        completedLectures =
-          completedLectures.filter(
-            item => item !== number
-          );
-
-      } else {
-
-        completedLectures.push(number);
-
-        completedLectures.sort(
-          (a, b) => a - b
-        );
-
-      }
-
-
-      localStorage.setItem(
-        STORAGE_KEY,
-        JSON.stringify(completedLectures)
-      );
-
-
-      renderLectures();
-
-      updateProgress();
-
-    }
-
-
-    /*
-     * ============================================
-     * PROGRESS
-     * ============================================
-     */
-
-    function updateProgress() {
-
-      const count =
-        completedLectures.length;
-
-
-      const percentage =
-        Math.round(
-          (count / lectures.length) * 100
-        );
-
-
-      document.getElementById(
-        "progressFill"
-      ).style.width =
-        percentage + "%";
-
-
-      document.getElementById(
-        "progressPercent"
-      ).textContent =
-        percentage + "%";
-
-
-      document.getElementById(
-        "progressText"
-      ).textContent =
-        `${count} of 26 lectures completed`;
-
-
-      if (count === 0) {
-
-        document.getElementById(
-          "courseStatus"
-        ).textContent =
-          "Lecture 1 unlocked";
-
-      } else if (count < 26) {
-
-        document.getElementById(
-          "courseStatus"
-        ).textContent =
-          `Lecture ${count + 1} unlocked`;
-
-      } else {
-
-        document.getElementById(
-          "courseStatus"
-        ).textContent =
-          "All lectures completed ✓";
-
-      }
-
-
-      updateProblemSets();
-
-    }
-
-
-    /*
-     * ============================================
-     * PROBLEM SET UNLOCK
-     * ============================================
-     */
-
-    function updateProblemSets() {
-
-      const allLecturesComplete =
-        completedLectures.length === 26;
-
-
-      const status =
-        document.getElementById(
-          "problemSetStatus"
-        );
-
-
-      const buttons =
-        document.getElementById(
-          "problemSetButtons"
-        );
-
-
-      const finalButton =
-        document.getElementById(
-          "finalTestButton"
-        );
-
-
-      const navFinalTest =
-        document.getElementById(
-          "navFinalTest"
-        );
-
-
-      if (allLecturesComplete) {
-
-        status.innerHTML =
-          "✓ All 26 lectures completed. Problem sets and final test are unlocked.";
-
-
-        status.style.color =
-          "#16a34a";
-
-
-        buttons.style.display =
-          "flex";
-
-
-        finalButton.classList.remove(
-          "disabled"
-        );
-
-
-        finalButton.textContent =
-          "Take Final Test →";
-
-
-        navFinalTest.textContent =
-          "Final Test →";
-
-
-      } else {
-
-        status.innerHTML =
-          "🔒 Complete all 26 lectures to unlock.";
-
-
-        status.style.color =
-          "#6b7280";
-
-
-        buttons.style.display =
-          "none";
-
-
-        finalButton.classList.add(
-          "disabled"
-        );
-
-
-        finalButton.textContent =
-          "🔒 Final Test Locked";
-
-
-        navFinalTest.textContent =
-          "Final Test";
-
-      }
-
-    }
-
-
-    /*
-     * ============================================
-     * PROTECT FINAL TEST LINK
-     * ============================================
-     */
-
-    document
-      .getElementById("finalTestButton")
-      .addEventListener(
-        "click",
-        function(event) {
-
-          if (
-            completedLectures.length !== 26
-          ) {
-
-            event.preventDefault();
-
-            alert(
-              "Complete all 26 lectures before taking the final test."
-            );
-
-          }
-
-        }
-      );
-
-
-    document
-      .getElementById("navFinalTest")
-      .addEventListener(
-        "click",
-        function(event) {
-
-          if (
-            completedLectures.length !== 26
-          ) {
-
-            event.preventDefault();
-
-            alert(
-              "Complete all 26 lectures before taking the final test."
-            );
-
-          }
-
-        }
-      );
-
-
-    /*
-     * ============================================
-     * INITIALIZE
-     * ============================================
-     */
+      Optional server-side progress storage.
+    */
+
+    await api("progress",{
+      name:student.name,
+      mobile:student.mobile,
+      email:student.email,
+      lecture:index+1
+    });
 
     renderLectures();
 
-    updateProgress();
+    toast("Lecture completed.");
 
-  </script>
+  }
+
+}
+
+
+/* ============================================================
+   PROGRESS
+============================================================ */
+
+function updateProgress(){
+
+  const count=completedLectures.length;
+
+  const percentage=
+    Math.round((count/26)*100);
+
+  document.getElementById(
+    "completedCount"
+  ).textContent=
+    count+"/26";
+
+  document.getElementById(
+    "headerProgress"
+  ).style.width=
+    percentage+"%";
+
+
+  const btn=
+    document.getElementById("startTestBtn");
+
+  if(count===26){
+
+    btn.disabled=false;
+
+    btn.textContent="Start Final Assessment";
+
+  }else{
+
+    btn.disabled=true;
+
+    btn.textContent=
+      "Complete all 26 lectures first";
+
+  }
+
+}
+
+
+/* ============================================================
+   START ASSESSMENT
+============================================================ */
+
+function startAssessment(){
+
+  if(completedLectures.length<26){
+
+    toast(
+      "Complete all 26 lectures before the assessment."
+    );
+
+    return;
+
+  }
+
+
+  if(
+    !confirm(
+      "You are about to start the final assessment.\n\n"+
+      "50 questions\n"+
+      "60 minutes\n"+
+      "One attempt\n\n"+
+      "Continue?"
+    )
+  ){
+
+    return;
+
+  }
+
+
+  answers={};
+
+  currentQuestion=0;
+
+  remainingSeconds=TEST_TIME_SECONDS;
+
+  violations=0;
+
+  testStarted=true;
+
+  testSubmitted=false;
+
+
+  /*
+    Shuffle question order.
+
+    Coding questions remain included.
+  */
+
+  window.examQuestions=
+    shuffle(
+      quiz.map((q,index)=>({
+        ...q,
+        originalIndex:index
+      }))
+    );
+
+
+  showView("testView");
+
+  renderQuestion();
+
+  startTimer();
+
+  enableAntiCheat();
+
+  requestFullscreen();
+
+}
+
+
+/* ============================================================
+   QUESTION RENDER
+============================================================ */
+
+function renderQuestion(){
+
+  const q=
+    window.examQuestions[currentQuestion];
+
+  if(!q)return;
+
+
+  document.getElementById(
+    "questionNumber"
+  ).textContent=
+    `Question ${currentQuestion+1} of ${window.examQuestions.length}`;
+
+
+  document.getElementById(
+    "questionType"
+  ).textContent=
+    q.type==="mcq"
+      ?"Multiple Choice"
+      :"Coding Question";
+
+
+  document.getElementById(
+    "questionText"
+  ).textContent=
+    q.q;
+
+
+  const area=
+    document.getElementById("answerArea");
+
+  area.innerHTML="";
+
+
+  if(q.type==="mcq"){
+
+    const options=
+      q.options.map(
+        (text,index)=>({
+          text,
+          original:index
+        })
+      );
+
+    const shuffledOptions=
+      shuffle(options);
+
+
+    const wrapper=
+      document.createElement("div");
+
+    wrapper.className="options";
+
+
+    shuffledOptions.forEach(option=>{
+
+      const label=
+        document.createElement("label");
+
+      label.className="option";
+
+      const checked=
+        answers[currentQuestion] !== undefined &&
+        answers[currentQuestion] === option.original;
+
+
+      label.innerHTML=`
+
+        <input
+          type="radio"
+          name="answer"
+          value="${option.original}"
+          ${checked?"checked":""}
+        >
+
+        <span>
+          ${escapeHTML(option.text)}
+        </span>
+
+      `;
+
+      wrapper.appendChild(label);
+
+    });
+
+
+    area.appendChild(wrapper);
+
+
+  }else{
+
+    const textarea=
+      document.createElement("textarea");
+
+    textarea.className="code-answer";
+
+    textarea.placeholder=
+      "Write your Python code here...";
+
+    textarea.spellcheck=false;
+
+    textarea.value=
+      answers[currentQuestion] || "";
+
+    textarea.oninput=function(){
+
+      answers[currentQuestion]=
+        textarea.value;
+
+    };
+
+    area.appendChild(textarea);
+
+  }
+
+
+  document.getElementById(
+    "prevBtn"
+  ).style.visibility=
+    currentQuestion===0
+      ?"hidden"
+      :"visible";
+
+
+  document.getElementById(
+    "nextBtn"
+  ).textContent=
+    currentQuestion===
+      window.examQuestions.length-1
+      ?"Submit Assessment"
+      :"Next";
+
+}
+
+
+/* ============================================================
+   SAVE CURRENT ANSWER
+============================================================ */
+
+function saveCurrentAnswer(){
+
+  const q=
+    window.examQuestions[currentQuestion];
+
+  if(q.type==="mcq"){
+
+    const selected=
+      document.querySelector(
+        'input[name="answer"]:checked'
+      );
+
+    if(selected){
+
+      answers[currentQuestion]=
+        Number(selected.value);
+
+    }
+
+  }
+
+}
+
+
+/* ============================================================
+   NAVIGATION
+============================================================ */
+
+function previousQuestion(){
+
+  saveCurrentAnswer();
+
+  if(currentQuestion>0){
+
+    currentQuestion--;
+
+    renderQuestion();
+
+  }
+
+}
+
+
+function nextQuestion(){
+
+  saveCurrentAnswer();
+
+  if(
+    currentQuestion===
+    window.examQuestions.length-1
+  ){
+
+    if(
+      confirm(
+        "Submit your final assessment?\n\n"+
+        "You will not be able to change your answers."
+      )
+    ){
+
+      submitAssessment();
+
+    }
+
+    return;
+
+  }
+
+
+  currentQuestion++;
+
+  renderQuestion();
+
+}
+
+
+/* ============================================================
+   TIMER
+============================================================ */
+
+function startTimer(){
+
+  clearInterval(timerInterval);
+
+  updateTimer();
+
+
+  timerInterval=
+    setInterval(()=>{
+
+      remainingSeconds--;
+
+      updateTimer();
+
+
+      if(remainingSeconds<=0){
+
+        clearInterval(timerInterval);
+
+        alert(
+          "Time is up. Your assessment will be submitted."
+        );
+
+        submitAssessment();
+
+      }
+
+    },1000);
+
+}
+
+
+function updateTimer(){
+
+  const minutes=
+    Math.floor(remainingSeconds/60);
+
+  const seconds=
+    remainingSeconds%60;
+
+  document.getElementById(
+    "timer"
+  ).textContent=
+    String(minutes).padStart(2,"0")+
+    ":"+
+    String(seconds).padStart(2,"0");
+
+}
+
+
+/* ============================================================
+   CODE EVALUATION
+============================================================ */
+
+function normalizeCode(code){
+
+  return code
+    .toLowerCase()
+    .replace(/\s+/g," ")
+    .replace(/["']/g,"'")
+    .trim();
+
+}
+
+
+function codeAnswerIsAcceptable(user,expected,index){
+
+  const u=normalizeCode(user);
+
+  if(!u)return false;
+
+
+  /*
+    This is intentionally flexible.
+
+    It does NOT require an exact string match.
+    Equivalent solutions can receive credit.
+  */
+
+  switch(index){
+
+    case 40:
+      return (
+        u.includes("total") &&
+        u.includes("a + b") &&
+        u.includes("* c") &&
+        u.includes("print")
+      );
+
+    case 41:
+      return (
+        u.includes("if number > 0") &&
+        u.includes("elif number < 0") &&
+        u.includes("else") &&
+        u.includes("positive") &&
+        u.includes("negative") &&
+        u.includes("zero")
+      );
+
+    case 42:
+      return (
+        u.includes("range(n)") &&
+        u.includes("hello world") &&
+        u.includes("for")
+      );
+
+    case 43:
+      return (
+        u.includes("while") &&
+        u.includes("i**3") &&
+        u.includes("n")
+      );
+
+    case 44:
+      return (
+        u.includes("lnew") &&
+        u.includes("e**2") &&
+        u.includes("e % 2 == 0")
+      );
+
+    case 45:
+      return (
+        u.includes("def div_by") &&
+        u.includes("%") &&
+        u.includes("return")
+      );
+
+    case 46:
+      return (
+        u.includes("d.items") &&
+        u.includes("k == v") &&
+        u.includes("count")
+      );
+
+    case 47:
+      return (
+        u.includes("def recur_power") &&
+        u.includes("exp") &&
+        u.includes("return") &&
+        u.includes("recur_power")
+      );
+
+    case 48:
+      return (
+        u.includes("def total_recur") &&
+        u.includes("return") &&
+        u.includes("total_recur")
+      );
+
+    case 49:
+      return (
+        u.includes("class container") &&
+        u.includes("__init__") &&
+        u.includes("self.mylist")
+      );
+
+    default:
+      return false;
+
+  }
+
+}
+
+
+/* ============================================================
+   SUBMIT ASSESSMENT
+============================================================ */
+
+async function submitAssessment(){
+
+  if(testSubmitted)return;
+
+  testSubmitted=true;
+
+  clearInterval(timerInterval);
+
+  saveCurrentAnswer();
+
+  disableAntiCheat();
+
+
+  let correct=0;
+
+  let mcqCorrect=0;
+
+  let codeCorrect=0;
+
+  let mcqTotal=0;
+
+  let codeTotal=0;
+
+
+  window.examQuestions.forEach(
+    (q,index)=>{
+
+      const userAnswer=
+        answers[index];
+
+
+      if(q.type==="mcq"){
+
+        mcqTotal++;
+
+        if(
+          userAnswer!==undefined &&
+          Number(userAnswer)===Number(q.answer)
+        ){
+
+          correct++;
+
+          mcqCorrect++;
+
+        }
+
+      }else{
+
+        codeTotal++;
+
+        if(
+          codeAnswerIsAcceptable(
+            userAnswer || "",
+            q.answer,
+            q.originalIndex
+          )
+        ){
+
+          correct++;
+
+          codeCorrect++;
+
+        }
+
+      }
+
+    }
+  );
+
+
+  const score=
+    Math.round(
+      (correct/window.examQuestions.length)*100
+    );
+
+
+  const passed=
+    score>=PASS_PERCENTAGE;
+
+
+  const date=
+    new Date().toLocaleDateString("en-IN");
+
+
+  let certificateId="";
+
+
+  if(passed){
+
+    certificateId=
+      generateCertificateId();
+
+  }
+
+
+  certificateData={
+    id:certificateId,
+    score,
+    date
+  };
+
+
+  /*
+    IMPORTANT:
+
+    Your Apps Script should verify the score
+    server-side before permanently issuing the
+    certificate.
+  */
+
+  const serverResult=
+    await api("submitQuiz",{
+
+      name:student.name,
+
+      mobile:student.mobile,
+
+      email:student.email,
+
+      score,
+
+      status:passed
+        ?"Passed"
+        :"Failed",
+
+      certificateId,
+
+      totalQuestions:50,
+
+      mcqCorrect,
+
+      mcqTotal,
+
+      codeCorrect,
+
+      codeTotal
+
+    });
+
+
+  if(
+    serverResult &&
+    serverResult.certificateId
+  ){
+
+    certificateData.id=
+      serverResult.certificateId;
+
+  }
+
+
+  showResult(
+    score,
+    passed,
+    certificateData.id
+  );
+
+}
+
+
+/* ============================================================
+   RESULT
+============================================================ */
+
+function showResult(score,passed,certificateId){
+
+  showView("resultView");
+
+
+  const status=
+    document.getElementById("resultStatus");
+
+  status.innerHTML=
+    `<h1 class="${passed?"pass":"fail"}">
+      ${passed?"Assessment Passed":"Assessment Not Passed"}
+    </h1>`;
+
+
+  document.getElementById(
+    "resultScore"
+  ).textContent=
+    score+"%";
+
+
+  document.getElementById(
+    "resultScore"
+  ).className=
+    "score "+(passed?"pass":"fail");
+
+
+  document.getElementById(
+    "resultIcon"
+  ).textContent=
+    passed?"🎓":"📚";
+
+
+  document.getElementById(
+    "resultText"
+  ).textContent=
+    passed
+      ?`Congratulations ${student.name}. You have passed the final assessment and are eligible for the Openbox Academy certificate.`
+      :`You scored ${score}%. The current pass threshold is ${PASS_PERCENTAGE}%. Review the course material and try again when your assessment policy allows it.`;
+
+
+  const certButton=
+    document.getElementById("certificateBtn");
+
+
+  /*
+    Do not show certificate if the server
+    didn't confirm the certificate ID.
+  */
+
+  if(passed && certificateId){
+
+    certButton.style.display="inline-block";
+
+  }else{
+
+    certButton.style.display="none";
+
+  }
+
+}
+
+
+/* ============================================================
+   CERTIFICATE ID
+============================================================ */
+
+function generateCertificateId(){
+
+  const year=
+    new Date().getFullYear();
+
+  const random=
+    Math.floor(
+      100000+
+      Math.random()*900000
+    );
+
+  return `OB-${year}-${random}`;
+
+}
+
+
+/* ============================================================
+   CERTIFICATE DOWNLOAD
+============================================================ */
+
+function downloadCertificate(){
+
+  /*
+    Uses the browser's print engine.
+
+    Select:
+      Destination → Save as PDF
+  */
+
+  window.print();
+
+}
+
+
+/* ============================================================
+   LINKEDIN
+============================================================ */
+
+function generateCaption(){
+
+  if(!certificateData)return;
+
+
+  const caption=
+`🎓 I’m excited to share that I’ve successfully completed the Python Programming Fundamentals Course from Openbox Academy.
+
+Through this course, I strengthened my understanding of:
+
+• Python programming fundamentals
+• Control flow and loops
+• Functions and abstraction
+• Lists, tuples and dictionaries
+• Recursion
+• Object-oriented programming
+• Algorithmic complexity
+• Problem solving and coding exercises
+
+I’m grateful for the opportunity to learn, practice and validate my understanding through the final assessment.
+
+📜 Certificate ID: ${certificateData.id}
+📊 Assessment Score: ${certificateData.score}%
+
+If you're looking to learn Python for free, you can start here:
+
+👉 Free Python Learning with Openbox:
+https://openboxgp.vercel.app/python.html
+
+#Python #PythonProgramming #Programming #LearnToCode #OpenboxAcademy #Coding #SoftwareDevelopment`;
+
+
+  document.getElementById(
+    "linkedinCaption"
+  ).value=
+    caption;
+
+}
+
+
+async function copyCaption(){
+
+  const textarea=
+    document.getElementById(
+      "linkedinCaption"
+    );
+
+  try{
+
+    await navigator.clipboard.writeText(
+      textarea.value
+    );
+
+    toast(
+      "LinkedIn caption copied."
+    );
+
+  }catch(e){
+
+    textarea.select();
+
+    document.execCommand("copy");
+
+    toast(
+      "LinkedIn caption copied."
+    );
+
+  }
+
+}
+
+
+function shareLinkedIn(){
+
+  const url=
+    encodeURIComponent(
+      "https://openboxgp.vercel.app/python.html"
+    );
+
+
+  window.open(
+    "https://www.linkedin.com/sharing/share-offsite/?url="+url,
+    "_blank",
+    "width=700,height=600"
+  );
+
+
+  toast(
+    "LinkedIn opened. Paste your copied caption into the post."
+  );
+
+}
+
+
+/* ============================================================
+   ANTI-CHEATING
+============================================================ */
+
+function registerViolation(reason){
+
+  if(
+    !testStarted ||
+    testSubmitted
+  )return;
+
+
+  violations++;
+
+
+  toast(
+    `Assessment warning ${violations}/${MAX_VIOLATIONS}: ${reason}`
+  );
+
+
+  /*
+    Auto-submit after repeated violations.
+  */
+
+  if(violations>=MAX_VIOLATIONS){
+
+    alert(
+      "The assessment has been automatically submitted because of repeated assessment violations."
+    );
+
+    submitAssessment();
+
+  }
+
+}
+
+
+function disableContextMenu(e){
+
+  if(testStarted){
+
+    e.preventDefault();
+
+  }
+
+}
+
+
+function disableSelection(e){
+
+  if(testStarted){
+
+    e.preventDefault();
+
+  }
+
+}
+
+
+function keyboardProtection(e){
+
+  if(!testStarted)return;
+
+
+  const key=e.key.toLowerCase();
+
+
+  const blocked=
+    (e.ctrlKey && ["c","x","v","u","s","p","a"].includes(key)) ||
+    (e.ctrlKey && e.shiftKey && ["i","j","c"].includes(key)) ||
+    e.key==="F12";
+
+
+  if(blocked){
+
+    e.preventDefault();
+
+    registerViolation(
+      "Restricted keyboard shortcut detected."
+    );
+
+  }
+
+}
+
+
+function visibilityHandler(){
+
+  if(
+    testStarted &&
+    !testSubmitted &&
+    document.hidden
+  ){
+
+    registerViolation(
+      "You left the assessment window."
+    );
+
+  }
+
+}
+
+
+function fullscreenHandler(){
+
+  if(
+    testStarted &&
+    !testSubmitted &&
+    !document.fullscreenElement
+  ){
+
+    registerViolation(
+      "Fullscreen mode was exited."
+    );
+
+  }
+
+}
+
+
+function beforeUnloadHandler(e){
+
+  if(
+    testStarted &&
+    !testSubmitted
+  ){
+
+    e.preventDefault();
+
+    e.returnValue="";
+
+  }
+
+}
+
+
+function enableAntiCheat(){
+
+  document.addEventListener(
+    "contextmenu",
+    disableContextMenu
+  );
+
+  document.addEventListener(
+    "selectstart",
+    disableSelection
+  );
+
+  document.addEventListener(
+    "copy",
+    disableSelection
+  );
+
+  document.addEventListener(
+    "cut",
+    disableSelection
+  );
+
+  document.addEventListener(
+    "paste",
+    disableSelection
+  );
+
+  document.addEventListener(
+    "keydown",
+    keyboardProtection
+  );
+
+  document.addEventListener(
+    "visibilitychange",
+    visibilityHandler
+  );
+
+  document.addEventListener(
+    "fullscreenchange",
+    fullscreenHandler
+  );
+
+  window.addEventListener(
+    "beforeunload",
+    beforeUnloadHandler
+  );
+
+}
+
+
+function disableAntiCheat(){
+
+  document.removeEventListener(
+    "contextmenu",
+    disableContextMenu
+  );
+
+  document.removeEventListener(
+    "selectstart",
+    disableSelection
+  );
+
+  document.removeEventListener(
+    "copy",
+    disableSelection
+  );
+
+  document.removeEventListener(
+    "cut",
+    disableSelection
+  );
+
+  document.removeEventListener(
+    "paste",
+    disableSelection
+  );
+
+  document.removeEventListener(
+    "keydown",
+    keyboardProtection
+  );
+
+  document.removeEventListener(
+    "visibilitychange",
+    visibilityHandler
+  );
+
+  document.removeEventListener(
+    "fullscreenchange",
+    fullscreenHandler
+  );
+
+  window.removeEventListener(
+    "beforeunload",
+    beforeUnloadHandler
+  );
+
+}
+
+
+async function requestFullscreen(){
+
+  try{
+
+    if(
+      !document.fullscreenElement &&
+      document.documentElement.requestFullscreen
+    ){
+
+      await document.documentElement.requestFullscreen();
+
+    }
+
+  }catch(e){
+
+    console.log(
+      "Fullscreen request was not available."
+    );
+
+  }
+
+}
+
+
+/* ============================================================
+   LOGOUT
+============================================================ */
+
+function logout(){
+
+  if(testStarted && !testSubmitted){
+
+    toast(
+      "You cannot logout during the assessment."
+    );
+
+    return;
+
+  }
+
+
+  localStorage.removeItem(
+    "openbox_python_student"
+  );
+
+  student=null;
+
+  completedLectures=[];
+
+  showView("loginView");
+
+  document.getElementById(
+    "mainHeader"
+  ).style.display="none";
+
+}
+
+
+/* ============================================================
+   UTILITIES
+============================================================ */
+
+function toast(message){
+
+  const el=
+    document.getElementById("toast");
+
+  el.textContent=message;
+
+  el.classList.add("show");
+
+  setTimeout(()=>{
+    el.classList.remove("show");
+  },3000);
+
+}
+
+
+function escapeHTML(str){
+
+  return String(str)
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
+
+}
+
+
+function scrollToLectures(){
+
+  document
+    .getElementById("lecturesSection")
+    .scrollIntoView({
+      behavior:"smooth"
+    });
+
+}
+
+
+/* ============================================================
+   STARTUP
+============================================================ */
+
+document.addEventListener(
+  "DOMContentLoaded",
+  init
+);
+
+</script>
 
 </body>
 </html>
