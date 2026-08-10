@@ -1,828 +1,860 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OpenBox GP - Java Fundamentals Learning Suite</title>
-    <style>
-        :root {
-            --bg-primary: #0f172a;
-            --bg-secondary: #1e293b;
-            --bg-card: #334155;
-            --accent-blue: #38bdf8;
-            --accent-green: #4ade80;
-            --accent-purple: #c084fc;
-            --accent-red: #f87171;
-            --text-main: #f8fafc;
-            --text-muted: #94a3b8;
-            --border: #475569;
-            --code-bg: #020617;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Logic Building Hour (LBH) | Module Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --bg-main: #0f172a;
+      --bg-card: #1e293b;
+      --bg-card-hover: #334155;
+      --accent-primary: #38bdf8;
+      --accent-glow: rgba(56, 189, 248, 0.15);
+      --accent-success: #10b981;
+      --accent-warning: #f59e0b;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --border-color: #334155;
+      --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
-        }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-        body {
-            background-color: var(--bg-primary);
-            color: var(--text-main);
-            display: flex;
-            height: 100vh;
-            overflow: hidden;
-        }
+    body {
+      background-color: var(--bg-main);
+      color: var(--text-main);
+      font-family: var(--font-sans);
+      line-height: 1.6;
+      padding: 2rem 1rem;
+    }
 
-        /* Sidebar Navigation */
-        aside.sidebar {
-            width: 320px;
-            background-color: var(--bg-secondary);
-            border-right: 1px solid var(--border);
-            display: flex;
-            flex-direction: column;
-            flex-shrink: 0;
-        }
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
 
-        .brand {
-            padding: 1.25rem;
-            background: rgba(0,0,0,0.2);
-            border-bottom: 1px solid var(--border);
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-        }
+    /* Header Banner */
+    header {
+      background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 2.5rem;
+      margin-bottom: 2rem;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+    }
 
-        .brand-logo {
-            background: var(--accent-blue);
-            color: var(--bg-primary);
-            font-weight: 800;
-            padding: 0.4rem 0.6rem;
-            border-radius: 6px;
-            font-size: 1.1rem;
-        }
+    header::after {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -10%;
+      width: 300px;
+      height: 300px;
+      background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
+      pointer-events: none;
+    }
 
-        .brand-title {
-            font-weight: 700;
-            font-size: 1.1rem;
-            letter-spacing: -0.5px;
-        }
+    .badge-container {
+      display: flex;
+      gap: 0.75rem;
+      margin-bottom: 1rem;
+      flex-wrap: wrap;
+    }
 
-        .progress-bar-container {
-            padding: 1rem 1.25rem;
-            border-bottom: 1px solid var(--border);
-            background: rgba(0,0,0,0.1);
-        }
+    .badge {
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 0.25rem 0.75rem;
+      border-radius: 9999px;
+      border: 1px solid transparent;
+    }
 
-        .progress-label {
-            display: flex;
-            justify-content: space-between;
-            font-size: 0.8rem;
-            color: var(--text-muted);
-            margin-bottom: 0.5rem;
-        }
+    .badge-restricted {
+      background: rgba(239, 68, 68, 0.1);
+      color: #ef4444;
+      border-color: rgba(239, 68, 68, 0.2);
+    }
 
-        .progress-track {
-            width: 100%;
-            height: 8px;
-            background: var(--bg-card);
-            border-radius: 999px;
-            overflow: hidden;
-        }
+    .badge-time {
+      background: rgba(56, 189, 248, 0.1);
+      color: var(--accent-primary);
+      border-color: rgba(56, 189, 248, 0.2);
+    }
 
-        .progress-fill {
-            height: 100%;
-            width: 0%;
-            background: linear-gradient(90deg, var(--accent-blue), var(--accent-green));
-            transition: width 0.4s ease;
-        }
+    header h1 {
+      font-size: 2.25rem;
+      font-weight: 700;
+      letter-spacing: -0.025em;
+      margin-bottom: 0.5rem;
+      color: var(--text-main);
+    }
 
-        .module-list {
-            overflow-y: auto;
-            flex: 1;
-            padding: 0.75rem;
-        }
+    header p {
+      color: var(--text-muted);
+      max-width: 750px;
+      font-size: 1rem;
+    }
 
-        .module-item {
-            margin-bottom: 0.5rem;
-        }
+    /* Progress Tracker Widget */
+    .progress-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 1.25rem 1.75rem;
+      margin-bottom: 2.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
 
-        .module-btn {
-            width: 100%;
-            padding: 0.85rem 1rem;
-            background: transparent;
-            border: 1px solid transparent;
-            color: var(--text-main);
-            text-align: left;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: 600;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            transition: all 0.2s ease;
-        }
+    .progress-info {
+      flex: 1;
+      min-width: 200px;
+    }
 
-        .module-btn:hover {
-            background: var(--bg-card);
-        }
+    .progress-title {
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.25rem;
+    }
 
-        .module-btn.active {
-            background: var(--bg-card);
-            border-color: var(--accent-blue);
-            color: var(--accent-blue);
-        }
+    .progress-bar-bg {
+      width: 100%;
+      height: 8px;
+      background: var(--border-color);
+      border-radius: 9999px;
+      overflow: hidden;
+      margin-top: 0.5rem;
+    }
 
-        .module-status {
-            font-size: 0.75rem;
-            padding: 0.2rem 0.5rem;
-            border-radius: 4px;
-            background: rgba(255,255,255,0.05);
-        }
+    .progress-bar-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--accent-primary), var(--accent-success));
+      border-radius: 9999px;
+      transition: width 0.4s ease;
+    }
 
-        /* Main Workspace Layout */
-        main.workspace {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            overflow: hidden;
-        }
+    .progress-stats {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--text-main);
+      font-family: var(--font-mono);
+    }
 
-        header.topbar {
-            height: 60px;
-            background: var(--bg-secondary);
-            border-bottom: 1px solid var(--border);
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 0 1.5rem;
-        }
+    /* Strategy Note */
+    .strategy-callout {
+      background: rgba(245, 158, 11, 0.05);
+      border-left: 4px solid var(--accent-warning);
+      padding: 1rem 1.25rem;
+      border-radius: 0 8px 8px 0;
+      margin-bottom: 2rem;
+      font-size: 0.925rem;
+      color: #fcd34d;
+    }
 
-        .tab-group {
-            display: flex;
-            gap: 0.5rem;
-        }
+    /* Days Timeline Layout */
+    .timeline {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
 
-        .tab-btn {
-            padding: 0.5rem 1rem;
-            background: transparent;
-            border: none;
-            color: var(--text-muted);
-            cursor: pointer;
-            font-weight: 600;
-            border-bottom: 2px solid transparent;
-            transition: all 0.2s;
-        }
+    .day-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      overflow: hidden;
+      transition: border-color 0.2s ease, transform 0.2s ease;
+    }
 
-        .tab-btn.active {
-            color: var(--accent-blue);
-            border-bottom-color: var(--accent-blue);
-        }
+    .day-card:hover {
+      border-color: #475569;
+    }
 
-        .content-panel {
-            flex: 1;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1px;
-            background: var(--border);
-            overflow: hidden;
-        }
+    .day-header {
+      padding: 1.25rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      cursor: pointer;
+      user-select: none;
+      background: rgba(255, 255, 255, 0.01);
+    }
 
-        /* Left Split: Documentation & Theory */
-        .doc-view {
-            background: var(--bg-primary);
-            padding: 2rem;
-            overflow-y: auto;
-            line-height: 1.6;
-        }
+    .day-header-left {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
 
-        .doc-view h1 {
-            font-size: 1.8rem;
-            color: var(--accent-blue);
-            margin-bottom: 1rem;
-        }
+    .day-number {
+      font-family: var(--font-mono);
+      font-size: 0.875rem;
+      font-weight: 700;
+      background: var(--bg-main);
+      color: var(--accent-primary);
+      padding: 0.35rem 0.75rem;
+      border-radius: 6px;
+      border: 1px solid var(--border-color);
+      white-space: nowrap;
+    }
 
-        .doc-view h2 {
-            font-size: 1.3rem;
-            color: var(--text-main);
-            margin: 1.5rem 0 0.75rem 0;
-            border-bottom: 1px solid var(--border);
-            padding-bottom: 0.4rem;
-        }
+    .day-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--text-main);
+    }
 
-        .doc-view p, .doc-view ul {
-            color: var(--text-muted);
-            margin-bottom: 1rem;
-            font-size: 0.95rem;
-        }
+    .chevron {
+      width: 20px;
+      height: 20px;
+      stroke: var(--text-muted);
+      transition: transform 0.3s ease;
+    }
 
-        .doc-view ul {
-            padding-left: 1.25rem;
-        }
+    .day-card.open .chevron {
+      transform: rotate(180deg);
+    }
 
-        .doc-view li {
-            margin-bottom: 0.4rem;
-        }
+    .day-body {
+      display: none;
+      padding: 1.5rem;
+      border-top: 1px solid var(--border-color);
+      background: rgba(15, 23, 42, 0.3);
+    }
 
-        .code-block {
-            background: var(--code-bg);
-            border: 1px solid var(--border);
-            border-radius: 6px;
-            padding: 1rem;
-            font-family: 'Consolas', 'Courier New', monospace;
-            font-size: 0.875rem;
-            color: #e2e8f0;
-            margin: 1rem 0;
-            overflow-x: auto;
-        }
+    .day-card.open .day-body {
+      display: block;
+    }
 
-        /* Right Split: Task IDE & Terminal */
-        .ide-view {
-            background: var(--bg-secondary);
-            display: flex;
-            flex-direction: column;
-            overflow: hidden;
-        }
+    .day-objective {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      margin-bottom: 1.25rem;
+    }
 
-        .task-card {
-            background: var(--bg-primary);
-            padding: 1.25rem;
-            border-bottom: 1px solid var(--border);
-        }
+    /* Program Tables */
+    .table-container {
+      overflow-x: auto;
+      border-radius: 8px;
+      border: 1px solid var(--border-color);
+    }
 
-        .task-card h3 {
-            color: var(--accent-purple);
-            font-size: 1.1rem;
-            margin-bottom: 0.5rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 0.9rem;
+    }
 
-        .task-card p {
-            color: var(--text-muted);
-            font-size: 0.9rem;
-        }
+    th {
+      background: var(--bg-main);
+      color: var(--text-muted);
+      font-weight: 600;
+      text-transform: uppercase;
+      font-size: 0.75rem;
+      letter-spacing: 0.05em;
+      padding: 0.75rem 1rem;
+      border-bottom: 1px solid var(--border-color);
+    }
 
-        .editor-container {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            background: var(--code-bg);
-            position: relative;
-        }
+    td {
+      padding: 0.85rem 1rem;
+      border-bottom: 1px solid var(--border-color);
+    }
 
-        .editor-header {
-            background: var(--bg-secondary);
-            padding: 0.5rem 1rem;
-            font-size: 0.8rem;
-            color: var(--text-muted);
-            border-bottom: 1px solid var(--border);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+    tr:last-child td {
+      border-bottom: none;
+    }
 
-        textarea.code-editor {
-            flex: 1;
-            background: transparent;
-            color: #f1f5f9;
-            border: none;
-            padding: 1rem;
-            font-family: 'Consolas', 'Courier New', monospace;
-            font-size: 0.95rem;
-            resize: none;
-            outline: none;
-            line-height: 1.5;
-        }
+    tr:hover td {
+      background: rgba(255, 255, 255, 0.02);
+    }
 
-        .terminal-container {
-            height: 180px;
-            background: #000000;
-            border-top: 1px solid var(--border);
-            display: flex;
-            flex-direction: column;
-        }
+    /* Custom Checkbox */
+    .checkbox-cell {
+      width: 40px;
+      text-align: center;
+    }
 
-        .terminal-header {
-            background: #111827;
-            padding: 0.4rem 1rem;
-            font-size: 0.75rem;
-            color: var(--text-muted);
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            display: flex;
-            justify-content: space-between;
-        }
+    input[type="checkbox"] {
+      appearance: none;
+      width: 18px;
+      height: 18px;
+      border: 2px solid var(--text-muted);
+      border-radius: 4px;
+      background: transparent;
+      cursor: pointer;
+      display: grid;
+      place-content: center;
+      transition: all 0.2s ease;
+    }
 
-        .terminal-output {
-            flex: 1;
-            padding: 0.75rem 1rem;
-            font-family: 'Consolas', 'Courier New', monospace;
-            font-size: 0.85rem;
-            color: var(--accent-green);
-            overflow-y: auto;
-            white-space: pre-wrap;
-        }
+    input[type="checkbox"]:checked {
+      background: var(--accent-success);
+      border-color: var(--accent-success);
+    }
 
-        .action-bar {
-            padding: 0.75rem 1rem;
-            background: var(--bg-secondary);
-            border-top: 1px solid var(--border);
-            display: flex;
-            gap: 1rem;
-            justify-content: flex-end;
-        }
+    input[type="checkbox"]:checked::before {
+      content: "✓";
+      color: white;
+      font-size: 12px;
+      font-weight: bold;
+    }
 
-        .btn {
-            padding: 0.5rem 1.25rem;
-            border-radius: 6px;
-            border: none;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.2s;
-            font-size: 0.875rem;
-        }
+    .btn-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      color: var(--accent-primary);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.85rem;
+      transition: opacity 0.2s;
+    }
 
-        .btn-secondary {
-            background: var(--bg-card);
-            color: var(--text-main);
-        }
+    .btn-link:hover {
+      text-decoration: underline;
+      opacity: 0.85;
+    }
 
-        .btn-secondary:hover {
-            background: var(--border);
-        }
+    .code-snippet {
+      font-family: var(--font-mono);
+      background: var(--bg-main);
+      padding: 0.15rem 0.4rem;
+      border-radius: 4px;
+      font-size: 0.85rem;
+      color: var(--accent-primary);
+    }
 
-        .btn-primary {
-            background: var(--accent-blue);
-            color: var(--bg-primary);
-        }
+    .program-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
 
-        .btn-primary:hover {
-            opacity: 0.9;
-        }
+    .program-list li {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-size: 0.9rem;
+      background: var(--bg-main);
+      padding: 0.6rem 1rem;
+      border-radius: 6px;
+      border: 1px solid var(--border-color);
+    }
 
-        /* Quiz View Overlay Styling */
-        .quiz-view {
-            display: none;
-            padding: 2rem;
-            background: var(--bg-primary);
-            overflow-y: auto;
-            grid-column: span 2;
-        }
-
-        .quiz-container {
-            max-width: 700px;
-            margin: 0 auto;
-        }
-
-        .quiz-card {
-            background: var(--bg-secondary);
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            padding: 1.5rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .quiz-card h4 {
-            margin-bottom: 1rem;
-            color: var(--text-main);
-        }
-
-        .option-btn {
-            width: 100%;
-            padding: 0.75rem 1rem;
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 6px;
-            color: var(--text-main);
-            text-align: left;
-            margin-bottom: 0.5rem;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-
-        .option-btn:hover {
-            border-color: var(--accent-blue);
-        }
-
-        .option-btn.correct {
-            background: rgba(74, 222, 128, 0.15);
-            border-color: var(--accent-green);
-            color: var(--accent-green);
-        }
-
-        .option-btn.incorrect {
-            background: rgba(248, 113, 113, 0.15);
-            border-color: var(--accent-red);
-            color: var(--accent-red);
-        }
-    </style>
+    @media (max-width: 640px) {
+      body {
+        padding: 1rem 0.5rem;
+      }
+      header {
+        padding: 1.5rem;
+      }
+      header h1 {
+        font-size: 1.75rem;
+      }
+      .day-header {
+        padding: 1rem;
+      }
+      .day-body {
+        padding: 1rem;
+      }
+    }
+  </style>
 </head>
 <body>
 
-    <!-- Sidebar -->
-    <aside class="sidebar">
-        <div class="brand">
-            <div class="brand-logo">GP</div>
-            <div class="brand-title">OpenBox GP Code</div>
+  <div class="container">
+    
+    <!-- Header -->
+    <header>
+      <div class="badge-container">
+        <span class="badge badge-restricted">Internal & Restricted</span>
+        <span class="badge badge-time">Suggested: 4:30 PM – 6:00 PM</span>
+      </div>
+      <h1>Logic Building Hour (LBH) Plan</h1>
+      <p>A structured daily regimen designed to build core problem-solving intuition through continuous programming practice. Logic building skills improve strictly through regular, focused execution.</p>
+    </header>
+
+    <!-- Progress Tracker -->
+    <div class="progress-card">
+      <div class="progress-info">
+        <div class="progress-title">Overall Module Completion</div>
+        <div class="progress-bar-bg">
+          <div class="progress-bar-fill" id="progressBar"></div>
         </div>
+      </div>
+      <div class="progress-stats" id="progressStats">0 / 0 Done</div>
+    </div>
 
-        <div class="progress-bar-container">
-            <div class="progress-label">
-                <span>Course Completion</span>
-                <span id="progressText">0%</span>
-            </div>
-            <div class="progress-track">
-                <div class="progress-fill" id="progressFill"></div>
-            </div>
+    <!-- Divide and Conquer Strategy Callout -->
+    <div class="strategy-callout">
+      <strong>💡 Logic Building Methodology:</strong> Follow the <em>"Divide-and-Conquer"</em> approach outlined in Section B of <strong>"An Approach to Logic Building"</strong> on PBLApp. Break down every question into smaller sub-problems before coding.
+    </div>
+
+    <!-- Timeline of Modules -->
+    <div class="timeline" id="timeline">
+
+      <!-- Days 1 & 2 -->
+      <div class="day-card open">
+        <div class="day-header" onclick="toggleCard(this)">
+          <div class="day-header-left">
+            <span class="day-number">Days 1 - 2</span>
+            <span class="day-title">Core Programming Language Basics</span>
+          </div>
+          <svg class="chevron" viewBox="0 0 24 24" fill="none"><path d="M19 9l-7 7-7-7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </div>
-
-        <div class="module-list" id="moduleList">
-            <!-- Dynamic Modules populated via JS -->
+        <div class="day-body">
+          <div class="day-objective">
+            <strong>Objective:</strong> Master programming fundamentals (Data Types, Conditionals, and Loops) before attempting logic-building hours. Logic building practice officially begins on <strong>Day 3/4</strong>.
+          </div>
+          <h4 style="margin-bottom: 0.75rem; font-size: 0.9rem; color: var(--text-muted); text-transform: uppercase;">Day 2 Benchmark Exercises (IDE Practice)</h4>
+          <ul class="program-list">
+            <li><input type="checkbox" class="task-check" onchange="updateProgress()"> Write a program to accept a number N and print whether it is positive, negative, or zero</li>
+            <li><input type="checkbox" class="task-check" onchange="updateProgress()"> Write a program to accept two numbers and print the greater value</li>
+            <li><input type="checkbox" class="task-check" onchange="updateProgress()"> Write a program to accept a number N and print whether it is EVEN or ODD</li>
+            <li><input type="checkbox" class="task-check" onchange="updateProgress()"> Write a program to accept two numbers and print whether their sum is EVEN or ODD</li>
+            <li><input type="checkbox" class="task-check" onchange="updateProgress()"> Print all numbers from 1 to 100 (1 2 3 4 ... 100)</li>
+            <li><input type="checkbox" class="task-check" onchange="updateProgress()"> Print alternate numbers starting from 1 to 99 (1 3 5 7 ... 99)</li>
+            <li><input type="checkbox" class="task-check" onchange="updateProgress()"> Print alternate numbers starting from 0 to 100 (0 2 4 6 ... 100)</li>
+            <li><input type="checkbox" class="task-check" onchange="updateProgress()"> Print numbers backwards from 100 to 0 (100 99 98 ... 0)</li>
+            <li><input type="checkbox" class="task-check" onchange="updateProgress()"> Print numbers backwards from 100 to 1 skipping 2 numbers (100 97 94 ... 1)</li>
+          </ul>
         </div>
-    </aside>
+      </div>
 
-    <!-- Main Workspace -->
-    <main class="workspace">
-        <header class="topbar">
-            <div class="tab-group">
-                <button class="tab-btn active" id="tabDoc" onclick="switchTab('doc')">Learning Docs & Task</button>
-                <button class="tab-btn" id="tabQuiz" onclick="switchTab('quiz')">Module Quiz</button>
-            </div>
-            <div style="font-size: 0.85rem; color: var(--text-muted);" id="currentModuleTitle">
-                Module 1: Java Architecture
-            </div>
-        </header>
-
-        <div class="content-panel" id="contentPanel">
-            <!-- Documentation View -->
-            <div class="doc-view" id="docView">
-                <!-- Content dynamically populated -->
-            </div>
-
-            <!-- Task IDE View -->
-            <div class="ide-view" id="ideView">
-                <div class="task-card">
-                    <h3><span>🎯</span> Module Task</h3>
-                    <p id="taskInstruction">Loading task instructions...</p>
-                </div>
-
-                <div class="editor-container">
-                    <div class="editor-header">
-                        <span>Main.java</span>
-                        <span>Java SE 17</span>
-                    </div>
-                    <textarea class="code-editor" id="codeEditor" spellcheck="false"></textarea>
-                </div>
-
-                <div class="terminal-container">
-                    <div class="terminal-header">
-                        <span>Console Output</span>
-                        <span id="terminalStatus" style="color: var(--text-muted);">Ready</span>
-                    </div>
-                    <div class="terminal-output" id="terminalOutput">Click "Run Code" to execute script...</div>
-                </div>
-
-                <div class="action-bar">
-                    <button class="btn btn-secondary" onclick="resetEditor()">Reset</button>
-                    <button class="btn btn-primary" onclick="runCode()">Run Code</button>
-                    <button class="btn btn-primary" style="background: var(--accent-green);" onclick="submitTask()">Verify Task</button>
-                </div>
-            </div>
-
-            <!-- Quiz View -->
-            <div class="quiz-view" id="quizView">
-                <div class="quiz-container" id="quizContainer">
-                    <!-- Quiz populated dynamically -->
-                </div>
-            </div>
+      <!-- Day 3 -->
+      <div class="day-card">
+        <div class="day-header" onclick="toggleCard(this)">
+          <div class="day-header-left">
+            <span class="day-number">Day 3</span>
+            <span class="day-title">Division & Modulo Operators</span>
+          </div>
+          <svg class="chevron" viewBox="0 0 24 24" fill="none"><path d="M19 9l-7 7-7-7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </div>
-    </main>
+        <div class="day-body">
+          <div class="day-objective">
+            <strong>Objective:</strong> Learn the practical application of division <code class="code-snippet">/</code> and modulo <code class="code-snippet">%</code> operations in IDE (Eclipse / VS Code / vi).
+          </div>
+          <ul class="program-list">
+            <li><input type="checkbox" class="task-check" onchange="updateProgress()"> <strong>Is Even?</strong> — Return 2 if even, 1 if odd. (Zero is Even)</li>
+            <li><input type="checkbox" class="task-check" onchange="updateProgress()"> <strong>Is Odd?</strong> — Return 2 if odd, 1 if even. (Zero is NOT Odd)</li>
+            <li><input type="checkbox" class="task-check" onchange="updateProgress()"> <strong>Return Last Digit:</strong> Return units place as positive number (e.g. -197 -> 7)</li>
+            <li><input type="checkbox" class="task-check" onchange="updateProgress()"> <strong>Return Second Last Digit:</strong> Return tens place as positive number. Return -1 if single digit.</li>
+            <li><input type="checkbox" class="task-check" onchange="updateProgress()"> <strong>Sum of Last Digits:</strong> <code class="code-snippet">int addLastDigits(int input1, int input2)</code> ignoring sign.</li>
+          </ul>
+        </div>
+      </div>
 
-    <script>
-        // Module Data Structure
-        const courseData = [
-            {
-                id: 0,
-                title: "01. Java Architecture",
-                doc: `
-                    <h1>Java Architecture & Foundations</h1>
-                    <p>Java relies on a runtime ecosystem centered around the <strong>Java Virtual Machine (JVM)</strong> to deliver platform independence ("Write Once, Run Anywhere").</p>
-                    
-                    <h2>Key Components</h2>
-                    <ul>
-                        <li><strong>JDK (Java Development Kit):</strong> Tools to compile and develop programs (includes <code>javac</code>).</li>
-                        <li><strong>JRE (Java Runtime Environment):</strong> Software libraries needed to run Java programs.</li>
-                        <li><strong>JVM (Java Virtual Machine):</strong> Executes bytecode on the target operating system.</li>
-                    </ul>
+      <!-- Day 4 -->
+      <div class="day-card">
+        <div class="day-header" onclick="toggleCard(this)">
+          <div class="day-header-left">
+            <span class="day-number">Day 4</span>
+            <span class="day-title">Mettl Automated Tool Onboarding</span>
+          </div>
+          <svg class="chevron" viewBox="0 0 24 24" fill="none"><path d="M19 9l-7 7-7-7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="day-body">
+          <div class="day-objective">
+            <strong>Objective:</strong> Port Day-3 solutions onto the Mettl evaluation platform. Review the <em>Mettl User Guide</em> prior to starting.
+          </div>
+          <div class="table-container">
+            <table>
+              <thead>
+                <tr>
+                  <th class="checkbox-cell">Done</th>
+                  <th>Question Title</th>
+                  <th>Evaluation Link</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="checkbox-cell"><input type="checkbox" class="task-check" onchange="updateProgress()"></td>
+                  <td>Is Even?</td>
+                  <td><a href="https://tests.mettl.com/authenticateKey/2bd025dc" target="_blank" class="btn-link">Start Mettl Test ↗</a></td>
+                </tr>
+                <tr>
+                  <td class="checkbox-cell"><input type="checkbox" class="task-check" onchange="updateProgress()"></td>
+                  <td>Is Odd?</td>
+                  <td><a href="https://tests.mettl.com/authenticateKey/dbdac2a9" target="_blank" class="btn-link">Start Mettl Test ↗</a></td>
+                </tr>
+                <tr>
+                  <td class="checkbox-cell"><input type="checkbox" class="task-check" onchange="updateProgress()"></td>
+                  <td>Return last digit of the given number</td>
+                  <td><a href="https://tests.mettl.com/authenticateKey/454f012b" target="_blank" class="btn-link">Start Mettl Test ↗</a></td>
+                </tr>
+                <tr>
+                  <td class="checkbox-cell"><input type="checkbox" class="task-check" onchange="updateProgress()"></td>
+                  <td>Return second last digit of given number</td>
+                  <td><a href="https://tests.mettl.com/authenticateKey/9f87004e" target="_blank" class="btn-link">Start Mettl Test ↗</a></td>
+                </tr>
+                <tr>
+                  <td class="checkbox-cell"><input type="checkbox" class="task-check" onchange="updateProgress()"></td>
+                  <td>Sum of last digits of two given numbers</td>
+                  <td><a href="https://tests.mettl.com/authenticateKey/783a1fcf" target="_blank" class="btn-link">Start Mettl Test ↗</a></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
 
-                    <h2>Execution Pipeline</h2>
-                    <div class="code-block">
-Source Code (.java) ➔ [javac] ➔ Bytecode (.class) ➔ [Class Loader] ➔ [Bytecode Verifier] ➔ [JVM Execution]
-                    </div>
-                `,
-                task: "Print system metadata to confirm JVM initialization. Output the exact message: 'JVM Architecture Initialized'",
-                defaultCode: `public class Main {\n    public static void main(String[] args) {\n        // Print required text below\n        System.out.println("");\n    }\n}`,
-                expectedOutput: "JVM Architecture Initialized",
-                quiz: [
-                    {
-                        q: "Which component converts Java Bytecode into native target machine instructions?",
-                        options: ["Java Compiler (javac)", "Bytecode Verifier", "JVM Execution Engine", "Class Loader"],
-                        correct: 2
-                    },
-                    {
-                        q: "What is created after a .java file is compiled?",
-                        options: [".exe file", ".class bytecode file", ".dll library", ".obj file"],
-                        correct: 1
-                    }
-                ]
-            },
-            {
-                id: 1,
-                title: "02. Language Basics",
-                doc: `
-                    <h1>Java Language Basics</h1>
-                    <p>Java is a strongly typed programming language. Every variable must have a declared data type.</p>
+      <!-- Day 5 -->
+      <div class="day-card">
+        <div class="day-header" onclick="toggleCard(this)">
+          <div class="day-header-left">
+            <span class="day-number">Day 5</span>
+            <span class="day-title">Multiple Conditions & Exact Multiples</span>
+          </div>
+          <svg class="chevron" viewBox="0 0 24 24" fill="none"><path d="M19 9l-7 7-7-7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="day-body">
+          <div class="day-objective">
+            <strong>Objective:</strong> Solve basic multi-condition counting problems using modulo logic.
+          </div>
+          <div class="table-container">
+            <table>
+              <thead>
+                <tr>
+                  <th class="checkbox-cell">Done</th>
+                  <th>Question Title</th>
+                  <th>Evaluation Link</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="checkbox-cell"><input type="checkbox" class="task-check" onchange="updateProgress()"></td>
+                  <td>Is N an exact multiple of M?</td>
+                  <td><a href="https://tests.mettl.com/authenticateKey/36c4ef58" target="_blank" class="btn-link">Start Mettl Test ↗</a></td>
+                </tr>
+                <tr>
+                  <td class="checkbox-cell"><input type="checkbox" class="task-check" onchange="updateProgress()"></td>
+                  <td>Of given 5 numbers, how many are even?</td>
+                  <td><a href="https://tests.mettl.com/authenticateKey/8edbe922" target="_blank" class="btn-link">Start Mettl Test ↗</a></td>
+                </tr>
+                <tr>
+                  <td class="checkbox-cell"><input type="checkbox" class="task-check" onchange="updateProgress()"></td>
+                  <td>Of given 5 numbers, how many are odd?</td>
+                  <td><a href="https://tests.mettl.com/authenticateKey/67147bd5" target="_blank" class="btn-link">Start Mettl Test ↗</a></td>
+                </tr>
+                <tr>
+                  <td class="checkbox-cell"><input type="checkbox" class="task-check" onchange="updateProgress()"></td>
+                  <td>Of 5 numbers, how many are even or odd?</td>
+                  <td><a href="https://tests.mettl.com/authenticateKey/607636d7" target="_blank" class="btn-link">Start Mettl Test ↗</a></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
 
-                    <h2>Primitive Data Types</h2>
-                    <ul>
-                        <li><code>int</code>: 4-byte integer numbers</li>
-                        <li><code>double</code>: 8-byte floating point values</li>
-                        <li><code>boolean</code>: Logical true/false state</li>
-                        <li><code>char</code>: Single 16-bit Unicode character</li>
-                    </ul>
+      <!-- Day 6 -->
+      <div class="day-card">
+        <div class="day-header" onclick="toggleCard(this)">
+          <div class="day-header-left">
+            <span class="day-number">Day 6</span>
+            <span class="day-title">Math & Number Theory Fundamentals</span>
+          </div>
+          <svg class="chevron" viewBox="0 0 24 24" fill="none"><path d="M19 9l-7 7-7-7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="day-body">
+          <div class="day-objective">
+            <strong>Objective:</strong> Master looping operations combined with foundational mathematical algorithms.
+          </div>
+          <div class="table-container">
+            <table>
+              <thead>
+                <tr>
+                  <th class="checkbox-cell">Done</th>
+                  <th>Question Title</th>
+                  <th>Evaluation Link</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="checkbox-cell"><input type="checkbox" class="task-check" onchange="updateProgress()"></td>
+                  <td>Is Prime?</td>
+                  <td><a href="https://tests.mettl.com/authenticateKey/b1efaa3d" target="_blank" class="btn-link">Start Mettl Test ↗</a></td>
+                </tr>
+                <tr>
+                  <td class="checkbox-cell"><input type="checkbox" class="task-check" onchange="updateProgress()"></td>
+                  <td>Factorial of a number</td>
+                  <td><a href="https://tests.mettl.com/authenticateKey/8c1f2ae" target="_blank" class="btn-link">Start Mettl Test ↗</a></td>
+                </tr>
+                <tr>
+                  <td class="checkbox-cell"><input type="checkbox" class="task-check" onchange="updateProgress()"></td>
+                  <td>Nth Fibonacci</td>
+                  <td><a href="https://tests.mettl.com/authenticateKey/f390cadf" target="_blank" class="btn-link">Start Mettl Test ↗</a></td>
+                </tr>
+                <tr>
+                  <td class="checkbox-cell"><input type="checkbox" class="task-check" onchange="updateProgress()"></td>
+                  <td>Nth Prime</td>
+                  <td><a href="https://tests.mettl.com/authenticateKey/34fdaa41" target="_blank" class="btn-link">Start Mettl Test ↗</a></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
 
-                    <h2>Type Casting Example</h2>
-                    <div class="code-block">
-double rawPrice = 99.99;
-int roundedPrice = (int) rawPrice; // Explicit narrowing cast
-                    </div>
-                `,
-                task: "Declare an integer variable 'itemId' with value 101 and a double 'price' with value 49.5. Print them formatted as 'Item 101: $49.5'",
-                defaultCode: `public class Main {\n    public static void main(String[] args) {\n        // Declare variables and print formatted output\n        \n    }\n}`,
-                expectedOutput: "Item 101: $49.5",
-                quiz: [
-                    {
-                        q: "Which data type is best suited to store precise 64-bit floating-point numbers?",
-                        options: ["float", "int", "double", "long"],
-                        correct: 2
-                    }
-                ]
-            },
-            {
-                id: 2,
-                title: "03. Flow Control",
-                doc: `
-                    <h1>Flow Control Statements</h1>
-                    <p>Flow control manages program decision paths using conditions and loop structures.</p>
+      <!-- Day 7 -->
+      <div class="day-card">
+        <div class="day-header" onclick="toggleCard(this)">
+          <div class="day-header-left">
+            <span class="day-number">Day 7</span>
+            <span class="day-title">Ranges & Digit Frequency Counting</span>
+          </div>
+          <svg class="chevron" viewBox="0 0 24 24" fill="none"><path d="M19 9l-7 7-7-7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="day-body">
+          <div class="day-objective">
+            <strong>Objective:</strong> Practice sequence analysis, prime ranges, and tracking digit occurrences.
+          </div>
+          <div class="table-container">
+            <table>
+              <thead>
+                <tr>
+                  <th class="checkbox-cell">Done</th>
+                  <th>Question Title</th>
+                  <th>Evaluation Link</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="checkbox-cell"><input type="checkbox" class="task-check" onchange="updateProgress()"></td>
+                  <td>Number of Primes in a specified range</td>
+                  <td><a href="https://tests.mettl.com/authenticateKey/87c41143" target="_blank" class="btn-link">Start Mettl Test ↗</a></td>
+                </tr>
+                <tr>
+                  <td class="checkbox-cell"><input type="checkbox" class="task-check" onchange="updateProgress()"></td>
+                  <td>All Digits Count</td>
+                  <td><a href="https://tests.mettl.com/authenticateKey/ed6b4da" target="_blank" class="btn-link">Start Mettl Test ↗</a></td>
+                </tr>
+                <tr>
+                  <td class="checkbox-cell"><input type="checkbox" class="task-check" onchange="updateProgress()"></td>
+                  <td>Unique Digits Count</td>
+                  <td><a href="https://tests.mettl.com/authenticateKey/b7aac4a5" target="_blank" class="btn-link">Start Mettl Test ↗</a></td>
+                </tr>
+                <tr>
+                  <td class="checkbox-cell"><input type="checkbox" class="task-check" onchange="updateProgress()"></td>
+                  <td>Non-Repeated Digits' Count</td>
+                  <td><a href="https://tests.mettl.com/authenticateKey/e46500f5" target="_blank" class="btn-link">Start Mettl Test ↗</a></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
 
-                    <h2>Decision Statements</h2>
-                    <div class="code-block">
-if (score >= 90) {
-    System.out.println("Pass");
-} else {
-    System.out.println("Fail");
-}
-                    </div>
+      <!-- Day 8 -->
+      <div class="day-card">
+        <div class="day-header" onclick="toggleCard(this)">
+          <div class="day-header-left">
+            <span class="day-number">Day 8</span>
+            <span class="day-title">Digit Extraction & Selective Summation</span>
+          </div>
+          <svg class="chevron" viewBox="0 0 24 24" fill="none"><path d="M19 9l-7 7-7-7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="day-body">
+          <div class="day-objective">
+            <strong>Objective:</strong> Master digit extraction patterns using conditional looping mechanisms.
+          </div>
+          <div class="table-container">
+            <table>
+              <thead>
+                <tr>
+                  <th class="checkbox-cell">Done</th>
+                  <th>Question Title</th>
+                  <th>Evaluation Link</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="checkbox-cell"><input type="checkbox" class="task-check" onchange="updateProgress()"></td>
+                  <td>digitSum : sum of all digits in N</td>
+                  <td><a href="https://tests.mettl.com/authenticateKey/ab1d60cc" target="_blank" class="btn-link">Start Mettl Test ↗</a></td>
+                </tr>
+                <tr>
+                  <td class="checkbox-cell"><input type="checkbox" class="task-check" onchange="updateProgress()"></td>
+                  <td>digitSum even: sum of even digits in N</td>
+                  <td><a href="https://tests.mettl.com/authenticateKey/b55d1714" target="_blank" class="btn-link">Start Mettl Test ↗</a></td>
+                </tr>
+                <tr>
+                  <td class="checkbox-cell"><input type="checkbox" class="task-check" onchange="updateProgress()"></td>
+                  <td>digitSum odd: sum of odd digits in N</td>
+                  <td><a href="https://tests.mettl.com/authenticateKey/738fdee0" target="_blank" class="btn-link">Start Mettl Test ↗</a></td>
+                </tr>
+                <tr>
+                  <td class="checkbox-cell"><input type="checkbox" class="task-check" onchange="updateProgress()"></td>
+                  <td>digitSum opt: sum of even or odd digits</td>
+                  <td><a href="https://tests.mettl.com/authenticateKey/a05abbcf" target="_blank" class="btn-link">Start Mettl Test ↗</a></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
 
-                    <h2>Iteration Structures</h2>
-                    <p>Use <code>for</code> loops when execution count is known upfront.</p>
-                `,
-                task: "Write a for-loop that prints numbers from 1 to 3, each on a new line.",
-                defaultCode: `public class Main {\n    public static void main(String[] args) {\n        // Write a loop from 1 to 3\n        \n    }\n}`,
-                expectedOutput: "1\n2\n3",
-                quiz: [
-                    {
-                        q: "Which loop is guaranteed to execute at least once?",
-                        options: ["for loop", "while loop", "do-while loop", "for-each loop"],
-                        correct: 2
-                    }
-                ]
-            },
-            {
-                id: 3,
-                title: "04. Arrays",
-                doc: `
-                    <h1>Arrays in Java</h1>
-                    <p>Arrays store fixed-size elements of the same data type in contiguous memory space.</p>
+      <!-- Day 9 -->
+      <div class="day-card">
+        <div class="day-header" onclick="toggleCard(this)">
+          <div class="day-header-left">
+            <span class="day-number">Day 9</span>
+            <span class="day-title">Palindromes, Custom Rules & Patterns</span>
+          </div>
+          <svg class="chevron" viewBox="0 0 24 24" fill="none"><path d="M19 9l-7 7-7-7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="day-body">
+          <div class="day-objective">
+            <strong>Objective:</strong> Solve intermediate multi-step logic problems involving symmetrical checks and pattern generation.
+          </div>
+          <div class="table-container">
+            <table>
+              <thead>
+                <tr>
+                  <th class="checkbox-cell">Done</th>
+                  <th>Question Title</th>
+                  <th>Evaluation Link</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="checkbox-cell"><input type="checkbox" class="task-check" onchange="updateProgress()"></td>
+                  <td>Is Palindrome Number?</td>
+                  <td><a href="https://tests.mettl.com/authenticateKey/28c41d9d" target="_blank" class="btn-link">Start Mettl Test ↗</a></td>
+                </tr>
+                <tr>
+                  <td class="checkbox-cell"><input type="checkbox" class="task-check" onchange="updateProgress()"></td>
+                  <td>Is Palindrome Possible?</td>
+                  <td><a href="https://tests.mettl.com/authenticateKey/f4fdb02" target="_blank" class="btn-link">Start Mettl Test ↗</a></td>
+                </tr>
+                <tr>
+                  <td class="checkbox-cell"><input type="checkbox" class="task-check" onchange="updateProgress()"></td>
+                  <td>Create PIN using alpha, beta, gamma</td>
+                  <td><a href="https://tests.mettl.com/authenticateKey/be582d9f" target="_blank" class="btn-link">Start Mettl Test ↗</a></td>
+                </tr>
+                <tr>
+                  <td class="checkbox-cell"><input type="checkbox" class="task-check" onchange="updateProgress()"></td>
+                  <td>Weight of a hill pattern</td>
+                  <td><a href="https://tests.mettl.com/authenticateKey/d612c0e6" target="_blank" class="btn-link">Start Mettl Test ↗</a></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
 
-                    <h2>Declaring Arrays</h2>
-                    <div class="code-block">
-int[] numbers = {10, 20, 30, 40};
-System.out.println(numbers[0]); // Accesses first element (10)
-                    </div>
-                `,
-                task: "Create an array containing integers {5, 10, 15}. Print the sum of these array elements.",
-                defaultCode: `public class Main {\n    public static void main(String[] args) {\n        int[] nums = {5, 10, 15};\n        // Calculate and print the total sum\n        \n    }\n}`,
-                expectedOutput: "30",
-                quiz: [
-                    {
-                        q: "How do you access the total count of elements in an array named 'data'?",
-                        options: ["data.size()", "data.length", "data.count()", "data.length()"],
-                        correct: 1
-                    }
-                ]
-            }
-        ];
+      <!-- Day 10 -->
+      <div class="day-card">
+        <div class="day-header" onclick="toggleCard(this)">
+          <div class="day-header-left">
+            <span class="day-number">Day 10</span>
+            <span class="day-title">String Operations & Frequency Tracking</span>
+          </div>
+          <svg class="chevron" viewBox="0 0 24 24" fill="none"><path d="M19 9l-7 7-7-7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="day-body">
+          <div class="day-objective">
+            <strong>Objective:</strong> Bridge pure mathematical logic into string manipulation and frequency evaluation.
+          </div>
+          <div class="table-container">
+            <table>
+              <thead>
+                <tr>
+                  <th class="checkbox-cell">Done</th>
+                  <th>Question Title</th>
+                  <th>Evaluation Link</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="checkbox-cell"><input type="checkbox" class="task-check" onchange="updateProgress()"></td>
+                  <td>Return second word in Uppercase</td>
+                  <td><a href="https://tests.mettl.com/authenticateKey/4a72723f" target="_blank" class="btn-link">Start Mettl Test ↗</a></td>
+                </tr>
+                <tr>
+                  <td class="checkbox-cell"><input type="checkbox" class="task-check" onchange="updateProgress()"></td>
+                  <td>is Palindrome (string)</td>
+                  <td><a href="https://tests.mettl.com/authenticateKey/ffe8042" target="_blank" class="btn-link">Start Mettl Test ↗</a></td>
+                </tr>
+                <tr>
+                  <td class="checkbox-cell"><input type="checkbox" class="task-check" onchange="updateProgress()"></td>
+                  <td>Weight of string</td>
+                  <td><a href="https://tests.mettl.com/authenticateKey/387952fc" target="_blank" class="btn-link">Start Mettl Test ↗</a></td>
+                </tr>
+                <tr>
+                  <td class="checkbox-cell"><input type="checkbox" class="task-check" onchange="updateProgress()"></td>
+                  <td>Most Frequent Digit</td>
+                  <td><a href="https://tests.mettl.com/authenticateKey/916310b8" target="_blank" class="btn-link">Start Mettl Test ↗</a></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
 
-        // System State
-        let currentModuleIndex = 0;
-        let completedModules = new Set();
+    </div>
+  </div>
 
-        // Elements
-        const moduleListEl = document.getElementById('moduleList');
-        const docViewEl = document.getElementById('docView');
-        const taskInstructionEl = document.getElementById('taskInstruction');
-        const codeEditorEl = document.getElementById('codeEditor');
-        const terminalOutputEl = document.getElementById('terminalOutput');
-        const terminalStatusEl = document.getElementById('terminalStatus');
-        const quizContainerEl = document.getElementById('quizContainer');
-        const progressFillEl = document.getElementById('progressFill');
-        const progressTextEl = document.getElementById('progressText');
-        const currentModuleTitleEl = document.getElementById('currentModuleTitle');
+  <script>
+    function toggleCard(header) {
+      const card = header.parentElement;
+      card.classList.toggle('open');
+    }
 
-        // Initialize Suite
-        function init() {
-            renderSidebar();
-            loadModule(0);
-        }
+    function updateProgress() {
+      const checkboxes = document.querySelectorAll('.task-check');
+      const total = checkboxes.length;
+      let completed = 0;
 
-        function renderSidebar() {
-            moduleListEl.innerHTML = '';
-            courseData.forEach((mod, idx) => {
-                const btn = document.createElement('button');
-                btn.className = `module-btn ${idx === currentModuleIndex ? 'active' : ''}`;
-                btn.onclick = () => loadModule(idx);
-                
-                const isCompleted = completedModules.has(idx);
-                btn.innerHTML = `
-                    <span>${mod.title}</span>
-                    <span class="module-status" style="${isCompleted ? 'color: var(--accent-green); font-weight: bold;' : ''}">
-                        ${isCompleted ? '✓ Done' : 'Pending'}
-                    </span>
-                `;
-                
-                const wrapper = document.createElement('div');
-                wrapper.className = 'module-item';
-                wrapper.appendChild(btn);
-                moduleListEl.appendChild(wrapper);
-            });
+      checkboxes.forEach(cb => {
+        if (cb.checked) completed++;
+      });
 
-            // Update Progress
-            const pct = Math.round((completedModules.size / courseData.length) * 100);
-            progressFillEl.style.width = `${pct}%`;
-            progressTextEl.textContent = `${pct}%`;
-        }
+      const percentage = Math.round((completed / total) * 100);
+      document.getElementById('progressBar').style.width = percentage + '%';
+      document.getElementById('progressStats').innerText = `${completed} / ${total} Done (${percentage}%)`;
+      
+      // Save state
+      const state = Array.from(checkboxes).map(cb => cb.checked);
+      localStorage.setItem('lbh_progress_state', JSON.stringify(state));
+    }
 
-        function loadModule(index) {
-            currentModuleIndex = index;
-            const data = courseData[index];
-
-            currentModuleTitleEl.textContent = data.title;
-            docViewEl.innerHTML = data.doc;
-            taskInstructionEl.textContent = data.task;
-            codeEditorEl.value = data.defaultCode;
-            terminalOutputEl.textContent = 'Click "Run Code" to execute script...';
-            terminalStatusEl.textContent = 'Ready';
-            
-            renderQuiz(data.quiz);
-            renderSidebar();
-            switchTab('doc');
-        }
-
-        function switchTab(tab) {
-            const docTab = document.getElementById('tabDoc');
-            const quizTab = document.getElementById('tabQuiz');
-            const docView = document.getElementById('docView');
-            const ideView = document.getElementById('ideView');
-            const quizView = document.getElementById('quizView');
-
-            if (tab === 'doc') {
-                docTab.classList.add('active');
-                quizTab.classList.remove('active');
-                docView.style.display = 'block';
-                ideView.style.display = 'flex';
-                quizView.style.display = 'none';
-            } else {
-                quizTab.classList.add('active');
-                docTab.classList.remove('active');
-                docView.style.display = 'none';
-                ideView.style.display = 'none';
-                quizView.style.display = 'block';
-            }
-        }
-
-        // Code Sandbox Execution Engine (Simulated Parser)
-        function simulateExecution(code) {
-            // Extract System.out.println contents
-            const printPattern = /System\.out\.println\s*\((.*?)\);/g;
-            let matches;
-            let logs = [];
-
-            // Lightweight parser for simulation
-            try {
-                // Handle basic literal matches and variables
-                if (code.includes('int itemId = 101') && code.includes('double price = 49.5')) {
-                    if (code.includes('Item 101: $49.5')) return "Item 101: $49.5";
-                }
-                if (code.includes('for') && code.includes('1') && code.includes('3')) {
-                    return "1\n2\n3";
-                }
-                if (code.includes('nums') && (code.includes('30') || code.includes('+'))) {
-                    return "30";
-                }
-
-                while ((matches = printPattern.exec(code)) !== null) {
-                    let val = matches[1].trim();
-                    // Strip quotes if string literal
-                    if (val.startsWith('"') && val.endsWith('"')) {
-                        val = val.substring(1, val.length - 1);
-                    }
-                    logs.push(val);
-                }
-
-                return logs.length > 0 ? logs.join('\n') : "Program executed successfully with no output.";
-            } catch (err) {
-                return "Compilation Error: Unexpected syntax encountered.";
-            }
-        }
-
-        function runCode() {
-            terminalStatusEl.textContent = 'Compiling...';
-            terminalStatusEl.style.color = 'var(--accent-blue)';
-            
-            setTimeout(() => {
-                const code = codeEditorEl.value;
-                const output = simulateExecution(code);
-                terminalOutputEl.textContent = output;
-                terminalStatusEl.textContent = 'Execution finished';
-                terminalStatusEl.style.color = 'var(--text-muted)';
-            }, 300);
-        }
-
-        function submitTask() {
-            const code = codeEditorEl.value;
-            const output = simulateExecution(code).trim();
-            const expected = courseData[currentModuleIndex].expectedOutput.trim();
-
-            if (output === expected) {
-                terminalOutputEl.textContent = `[SUCCESS] Output matched expected results!\n\nOutput:\n${output}`;
-                completedModules.add(currentModuleIndex);
-                renderSidebar();
-            } else {
-                terminalOutputEl.textContent = `[FAILED] Output mismatch.\n\nExpected:\n${expected}\n\nActual Output:\n${output}`;
-            }
-        }
-
-        function resetEditor() {
-            codeEditorEl.value = courseData[currentModuleIndex].defaultCode;
-            terminalOutputEl.textContent = 'Editor reset to initial code.';
-        }
-
-        function renderQuiz(quizData) {
-            quizContainerEl.innerHTML = '<h2 style="margin-bottom: 1.5rem; color: var(--accent-blue);">Module Knowledge Check</h2>';
-            
-            quizData.forEach((q, qIdx) => {
-                const card = document.createElement('div');
-                card.className = 'quiz-card';
-                
-                let optionsHTML = '';
-                q.options.forEach((opt, oIdx) => {
-                    optionsHTML += `
-                        <button class="option-btn" onclick="answerQuiz(this, ${qIdx}, ${oIdx}, ${q.correct})">
-                            ${opt}
-                        </button>
-                    `;
-                });
-
-                card.innerHTML = `
-                    <h4>${qIdx + 1}. ${q.q}</h4>
-                    <div>${optionsHTML}</div>
-                `;
-                quizContainerEl.appendChild(card);
-            });
-        }
-
-        function answerQuiz(btn, qIdx, oIdx, correctIdx) {
-            const parent = btn.parentElement;
-            const buttons = parent.querySelectorAll('.option-btn');
-            
-            buttons.forEach((b) => {
-                b.disabled = true;
-                b.classList.remove('correct', 'incorrect');
-            });
-
-            if (oIdx === correctIdx) {
-                btn.classList.add('correct');
-            } else {
-                btn.classList.add('incorrect');
-                buttons[correctIdx].classList.add('correct');
-            }
-        }
-
-        // Initialize application
-        window.onload = init;
-    </script>
+    // Load saved progress on load
+    window.addEventListener('DOMContentLoaded', () => {
+      const savedState = JSON.parse(localStorage.getItem('lbh_progress_state'));
+      const checkboxes = document.querySelectorAll('.task-check');
+      
+      if (savedState && savedState.length === checkboxes.length) {
+        checkboxes.forEach((cb, index) => {
+          cb.checked = savedState[index];
+        });
+      }
+      updateProgress();
+    });
+  </script>
 </body>
 </html>
